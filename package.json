@@ -4,6 +4,7 @@
   "description": "Style Point is a schedule service that connects people to barbers and stylists at the time and location of your choice!",
   "main": "index.js",
   "scripts": {
+    "start": "node ./src",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
