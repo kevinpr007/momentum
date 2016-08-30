@@ -1,0 +1,33 @@
+{
+  "name": "stylepoint",
+  "version": "0.1.0",
+  "description": "Style Point is a schedule service that connects people to barbers and stylists at the time and location of your choice!",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ivan-Marquez/stylepoint.git"
+  },
+  "keywords": [
+    "barber",
+    "stylist",
+    "appointment"
+  ],
+  "author": "Kevin Rivera, Ivan Marquez",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Ivan-Marquez/stylepoint/issues"
+  },
+  "homepage": "https://github.com/Ivan-Marquez/stylepoint#readme",
+  "dependencies": {
+    "bluebird": "~3.4.3",
+    "dotenv": "~2.0.0",
+    "lodash": "~4.15.0",
+    "mongodb": "~2.2.9"
+  },
+  "devDependencies": {
+    "debug": "~2.2.0"
+  }
+}
