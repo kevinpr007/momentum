@@ -9,7 +9,8 @@ const config = {
     ENV: process.env.NODE_ENV,
     PORT: process.env.PORT,
     TEST_DB_URL: process.env.TEST_DB_URL,
-    ADMIN_DB_URL: process.env.ADMIN_DB_URL
+    ADMIN_DB_URL: process.env.ADMIN_DB_URL,
+    SP_DB_URL: process.env.SP_DB_URL
 };
 
 module.exports = (key) => {
