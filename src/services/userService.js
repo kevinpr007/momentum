@@ -1,9 +1,8 @@
 const mongoose = require('mongoose');
 mongoose.Promise = require('bluebird');
-const userSchema = require('../models/user').userSchema;
-const Users = mongoose.model('Users', userSchema);
+const Users = mongoose.model('Users');
 
-let userService = (db) => {
+let userService = () => {
     let getAll = () => {
         return Users.find();
     };

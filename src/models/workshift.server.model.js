@@ -4,10 +4,10 @@ const Schema = mongoose.Schema;
 const workshiftSchema = new Schema({
     startDate: Date,
     endDate: Date,
-    createdBy: ObjectId,
-    createdOn: Date,
+    createdBy: Schema.ObjectId,
+    createdOn: {type: Date, default: Date.now},
     days: [String],
-    userId: ObjectId
+    userId: Schema.ObjectId
 }, {collection: 'sp_workshift'});
 
-exports.workshiftSchema = workshiftSchema;
+mongoose.model('WorkShifts', workshiftSchema);

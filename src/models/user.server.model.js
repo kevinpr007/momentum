@@ -2,9 +2,8 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
-    word: {type: String, index: 1, required: true, unique: true},
-    first: {type: String, index: 1},
-    last: String,
+    first: {type: String, index: 1, required: 'Please provide your first name'},
+    last: {type: String, index: 1, required: 'Please provide your last name'},
     dob: Date,
     phone: Number,
     roles: [String],
@@ -15,8 +14,8 @@ const userSchema = new Schema({
     createdOn: Date
 }, {collection: 'sp_user'});
 
-userSchema.methods.fullName = function(){
+userSchema.methods.fullName = function () {
     return `${this.first} ${this.last}`;
 };
 
-exports.userSchema = userSchema;
+mongoose.model('Users', userSchema);
