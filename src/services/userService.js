@@ -3,12 +3,15 @@ mongoose.Promise = require('bluebird');
 const userSchema = require('../models/user.server.model').userSchema;
 const User = mongoose.model('Users', userSchema);
 
-let userService = () => {
+let userService = logger => {
     let getAll = () => {
         return new Promise((resolve, reject) => {
             return User.find((err, results) => {
-                if (err) reject({error: err});
-                else resolve(results);
+                if (err) {
+                    logger.log('debug', err);
+                    reject({error: err});
+                } else
+                    resolve(results);
             });
         });
     };
@@ -16,8 +19,11 @@ let userService = () => {
     let getByUserName = (username) => {
         return new Promise((resolve, reject) => {
             User.findOne().where('userName', username).exec((err, results) => {
-                if (err) reject({error: err});
-                else resolve(results);
+                if (err) {
+                    logger.log('debug', err);
+                    reject({error: err});
+                } else
+                    resolve(results);
             });
         });
     };
