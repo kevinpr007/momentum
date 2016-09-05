@@ -1,4 +1,4 @@
-const config = require('./config');
+const config = require('./env');
 const mongoose = require('mongoose');
 
 module.exports = () => {
