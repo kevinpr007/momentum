@@ -8,19 +8,10 @@
     "HEROKU_APP_NAME": {
       "required": true
     },
-    "ADMIN_DB_URL": {
-      "description": "Mongodb connection for admin db",
-      "required": true
-    },
-    "SP_DB_URL":{
+    "DB_URL": {
       "description": "Mongodb connection for stylePoint db",
       "required": true
-    },
-    "TEST_DB_URL": {
-      "description": "Mongodb connection for test db",
-      "required": true
-    },
-    "NODE_ENV": "staging"
+    }
   },
   "image": "heroku/nodejs"
 }

@@ -1,4 +1,4 @@
-let mongoose = require('./config/mongoose')();
-const userService = require('./services/userService')(mongoose.logger);
+require('./config/mongoose')();
+const userService = require('./services/userService')();
 
 console.log(userService.getAll());
