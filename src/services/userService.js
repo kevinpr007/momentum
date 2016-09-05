@@ -1,14 +1,30 @@
 const mongoose = require('mongoose');
 mongoose.Promise = require('bluebird');
-const Users = mongoose.model('Users');
+const userSchema = require('../models/user.server.model').userSchema;
+const User = mongoose.model('Users', userSchema);
 
 let userService = () => {
     let getAll = () => {
-        return Users.find();
+        return new Promise((resolve, reject) => {
+            return User.find((err, results) => {
+                if (err) reject({error: err});
+                else resolve(results);
+            });
+        });
+    };
+
+    let getByUserName = (username) => {
+        return new Promise((resolve, reject) => {
+            User.findOne().where('userName', username).exec((err, results) => {
+                if (err) reject({error: err});
+                else resolve(results);
+            });
+        });
     };
 
     return {
-        getAll: getAll
+        getAll: getAll,
+        getByUserName: getByUserName
     };
 };
 

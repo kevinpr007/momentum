@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const days = require('./days.server.enum');
 const Schema = mongoose.Schema;
 
 const workshiftSchema = new Schema({
@@ -6,8 +7,8 @@ const workshiftSchema = new Schema({
     endDate: Date,
     createdBy: Schema.ObjectId,
     createdOn: {type: Date, default: Date.now},
-    days: [String],
+    days: {type: String, enum: days()},
     userId: Schema.ObjectId
 }, {collection: 'sp_workshift'});
 
-mongoose.model('WorkShifts', workshiftSchema);
+exports.workshiftSchema = workshiftSchema;

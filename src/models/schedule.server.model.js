@@ -7,4 +7,4 @@ const scheduleSchema = new Schema({
     workshiftId: Schema.ObjectId
 }, {collection: 'sp_schedule'});
 
-mongoose.model('Schedules', scheduleSchema);
+exports.scheduleSchema = scheduleSchema;
