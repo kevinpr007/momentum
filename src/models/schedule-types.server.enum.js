@@ -1,5 +1,5 @@
 module.exports = () => {
-    return ['', ''];
+    return [];
 };
 
 //@Todo: Define schedule types.
