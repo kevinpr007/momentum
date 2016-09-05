@@ -22,9 +22,14 @@ mongoose.set('debug', (collectionName, method, query, doc, options) => {
 });
 
 module.exports = () => {
+    require('../models/user.server.model');
+    require('../models/schedule.server.model');
+    require('../models/workshift.server.model');
+    require('../models/location.server.model');
+    require('../models/service.server.model');
+
     return {
-        connect: mongoose.connect(config('SP_DB_URL')),
-        disconnect: mongoose.disconnect(),
-        logger: logger
+        logger: logger,
+        connect: mongoose.connect(config('SP_DB_URL'))
     };
 };

@@ -1,11 +1,11 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const roles = require('./roles.server.enum');
+const roles = require('./roles.server.enum')();
 
 const userSchema = new Schema({
     firstName: {type: String, index: 1, required: true},
     lastName: {type: String, index: 1, required: true},
-    email: {type: String, match: /.+@.+\..+/, index: true},
+    email: {type: String, match: /.+@.+\..+/, required: true, index: true},
     dob: {
         type: Date, validate: [
             date => {
@@ -14,13 +14,17 @@ const userSchema = new Schema({
             'Please enter a valid date.'
         ]
     },
-    userName: {type: String, trim: true, unique: true},
+    userName: {type: String, trim: true, required: true, unique: true},
     phone: Number,
-    roles: {type: String, enum: roles()},
+    roles: {type: String, enum: roles, required: true},
     addresses: {
-        street: String, city: String, state: String, zip: Number
+        location: {type: Schema.ObjectId, ref: 'Location'},
+        street: String,
+        city: String,
+        state: String,
+        zip: Number
     },
-    createdBy: String,
+    createdBy: {type: Schema.ObjectId, ref: 'User', required: true},
     createdOn: {type: Date, default: Date.now}
 }, {collection: 'sp_user'});
 
@@ -29,5 +33,4 @@ userSchema.virtual('fullName').get(() => {
 });
 
 userSchema.set('toJSON', {getters: true, virtuals: true});
-
-exports.userSchema = userSchema;
+mongoose.model('User', userSchema);
