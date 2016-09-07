@@ -4,6 +4,7 @@
   "description": "Style Point is a schedule service that connects people to barbers and stylists at the time and location of your choice!",
   "main": "index.js",
   "scripts": {
+    "start": "node ./src",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -25,7 +26,8 @@
     "bluebird": "~3.4.3",
     "dotenv": "~2.0.0",
     "lodash": "~4.15.0",
-    "mongodb": "~2.2.9"
+    "mongodb": "~2.2.9",
+    "mongoose": "^4.5.10"
   },
   "devDependencies": {
     "debug": "~2.2.0"
