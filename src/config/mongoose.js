@@ -12,11 +12,7 @@ let serializer = data => {
 let logger = bunyan.createLogger({
     name: 'StylePoint',
     src: false,
-    streams: [
-        {
-            path: '../logs/db.log'
-        }
-    ],
+    streams: [{path: '../logs/db.log'}],
     serializers: {
         dbQuery: serializer
     }
