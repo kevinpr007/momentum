@@ -12,13 +12,17 @@ let serializer = data => {
 let logger = bunyan.createLogger({
     name: 'StylePoint',
     src: false,
-    streams: [{path: `${__dirname}/db.log`}],
+    streams: [
+        {
+            path: '../logs/db.log'
+        }
+    ],
     serializers: {
         dbQuery: serializer
     }
 });
 
-mongoose.set('debug', (coll, method, query, doc, options) => {
+mongoose.set('info', (coll, method, query, doc, options) => {
     let set = {
         coll: coll,
         method: method,
@@ -32,7 +36,7 @@ mongoose.set('debug', (coll, method, query, doc, options) => {
     });
 });
 
-mongoose.connection.on('error', err => logger.error(err));
+mongoose.connection.on('error', err => logger.fatal(err));
 
 module.exports = () => {
     require('../models/user.server.model');
