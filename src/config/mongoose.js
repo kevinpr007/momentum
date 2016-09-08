@@ -1,24 +1,8 @@
 const config = require('./env');
 const mongoose = require('mongoose');
-const bunyan = require('bunyan');
+const logger = require('./logger');
 
-let serializer = data => {
-    let query = JSON.stringify(data.query);
-    let options = JSON.stringify(data.options || {});
-
-    return `db.${data.coll}.${data.method}(${query}, ${options});`;
-};
-
-let logger = bunyan.createLogger({
-    name: 'StylePoint',
-    src: false,
-    streams: [{path: '../logs/db.log'}],
-    serializers: {
-        dbQuery: serializer
-    }
-});
-
-mongoose.set('info', (coll, method, query, doc, options) => {
+mongoose.set('debug', (coll, method, query, doc, options) => {
     let set = {
         coll: coll,
         method: method,
@@ -32,7 +16,7 @@ mongoose.set('info', (coll, method, query, doc, options) => {
     });
 });
 
-mongoose.connection.on('error', err => logger.fatal(err));
+mongoose.connection.on('error', err => logger.error(err));
 
 module.exports = () => {
     require('../models/user.server.model');
@@ -41,7 +25,5 @@ module.exports = () => {
     require('../models/location.server.model');
     require('../models/service.server.model');
 
-    return {
-        connect: mongoose.connect(config('DB_URL'))
-    };
+    return mongoose.connect(config('DB_URL'));
 };
