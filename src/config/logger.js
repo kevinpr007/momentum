@@ -1,5 +1,6 @@
 const bunyan = require('bunyan');
-let RotatingFileStream = require('bunyan-rotating-file-stream');
+const RotatingFileStream = require('bunyan-rotating-file-stream');
+const BunyanMiddleware = require('bunyan-middleware');
 
 let serializer = data => {
     let query = JSON.stringify(data.query);
@@ -8,7 +9,7 @@ let serializer = data => {
     return `db.${data.coll}.${data.method}(${query}, ${options});`;
 };
 
-module.exports = bunyan.createLogger({
+let logger = bunyan.createLogger({
     name: 'StylePoint',
     src: false,
     streams: [
@@ -20,7 +21,7 @@ module.exports = bunyan.createLogger({
             level: 'error',
             type: 'raw',
             stream: new RotatingFileStream({
-                path: '../logs/db.log',
+                path: './logs/db.log',
                 period: '1d',
                 totalFiles: 10,
                 rotateExisting: true,
@@ -34,3 +35,15 @@ module.exports = bunyan.createLogger({
     }
 });
 
+let expressLogger = BunyanMiddleware({
+    headerName: 'X-Request-Id',
+    propertyName: 'reqId',
+    logName: 'req_id',
+    obscureHeaders: [],
+    logger: logger
+});
+
+module.exports = {
+    mongoLogger: logger,
+    expressLogger: expressLogger
+};

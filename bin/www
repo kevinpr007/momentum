@@ -1,8 +1,11 @@
 #!/usr/bin/env node
 
-const app = require('../src/config/express');
+const logger = require('../src/config/logger');
+const mongoose = require('../src/config/mongoose')(logger.mongoLogger);
+const app = require('../src/config/express')(logger.expressLogger);
+
 const config = require('../src/config/env');
-const debug = require('debug')('express-api:server');
+const debug = require('debug')('stylepoint:server');
 const http = require('http');
 const port = config('PORT');
 
@@ -10,21 +13,16 @@ app.set('port', port);
 let server = http.createServer(app);
 
 function onError(error) {
-    if (error.syscall !== 'listen') {
-        throw error;
-    }
-
-    let bind = typeof port === 'string'
-        ? 'Pipe ' + port
-        : 'Port ' + port;
+    if (error.syscall !== 'listen') throw error;
+    let bind = typeof port === 'string' ? 'Pipe ' + port : 'Port ' + port;
 
     switch (error.code) {
         case 'EACCES':
-            console.error(bind + ' requires elevated privileges');
+            console.error(`${bind} requires elevated privileges`);
             process.exit(1);
             break;
         case 'EADDRINUSE':
-            console.error(bind + ' is already in use');
+            console.error(`${bind} is already in use`);
             process.exit(1);
             break;
         default:
@@ -34,8 +32,6 @@ function onError(error) {
 
 function onListening() {
     let addr = server.address();
-    let bind = typeof addr === 'string'
-        ? 'pipe ' + addr
-        : 'port ' + addr.port;
+    let bind = typeof addr === 'string'? 'pipe ' + addr : 'port ' + addr.port;
     debug('Listening on ' + bind);
 }

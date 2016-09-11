@@ -1,24 +1,23 @@
 const config = require('./env');
 const mongoose = require('mongoose');
-const logger = require('./logger');
 
-mongoose.set('debug', (coll, method, query, doc, options) => {
-    let set = {
-        coll: coll,
-        method: method,
-        query: query,
-        doc: doc,
-        options: options
-    };
+module.exports = logger => {
+    mongoose.set('debug', (coll, method, query, doc, options) => {
+        let set = {
+            coll: coll,
+            method: method,
+            query: query,
+            doc: doc,
+            options: options
+        };
 
-    logger.info({
-        dbQuery: set
+        logger.info({
+            dbQuery: set
+        });
     });
-});
 
-mongoose.connection.on('error', err => logger.error(err));
+    mongoose.connection.on('error', err => logger.error(err));
 
-module.exports = () => {
     require('../models/user.server.model');
     require('../models/schedule.server.model');
     require('../models/workshift.server.model');
