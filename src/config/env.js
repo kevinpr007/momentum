@@ -8,11 +8,11 @@ if (ENV === 'development') dotenv.load({
 const config = {
     NODE_ENV: process.env.NODE_ENV,
     PORT: process.env.PORT,
-    DB_URL: process.env.DB_URL
+    DB_URL: process.env.DB_URL,
+    SESSION_SECRET: process.env.SESSION_SECRET
 };
 
 module.exports = (key) => {
     if (!key) return config;
-
     return config[key];
 };
