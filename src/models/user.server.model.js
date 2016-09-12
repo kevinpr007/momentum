@@ -26,9 +26,11 @@ const userSchema = new Schema({
     },
     createdBy: {type: Schema.ObjectId, ref: 'User', required: true},
     createdOn: {type: Date, default: Date.now}
-}, {collection: 'sp_user'});
+}, {
+    collection: 'sp_user'
+});
 
-userSchema.virtual('fullName').get(() => {
+userSchema.virtual('fullName').get(function () {
     return `${this.firstName} ${this.lastName}`;
 });
 

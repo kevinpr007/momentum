@@ -1,5 +1,5 @@
 const bunyan = require('bunyan');
-let RotatingFileStream = require('bunyan-rotating-file-stream');
+const RotatingFileStream = require('bunyan-rotating-file-stream');
 
 let serializer = data => {
     let query = JSON.stringify(data.query);
@@ -20,7 +20,7 @@ module.exports = bunyan.createLogger({
             level: 'error',
             type: 'raw',
             stream: new RotatingFileStream({
-                path: '../logs/db.log',
+                path: './logs/db.log',
                 period: '1d',
                 totalFiles: 10,
                 rotateExisting: true,
@@ -33,4 +33,3 @@ module.exports = bunyan.createLogger({
         dbQuery: serializer
     }
 });
-
