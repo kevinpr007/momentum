@@ -1,18 +1,18 @@
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
 const debug = require('debug')('stylepoint:server');
+const logger = require('../src/config/logger');
 const mongoose = require('../src/config/mongoose');
 const express = require('../src/config/express');
 const env = require('../src/config/env');
 const http = require('http');
 const port = env('PORT');
 
-let db = mongoose();
-let app = express();
+let db = mongoose(logger);
+let app = express(logger);
 let server = http.createServer(app);
 
 server.listen(port);
-
 server.on('error', error => {
     if (error.syscall !== 'listen') throw error;
         let bind = typeof port === 'string' ? `Pipe ${port}` : `Port ${port}`;
