@@ -1,15 +1,17 @@
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
 const debug = require('debug')('stylepoint:server');
-const logger = require('../src/config/logger');
 const mongoose = require('../src/config/mongoose');
+const passport = require('../src/config/passport');
 const express = require('../src/config/express');
+const logger = require('../src/config/logger');
 const env = require('../src/config/env');
 const http = require('http');
 const port = env('PORT');
 
 let db = mongoose(logger);
 let app = express(logger);
+let passport = passport();
 let server = http.createServer(app);
 
 server.listen(port);

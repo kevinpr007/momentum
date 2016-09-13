@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const crypto = require('crypto');
 const roles = require('./roles.server.enum')();
 
 const userSchema = new Schema({
@@ -11,10 +12,27 @@ const userSchema = new Schema({
             date => {
                 return date < Date.now();
             },
-            'Please enter a valid date.'
+            'Please enter a valid date'
         ]
     },
     userName: {type: String, trim: true, required: true, unique: true},
+    password: {
+        type: String,
+        validate: [
+            password => {
+                return password && password.length > 6;
+            }, 'Password should be longer tahn 6 characters'
+        ]
+    },
+    salt: {
+        type: String
+    },
+    provider: {
+        type: String,
+        required: 'Provider is required'
+    },
+    providerId: String,
+    providerData: {},
     phone: Number,
     roles: {type: String, enum: roles, required: true},
     addresses: {
@@ -33,6 +51,38 @@ const userSchema = new Schema({
 userSchema.virtual('fullName').get(function () {
     return `${this.firstName} ${this.lastName}`;
 });
+
+userSchema.pre('save', function (next) {
+    if (this.password) {
+        this.salt = new Buffer(crypto.randomBytes(16).toString('base64'), 'base64');
+        this.password = this.hashPassword(this.password);
+    }
+    next();
+});
+
+userSchema.methods.hashPassword = function (password) {
+    return crypto.pbkdf2Sync(password, this.salt, 10000, 64).toString('base64');
+};
+
+userSchema.methods.authenticate = function (password) {
+    return this.password === this.hashPassword(password);
+};
+
+userSchema.statics.findUniqueUsername = (username, suffix, callback) => {
+    let possibleUsername = username + (suffix || '');
+
+    this.findOne({
+        username: possibleUsername
+    }, (err, user) => {
+        if (!err)
+            if (!user)
+                callback(possibleUsername);
+            else
+                return this.findUniqueUsername(username, (suffix || 0) + 1, callback);
+        else
+            callback(null);
+    });
+};
 
 userSchema.set('toJSON', {getters: true, virtuals: true});
 mongoose.model('User', userSchema);

@@ -12,8 +12,13 @@ let userService = () => {
             .where('userName', username).exec();
     };
 
+    let getAuthUser = id => {
+        return User.findOne({_id: id}, '-password -salt').exec();
+    };
+
     return {
         getAll: getAll,
+        getAuthUser: getAuthUser,
         getByUserName: getByUserName
     };
 };

@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const path = require('path');
 const env = require('./env');
+const passport = require('passport');
 const favicon = require('serve-favicon');
 const bodyParser = require('body-parser');
 const session = require('express-session');
@@ -25,6 +26,8 @@ module.exports = logger => {
         resave: true,
         secret: env('SESSION_SECRET')
     }));
+    app.use(passport.initialize());
+    app.use(passport.session());
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({
         extended: true
