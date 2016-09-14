@@ -1,13 +1,15 @@
+const HttpStatus = require('http-status-codes');
+
 let userController = (userService) => {
     let getAllUsers = (req, res) => {
         userService.getAll().then(users => {
             req.log.info(req.session);
             res.json(users);
         }).catch(err => {
-                req.log.error(err);
-                res.status(500);
-                res.json(err);
-            });
+            req.log.error(err);
+            res.status(HttpStatus.INTERNAL_SERVER_ERROR);
+            res.json(err);
+        });
     };
 
     let getByUserName = (req, res) => {
@@ -15,7 +17,7 @@ let userController = (userService) => {
             .then(user => res.json(user))
             .catch(err => {
                 req.log.info(err);
-                res.status(500);
+                res.status(HttpStatus.INTERNAL_SERVER_ERROR);
                 res.json(err);
             });
     };
