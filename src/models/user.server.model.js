@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const mongoDB = require('../config/mongoose.collections.json');
+
 const roles = require('./roles.server.enum')();
 
 const userSchema = new Schema({
@@ -11,23 +13,23 @@ const userSchema = new Schema({
             date => {
                 return date < Date.now();
             },
-            'Please enter a valid date.'
+            'Please enter a valid date of birth.'
         ]
     },
     userName: {type: String, trim: true, required: true, unique: true},
     phone: Number,
     roles: {type: String, enum: roles, required: true},
     addresses: {
-        location: {type: Schema.ObjectId, ref: 'Location'},
+        location: {type: Schema.ObjectId, ref: mongoDB.Model.Location},
         street: String,
         city: String,
         state: String,
         zip: Number
     },
-    createdBy: {type: Schema.ObjectId, ref: 'User', required: true},
+    createdBy: {type: Schema.ObjectId, ref: mongoDB.Model.User, required: true},
     createdOn: {type: Date, default: Date.now}
 }, {
-    collection: 'sp_user'
+    collection: mongoDB.Collection.User
 });
 
 userSchema.virtual('fullName').get(function () {
@@ -35,4 +37,4 @@ userSchema.virtual('fullName').get(function () {
 });
 
 userSchema.set('toJSON', {getters: true, virtuals: true});
-mongoose.model('User', userSchema);
+mongoose.model(mongoDB.Model.User, userSchema);
