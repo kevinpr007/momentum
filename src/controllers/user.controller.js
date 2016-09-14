@@ -1,7 +1,6 @@
 let userController = (userService) => {
     let getAllUsers = (req, res) => {
         userService.getAll().then(users => {
-            req.log.info(req.session);
             res.json(users);
         }).catch(err => {
                 req.log.error(err);

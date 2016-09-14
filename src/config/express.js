@@ -1,12 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const path = require('path');
-const env = require('./env');
 const passport = require('passport');
 const favicon = require('serve-favicon');
 const bodyParser = require('body-parser');
-const session = require('express-session');
-const cookieParser = require('cookie-parser');
 const BunyanMiddleware = require('bunyan-middleware');
 
 module.exports = logger => {
@@ -21,18 +18,11 @@ module.exports = logger => {
         obscureHeaders: [],
         logger: logger
     }));
-    app.use(session({
-        saveUninitialized: true,
-        resave: true,
-        secret: env('SESSION_SECRET')
-    }));
     app.use(passport.initialize());
-    app.use(passport.session());
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({
         extended: true
     }));
-    app.use(cookieParser());
     app.use(favicon('./public/img/favicon.ico'));
     app.use(express.static(path.join(__dirname, 'public')));
 

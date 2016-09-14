@@ -1,5 +1,4 @@
 const passport = require('passport');
-const mongoose = require('mongoose');
 
 module.exports = () => {
     let userService = require('../services/userService')();
