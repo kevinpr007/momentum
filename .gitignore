@@ -1,5 +1,6 @@
 # Intelli J
 .idea/
+*.iml
 
 # Enviroment Variables
 .env
