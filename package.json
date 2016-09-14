@@ -4,14 +4,20 @@
   "description": "Style Point is a schedule service that connects people to barbers and stylists at the time and location of your choice!",
   "scripts": {
     "start": "node ./bin/www",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "startIntelliJ": "node %NODE_DEBUG_OPTION% ./bin/www",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "standard": "standard --fix",
+    "retire": " retire --node --verbose",
+    "nsp":"nsp check" 
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Ivan-Marquez/stylepoint.git"
   },
   "keywords": [
+    "salon",
     "barber",
+    "style",
     "stylist",
     "appointment"
   ],
@@ -37,8 +43,12 @@
     "passport-jwt": "^2.1.0",
     "passport-local": "^1.0.0",
     "serve-favicon": "^2.3.0"
+    "http-status-codes": "^1.0.6"
   },
   "devDependencies": {
-    "debug": "~2.2.0"
+    "debug": "~2.2.0",
+    "nsp": "^2.6.1",
+    "retire": "^1.2.10",
+    "standard": "*"
   }
 }

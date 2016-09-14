@@ -1,9 +1,11 @@
-const dotenv = require('dotenv');
-const ENV = process.env.NODE_ENV || 'development';
+const dotenv = require('dotenv')
+const ENV = process.env.NODE_ENV || 'development'
 
-if (ENV === 'development') dotenv.load({
+if (ENV === 'development') {
+  dotenv.load({
     path: `${__dirname}/.env`
-});
+  })
+}
 
 const config = {
     NODE_ENV: process.env.NODE_ENV,
@@ -13,6 +15,6 @@ const config = {
 };
 
 module.exports = (key) => {
-    if (!key) return config;
-    return config[key];
-};
+  if (!key) return config
+  return config[key]
+}

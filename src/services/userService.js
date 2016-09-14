@@ -1,11 +1,11 @@
-const mongoose = require('mongoose');
-mongoose.Promise = require('bluebird');
-const User = mongoose.model('User');
+const mongoose = require('mongoose')
+mongoose.Promise = require('bluebird')
+const User = mongoose.model('User')
 
 let userService = () => {
-    let getAll = () => {
-        return User.find().exec();
-    };
+  let getAll = () => {
+    return User.find().exec()
+  }
 
     let getByEmail = (email) => {
         return User.findOne()
@@ -23,4 +23,4 @@ let userService = () => {
     };
 };
 
-module.exports = userService;
+module.exports = userService

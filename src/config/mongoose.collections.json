@@ -1,0 +1,16 @@
+{
+  "Model": {
+    "Location": "Location",
+    "User": "User",
+    "Workshift": "Workshift",
+    "Service": "Service",
+    "Schedule": "Schedule"
+  },
+  "Collection": {
+    "Location": "sp_location",
+    "User": "sp_user",
+    "Workshift": "sp_workshift",
+    "Service": "sp_service",
+    "Schedule": "sp_schedule"
+  }
+}

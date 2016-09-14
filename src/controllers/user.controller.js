@@ -1,28 +1,31 @@
-let userController = (userService) => {
-    let getAllUsers = (req, res) => {
-        userService.getAll().then(users => {
-            res.json(users);
-        }).catch(err => {
-                req.log.error(err);
-                res.status(500);
-                res.json(err);
-            });
-    };
+const HttpStatus = require('http-status-codes')
 
-    let getByUserName = (req, res) => {
-        userService.getByEmail(req.params.userName)
+let userController = (userService) => {
+  let getAllUsers = (req, res) => {
+    userService.getAll().then(users => {
+      req.log.info(req.session)
+      res.json(users)
+    }).catch(err => {
+      req.log.error(err)
+      res.status(HttpStatus.INTERNAL_SERVER_ERROR)
+      res.json(err)
+    })
+  }
+
+  let getByUserName = (req, res) => {
+    userService.getByUserName(req.params.userName)
             .then(user => res.json(user))
             .catch(err => {
-                req.log.info(err);
-                res.status(500);
-                res.json(err);
-            });
-    };
+              req.log.info(err)
+              res.status(HttpStatus.INTERNAL_SERVER_ERROR)
+              res.json(err)
+            })
+  }
 
-    return {
-        getAllUsers: getAllUsers,
-        getByEmail: getByUserName
-    };
-};
+  return {
+    getAllUsers: getAllUsers,
+    getByUserName: getByUserName
+  }
+}
 
-module.exports = userController;
+module.exports = userController

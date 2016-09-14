@@ -1,7 +1,9 @@
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+const mongoose = require('mongoose')
+const Schema = mongoose.Schema
 const crypto = require('crypto');
-const roles = require('./roles.server.enum')();
+const mongoDB = require('../config/mongoose.collections.json')
+
+const roles = require('./roles.server.enum')()
 
 const userSchema = new Schema({
     firstName: {type: String, index: 1, required: true},
@@ -31,21 +33,21 @@ const userSchema = new Schema({
     phone: Number,
     roles: {type: String, enum: roles, required: true},
     addresses: {
-        location: {type: Schema.ObjectId, ref: 'Location'},
+        location: {type: Schema.ObjectId, ref: mongoDB.Model.Location},
         street: String,
         city: String,
         state: String,
         zip: Number
     },
-    createdBy: {type: Schema.ObjectId, ref: 'User', required: true},
-    createdOn: {type: Date, default: Date.now}
+    createdBy: {type: Schema.ObjectId, ref: mongoDB.Model.User, required: true},
+    createdOn: {type: Date, default: Date.now},
 }, {
-    collection: 'sp_user'
-});
+  collection: mongoDB.Collection.User
+})
 
 userSchema.virtual('fullName').get(function () {
-    return `${this.firstName} ${this.lastName}`;
-});
+  return `${this.firstName} ${this.lastName}`
+})
 
 userSchema.pre('save', function (next) {
     if (this.password) {
@@ -80,4 +82,4 @@ userSchema.statics.findUniqueUsername = (username, suffix, callback) => {
 };
 
 userSchema.set('toJSON', {getters: true, virtuals: true});
-mongoose.model('User', userSchema);
+mongoose.model(mongoDB.Model.User, userSchema)
