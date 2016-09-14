@@ -10,7 +10,7 @@ let userController = (userService) => {
     };
 
     let getByUserName = (req, res) => {
-        userService.getByUserName(req.params.userName)
+        userService.getByEmail(req.params.userName)
             .then(user => res.json(user))
             .catch(err => {
                 req.log.info(err);
@@ -21,7 +21,7 @@ let userController = (userService) => {
 
     return {
         getAllUsers: getAllUsers,
-        getByUserName: getByUserName
+        getByEmail: getByUserName
     };
 };
 

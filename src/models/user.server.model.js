@@ -6,7 +6,7 @@ const roles = require('./roles.server.enum')();
 const userSchema = new Schema({
     firstName: {type: String, index: 1, required: true},
     lastName: {type: String, index: 1, required: true},
-    email: {type: String, match: /.+@.+\..+/, required: true, index: true},
+    email: {type: String, match: /.+@.+\..+/, trim: true, required: true, index: true},
     dob: {
         type: Date, validate: [
             date => {
@@ -15,7 +15,6 @@ const userSchema = new Schema({
             'Please enter a valid date'
         ]
     },
-    userName: {type: String, trim: true, required: true, unique: true},
     password: {
         type: String,
         validate: [
@@ -27,12 +26,8 @@ const userSchema = new Schema({
     salt: {
         type: String
     },
-    provider: {
-        type: String,
-        required: 'Provider is required'
-    },
-    providerId: String,
-    providerData: {},
+    resetPasswordToken: {type: String},
+    resetPasswordExpires: {type: Date},
     phone: Number,
     roles: {type: String, enum: roles, required: true},
     addresses: {
@@ -72,7 +67,7 @@ userSchema.statics.findUniqueUsername = (username, suffix, callback) => {
     let possibleUsername = username + (suffix || '');
 
     this.findOne({
-        username: possibleUsername
+        email: possibleUsername
     }, (err, user) => {
         if (!err)
             if (!user)

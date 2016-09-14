@@ -7,19 +7,19 @@ let userService = () => {
         return User.find().exec();
     };
 
-    let getByUserName = (username) => {
+    let getByEmail = (email) => {
         return User.findOne()
-            .where('userName', username).exec();
+            .where('email', email).exec();
     };
 
-    let getAuthUser = id => {
+    let getById = id => {
         return User.findOne({_id: id}, '-password -salt').exec();
     };
 
     return {
         getAll: getAll,
-        getAuthUser: getAuthUser,
-        getByUserName: getByUserName
+        getById: getById,
+        getByEmail: getByEmail
     };
 };
 

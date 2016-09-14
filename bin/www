@@ -11,7 +11,7 @@ const port = env('PORT');
 
 let db = mongoose(logger);
 let app = express(logger);
-let passport = passport();
+let auth = passport();
 let server = http.createServer(app);
 
 server.listen(port);

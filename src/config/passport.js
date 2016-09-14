@@ -8,10 +8,11 @@ module.exports = () => {
     });
 
     passport.deserializeUser(function (id, cb) {
-        userService.getAuthUser(id)
+        userService.getById(id)
             .then(user => cb(null, user))
             .catch(err => cb(err, null));
     });
 
-    require('./strategies/local.js')();
+    require('./strategies/local')();
+    require('./strategies/jwt')();
 };

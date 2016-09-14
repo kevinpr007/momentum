@@ -1,15 +1,18 @@
+const env = require('../env');
 const passport = require('passport');
-const LocalStrategy = require('passport-local');
+const JwtStrategy = require('passport-jwt').Strategy;
+const ExtractJwt = require('passport-jwt').ExtractJwt;
 
-const localOptions = {
-    usernameField: 'email'
+const jwtOptions = {
+    jwtFromRequest: ExtractJwt.fromAuthHeader(),
+    secretOrKey: env('SECRET')
 };
 
 module.exports = () => {
     const userService = require('../../services/userService')();
 
-    passport.use(new LocalStrategy(localOptions, (email, password, cb) => {
-        userService.getByEmail(email)
+    passport.use(new JwtStrategy(jwtOptions, (payload, cb) => {
+        userService.getById(payload.id)
             .then(user => {
                 if (!user) return cb(null, false, {
                     message: 'Unknown user'
