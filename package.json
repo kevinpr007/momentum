@@ -11,7 +11,9 @@
     "url": "git+https://github.com/Ivan-Marquez/stylepoint.git"
   },
   "keywords": [
+    "salon",
     "barber",
+    "style",
     "stylist",
     "appointment"
   ],
@@ -34,7 +36,8 @@
     "lodash": "~4.15.0",
     "mongodb": "~2.2.9",
     "mongoose": "^4.5.10",
-    "serve-favicon": "^2.3.0"
+    "serve-favicon": "^2.3.0",
+    "http-status-codes": "^1.0.6"
   },
   "devDependencies": {
     "debug": "~2.2.0"
