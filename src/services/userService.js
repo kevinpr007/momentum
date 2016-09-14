@@ -7,20 +7,19 @@ let userService = () => {
     return User.find().exec()
   }
 
-    let getByEmail = (email) => {
-        return User.findOne()
-            .where('email', email).exec();
-    };
+  let getByEmail = (email) => {
+    return User.findOne().where('email', email).exec()
+  }
 
-    let getById = id => {
-        return User.findOne({_id: id}, '-password -salt').exec();
-    };
+  let getById = id => {
+    return User.findOne({_id: id}, '-password -salt').exec()
+  }
 
-    return {
-        getAll: getAll,
-        getById: getById,
-        getByEmail: getByEmail
-    };
-};
+  return {
+    getAll: getAll,
+    getById: getById,
+    getByEmail: getByEmail
+  }
+}
 
 module.exports = userService

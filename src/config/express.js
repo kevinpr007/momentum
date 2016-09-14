@@ -1,31 +1,31 @@
 const express = require('express')
 const router = express.Router()
 const path = require('path')
-const env = require('./env')
-const passport = require('passport');
+const passport = require('passport')
 const favicon = require('serve-favicon')
 const bodyParser = require('body-parser')
 const BunyanMiddleware = require('bunyan-middleware')
 const HttpStatus = require('http-status-codes')
 
 module.exports = logger => {
-    /**
-     * Global App Config
-     */
+  /**
+   * Global App Config
+   */
   let app = express()
-    app.use(BunyanMiddleware({
-        headerName: 'X-Request-Id',
-        propertyName: 'reqId',
-        logName: 'req_id',
-        obscureHeaders: [],
-        logger: logger
-    }));
-    app.use(bodyParser.json());
-    app.use(bodyParser.urlencoded({
-        extended: true
-    }));
-    app.use(favicon('./public/img/favicon.ico'));
-    app.use(express.static(path.join(__dirname, 'public')));
+  app.use(BunyanMiddleware({
+    headerName: 'X-Request-Id',
+    propertyName: 'reqId',
+    logName: 'req_id',
+    obscureHeaders: [],
+    logger: logger
+  }))
+  app.use(bodyParser.json())
+  app.use(bodyParser.urlencoded({
+    extended: true
+  }))
+
+  app.use(favicon('./public/img/favicon.ico'))
+  app.use(express.static(path.join(__dirname, 'public')))
 
   app.use(BunyanMiddleware({
     headerName: 'X-Request-Id',
@@ -35,34 +35,24 @@ module.exports = logger => {
     logger: logger
   }))
 
-  app.use(session({
-    saveUninitialized: true,
-    resave: true,
-    secret: env('SESSION_SECRET')
-  }))
-
   app.use(bodyParser.json())
-
   app.use(bodyParser.urlencoded({
     extended: true
   }))
 
-  app.use(cookieParser())
-
   app.use(favicon('./public/img/favicon.ico'))
-
   app.use(express.static(path.join(__dirname, 'public')))
 
-    /**
-     * Auth Config
-     */
-    //app.use(passport.initialize());
-    passport.authenticate('local', {session: false});
-    passport.authenticate('local', {session: false});
+  /**
+   * Auth Config
+   */
+  // app.use(passport.initialize());
+  passport.authenticate('local', {session: false})
+  passport.authenticate('local', {session: false})
 
-    /**
-     * Routing Config
-     */
+  /**
+   * Routing Config
+   */
   app.use('/api', router)
 
   app.get('/', (request, response) => {
@@ -76,22 +66,22 @@ module.exports = logger => {
     next(err)
   })
 
-    /**
-     * CORS Config
-     */
-    app.use((req, res, next) => {
-        res.header('Access-Control-Allow-Origin', '*');
-        res.header('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, OPTIONS');
-        res.header('Access-Control-Allow-Headers',
-            'Origin, X-Requested-With, Content-Type, Accept, Authorization, Access-Control-Allow-Credentials');
-        res.header('Access-Control-Allow-Credentials', 'true');
-        next();
-    });
+  /**
+   * CORS Config
+   */
+  app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*')
+    res.header('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, OPTIONS')
+    res.header('Access-Control-Allow-Headers',
+        'Origin, X-Requested-With, Content-Type, Accept, Authorization, Access-Control-Allow-Credentials')
+    res.header('Access-Control-Allow-Credentials', 'true')
+    next()
+  })
 
-    /**
-     * Global Error Config
-     */
-  app.use((err, req, res, next) => {
+  /**
+   * Global Error Config
+   */
+  app.use((err, req, res) => {
     logger.error(err)
     res.status(err.status || HttpStatus.INTERNAL_SERVER_ERROR)
     res.json({

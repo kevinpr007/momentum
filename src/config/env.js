@@ -8,11 +8,11 @@ if (ENV === 'development') {
 }
 
 const config = {
-    NODE_ENV: process.env.NODE_ENV,
-    PORT: process.env.PORT,
-    DB_URL: process.env.DB_URL,
-    SECRET: process.env.SECRET
-};
+  NODE_ENV: process.env.NODE_ENV,
+  PORT: process.env.PORT,
+  DB_URL: process.env.DB_URL,
+  SECRET: process.env.SECRET
+}
 
 module.exports = (key) => {
   if (!key) return config
