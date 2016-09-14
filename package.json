@@ -6,8 +6,9 @@
     "start": "node ./bin/www",
     "startIntelliJ": "node %NODE_DEBUG_OPTION% ./bin/www",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "standard": "standard --fix && npm run start",
-    "retire": " retire --node --verbose"
+    "standard": "standard --fix",
+    "retire": " retire --node --verbose",
+    "nsp":"nsp check" 
   },
   "repository": {
     "type": "git",
@@ -44,6 +45,7 @@
   },
   "devDependencies": {
     "debug": "~2.2.0",
+    "nsp": "^2.6.1",
     "retire": "^1.2.10",
     "standard": "*"
   }
