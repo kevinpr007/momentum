@@ -4,6 +4,7 @@
   "description": "Style Point is a schedule service that connects people to barbers and stylists at the time and location of your choice!",
   "scripts": {
     "start": "node ./bin/www",
+    "startIntelliJ": "node %NODE_DEBUG_OPTION% ./bin/www",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
