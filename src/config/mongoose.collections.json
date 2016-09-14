@@ -10,7 +10,7 @@
     "Location": "sp_location",
     "User": "sp_user",
     "Workshift": "sp_workshift",
-    "Service": "sp_service"
+    "Service": "sp_service",
     "Schedule": "sp_schedule"
   }
 }

@@ -13,7 +13,7 @@ const scheduleSchema = new Schema({
     createdOn: {type: Date, default: Date.now}
 }, {collection: mongoDB.Collection.Schedule});
 
-workshiftSchema.virtual('show').get(function () {
+scheduleSchema.virtual('show').get(function () {
     return `${this.service}: ${this.startDate} - ${this.endDate}`;
 });
 
