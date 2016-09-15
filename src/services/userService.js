@@ -1,36 +1,21 @@
-const mongoose = require('mongoose');
-mongoose.Promise = require('bluebird');
-const User = require('mongoose').model('User');
+const mongoose = require('mongoose')
+mongoose.Promise = require('bluebird')
+const User = mongoose.model('User')
 
-let userService = logger => {
-    let getAll = () => {
-        return new Promise((resolve, reject) => {
-            return User.find((err, results) => {
-                if (err) {
-                    logger.error(err);
-                    reject({error: err});
-                } else
-                    resolve(results);
-            });
-        });
-    };
+let userService = () => {
+  let getAll = () => {
+    return User.find().exec()
+  }
 
-    let getByUserName = (username) => {
-        return new Promise((resolve, reject) => {
-            User.findOne().where('userName', username).exec((err, results) => {
-                if (err) {
-                    logger.error(err);
-                    reject({error: err});
-                } else
-                    resolve(results);
-            });
-        });
-    };
+  let getByUserName = (username) => {
+    return User.findOne()
+            .where('userName', username).exec()
+  }
 
-    return {
-        getAll: getAll,
-        getByUserName: getByUserName
-    };
-};
+  return {
+    getAll: getAll,
+    getByUserName: getByUserName
+  }
+}
 
-module.exports = userService;
+module.exports = userService
