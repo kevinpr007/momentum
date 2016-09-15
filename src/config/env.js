@@ -11,7 +11,9 @@ const config = {
   NODE_ENV: process.env.NODE_ENV,
   PORT: process.env.PORT,
   DB_URL: process.env.DB_URL,
-  SECRET: process.env.SECRET
+  SECRET: process.env.SECRET,
+  EMAIL: process.env.EMAIL,
+  EMAIL_PASS: process.env.EMAIL_PASS
 }
 
 module.exports = (key) => {
