@@ -2,7 +2,6 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 const crypto = require('crypto')
 const mongoDB = require('../config/mongoose.collections.json')
-
 const roles = require('./roles.server.enum')()
 
 const userSchema = new Schema({
@@ -23,8 +22,9 @@ const userSchema = new Schema({
     validate: [
       password => {
         return password && password.length > 6
-      }, 'Password should be longer tahn 6 characters'
-    ]
+      }, 'Password should be longer than 6 characters'
+    ],
+    required: true
   },
   salt: {
     type: String
@@ -32,7 +32,7 @@ const userSchema = new Schema({
   resetPasswordToken: {type: String},
   resetPasswordExpires: {type: Date},
   phone: Number,
-  roles: {type: String, enum: roles, required: true},
+  roles: {type: String, enum: roles},
   addresses: {
     location: {type: Schema.ObjectId, ref: mongoDB.Model.Location},
     street: String,
@@ -40,7 +40,7 @@ const userSchema = new Schema({
     state: String,
     zip: Number
   },
-  createdBy: {type: Schema.ObjectId, ref: mongoDB.Model.User, required: true},
+  createdBy: {type: Schema.ObjectId, ref: mongoDB.Model.User},
   createdOn: {type: Date, default: Date.now}
 }, {
   collection: mongoDB.Collection.User
@@ -62,26 +62,8 @@ userSchema.methods.hashPassword = function (password) {
   return crypto.pbkdf2Sync(password, this.salt, 10000, 64).toString('base64')
 }
 
-userSchema.methods.authenticate = function (password) {
+userSchema.methods.isValidPassword = function (password) {
   return this.password === this.hashPassword(password)
-}
-
-userSchema.statics.findUniqueUsername = (username, suffix, callback) => {
-  let possibleUsername = username + (suffix || '')
-
-  this.findOne({
-    email: possibleUsername
-  }, (err, user) => {
-    if (!err) {
-      if (!user) {
-        callback(possibleUsername)
-      } else {
-        return this.findUniqueUsername(username, (suffix || 0) + 1, callback)
-      }
-    } else {
-      callback(null)
-    }
-  })
 }
 
 userSchema.set('toJSON', {getters: true, virtuals: true})

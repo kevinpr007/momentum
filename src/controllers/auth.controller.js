@@ -1,50 +1,53 @@
+const HttpStatus = require('http-status-codes')
+
 let authController = (authService) => {
   let userService = require('../services/userService')()
 
   let login = (req, res) => {
-    res.status(200).json({
+    res.status(HttpStatus.OK).json({
       token: `JWT ${authService.generateToken(req.user)}`,
       user: req.user
     })
   }
 
   let register = function (req, res, next) {
-    const email = req.body.email
-    const firstName = req.body.firstName
-    const lastName = req.body.lastName
-    const password = req.body.password
-
-    if (!email) {
-      return res.status(422).send({error: 'You must enter an email address.'})
+    let user = {
+      email: req.body.email,
+      password: req.body.password,
+      firstName: req.body.firstName,
+      lastName: req.body.lastName
     }
-
-    if (!firstName || !lastName) {
-      return res.status(422).send({error: 'You must enter your full name.'})
-    }
-
-    if (!password) {
-      return res.status(422).send({error: 'You must enter a password.'})
-    }
-
-    userService.getByEmail(email).then(existingUser => {
+    userService.getByEmail(user.email).then(existingUser => {
       if (existingUser) {
-        return res.status(422).send({error: 'That email address is already in use.'})
+        return res.status(HttpStatus.UNPROCESSABLE_ENTITY)
+            .send({error: 'That email address is already in use.'})
       }
-
-      // let user = new User({
-      //   email: email,
-      //   password: password,
-      //   profile: {firstName: firstName, lastName: lastName}
-      // })
-
-      res.status(201).json({
-        token: `JWT ${authService.generateToken(req.user)}`,
-        user: req.user
+      userService.createUser(user).then(user => {
+        res.status(HttpStatus.CREATED).json({
+          token: `JWT ${authService.generateToken(user)}`,
+          user: user
+        })
       })
     }).catch(err => next(err))
   }
 
+  let auth = (req, res, next) => {
+    userService.getByEmail(req.email)
+        .then(user => {
+          if (!user) {
+            res.status(HttpStatus.NOT_FOUND)
+                .json({error: 'Unknown user'})
+          }
+          if (!user.isValidPassword(req.password)) {
+            res.status(HttpStatus.BAD_REQUEST)
+                .json({error: 'Invalid password'})
+          }
+          return user
+        }).catch(err => next(err))
+  }
+
   return {
+    auth: auth,
     login: login,
     register: register
   }

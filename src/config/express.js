@@ -46,8 +46,7 @@ module.exports = logger => {
   /**
    * Auth Config
    */
-  // app.use(passport.initialize());
-  passport.authenticate('local', {session: false})
+  passport.authenticate('jwt', {session: false})
   passport.authenticate('local', {session: false})
 
   /**

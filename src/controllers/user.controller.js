@@ -14,12 +14,12 @@ let userController = (userService) => {
 
   let getByUserName = (req, res) => {
     userService.getByUserName(req.params.userName)
-            .then(user => res.json(user))
-            .catch(err => {
-              req.log.info(err)
-              res.status(HttpStatus.INTERNAL_SERVER_ERROR)
-              res.json(err)
-            })
+        .then(user => res.json(user))
+        .catch(err => {
+          req.log.info(err)
+          res.status(HttpStatus.INTERNAL_SERVER_ERROR)
+          res.json(err)
+        })
   }
 
   return {

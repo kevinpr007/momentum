@@ -15,10 +15,22 @@ let userService = () => {
     return User.findOne({_id: id}, '-password -salt').exec()
   }
 
+  let createUser = user => {
+    let newUser = new User({
+      firstName: user.firstName,
+      lastName: user.lastName,
+      email: user.email,
+      password: user.password
+    })
+
+    return newUser.save()
+  }
+
   return {
     getAll: getAll,
     getById: getById,
-    getByEmail: getByEmail
+    getByEmail: getByEmail,
+    createUser: createUser
   }
 }
 

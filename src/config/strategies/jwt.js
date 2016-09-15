@@ -19,11 +19,6 @@ module.exports = () => {
               message: 'Unknown user'
             })
           }
-          if (!user.authenticate('')) {
-            return cb(null, false, {
-              message: 'Invalid password'
-            })
-          }
           return cb(null, user)
         }).catch(err => cb(err))
   }))
