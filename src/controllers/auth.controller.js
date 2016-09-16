@@ -3,11 +3,25 @@ const HttpStatus = require('http-status-codes')
 let authController = (authService) => {
   let userService = require('../services/userService')()
 
-  let login = (req, res) => {
-    res.status(HttpStatus.OK).json({
-      token: `JWT ${authService.generateToken(req.user)}`,
-      user: req.user
-    })
+  let auth = (req, res) => {
+    userService.getByEmail(req.body.email)
+        .then(user => {
+          if (!user) {
+            res.status(HttpStatus.BAD_REQUEST)
+                .json({error: 'Authentication failed. User not found.'})
+          }
+          user.isValidPassword(req.body.password, (err, isMatch) => {
+            if (isMatch && !err) {
+              res.status(HttpStatus.OK).json({
+                token: `JWT ${authService.generateToken(user)}`,
+                user: user
+              })
+            } else {
+              res.status(HttpStatus.BAD_REQUEST)
+                  .json({error: 'Authentication failed. Wrong password.'})
+            }
+          })
+        })
   }
 
   let register = function (req, res, next) {
@@ -20,9 +34,9 @@ let authController = (authService) => {
     userService.getByEmail(user.email).then(existingUser => {
       if (existingUser) {
         return res.status(HttpStatus.UNPROCESSABLE_ENTITY)
-            .send({error: 'That email address is already in use.'})
+            .json({error: 'That email address is already registered.'})
       }
-      userService.createUser(user).then(user => {
+      return userService.createUser(user).then(user => {
         res.status(HttpStatus.CREATED).json({
           token: `JWT ${authService.generateToken(user)}`,
           user: user
@@ -31,24 +45,8 @@ let authController = (authService) => {
     }).catch(err => next(err))
   }
 
-  let auth = (req, res, next) => {
-    userService.getByEmail(req.email)
-        .then(user => {
-          if (!user) {
-            res.status(HttpStatus.NOT_FOUND)
-                .json({error: 'Unknown user'})
-          }
-          if (!user.isValidPassword(req.password)) {
-            res.status(HttpStatus.BAD_REQUEST)
-                .json({error: 'Invalid password'})
-          }
-          return user
-        }).catch(err => next(err))
-  }
-
   return {
     auth: auth,
-    login: login,
     register: register
   }
 }

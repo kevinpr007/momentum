@@ -54,11 +54,13 @@ module.exports = logger => {
    */
   app.use('/api', router)
 
+  require('../routes/auth.routes')(router)
+  require('../routes/user.routes')(router)
+
   app.get('/', (request, response) => {
     response.send('Hello World!')
   })
 
-  require('../routes/user.routes')(router)
   app.use((req, res, next) => {
     let err = new Error(HttpStatus.getStatusText(HttpStatus.NOT_FOUND))
     err.status = HttpStatus.NOT_FOUND
