@@ -1,3 +1,4 @@
+const Promise = require('bluebird')
 const passport = require('passport')
 const LocalStrategy = require('passport-local')
 
@@ -8,20 +9,20 @@ module.exports = () => {
     userService.getByEmail(email)
         .then(user => {
           if (!user) {
-            return cb(null, false, {
+            return Promise.resolve(cb(null, false, {
               message: 'Unknown user'
-            })
+            }))
           }
           user.isValidPassword(password, (err, isMatch) => {
             if (err) {
-              return cb(err)
+              return Promise.resolve(cb(err))
             }
             if (!isMatch) {
-              return cb(null, false, {
+              return Promise.resolve(cb(null, false, {
                 message: 'Invalid password'
-              })
+              }))
             }
-            return cb(null, user)
+            return Promise.resolve(cb(null, user))
           })
         }).catch(err => cb(err))
   }))
