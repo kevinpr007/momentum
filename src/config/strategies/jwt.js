@@ -12,7 +12,7 @@ module.exports = () => {
   const userService = require('../../services/userService')()
 
   passport.use(new JwtStrategy(jwtOptions, (payload, cb) => {
-    userService.getById(payload.id)
+    userService.getById(payload._doc._id)
         .then(user => {
           if (!user) {
             return cb(null, false, {

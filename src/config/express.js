@@ -1,7 +1,6 @@
 const express = require('express')
 const router = express.Router()
 const path = require('path')
-const passport = require('passport')
 const favicon = require('serve-favicon')
 const bodyParser = require('body-parser')
 const BunyanMiddleware = require('bunyan-middleware')
@@ -42,12 +41,6 @@ module.exports = logger => {
 
   app.use(favicon('./public/img/favicon.ico'))
   app.use(express.static(path.join(__dirname, 'public')))
-
-  /**
-   * Auth Config
-   */
-  passport.authenticate('jwt', {session: false})
-  passport.authenticate('local', {session: false})
 
   /**
    * Routing Config
