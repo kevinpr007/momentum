@@ -80,5 +80,13 @@ userSchema.methods.isValidPassword = function (password, cb) {
   })
 }
 
-userSchema.set('toJSON', {getters: true, virtuals: true})
+userSchema.set('toJSON', {
+  getters: true,
+  virtuals: true,
+  transform: (doc, ret) => {
+    delete ret.password
+    return ret
+  }
+})
+
 mongoose.model(mongoDB.Model.User, userSchema)

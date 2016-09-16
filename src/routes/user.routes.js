@@ -1,7 +1,8 @@
 const userService = require('../services/userService')()
 const userController = require('../controllers/user.controller')(userService)
+const auth = require('passport').authenticate('jwt', {session: false})
 
 module.exports = router => {
-  router.get('/users', userController.getAllUsers)
+  router.get('/users', auth, userController.getAllUsers)
   router.get('/users/:userName', userController.getByUserName)
 }

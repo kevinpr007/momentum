@@ -21,10 +21,12 @@ let authController = (authService) => {
                   .json({error: 'Authentication failed. Wrong password.'})
             }
           })
+        }).catch(err => {
+      res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({error: err})
         })
   }
 
-  let register = function (req, res, next) {
+  let register = function (req, res) {
     let user = {
       email: req.body.email,
       password: req.body.password,
@@ -42,7 +44,9 @@ let authController = (authService) => {
           user: user
         })
       })
-    }).catch(err => next(err))
+    }).catch(err => {
+      res.status(HttpStatus.BAD_REQUEST).json({error: err})
+    })
   }
 
   return {
