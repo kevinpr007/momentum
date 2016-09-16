@@ -1,13 +1,13 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
-const crypto = require('crypto')
+const bcrypt = require('bcrypt-nodejs')
 const mongoDB = require('../config/mongoose.collections.json')
 const roles = require('./roles.server.enum')()
 
 const userSchema = new Schema({
-  firstName: {type: String, index: 1, required: true},
-  lastName: {type: String, index: 1, required: true},
-  email: {type: String, match: /.+@.+\..+/, trim: true, required: true, index: true},
+  firstName: {type: String, required: true},
+  lastName: {type: String, required: true},
+  email: {type: String, match: /.+@.+\..+/, trim: true, required: true, index: 1},
   dob: {
     type: Date,
     validate: [
@@ -51,19 +51,33 @@ userSchema.virtual('fullName').get(function () {
 })
 
 userSchema.pre('save', function (next) {
-  if (this.password) {
-    this.salt = new Buffer(crypto.randomBytes(16).toString('base64'), 'base64')
-    this.password = this.hashPassword(this.password)
+  const user = this
+  const SALT_FACTOR = 5
+
+  if (!user.isModified('password')) {
+    return next()
   }
-  next()
+  bcrypt.genSalt(SALT_FACTOR, (err, salt) => {
+    if (err) {
+      return next(err)
+    }
+    bcrypt.hash(user.password, salt, null, (err, hash) => {
+      if (err) {
+        return next(err)
+      }
+      user.password = hash
+      next()
+    })
+  })
 })
 
-userSchema.methods.hashPassword = function (password) {
-  return crypto.pbkdf2Sync(password, this.salt, 10000, 64).toString('base64')
-}
-
-userSchema.methods.isValidPassword = function (password) {
-  return this.password === this.hashPassword(password)
+userSchema.methods.isValidPassword = function (password, cb) {
+  bcrypt.compare(password, this.password, (err, isMatch) => {
+    if (err) {
+      return cb(err)
+    }
+    cb(null, isMatch)
+  })
 }
 
 userSchema.set('toJSON', {getters: true, virtuals: true})
