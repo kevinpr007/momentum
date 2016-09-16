@@ -8,7 +8,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "standard": "standard --fix",
     "retire": " retire --node --verbose",
-    "nsp": "nsp check"
+    "nsp": "nsp check",
+    "nodemon": "nodemon ./bin/www"
   },
   "repository": {
     "type": "git",
@@ -49,6 +50,7 @@
   },
   "devDependencies": {
     "debug": "~2.2.0",
+    "nodemon": "^1.10.2",
     "nsp": "^2.6.1",
     "retire": "^1.2.10",
     "standard": "*"
