@@ -8,7 +8,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "standard": "standard --fix",
     "retire": " retire --node --verbose",
-    "nsp":"nsp check" 
+    "nsp": "nsp check",
+    "push": "npm run standard & npm run retire & npm run nsp"
   },
   "repository": {
     "type": "git",
@@ -35,11 +36,12 @@
     "bunyan-rotating-file-stream": "^1.6.1",
     "dotenv": "~2.0.0",
     "express": "^4.14.0",
+    "helmet": "^2.2.0",
+    "http-status-codes": "^1.0.6",
     "lodash": "~4.15.0",
     "mongodb": "~2.2.9",
     "mongoose": "^4.5.10",
-    "serve-favicon": "^2.3.0",
-    "http-status-codes": "^1.0.6"
+    "serve-favicon": "^2.3.0"
   },
   "devDependencies": {
     "debug": "~2.2.0",
