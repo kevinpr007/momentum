@@ -5,31 +5,30 @@ const confirmResetPasswordEmail = require('../services/emails/confirm-reset-pass
 let authController = authService => {
   let userService = require('../services/user.service')()
 
-  let auth = (req, res) => {
-    userService.getByEmail(req.body.email)
-        .then(user => {
-          if (!user) {
-            res.status(HttpStatus.BAD_REQUEST)
-                .json({error: 'Authentication failed. User not found.'})
-          }
-          user.isValidPassword(req.body.password, (err, isMatch) => {
-            if (isMatch && !err) {
-              res.status(HttpStatus.OK).json({
-                token: `JWT ${authService.generateToken(user)}`,
-                user: user
-              })
-            } else {
-              res.status(HttpStatus.BAD_REQUEST)
-                  .json({error: 'Authentication failed. Wrong password.'})
-            }
+  let auth = (req, res, next) => {
+    userService.getByEmail(req.body.email).then(user => {
+      if (!user) {
+        res.status(HttpStatus.BAD_REQUEST)
+            .json({error: 'Authentication failed. User not found.'})
+      }
+      user.isValidPassword(req.body.password, (err, isMatch) => {
+        if (isMatch && !err) {
+          res.status(HttpStatus.OK).json({
+            token: `JWT ${authService.generateToken(user)}`,
+            user: user
           })
-        }).catch(err => {
+        } else {
+          res.status(HttpStatus.BAD_REQUEST)
+              .json({error: 'Authentication failed. Wrong password.'})
+        }
+      })
+    }).catch(err => {
       req.log.error(err)
-      res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({error: err})
-        })
+      next(err)
+    })
   }
 
-  let register = (req, res) => {
+  let register = (req, res, next) => {
     let user = {
       email: req.body.email,
       password: req.body.password,
@@ -49,11 +48,11 @@ let authController = authService => {
       })
     }).catch(err => {
       req.log.error(err)
-      res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({error: err})
+      next(err)
     })
   }
 
-  let confirmResetPassword = (req, res) => {
+  let confirmResetPassword = (req, res, next) => {
     userService.getByEmail(req.body.email).then(user => {
       if (!user) {
         res.status(HttpStatus.UNPROCESSABLE_ENTITY)
@@ -66,11 +65,11 @@ let authController = authService => {
       res.status(HttpStatus.OK).json({data: data})
     }).catch(err => {
       req.log.error(err)
-      res.status(HttpStatus.BAD_REQUEST).json({error: err})
+      next(err)
     })
   }
 
-  let resetPassword = (req, res) => {
+  let resetPassword = (req, res, next) => {
     authService.resetPassword(req.params.token).then(user => {
       if (!user) {
         res.status(HttpStatus.UNPROCESSABLE_ENTITY)
@@ -87,7 +86,7 @@ let authController = authService => {
       res.status(HttpStatus.OK).json({data: data})
     }).catch(err => {
       req.log.error(err)
-      res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({error: err})
+      next(err)
     })
   }
 

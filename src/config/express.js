@@ -77,8 +77,7 @@ module.exports = logger => {
    */
   app.use((err, req, res) => {
     logger.error(err)
-    res.status(err.status || HttpStatus.INTERNAL_SERVER_ERROR)
-    res.json({
+    res.status(err.status || HttpStatus.INTERNAL_SERVER_ERROR).json({
       message: err.message,
       error: err
     })

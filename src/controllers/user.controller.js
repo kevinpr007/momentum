@@ -1,30 +1,27 @@
 const HttpStatus = require('http-status-codes')
 
 let userController = userService => {
-  let getAllUsers = (req, res) => {
+  let getAllUsers = (req, res, next) => {
     userService.getAll().then(users => {
-      req.log.info(req.session)
-      res.json(users)
+      return res.status(HttpStatus.OK).json(users)
     }).catch(err => {
       req.log.error(err)
-      res.status(HttpStatus.INTERNAL_SERVER_ERROR)
-      res.json(err)
+      next(err)
     })
   }
 
-  let getByUserName = (req, res) => {
-    userService.getByUserName(req.params.userName)
-        .then(user => res.json(user))
+  let getByUserEmail = (req, res, next) => {
+    userService.getByEmail(req.params.userName)
+        .then(user => res.status(HttpStatus.OK).json(user))
         .catch(err => {
           req.log.info(err)
-          res.status(HttpStatus.INTERNAL_SERVER_ERROR)
-          res.json(err)
+          next(err)
         })
   }
 
   return {
     getAllUsers: getAllUsers,
-    getByUserName: getByUserName
+    getByUserEmail: getByUserEmail
   }
 }
 

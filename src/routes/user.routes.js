@@ -4,5 +4,5 @@ const auth = require('passport').authenticate('jwt', {session: false})
 
 module.exports = router => {
   router.get('/users', auth, userController.getAllUsers)
-  router.get('/users/:userName', userController.getByUserName)
+  router.get('/users/:userName', userController.getByUserEmail)
 }
