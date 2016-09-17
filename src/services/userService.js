@@ -7,7 +7,7 @@ let userService = () => {
     return User.find().exec()
   }
 
-  let getByEmail = (email) => {
+  let getByEmail = email => {
     return User.findOne().where('email', email).exec()
   }
 
@@ -15,7 +15,7 @@ let userService = () => {
     return User.findOne({_id: id}, '-password -salt').exec()
   }
 
-  let createUser = user => {
+  let registerUser = user => {
     let newUser = new User({
       firstName: user.firstName,
       lastName: user.lastName,
@@ -30,7 +30,7 @@ let userService = () => {
     getAll: getAll,
     getById: getById,
     getByEmail: getByEmail,
-    createUser: createUser
+    registerUser: registerUser
   }
 }
 

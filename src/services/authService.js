@@ -1,5 +1,8 @@
 const env = require('../config/env')
 const jwt = require('jsonwebtoken')
+const mongoose = require('mongoose')
+mongoose.Promise = require('bluebird')
+const User = mongoose.model('User')
 
 let authService = () => {
   let generateToken = user => {
@@ -8,8 +11,18 @@ let authService = () => {
     })
   }
 
+  let resetPassword = token => {
+    User.findOne({
+      resetPasswordToken: token,
+      resetPasswordExpires: {
+        $gt: Date.now()
+      }
+    }).exec()
+  }
+
   return {
-    generateToken: generateToken
+    generateToken: generateToken,
+    resetPassword: resetPassword
   }
 }
 

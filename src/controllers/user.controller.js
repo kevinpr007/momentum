@@ -1,6 +1,6 @@
 const HttpStatus = require('http-status-codes')
 
-let userController = (userService) => {
+let userController = userService => {
   let getAllUsers = (req, res) => {
     userService.getAll().then(users => {
       req.log.info(req.session)
