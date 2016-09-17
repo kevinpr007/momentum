@@ -13,7 +13,8 @@ const config = {
   DB_URL: process.env.DB_URL,
   SECRET: process.env.SECRET,
   EMAIL: process.env.EMAIL,
-  EMAIL_PASS: process.env.EMAIL_PASS
+  EMAIL_PASS: process.env.EMAIL_PASS,
+  TOKEN_LIFE: process.env.TOKEN_LIFE
 }
 
 module.exports = (key) => {
