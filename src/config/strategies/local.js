@@ -3,7 +3,7 @@ const passport = require('passport')
 const LocalStrategy = require('passport-local')
 
 module.exports = () => {
-  const userService = require('../../services/userService')()
+  const userService = require('../../services/user.service')()
 
   passport.use(new LocalStrategy((email, password, cb) => {
     userService.getByEmail(email)

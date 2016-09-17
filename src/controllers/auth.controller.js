@@ -1,8 +1,9 @@
 const HttpStatus = require('http-status-codes')
-const resetPasswordEmail = require('../services/emails/reset-password-confirm')
+const resetPasswordEmail = require('../services/emails/reset-password')
+const confirmResetPasswordEmail = require('../services/emails/confirm-reset-password')
 
 let authController = authService => {
-  let userService = require('../services/userService')()
+  let userService = require('../services/user.service')()
 
   let auth = (req, res) => {
     userService.getByEmail(req.body.email)
@@ -37,7 +38,7 @@ let authController = authService => {
     }
     userService.getByEmail(user.email).then(existingUser => {
       if (existingUser) {
-        return res.status(HttpStatus.UNPROCESSABLE_ENTITY)
+        res.status(HttpStatus.UNPROCESSABLE_ENTITY)
             .json({error: 'That email address is already registered.'})
       }
       return userService.registerUser(user).then(user => {
@@ -46,6 +47,23 @@ let authController = authService => {
           user: user
         })
       })
+    }).catch(err => {
+      req.log.error(err)
+      res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({error: err})
+    })
+  }
+
+  let confirmResetPassword = (req, res) => {
+    userService.getByEmail(req.body.email).then(user => {
+      if (!user) {
+        res.status(HttpStatus.UNPROCESSABLE_ENTITY)
+            .json({error: 'Your request could not be processed as entered. Please try again.'})
+      }
+      return authService.resetToken(user)
+    }).then(user => {
+      return confirmResetPasswordEmail(user, req.headers.host)
+    }).then(data => {
+      res.status(HttpStatus.OK).json({data: data})
     }).catch(err => {
       req.log.error(err)
       res.status(HttpStatus.BAD_REQUEST).json({error: err})
@@ -69,14 +87,15 @@ let authController = authService => {
       res.status(HttpStatus.OK).json({data: data})
     }).catch(err => {
       req.log.error(err)
-      res.status(HttpStatus.BAD_REQUEST).json({error: err})
+      res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({error: err})
     })
   }
 
   return {
     auth: auth,
     register: register,
-    resetPassword: resetPassword
+    resetPassword: resetPassword,
+    confirmResetPassword: confirmResetPassword
   }
 }
 

@@ -10,7 +10,7 @@ const jwtOptions = {
 }
 
 module.exports = () => {
-  const userService = require('../../services/userService')()
+  const userService = require('../../services/user.service')()
 
   passport.use(new JwtStrategy(jwtOptions, (payload, cb) => {
     userService.getById(payload._doc._id).then(user => {

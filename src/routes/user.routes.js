@@ -1,4 +1,4 @@
-const userService = require('../services/userService')()
+const userService = require('../services/user.service')()
 const userController = require('../controllers/user.controller')(userService)
 const auth = require('passport').authenticate('jwt', {session: false})
 

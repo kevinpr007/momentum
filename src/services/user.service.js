@@ -22,7 +22,6 @@ let userService = () => {
       email: user.email,
       password: user.password
     })
-
     return newUser.save()
   }
 
