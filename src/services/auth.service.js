@@ -4,11 +4,12 @@ const env = require('../config/env')
 const mongoose = require('mongoose')
 mongoose.Promise = require('bluebird')
 const User = mongoose.model('User')
+const tokenLife = env('TOKEN_LIFE')
 
 let authService = () => {
   let generateToken = user => {
     return jwt.sign(user, env('SECRET'), {
-      expiresIn: env('TOKEN_LIFE')
+      expiresIn: parseInt(tokenLife)
     })
   }
 
@@ -19,7 +20,7 @@ let authService = () => {
         return err
       }
       user.resetPasswordToken = token
-      user.resetPasswordExpires = Date.now() + env('TOKEN_LIFE')
+      user.resetPasswordExpires = Date.now() + parseInt(tokenLife)
       return user.save()
     })
   }
