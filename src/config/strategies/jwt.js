@@ -21,6 +21,6 @@ module.exports = () => {
       } else {
         return Promise.resolve(cb(null, user))
       }
-    }).catch(err => cb(err))
+    }).catch(err => Promise.resolve(cb(err)))
   }))
 }

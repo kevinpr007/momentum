@@ -1,10 +1,14 @@
 const jwt = require('jsonwebtoken')
 const crypto = require('crypto')
 const env = require('../config/env')
+const Promise = require('bluebird')
 const mongoose = require('mongoose')
-mongoose.Promise = require('bluebird')
+mongoose.Promise = Promise
 const User = mongoose.model('User')
 const tokenLife = env('TOKEN_LIFE')
+
+let randomBytes = Promise
+    .promisify(require("crypto").randomBytes);
 
 let authService = () => {
   let generateToken = user => {
@@ -14,22 +18,19 @@ let authService = () => {
   }
 
   let resetToken = user => {
-    crypto.randomBytes(48, (err, buffer) => {
-      const token = buffer.toString('hex')
-      if (err) {
-        return err
-      }
-      user.resetPasswordToken = token
-      user.resetPasswordExpires = Date.now() + parseInt(tokenLife)
+    let date = new Date()
+    return randomBytes(48).then(buffer => {
+      user.resetPasswordToken = buffer.toString('hex')
+      user.resetPasswordExpires = date.setSeconds(date.getSeconds() + parseInt(tokenLife))
       return user.save()
     })
   }
 
-  let resetPassword = token => {
+  let resetUserPassword = token => {
     return User.findOne({
       resetPasswordToken: token,
       resetPasswordExpires: {
-        $gt: Date.now()
+        $gt: new Date()
       }
     }).exec()
   }
@@ -37,7 +38,7 @@ let authService = () => {
   return {
     resetToken: resetToken,
     generateToken: generateToken,
-    resetPassword: resetPassword
+    resetUserPassword: resetUserPassword
   }
 }
 

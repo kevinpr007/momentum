@@ -70,7 +70,7 @@ let authController = authService => {
   }
 
   let resetPassword = (req, res, next) => {
-    authService.resetPassword(req.params.token).then(user => {
+    authService.resetUserPassword(req.params.token).then(user => {
       if (!user) {
         res.status(HttpStatus.UNPROCESSABLE_ENTITY)
             .json({error: 'Your token has expired. Please reset your password again.'})
@@ -78,7 +78,6 @@ let authController = authService => {
       user.password = req.body.password
       user.resetPasswordToken = undefined
       user.resetPasswordExpires = undefined
-      console.error(typeof user)
       return user.save()
     }).then(user => {
       return resetPasswordEmail(user)
