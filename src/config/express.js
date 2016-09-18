@@ -75,11 +75,21 @@ module.exports = logger => {
   /**
    * Global Error Config
    */
-  app.use((err, req, res) => {
+  if (app.get('env') === 'development') {
+    app.use((err, req, res, next) => {
+      logger.error(err)
+      res.status(err.status || HttpStatus.INTERNAL_SERVER_ERROR).json({
+        message: err.message,
+        error: err
+      })
+    })
+  }
+
+  app.use((err, req, res, next) => {
     logger.error(err)
     res.status(err.status || HttpStatus.INTERNAL_SERVER_ERROR).json({
       message: err.message,
-      error: err
+      error: {}
     })
   })
 
