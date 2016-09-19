@@ -1,17 +1,17 @@
 const jwt = require('jsonwebtoken')
-const env = require('../config/env')
 const Promise = require('bluebird')
 const mongoose = require('mongoose')
 mongoose.Promise = Promise
 const User = mongoose.model('User')
-const tokenLife = env('TOKEN_LIFE')
+const config = require('../config/config')
+const tokenLife = config.TOKEN_LIFE
 
 let randomBytes = Promise
     .promisify(require('crypto').randomBytes)
 
 let authService = () => {
   let generateToken = user => {
-    return jwt.sign(user, env('SECRET'), {
+    return jwt.sign(user, config.SECRET, {
       expiresIn: parseInt(tokenLife)
     })
   }

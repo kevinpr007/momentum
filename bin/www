@@ -5,9 +5,9 @@ const mongoose = require('../src/config/mongoose');
 const passport = require('../src/config/passport');
 const express = require('../src/config/express');
 const logger = require('../src/config/logger');
-const env = require('../src/config/env');
+const config = require('../src/config/config');
 const http = require('http');
-const port = env('PORT');
+const port = config.PORT;
 
 let db = mongoose(logger);
 let app = express(logger);

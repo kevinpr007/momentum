@@ -1,10 +1,10 @@
 const mailer = require('nodemailer')
-const env = require('./env')
+const config = require('./config')
 
 module.exports = mailer.createTransport({
   service: 'gmail',
   auth: {
-    user: env('EMAIL'),
-    pass: env('EMAIL_PASS')
+    user: config.EMAIL,
+    pass: config.EMAIL_PASS
   }
 })

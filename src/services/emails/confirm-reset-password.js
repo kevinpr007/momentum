@@ -1,10 +1,10 @@
 const Promise = require('bluebird')
-const env = require('../../config/env')
+const config = require('../../config/config')
 const transporter = require('../../config/nodemailer')
 
 module.exports = (user, host) => {
   let template = {
-    from: env('EMAIL'),
+    from: config.EMAIL,
     to: user.email,
     subject: 'Style Point: Reset your password',
     html: `
