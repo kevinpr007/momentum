@@ -1,11 +1,12 @@
 const Promise = require('bluebird')
 const passport = require('passport')
 const LocalStrategy = require('passport-local')
+const localOptions = {usernameField: 'email'}
 
 module.exports = () => {
   const userService = require('../../services/user.service')()
 
-  passport.use(new LocalStrategy((email, password, cb) => {
+  passport.use(new LocalStrategy(localOptions, (email, password, cb) => {
     userService.getByEmail(email)
         .then(user => {
           if (!user) {
@@ -24,6 +25,6 @@ module.exports = () => {
             }
             return Promise.resolve(cb(null, user))
           })
-        }).catch(err => cb(err))
+        }).catch(err => Promise.resolve(cb(err)))
   }))
 }
