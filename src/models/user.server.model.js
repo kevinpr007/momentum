@@ -3,6 +3,7 @@ const Schema = mongoose.Schema
 const bcrypt = require('bcrypt-nodejs')
 const mongoDB = require('../config/mongoose.collections.json')
 const roles = require('./roles.server.enum')()
+const config = require('../config/config')
 
 const userSchema = new Schema({
   firstName: {type: String, required: true},
@@ -52,12 +53,10 @@ userSchema.virtual('fullName').get(function () {
 
 userSchema.pre('save', function (next) {
   const user = this
-  const SALT_FACTOR = 5
-
   if (!user.isModified('password')) {
     return next()
   }
-  bcrypt.genSalt(SALT_FACTOR, (err, salt) => {
+  bcrypt.genSalt(config.SALT_FACTOR, (err, salt) => {
     if (err) {
       return next(err)
     }

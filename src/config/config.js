@@ -14,5 +14,6 @@ module.exports = {
   SECRET: process.env.SECRET,
   EMAIL: process.env.EMAIL,
   EMAIL_PASS: process.env.EMAIL_PASS,
-  TOKEN_LIFE: process.env.TOKEN_LIFE
+  TOKEN_LIFE: process.env.TOKEN_LIFE,
+  SALT_FACTOR: process.env.SALT_FACTOR
 }
