@@ -8,8 +8,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "standard": "standard --fix",
     "retire": " retire --node --verbose",
-    "nsp": "nsp check",
     "nodemon": "nodemon ./bin/www"
+    "nsp": "nsp check",
+    "push": "npm run standard && npm run retire && npm run nsp"
   },
   "repository": {
     "type": "git",
@@ -39,6 +40,7 @@
     "express": "^4.14.0",
     "http-status-codes": "^1.0.6",
     "jsonwebtoken": "^7.1.9",
+    "helmet": "^2.2.0",
     "lodash": "~4.15.0",
     "mongodb": "~2.2.9",
     "mongoose": "^4.5.10",

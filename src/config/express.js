@@ -5,12 +5,19 @@ const favicon = require('serve-favicon')
 const bodyParser = require('body-parser')
 const BunyanMiddleware = require('bunyan-middleware')
 const HttpStatus = require('http-status-codes')
+const helmet = require('helmet')
 
 module.exports = logger => {
   /**
    * Global App Config
    */
   let app = express()
+
+    /**
+     * Security area
+     */
+  app.use(helmet())
+
   app.use(BunyanMiddleware({
     headerName: 'X-Request-Id',
     propertyName: 'reqId',
