@@ -9,8 +9,7 @@
     "standard": "standard --fix",
     "retire": " retire --node --verbose",
     "nsp": "nsp check",
-    "push": "npm run standard && npm run retire && npm run nsp && npm run gitpush",
-    "gitpush": "git push origin HEAD"
+    "push": "npm run standard && npm run retire && npm run nsp"
   },
   "repository": {
     "type": "git",
