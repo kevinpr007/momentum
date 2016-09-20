@@ -12,42 +12,41 @@ module.exports = logger => {
    * Global App Config
    */
   let app = express()
+  app.use(BunyanMiddleware({
+    headerName: 'X-Request-Id',
+    propertyName: 'reqId',
+    logName: 'req_id',
+    obscureHeaders: [],
+    logger: logger
+  }))
+  app.use(bodyParser.json())
+  app.use(bodyParser.urlencoded({
+    extended: true
+  }))
 
-    /**
-     * Security area
-     */
+  app.use(favicon('./public/img/favicon.ico'))
+  app.use(express.static(path.join(__dirname, 'public')))
+
+  app.use(BunyanMiddleware({
+    headerName: 'X-Request-Id',
+    propertyName: 'reqId',
+    logName: 'req_id',
+    obscureHeaders: [],
+    logger: logger
+  }))
+
+  app.use(bodyParser.json())
+  app.use(bodyParser.urlencoded({
+    extended: true
+  }))
+
+  app.use(favicon('./public/img/favicon.ico'))
+  app.use(express.static(path.join(__dirname, 'public')))
+
+  /**
+   * Security area
+   */
   app.use(helmet())
-
-  app.use(BunyanMiddleware({
-    headerName: 'X-Request-Id',
-    propertyName: 'reqId',
-    logName: 'req_id',
-    obscureHeaders: [],
-    logger: logger
-  }))
-  app.use(bodyParser.json())
-  app.use(bodyParser.urlencoded({
-    extended: true
-  }))
-
-  app.use(favicon('./public/img/favicon.ico'))
-  app.use(express.static(path.join(__dirname, 'public')))
-
-  app.use(BunyanMiddleware({
-    headerName: 'X-Request-Id',
-    propertyName: 'reqId',
-    logName: 'req_id',
-    obscureHeaders: [],
-    logger: logger
-  }))
-
-  app.use(bodyParser.json())
-  app.use(bodyParser.urlencoded({
-    extended: true
-  }))
-
-  app.use(favicon('./public/img/favicon.ico'))
-  app.use(express.static(path.join(__dirname, 'public')))
 
   /**
    * Routing Config

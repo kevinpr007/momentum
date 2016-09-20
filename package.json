@@ -8,7 +8,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "standard": "standard --fix",
     "retire": " retire --node --verbose",
-    "nodemon": "nodemon ./bin/www"
+    "nodemon": "nodemon ./bin/www",
     "nsp": "nsp check",
     "push": "npm run standard && npm run retire && npm run nsp"
   },
