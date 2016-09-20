@@ -8,12 +8,18 @@ const session = require('express-session')
 const cookieParser = require('cookie-parser')
 const BunyanMiddleware = require('bunyan-middleware')
 const HttpStatus = require('http-status-codes')
+const helmet = require('helmet')
 
 module.exports = logger => {
     /**
      * Global App Config
      */
   let app = express()
+
+    /**
+     * Security area
+     */
+  app.use(helmet())
 
   app.use(BunyanMiddleware({
     headerName: 'X-Request-Id',
