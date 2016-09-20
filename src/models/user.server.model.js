@@ -1,25 +1,39 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
+const bcrypt = require('bcrypt-nodejs')
 const mongoDB = require('../config/mongoose.collections.json')
-
 const roles = require('./roles.server.enum')()
+const config = require('../config/config')
 
 const userSchema = new Schema({
-  firstName: {type: String, index: 1, required: true},
-  lastName: {type: String, index: 1, required: true},
-  email: {type: String, match: /.+@.+\..+/, required: true, index: true},
+  firstName: {type: String, required: true},
+  lastName: {type: String, required: true},
+  email: {type: String, match: /.+@.+\..+/, trim: true, required: true, index: 1},
   dob: {
     type: Date,
     validate: [
       date => {
         return date < Date.now()
       },
-      'Please enter a valid date of birth.'
+      'Please enter a valid date'
     ]
   },
-  userName: {type: String, trim: true, required: true, unique: true},
+  password: {
+    type: String,
+    validate: [
+      password => {
+        return password && password.length > 6
+      }, 'Password should be longer than 6 characters'
+    ],
+    required: true
+  },
+  salt: {
+    type: String
+  },
+  resetPasswordToken: {type: String},
+  resetPasswordExpires: {type: Date},
   phone: Number,
-  roles: {type: String, enum: roles, required: true},
+  roles: {type: String, enum: roles},
   addresses: {
     location: {type: Schema.ObjectId, ref: mongoDB.Model.Location},
     street: String,
@@ -27,7 +41,7 @@ const userSchema = new Schema({
     state: String,
     zip: Number
   },
-  createdBy: {type: Schema.ObjectId, ref: mongoDB.Model.User, required: true},
+  createdBy: {type: Schema.ObjectId, ref: mongoDB.Model.User},
   createdOn: {type: Date, default: Date.now}
 }, {
   collection: mongoDB.Collection.User
@@ -37,5 +51,41 @@ userSchema.virtual('fullName').get(function () {
   return `${this.firstName} ${this.lastName}`
 })
 
-userSchema.set('toJSON', {getters: true, virtuals: true})
+userSchema.pre('save', function (next) {
+  const user = this
+  if (!user.isModified('password')) {
+    return next()
+  }
+  bcrypt.genSalt(config.SALT_FACTOR, (err, salt) => {
+    if (err) {
+      return next(err)
+    }
+    bcrypt.hash(user.password, salt, null, (err, hash) => {
+      if (err) {
+        return next(err)
+      }
+      user.password = hash
+      next()
+    })
+  })
+})
+
+userSchema.methods.isValidPassword = function (password, cb) {
+  bcrypt.compare(password, this.password, (err, isMatch) => {
+    if (err) {
+      return cb(err)
+    }
+    cb(null, isMatch)
+  })
+}
+
+userSchema.set('toJSON', {
+  getters: true,
+  virtuals: true,
+  transform: (doc, ret) => {
+    delete ret.password
+    return ret
+  }
+})
+
 mongoose.model(mongoDB.Model.User, userSchema)

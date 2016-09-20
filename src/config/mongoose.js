@@ -1,4 +1,4 @@
-const env = require('./env')
+const config = require('./config')
 const mongoose = require('mongoose')
 
 module.exports = logger => {
@@ -24,5 +24,5 @@ module.exports = logger => {
   require('../models/location.server.model')
   require('../models/service.server.model')
 
-  return mongoose.connect(env('DB_URL'))
+  return mongoose.connect(config.DB_URL)
 }

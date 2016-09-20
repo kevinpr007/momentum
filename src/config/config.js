@@ -7,14 +7,13 @@ if (ENV === 'development') {
   })
 }
 
-const config = {
+module.exports = {
   NODE_ENV: process.env.NODE_ENV,
   PORT: process.env.PORT,
   DB_URL: process.env.DB_URL,
-  SESSION_SECRET: process.env.SESSION_SECRET
-}
-
-module.exports = (key) => {
-  if (!key) return config
-  return config[key]
+  SECRET: process.env.SECRET,
+  EMAIL: process.env.EMAIL,
+  EMAIL_PASS: process.env.EMAIL_PASS,
+  TOKEN_LIFE: process.env.TOKEN_LIFE,
+  SALT_FACTOR: process.env.SALT_FACTOR
 }

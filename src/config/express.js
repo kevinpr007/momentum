@@ -1,25 +1,43 @@
 const express = require('express')
 const router = express.Router()
 const path = require('path')
-const env = require('./env')
 const favicon = require('serve-favicon')
 const bodyParser = require('body-parser')
-const session = require('express-session')
-const cookieParser = require('cookie-parser')
 const BunyanMiddleware = require('bunyan-middleware')
 const HttpStatus = require('http-status-codes')
 const helmet = require('helmet')
 
 module.exports = logger => {
-    /**
-     * Global App Config
-     */
+  
+  /**
+   * Express area
+   */
   let app = express()
-
-    /**
-     * Security area
-     */
+  
+  /**
+   * Security area
+   */
   app.use(helmet())
+  
+  /**
+   * Global App Config
+   */
+  app.use(BunyanMiddleware({
+    headerName: 'X-Request-Id',
+    propertyName: 'reqId',
+    logName: 'req_id',
+    obscureHeaders: [],
+    logger: logger
+  }))
+  
+  app.use(bodyParser.json())
+  
+  app.use(bodyParser.urlencoded({
+    extended: true
+  }))
+
+  app.use(favicon('./public/img/favicon.ico'))
+  app.use(express.static(path.join(__dirname, 'public')))
 
   app.use(BunyanMiddleware({
     headerName: 'X-Request-Id',
@@ -29,49 +47,52 @@ module.exports = logger => {
     logger: logger
   }))
 
-  app.use(session({
-    saveUninitialized: true,
-    resave: true,
-    secret: env('SESSION_SECRET')
-  }))
-
   app.use(bodyParser.json())
-
   app.use(bodyParser.urlencoded({
     extended: true
   }))
 
-  app.use(cookieParser())
-
   app.use(favicon('./public/img/favicon.ico'))
-
   app.use(express.static(path.join(__dirname, 'public')))
 
-    /**
-     * Routing Config
-     */
+  /**
+   * Routing Config
+   */
   app.use('/api', router)
+
+  require('../routes/auth.routes')(router)
+  require('../routes/user.routes')(router)
 
   app.get('/', (request, response) => {
     response.send('Hello World!')
   })
 
-  require('../routes/user.routes')(router)
   app.use((req, res, next) => {
     let err = new Error(HttpStatus.getStatusText(HttpStatus.NOT_FOUND))
     err.status = HttpStatus.NOT_FOUND
     next(err)
   })
 
-    /**
-     * Global Error Config
-     */
+  /**
+   * CORS Config
+   */
+  app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*')
+    res.header('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, OPTIONS')
+    res.header('Access-Control-Allow-Headers',
+        'Origin, X-Requested-With, Content-Type, Accept, Authorization, Access-Control-Allow-Credentials')
+    res.header('Access-Control-Allow-Credentials', 'true')
+    next()
+  })
+
+  /**
+   * Global Error Config
+   */
   app.use((err, req, res, next) => {
     logger.error(err)
-    res.status(err.status || HttpStatus.INTERNAL_SERVER_ERROR)
-    res.json({
+    res.status(err.status || HttpStatus.INTERNAL_SERVER_ERROR).json({
       message: err.message,
-      error: err
+      error: app.get('env') === 'development' ? err : {}
     })
   })
 
