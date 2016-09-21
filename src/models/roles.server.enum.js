@@ -7,5 +7,5 @@
  user:          They will be the clients in the system. User role will be the lowest role in the system.
  */
 module.exports = () => {
-  return ['superAdmin', 'admin', 'manager', 'employee', 'user']
+  return ['SuperAdmin', 'Admin', 'Manager', 'Employee', 'User']
 }
