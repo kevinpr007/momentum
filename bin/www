@@ -1,5 +1,3 @@
-process.env.NODE_ENV = process.env.NODE_ENV || 'development'
-
 const mongoose = require('../src/config/mongoose')
 const passport = require('../src/config/passport')
 const express = require('../src/config/express')

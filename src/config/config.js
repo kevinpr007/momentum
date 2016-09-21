@@ -1,11 +1,27 @@
 const dotenv = require('dotenv')
-const ENV = process.env.NODE_ENV || 'development'
+const ENV = process.env.NODE_ENV
 
-if (ENV === 'development') {
-  dotenv.load({
-    path: `${__dirname}/.env`
-  })
+switch (ENV) {
+  case 'development':
+    dotenv.load({
+      path: `${__dirname}/.env_development`
+    })
+    break
+  case 'staging':
+    dotenv.load({
+      path: `${__dirname}/.env_staging`
+    })
+    break
+  case 'production':
+    dotenv.load({
+      path: `${__dirname}/.env_production`
+    })
+    break
+  default:
+    throw new Error('Error setting the environmet variables.')
 }
+
+console.log(`The environment variable selected is: ${ENV}`)
 
 module.exports = {
   NODE_ENV: process.env.NODE_ENV,
