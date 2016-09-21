@@ -18,7 +18,7 @@ switch (ENV) {
     })
     break
   default:
-    throw new Error('Error setting the environmet variables.')
+    throw new Error('Error setting the environment variables.')
 }
 
 console.log(`The environment variable selected is: ${ENV}`)
