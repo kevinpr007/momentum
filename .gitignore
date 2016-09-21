@@ -3,7 +3,7 @@
 *.iml
 
 # Enviroment Variables
-.env
+.env_*
 
 # Logs
 *.log
