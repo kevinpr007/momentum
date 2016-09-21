@@ -11,8 +11,8 @@ const locationSchema = new Schema({
     address2: {type: String},
     city: {type: String, required: true},
     state: {type: String, required: true},
-    //this field can have numbers like this 00718-12345
-    zipCode: {type: String, required: true},
+    // this field can have numbers like this 00718-12345
+    zipCode: {type: String, required: true}
   },
   createdBy: {type: Schema.ObjectId, ref: mongoDB.Model.User, required: true},
   createdOn: {type: Date, default: Date.now}

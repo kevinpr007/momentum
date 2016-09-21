@@ -8,17 +8,16 @@ const HttpStatus = require('http-status-codes')
 const helmet = require('helmet')
 
 module.exports = logger => {
-  
   /**
    * Express area
    */
   let app = express()
-  
+
   /**
    * Security area
    */
   app.use(helmet())
-  
+
   /**
    * Global App Config
    */
@@ -29,9 +28,9 @@ module.exports = logger => {
     obscureHeaders: [],
     logger: logger
   }))
-  
+
   app.use(bodyParser.json())
-  
+
   app.use(bodyParser.urlencoded({
     extended: true
   }))

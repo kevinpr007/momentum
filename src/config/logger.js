@@ -10,7 +10,7 @@ let serializer = data => {
 
 module.exports = bunyan.createLogger({
 
-  //TODO: Change hardcode
+  // TODO: Change hardcode
   name: 'StylePoint',
   src: false,
   streams: [
