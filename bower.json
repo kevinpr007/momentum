@@ -26,6 +26,6 @@
   "dependencies": {
     "font-awesome": "^4.6.3",
     "jquery": "^2.0.0",
-    "bootswatch-dist": "superhero"
+    "bootswatch-dist": "simplex"
   }
 }
