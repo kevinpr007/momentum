@@ -1,6 +1,6 @@
 {
-  "name": "stylepoint",
-  "version": "0.1.0",
+  "name": "StylePoint",
+  "version": "0.2.0",
   "description": "Style Point is a schedule service that connects people to barbers and stylists at the time and location of your choice!",
   "scripts": {
     "start": "node ./bin/www",
@@ -10,7 +10,7 @@
     "retire": " retire --node --verbose",
     "nodemon": "nodemon ./bin/www",
     "nsp": "nsp check",
-    "push": "npm run standard && npm run retire && npm run nsp"
+    "build": "npm run standard && npm run retire && npm run nsp"
   },
   "repository": {
     "type": "git",
