@@ -1,6 +1,5 @@
 const express = require('express')
 const router = express.Router()
-const path = require('path')
 const favicon = require('serve-favicon')
 const bodyParser = require('body-parser')
 const BunyanMiddleware = require('bunyan-middleware')
@@ -8,17 +7,16 @@ const HttpStatus = require('http-status-codes')
 const helmet = require('helmet')
 
 module.exports = logger => {
-  
   /**
    * Express area
    */
   let app = express()
-  
+
   /**
    * Security area
    */
   app.use(helmet())
-  
+
   /**
    * Global App Config
    */
@@ -29,15 +27,17 @@ module.exports = logger => {
     obscureHeaders: [],
     logger: logger
   }))
-  
+
   app.use(bodyParser.json())
-  
+
   app.use(bodyParser.urlencoded({
     extended: true
   }))
 
   app.use(favicon('./public/img/favicon.ico'))
-  app.use(express.static(path.join(__dirname, 'public')))
+  app.use(express.static('./public'))
+  app.set('views', './src/views')
+  app.set('view engine', 'hbs')
 
   app.use(BunyanMiddleware({
     headerName: 'X-Request-Id',
@@ -52,20 +52,14 @@ module.exports = logger => {
     extended: true
   }))
 
-  app.use(favicon('./public/img/favicon.ico'))
-  app.use(express.static(path.join(__dirname, 'public')))
-
   /**
    * Routing Config
    */
   app.use('/api', router)
 
+  require('../routes/index.routes')(router)
   require('../routes/auth.routes')(router)
   require('../routes/user.routes')(router)
-
-  app.get('/', (request, response) => {
-    response.send('Hello World!')
-  })
 
   app.use((req, res, next) => {
     let err = new Error(HttpStatus.getStatusText(HttpStatus.NOT_FOUND))
