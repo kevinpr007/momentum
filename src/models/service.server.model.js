@@ -7,7 +7,7 @@ const serviceSchema = new Schema({
   description: {type: String},
   price: {type: Number, required: true},
   time: {type: Number, required: true},
-  user: {type: Schema.ObjectId, ref: mongoDB.Model.User, required: true},
+  user: {type: Schema.ObjectId, ref: mongoDB.Model.User, required: true, index: 2},
   createdBy: {type: Schema.ObjectId, ref: mongoDB.Model.User, required: true},
   createdOn: {type: Date, default: Date.now}
 }, {collection: mongoDB.Collection.Service})

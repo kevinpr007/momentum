@@ -1,5 +1,3 @@
 module.exports = () => {
-  return []
+  return ['General', 'Exception']
 }
-
-// @Todo: Define schedule types.

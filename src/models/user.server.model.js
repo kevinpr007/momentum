@@ -6,9 +6,9 @@ const roles = require('./roles.server.enum')()
 const config = require('../config/config')
 
 const userSchema = new Schema({
-  firstName: {type: String, required: true},
-  lastName: {type: String, required: true},
-  email: {type: String, match: /.+@.+\..+/, trim: true, required: true, index: 1},
+  firstName: {type: String, required: true, index: 4},
+  lastName: {type: String, required: true, index: 3},
+  email: {type: String, match: /.+@.+\..+/, trim: true, required: true, index: 1, unique: true},
   dob: {
     type: Date,
     validate: [
@@ -22,8 +22,8 @@ const userSchema = new Schema({
     type: String,
     validate: [
       password => {
-        return password && password.length > 6
-      }, 'Password should be longer than 6 characters'
+        return password && password.length > parseInt(config.PASSWORD_LENGHT)
+      }, `Password should be longer than ${config.PASSWORD_LENGHT} characters`
     ],
     required: true
   },
@@ -33,13 +33,14 @@ const userSchema = new Schema({
   resetPasswordToken: {type: String},
   resetPasswordExpires: {type: Date},
   phone: Number,
-  roles: {type: String, enum: roles},
-  addresses: {
-    location: {type: Schema.ObjectId, ref: mongoDB.Model.Location},
-    street: String,
-    city: String,
-    state: String,
-    zip: Number
+  roles: {type: String, enum: roles, index: 2},
+  address: {
+    address1: {type: String, required: true},
+    address2: {type: String},
+    city: {type: String, required: true},
+    state: {type: String, required: true},
+    // this field can have numbers like this 00718-12345
+    zipCode: {type: String, required: true}
   },
   createdBy: {type: Schema.ObjectId, ref: mongoDB.Model.User},
   createdOn: {type: Date, default: Date.now}
