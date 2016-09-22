@@ -12,11 +12,6 @@ switch (ENV) {
       path: `${__dirname}/.env_staging`
     })
     break
-  case 'production':
-    dotenv.load({
-      path: `${__dirname}/.env_production`
-    })
-    break
   default:
     throw new Error('Error setting the environment variables.')
 }
