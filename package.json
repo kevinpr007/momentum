@@ -8,8 +8,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "standard": "standard --fix",
     "retire": " retire --node --verbose",
-    "nodemon_pc": "NODE_ENV=development&&nodemon ./bin/www",
-    "nodemon_mac": "NODE_ENV=development nodemon ./bin/www",
+    "nodemon_pc": "NODE_ENV=development&&nodemon ./bin/www --ignore public/",
+    "nodemon_mac": "NODE_ENV=development nodemon ./bin/www --ignore public/",
     "nsp": "nsp check",
     "build": "npm run standard && npm run retire && npm run nsp",
     "postinstall": "bower install"
@@ -41,6 +41,7 @@
     "bunyan-rotating-file-stream": "^1.6.1",
     "dotenv": "~2.0.0",
     "express": "^4.14.0",
+    "handlebars-form-helpers": "^0.1.3",
     "hbs": "^4.0.1",
     "helmet": "^2.2.0",
     "http-status-codes": "^1.0.6",
