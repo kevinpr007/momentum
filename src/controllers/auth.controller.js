@@ -29,18 +29,12 @@ let authController = (authService, nav) => {
   }
 
   let register = (req, res, next) => {
-    let user = {
-      email: req.body.email,
-      password: req.body.password,
-      firstName: req.body.firstName,
-      lastName: req.body.lastName
-    }
-    userService.getByEmail(user.email).then(existingUser => {
+    userService.getByEmail(req.body.email).then(existingUser => {
       if (existingUser) {
         res.status(HttpStatus.UNPROCESSABLE_ENTITY)
             .json({error: 'That email address is already registered.'})
       }
-      return userService.registerUser(user).then(user => {
+      return userService.registerUser(req.body).then(user => {
         res.status(HttpStatus.CREATED).json({
           token: `JWT ${authService.generateToken(user)}`,
           user: user

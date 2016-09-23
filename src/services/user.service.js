@@ -20,7 +20,14 @@ let userService = () => {
       firstName: user.firstName,
       lastName: user.lastName,
       email: user.email,
-      password: user.password
+      password: user.password,
+      address: {
+        address1: user.address.address1,
+        address2: user.address.address2,
+        city: user.address.city,
+        state: user.address.state,
+        zipCode: user.address.zipCode
+      }
     })
     return newUser.save()
   }
