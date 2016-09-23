@@ -2,7 +2,7 @@ const HttpStatus = require('http-status-codes')
 const resetPasswordEmail = require('../services/emails/reset-password')
 const confirmResetPasswordEmail = require('../services/emails/confirm-reset-password')
 
-let authController = authService => {
+let authController = (authService, nav) => {
   let userService = require('../services/user.service')()
 
   let auth = (req, res, next) => {
@@ -70,7 +70,11 @@ let authController = authService => {
   }
 
   let resetPassword = (req, res, next) => {
-    authService.resetUserPassword(req.params.token).then(user => {
+    res.render('reset-password', nav)
+  }
+
+  let newPassword = (req, res, next) => {
+    authService.resetUserPassword(req.body.token).then(user => {
       if (!user) {
         res.status(HttpStatus.UNPROCESSABLE_ENTITY)
             .json({error: 'Your token has expired. Please reset your password again.'})
@@ -92,6 +96,7 @@ let authController = authService => {
   return {
     auth: auth,
     register: register,
+    newPassword: newPassword,
     resetPassword: resetPassword,
     confirmResetPassword: confirmResetPassword
   }

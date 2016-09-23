@@ -1,8 +1,5 @@
-module.exports = router => {
-  router.get('/', (request, response) => {
-    response.render('index', {
-      title: 'Style Point',
-      year: new Date().getFullYear()
-    })
+module.exports = (router) => {
+  router.get('/', (req, res) => {
+    res.render('index', router.nav)
   })
 }

@@ -55,6 +55,11 @@ module.exports = logger => {
   /**
    * Routing Config
    */
+  router.nav = {
+    title: 'Pulsar Technologies',
+    year: new Date().getFullYear()
+  }
+
   app.use('/', router)
   require('../routes/index.routes')(router)
 
