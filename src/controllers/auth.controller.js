@@ -3,6 +3,8 @@ const resetPasswordEmail = require('../services/emails/reset-password')
 const confirmResetPasswordEmail = require('../services/emails/confirm-reset-password')
 
 let authController = (authService, navModel) => {
+
+  //TODO: Send userService as parameter
   let userService = require('../services/user.service')()
 
   let auth = (req, res, next) => {
