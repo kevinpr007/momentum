@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
 mongoose.Promise = require('bluebird')
 const User = mongoose.model('User')
+const userFactory = require('../helpers/user.factory')
 
 let userService = () => {
   let getAll = () => {
@@ -12,24 +13,11 @@ let userService = () => {
   }
 
   let getById = id => {
-    return User.findOne({_id: id}, '-password -salt').exec()
+    return User.findOne({_id: id}).exec()
   }
 
   let registerUser = user => {
-    let newUser = new User({
-      firstName: user.firstName,
-      lastName: user.lastName,
-      email: user.email,
-      password: user.password,
-      address: {
-        address1: user.address.address1,
-        address2: user.address.address2,
-        city: user.address.city,
-        state: user.address.state,
-        zipCode: user.address.zipCode
-      }
-    })
-    return newUser.save()
+    return userFactory(user).save()
   }
 
   return {
