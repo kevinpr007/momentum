@@ -9,6 +9,7 @@
     <title>Style Point</title>
     <link rel="stylesheet" href="/lib/bootswatch-dist/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="/css/styles.css"/>
 </head>
 <body>
 <div id="main-nav" class="navbar navbar-fixed-top">
@@ -25,9 +26,11 @@
         </div>
         <div class="navbar-collapse collapse">
             <ul id="navigation" class="nav navbar-nav navbar-right text-center">
-                <li><a class="navbar-brand" href="#" style="display: inline-flex">
-                    <i class="fa fa-github" aria-hidden="true" style="margin-top:3px;"></i>
-                </a></li>
+                <li>
+                    <a class="navbar-brand" href="{{gitUrl}}" target="_blank" style="display: inline-flex">
+                        <i class="fa fa-github" aria-hidden="true" style="margin-top:3px;"></i>
+                    </a>
+                </li>
             </ul>
         </div>
     </div>
@@ -48,5 +51,6 @@
 <script src="/lib/bootswatch-dist/js/bootstrap.min.js"></script>
 <script src="/lib/handlebars.js/dist/handlebars.js"></script>
 <script src="/lib/handlebars-form-helpers/dist/handlebars.form-helpers.min.js"></script>
+{{{sections.scripts}}}
 </body>
 </html>
