@@ -4,13 +4,15 @@
     "User": "User",
     "Workshift": "Workshift",
     "Service": "Service",
-    "Schedule": "Schedule"
+    "Schedule": "Schedule",
+    "Log": "Log"
   },
   "Collection": {
     "Location": "sp_location",
     "User": "sp_user",
     "Workshift": "sp_workshift",
     "Service": "sp_service",
-    "Schedule": "sp_schedule"
+    "Schedule": "sp_schedule",
+    "Log": "sp_log"
   }
 }

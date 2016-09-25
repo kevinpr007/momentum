@@ -24,6 +24,7 @@ module.exports = logger => {
   require('../models/workshift.server.model')
   require('../models/location.server.model')
   require('../models/service.server.model')
+  require('../models/logs.server.model')
 
   return mongoose.connect(config.DB_URL)
 }
