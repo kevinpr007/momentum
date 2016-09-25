@@ -17,7 +17,7 @@ module.exports = logger => {
     })
   })
 
-  //TODO: Add new events like 'online' 'offline', 'shutdown' logs
+  // TODO: Add new events like 'online' 'offline', 'shutdown' logs
   mongoose.connection.on('error', err => logger.error(err))
 
   require('../models/user.server.model')

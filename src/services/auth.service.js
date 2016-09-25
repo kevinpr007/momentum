@@ -18,8 +18,7 @@ let authService = () => {
 
   let resetToken = user => {
     let date = new Date()
-    //TODO: Can we remove this hardcode number
-    return randomBytes(48).then(buffer => {
+    return randomBytes(config.RANDOM_BYTES).then(buffer => {
       user.resetPasswordToken = buffer.toString('hex')
       user.resetPasswordExpires = date.setSeconds(date.getSeconds() + parseInt(tokenLife))
       return user.save()
