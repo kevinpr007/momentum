@@ -36,19 +36,25 @@ module.exports = logger => {
   }))
 
   /**
-   * Static Resources middleware
+   * Static Resources / View Engine middleware
    */
   app.use(favicon('./public/img/favicon.ico'))
-  hbsHelpers.register(hbs.handlebars)
   app.use(express.static('./public'))
+
+  hbs.registerHelper('section', function (name, options) {
+    this.sections = {}
+    this.sections[name] = options.fn(this)
+  })
+  hbsHelpers.register(hbs.handlebars)
   app.set('views', './src/views')
   app.set('view engine', 'hbs')
 
   /**
    * Routing middleware
    */
-  router.navModel = {
-    year: new Date().getFullYear()
+  router.templateModel = {
+    year: new Date().getFullYear(),
+    gitUrl: require('../../package.json').homepage
   }
 
   app.use('/', router)

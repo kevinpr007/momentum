@@ -1,7 +1,7 @@
 const authService = require('../services/auth.service')()
 
 module.exports = (router) => {
-  const authController = require('../controllers/auth.controller')(authService, router.navModel)
+  const authController = require('../controllers/auth.controller')(authService, router.templateModel)
 
   router.post('/auth', authController.auth)
   router.post('/register', authController.register)

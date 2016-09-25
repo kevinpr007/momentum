@@ -2,7 +2,7 @@ const HttpStatus = require('http-status-codes')
 const resetPasswordEmail = require('../services/emails/reset-password')
 const confirmResetPasswordEmail = require('../services/emails/confirm-reset-password')
 
-let authController = (authService, navModel) => {
+let authController = (authService, templateModel) => {
   let userService = require('../services/user.service')()
 
   let auth = (req, res, next) => {
@@ -64,8 +64,8 @@ let authController = (authService, navModel) => {
   }
 
   let resetPassword = (req, res, next) => {
-    navModel.token = req.params.token
-    res.render('reset-password', navModel)
+    templateModel.token = req.params.token
+    res.render('reset-password', templateModel)
   }
 
   let newPassword = (req, res, next) => {
