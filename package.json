@@ -31,6 +31,11 @@
     "url": "https://github.com/Ivan-Marquez/stylepoint/issues"
   },
   "homepage": "https://github.com/Ivan-Marquez/stylepoint#readme",
+  "standard": {
+    "ignore": [
+      "public/"
+    ]
+  },
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",
     "bluebird": "~3.4.3",
