@@ -10,7 +10,7 @@ const logsSchema = new Schema({
   createdOn: {type: Date, default: Date.now}
 }, {
   collection: mongoDB.Collection.Log,
-  capped: { size: 5242880, max: 5000, autoIndexId: true } //5 Megas
+  capped: { size: 5242880, max: 5000, autoIndexId: true } // 5 Megas
 })
 
 logsSchema.virtual('getError').get(function () {

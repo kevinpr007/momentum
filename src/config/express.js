@@ -92,7 +92,7 @@ module.exports = logger => {
   app.use((err, req, res, next) => {
     logger.error(err)
 
-    //Save all errors in the application
+    // Save all errors in the application
     logService.saveLog(err)
 
     res.status(err.status || HttpStatus.INTERNAL_SERVER_ERROR).json({
