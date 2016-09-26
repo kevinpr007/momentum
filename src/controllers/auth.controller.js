@@ -72,7 +72,7 @@ let authController = (authService, templateModel) => {
     authService.resetUserPassword(req.body.token).then(user => {
       if (!user) {
         res.status(HttpStatus.UNPROCESSABLE_ENTITY)
-            .json({error: 'Your token has expired. Please reset your password again.'})
+            .json({error: 'Invalid token. Please confirm this action through your email.'})
       }
       user.password = req.body.password
       user.resetPasswordToken = undefined

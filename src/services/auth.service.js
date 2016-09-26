@@ -18,7 +18,7 @@ let authService = () => {
 
   let resetToken = user => {
     let date = new Date()
-    return randomBytes(config.RANDOM_BYTES).then(buffer => {
+    return randomBytes(parseInt(config.RANDOM_BYTES)).then(buffer => {
       user.resetPasswordToken = buffer.toString('hex')
       user.resetPasswordExpires = date.setSeconds(date.getSeconds() + parseInt(tokenLife))
       return user.save()
