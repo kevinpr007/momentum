@@ -61,6 +61,7 @@ module.exports = logger => {
 
   require('../routes/auth.routes')(router)
   require('../routes/user.routes')(router)
+  require('../routes/log.routes')(router)
 
   app.get('/', (request, response) => {
     response.send('Hello World!')
@@ -87,12 +88,18 @@ module.exports = logger => {
   /**
    * Global Error Config
    */
+  const logService = require('../services/log.service')()
   app.use((err, req, res, next) => {
     logger.error(err)
+
+    // Save all errors in the application
+    logService.saveLog(err)
+
     res.status(err.status || HttpStatus.INTERNAL_SERVER_ERROR).json({
       message: err.message,
       error: app.get('env') === 'development' ? err : {}
     })
+    next(err)
   })
 
   return app

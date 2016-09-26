@@ -14,7 +14,7 @@ let userController = userService => {
     userService.getByEmail(req.params.userName)
         .then(user => res.status(HttpStatus.OK).json(user))
         .catch(err => {
-          req.log.info(err)
+          req.log.error(err)
           next(err)
         })
   }
