@@ -1,6 +1,7 @@
 const HttpStatus = require('http-status-codes')
 const resetPasswordEmail = require('../services/emails/reset-password')
 const confirmResetPasswordEmail = require('../services/emails/confirm-reset-password')
+const newAccountEmail = require('../services/emails/new-account')
 
 let authController = (authService, userService, templateModel) => {
   let auth = (req, res, next) => {
@@ -33,6 +34,7 @@ let authController = (authService, userService, templateModel) => {
   }
 
   let register = (req, res, next) => {
+    let user = null
     userService.getByEmail(req.body.email).then(existingUser => {
       if (existingUser) {
         next({
@@ -41,11 +43,14 @@ let authController = (authService, userService, templateModel) => {
         })
       }
       return userService.registerUser(req.body)
-    }).then(user => {
+    }).then(usr => {
+      user = usr
       res.status(HttpStatus.CREATED).json({
-        token: `JWT ${authService.generateToken(user)}`,
-        user: user
+        token: `JWT ${authService.generateToken(usr)}`,
+        user: usr
       })
+    }).then({
+        return newAccountEmail(user, req.headers.host)
     }).catch(err => {
       req.log.error(err)
       next(err)
