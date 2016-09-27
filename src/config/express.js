@@ -63,6 +63,7 @@ module.exports = logger => {
   app.use('/api', router)
   require('../routes/auth.routes')(router)
   require('../routes/user.routes')(router)
+  require('../routes/log.routes')(router)
 
   /**
    * CORS middleware
@@ -79,6 +80,7 @@ module.exports = logger => {
   /**
    * Global Error middleware
    */
+  const logService = require('../services/log.service')()
   app.use((req, res, next) => {
     let err = new Error(HttpStatus.getStatusText(HttpStatus.NOT_FOUND))
     err.status = HttpStatus.NOT_FOUND
@@ -87,10 +89,13 @@ module.exports = logger => {
 
   app.use((err, req, res, next) => {
     logger.error(err)
+    logService.saveLog(err)
+
     res.status(err.status || HttpStatus.INTERNAL_SERVER_ERROR).json({
       message: err.message,
       error: app.get('env') === 'development' ? err : {}
     })
+    next(err)
   })
 
   return app
