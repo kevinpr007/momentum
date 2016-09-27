@@ -14,16 +14,14 @@ module.exports = () => {
               message: 'Unknown user'
             }))
           }
-          user.isValidPassword(password, (err, isMatch) => {
-            if (err) {
-              return Promise.resolve(cb(err))
-            }
-            if (!isMatch) {
+          return user.isValidPassword(password).then(isMatch => {
+            if (isMatch) {
+              return Promise.resolve(cb(null, user))
+            } else {
               return Promise.resolve(cb(null, false, {
-                message: 'Invalid password'
+                message: 'Invalid Password'
               }))
             }
-            return Promise.resolve(cb(null, user))
           })
         }).catch(err => Promise.resolve(cb(err)))
   }))

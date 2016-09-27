@@ -36,7 +36,7 @@
               .addClass('pull-right').show().delay(5000).fadeOut()
         },
         error: function (error) {
-          $('#result').text(JSON.parse(error.responseText).error)
+          $('#result').text(JSON.parse(error.responseText).message)
               .addClass('pull-right').addClass('error')
               .show().delay(5000).fadeOut()
           submit.removeAttr('disabled')
