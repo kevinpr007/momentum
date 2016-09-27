@@ -2,26 +2,30 @@ const HttpStatus = require('http-status-codes')
 const resetPasswordEmail = require('../services/emails/reset-password')
 const confirmResetPasswordEmail = require('../services/emails/confirm-reset-password')
 
-let authController = authService => {
-  let userService = require('../services/user.service')()
-
+let authController = (authService, userService, templateModel) => {
   let auth = (req, res, next) => {
-    userService.getByEmail(req.body.email).then(user => {
-      if (!user) {
-        res.status(HttpStatus.BAD_REQUEST)
-            .json({error: 'Authentication failed. User not found.'})
+    let user = null
+    userService.getByEmail(req.body.email).then(usr => {
+      if (!usr) {
+        next({
+          status: HttpStatus.BAD_REQUEST,
+          message: 'Authentication failed. User not found.'
+        })
       }
-      user.isValidPassword(req.body.password, (err, isMatch) => {
-        if (isMatch && !err) {
-          res.status(HttpStatus.OK).json({
-            token: `JWT ${authService.generateToken(user)}`,
-            user: user
-          })
-        } else {
-          res.status(HttpStatus.BAD_REQUEST)
-              .json({error: 'Authentication failed. Wrong password.'})
-        }
-      })
+      user = usr
+      return user.isValidPassword(req.body.password)
+    }).then(isMatch => {
+      if (isMatch) {
+        res.status(HttpStatus.OK).json({
+          token: `JWT ${authService.generateToken(user)}`,
+          user: user
+        })
+      } else {
+        next({
+          status: HttpStatus.BAD_REQUEST,
+          message: 'Authentication failed. Wrong password.'
+        })
+      }
     }).catch(err => {
       req.log.error(err)
       next(err)
@@ -29,22 +33,18 @@ let authController = authService => {
   }
 
   let register = (req, res, next) => {
-    let user = {
-      email: req.body.email,
-      password: req.body.password,
-      firstName: req.body.firstName,
-      lastName: req.body.lastName
-    }
-    userService.getByEmail(user.email).then(existingUser => {
+    userService.getByEmail(req.body.email).then(existingUser => {
       if (existingUser) {
-        res.status(HttpStatus.UNPROCESSABLE_ENTITY)
-            .json({error: 'That email address is already registered.'})
-      }
-      return userService.registerUser(user).then(user => {
-        res.status(HttpStatus.CREATED).json({
-          token: `JWT ${authService.generateToken(user)}`,
-          user: user
+        next({
+          status: HttpStatus.UNPROCESSABLE_ENTITY,
+          message: 'That email address is already registered.'
         })
+      }
+      return userService.registerUser(req.body)
+    }).then(user => {
+      res.status(HttpStatus.CREATED).json({
+        token: `JWT ${authService.generateToken(user)}`,
+        user: user
       })
     }).catch(err => {
       req.log.error(err)
@@ -55,8 +55,10 @@ let authController = authService => {
   let confirmResetPassword = (req, res, next) => {
     userService.getByEmail(req.body.email).then(user => {
       if (!user) {
-        res.status(HttpStatus.UNPROCESSABLE_ENTITY)
-            .json({error: 'Your request could not be processed as entered. Please try again.'})
+        next({
+          status: HttpStatus.UNPROCESSABLE_ENTITY,
+          message: 'Your request could not be processed as entered. Please try again.'
+        })
       }
       return authService.resetToken(user)
     }).then(user => {
@@ -70,15 +72,33 @@ let authController = authService => {
   }
 
   let resetPassword = (req, res, next) => {
-    authService.resetUserPassword(req.params.token).then(user => {
-      if (!user) {
-        res.status(HttpStatus.UNPROCESSABLE_ENTITY)
-            .json({error: 'Your token has expired. Please reset your password again.'})
+    templateModel.token = req.params.token
+    res.render('reset-password', templateModel)
+  }
+
+  let newPassword = (req, res, next) => {
+    let user = null
+    authService.resetUserPassword(req.body.token).then(usr => {
+      if (!usr) {
+        next({
+          status: HttpStatus.UNPROCESSABLE_ENTITY,
+          message: 'Invalid token. Please confirm this action through your email.'
+        })
       }
-      user.password = req.body.password
-      user.resetPasswordToken = undefined
-      user.resetPasswordExpires = undefined
-      return user.save()
+      user = usr
+      return user.isValidPassword(req.body.currentPassword)
+    }).then(isMatch => {
+      if (isMatch) {
+        user.password = req.body.confirmPassword
+        user.resetPasswordToken = undefined
+        user.resetPasswordExpires = undefined
+        return user.save()
+      } else {
+        next({
+          status: HttpStatus.BAD_REQUEST,
+          message: 'Invalid password. Please validate your current password.'
+        })
+      }
     }).then(user => {
       return resetPasswordEmail(user)
     }).then(data => {
@@ -92,6 +112,7 @@ let authController = authService => {
   return {
     auth: auth,
     register: register,
+    newPassword: newPassword,
     resetPassword: resetPassword,
     confirmResetPassword: confirmResetPassword
   }

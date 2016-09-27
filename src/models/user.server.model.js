@@ -4,6 +4,7 @@ const bcrypt = require('bcrypt-nodejs')
 const mongoDB = require('../config/mongoose.collections.json')
 const roles = require('./roles.server.enum')()
 const config = require('../config/config')
+const Promise = require('bluebird')
 
 const userSchema = new Schema({
   firstName: {type: String, required: true, index: 4},
@@ -39,7 +40,6 @@ const userSchema = new Schema({
     address2: {type: String},
     city: {type: String, required: true},
     state: {type: String, required: true},
-    // this field can have numbers like this 00718-12345
     zipCode: {type: String, required: true}
   },
   createdBy: {type: Schema.ObjectId, ref: mongoDB.Model.User},
@@ -71,12 +71,14 @@ userSchema.pre('save', function (next) {
   })
 })
 
-userSchema.methods.isValidPassword = function (password, cb) {
-  bcrypt.compare(password, this.password, (err, isMatch) => {
-    if (err) {
-      return cb(err)
-    }
-    cb(null, isMatch)
+userSchema.methods.isValidPassword = function (password) {
+  return new Promise((resolve, reject) => {
+    bcrypt.compare(password, this.password, (err, isMatch) => {
+      if (err) {
+        reject(err)
+      }
+      resolve(isMatch)
+    })
   })
 }
 
