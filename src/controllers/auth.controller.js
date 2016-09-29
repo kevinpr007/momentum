@@ -1,7 +1,8 @@
 const HttpStatus = require('http-status-codes')
 const resetPasswordEmail = require('../services/emails/reset-password')
 const confirmResetPasswordEmail = require('../services/emails/confirm-reset-password')
-const newAccountEmail = require('../services/emails/new-account')
+const emailService = require('../services/email.service')
+const emailFactory = require('../helpers/email.factory')
 
 let authController = (authService, userService, templateModel) => {
   let auth = (req, res, next) => {
@@ -50,7 +51,10 @@ let authController = (authService, userService, templateModel) => {
         user: usr
       })
     }).then(() => {
-      return newAccountEmail(user, req.headers.host)
+      let params = [user.firstName, user.lastName, req.headers.host]
+      let emailTemplate = require('../services/emails/new-account')(params).getTemplate
+      let emailInfo = emailFactory(user.email, emailTemplate.subject, emailTemplate.html).getInfo
+      return emailService(emailInfo)
     }).catch(err => {
       req.log.error(err)
       next(err)

@@ -1,34 +1,22 @@
-const Promise = require('bluebird')
-const config = require('../../config/config')
-const transporter = require('../../config/nodemailer')
-
-module.exports = (user, host) => {
+module.exports = (params) => {
   let template = {
-    from: config.EMAIL,
-    to: user.email,
     subject: 'Style Point: New Account',
     html: `
         <p>
-            Hi ${user.firstName} ${user.lastName}!<br><br>
+            Hi ${params[0]} ${params[1]}!<br><br>
 
             Welcome to Style Point! Thanks so much for joining us. You’re on your way to super-productivity and beyond!
-            Click here to go: http://${host}
+            Click here to go: http://${params[2]}
 
-            <br><br>Have any questions? Just shoot us an email! We’re always here to help.
+            <br><br>Have any questions? Just shoot us an email! We’re always here to help.<br><br>
 
-            Cheerfully yours,
+            Cheerfully yours,<br>
             The Style Point Team
         </p>
     `
   }
 
-  return new Promise((resolve, reject) => {
-    transporter.sendMail(template, (err, data) => {
-      if (err) {
-        reject(err)
-      } else {
-        resolve(data)
-      }
-    })
-  })
+  return {
+    getTemplate: template
+  }
 }
