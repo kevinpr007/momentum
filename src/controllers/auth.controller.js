@@ -49,7 +49,7 @@ let authController = (authService, userService, templateModel) => {
         token: `JWT ${authService.generateToken(usr)}`,
         user: usr
       })
-    }).then({
+    }).then( () => {
         return newAccountEmail(user, req.headers.host)
     }).catch(err => {
       req.log.error(err)
