@@ -5,7 +5,7 @@
   "scripts": {
     "start": "node ./bin/www",
     "startIntelliJ": "node %NODE_DEBUG_OPTION% ./bin/www",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "node_modules/mocha/bin/mocha",
     "standard": "standard --fix",
     "retire": " retire --node --verbose",
     "nodemon_pc": "NODE_ENV=development&&nodemon ./bin/www --ignore public/",
@@ -63,9 +63,12 @@
   },
   "devDependencies": {
     "debug": "~2.2.0",
+    "mocha": "^3.1.0",
     "nodemon": "^1.10.2",
     "nsp": "^2.6.1",
     "retire": "^1.2.10",
+    "should": "^11.1.0",
+    "sinon": "^1.17.6",
     "standard": "*"
   }
 }
