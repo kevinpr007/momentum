@@ -1,8 +1,7 @@
 const config = require('../config/config')
 
 module.exports = (to, subject, html) => {
-  let getInfo = () =>  {
-
+  let getInfo = () => {
     let info = {
       from: config.EMAIL,
       to: to,

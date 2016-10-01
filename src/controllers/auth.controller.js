@@ -49,7 +49,7 @@ let authController = (authService, userService, templateModel) => {
         user: usr
       })
     }).then(() => {
-      //Send email for new account
+      // Send email for new account
       let params = [user.firstName, user.lastName, req.headers.host]
       let emailTemplate = require('../services/emails/new-account')(params).getTemplate()
       let emailInfo = emailFactory(user.email, emailTemplate.subject, emailTemplate.html).getInfo()
@@ -70,7 +70,7 @@ let authController = (authService, userService, templateModel) => {
       }
       return authService.resetToken(user)
     }).then(user => {
-      //Confirm Reset Password Email
+      // Confirm Reset Password Email
       let params = [req.headers.host, user.resetPasswordToken]
       let emailTemplate = require('../services/emails/confirm-reset-password')(params).getTemplate()
       let emailInfo = emailFactory(user.email, emailTemplate.subject, emailTemplate.html).getInfo()
@@ -112,7 +112,7 @@ let authController = (authService, userService, templateModel) => {
         })
       }
     }).then(user => {
-      //Reset Password Email
+      // Reset Password Email
       let params = []
       let emailTemplate = require('../services/emails/reset-password')(params).getTemplate()
       let emailInfo = emailFactory(user.email, emailTemplate.subject, emailTemplate.html).getInfo()
