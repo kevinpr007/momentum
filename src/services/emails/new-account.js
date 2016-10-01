@@ -1,7 +1,8 @@
 module.exports = (params) => {
-  let template = {
-    subject: 'Style Point: New Account',
-    html: `
+  let getTemplate = () => {
+    let template = {
+      subject: 'Style Point: New Account',
+      html: `
         <p>
             Hi ${params[0]} ${params[1]}!<br><br>
 
@@ -14,9 +15,11 @@ module.exports = (params) => {
             The Style Point Team
         </p>
     `
+    }
+    return template
   }
 
   return {
-    getTemplate: template
+    getTemplate: getTemplate
   }
 }

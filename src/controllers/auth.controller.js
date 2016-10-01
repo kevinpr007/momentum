@@ -51,10 +51,11 @@ let authController = (authService, userService, templateModel) => {
         user: usr
       })
     }).then(() => {
+      //Send email for new account
       let params = [user.firstName, user.lastName, req.headers.host]
-      let emailTemplate = require('../services/emails/new-account')(params).getTemplate
-      let emailInfo = emailFactory(user.email, emailTemplate.subject, emailTemplate.html).getInfo
-      return emailService(emailInfo)
+      let emailTemplate = require('../services/emails/new-account')(params).getTemplate()
+      let emailInfo = emailFactory(user.email, emailTemplate.subject, emailTemplate.html).getInfo()
+      return emailService(emailInfo).send()
     }).catch(err => {
       req.log.error(err)
       next(err)
