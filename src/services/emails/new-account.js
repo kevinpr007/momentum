@@ -1,4 +1,4 @@
-module.exports = (params) => {
+module.exports = params => {
   let getTemplate = () => {
     let template = {
       subject: 'Style Point: New Account',

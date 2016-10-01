@@ -1,6 +1,4 @@
 const HttpStatus = require('http-status-codes')
-const resetPasswordEmail = require('../services/emails/reset-password')
-const confirmResetPasswordEmail = require('../services/emails/confirm-reset-password')
 const emailService = require('../services/email.service')
 const emailFactory = require('../helpers/email.factory')
 
@@ -72,7 +70,11 @@ let authController = (authService, userService, templateModel) => {
       }
       return authService.resetToken(user)
     }).then(user => {
-      return confirmResetPasswordEmail(user, req.headers.host)
+      //Confirm Reset Password Email
+      let params = [req.headers.host, user.resetPasswordToken]
+      let emailTemplate = require('../services/emails/confirm-reset-password')(params).getTemplate()
+      let emailInfo = emailFactory(user.email, emailTemplate.subject, emailTemplate.html).getInfo()
+      return emailService(emailInfo).send()
     }).then(data => {
       res.status(HttpStatus.OK).json({data: data})
     }).catch(err => {
@@ -110,7 +112,11 @@ let authController = (authService, userService, templateModel) => {
         })
       }
     }).then(user => {
-      return resetPasswordEmail(user)
+      //Reset Password Email
+      let params = []
+      let emailTemplate = require('../services/emails/reset-password')(params).getTemplate()
+      let emailInfo = emailFactory(user.email, emailTemplate.subject, emailTemplate.html).getInfo()
+      return emailService(emailInfo).send()
     }).then(data => {
       res.status(HttpStatus.OK).json({data: data})
     }).catch(err => {
