@@ -1,4 +1,4 @@
-module.exports = params => {
+module.exports = () => {
   let getTemplate = () => {
     let template = {
       subject: 'Style Point: Password Changed',
@@ -6,7 +6,7 @@ module.exports = params => {
         <p>
             You are receiving this email because you changed your password.
             <br>
-            If you did not request this change, please contact us immediately.          
+            If you did not request this change, please contact us immediately.
         </p>
     `
     }
