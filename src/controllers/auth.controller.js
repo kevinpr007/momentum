@@ -7,10 +7,9 @@ let authController = (authService, userService, templateModel) => {
     let user = null
     userService.getByEmail(req.body.email).then(usr => {
       if (!usr) {
-        next({
-          status: HttpStatus.BAD_REQUEST,
-          message: 'Authentication failed. User not found.'
-        })
+        let err = new Error('Authentication failed. User not found.')
+        err.status = HttpStatus.BAD_REQUEST
+        throw err
       }
       user = usr
       return user.isValidPassword(req.body.password)
@@ -21,25 +20,20 @@ let authController = (authService, userService, templateModel) => {
           user: user
         })
       } else {
-        next({
-          status: HttpStatus.BAD_REQUEST,
-          message: 'Authentication failed. Wrong password.'
-        })
+        let err = new Error('Authentication failed. Wrong password.')
+        err.status = HttpStatus.BAD_REQUEST
+        throw err
       }
-    }).catch(err => {
-      req.log.error(err)
-      next(err)
-    })
+    }).catch(next)
   }
 
   let register = (req, res, next) => {
     let user = null
     userService.getByEmail(req.body.email).then(existingUser => {
       if (existingUser) {
-        next({
-          status: HttpStatus.UNPROCESSABLE_ENTITY,
-          message: 'That email address is already registered.'
-        })
+        let err = new Error('That email address is already registered.')
+        err.status = HttpStatus.UNPROCESSABLE_ENTITY
+        throw err
       }
       return userService.registerUser(req.body)
     }).then(usr => {
@@ -48,24 +42,20 @@ let authController = (authService, userService, templateModel) => {
         token: `JWT ${authService.generateToken(usr)}`,
         user: usr
       })
-    }).then(() => {
+    }).then( () => {
       // Send email for new account
       let emailTemplate = require('../services/emails/new-account')(user, req.headers.host).getTemplate()
       let emailInfo = emailFactory(user.email, emailTemplate.subject, emailTemplate.html).getInfo()
       return emailService(emailInfo).send()
-    }).catch(err => {
-      req.log.error(err)
-      next(err)
-    })
+    }).catch(next)
   }
 
   let confirmResetPassword = (req, res, next) => {
     userService.getByEmail(req.body.email).then(user => {
       if (!user) {
-        next({
-          status: HttpStatus.UNPROCESSABLE_ENTITY,
-          message: 'Your request could not be processed as entered. Please try again.'
-        })
+        let err = new Error('Your request could not be processed as entered. Please try again.')
+        err.status = HttpStatus.UNPROCESSABLE_ENTITY
+        throw err
       }
       return authService.resetToken(user)
     }).then(user => {
@@ -75,10 +65,7 @@ let authController = (authService, userService, templateModel) => {
       return emailService(emailInfo).send()
     }).then(data => {
       res.status(HttpStatus.OK).json({data: data})
-    }).catch(err => {
-      req.log.error(err)
-      next(err)
-    })
+    }).catch(next)
   }
 
   let resetPassword = (req, res, next) => {
@@ -90,10 +77,9 @@ let authController = (authService, userService, templateModel) => {
     let user = null
     authService.resetUserPassword(req.body.token).then(usr => {
       if (!usr) {
-        next({
-          status: HttpStatus.UNPROCESSABLE_ENTITY,
-          message: 'Invalid token. Please confirm this action through your email.'
-        })
+        let err = new Error('Invalid token. Please confirm this action through your email.')
+        err.status = HttpStatus.UNPROCESSABLE_ENTITY
+        throw err
       }
       user = usr
       return user.isValidPassword(req.body.currentPassword)
@@ -104,10 +90,9 @@ let authController = (authService, userService, templateModel) => {
         user.resetPasswordExpires = undefined
         return user.save()
       } else {
-        next({
-          status: HttpStatus.BAD_REQUEST,
-          message: 'Invalid password. Please validate your current password.'
-        })
+        let err = new Error('Invalid password. Please validate your current password.')
+        err.status = HttpStatus.BAD_REQUEST
+        throw err
       }
     }).then(user => {
       // Reset Password Email
@@ -116,10 +101,7 @@ let authController = (authService, userService, templateModel) => {
       return emailService(emailInfo).send()
     }).then(data => {
       res.status(HttpStatus.OK).json({data: data})
-    }).catch(err => {
-      req.log.error(err)
-      next(err)
-    })
+    }).catch(next)
   }
 
   return {

@@ -95,7 +95,6 @@ module.exports = logger => {
       message: err.message,
       error: app.get('env') === 'development' ? err : {}
     })
-    next(err)
   })
 
   return app
