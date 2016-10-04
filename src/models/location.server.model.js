@@ -3,7 +3,7 @@ const Schema = mongoose.Schema
 const mongoDB = require('../config/mongoose.collections.json')
 
 const locationSchema = new Schema({
-  name: {type: String, index: 1, required: true, unique: true},
+  name: {type: String, index: true, required: true, unique: true},
   description: {type: String},
   urlLocation: {type: String},
   address: {
@@ -11,7 +11,6 @@ const locationSchema = new Schema({
     address2: {type: String},
     city: {type: String, required: true},
     state: {type: String, required: true},
-    // this field can have numbers like this 00718-12345
     zipCode: {type: String, required: true}
   },
   createdBy: {type: Schema.ObjectId, ref: mongoDB.Model.User, required: true},

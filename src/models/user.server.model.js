@@ -7,9 +7,9 @@ const config = require('../config/config')
 const Promise = require('bluebird')
 
 const userSchema = new Schema({
-  firstName: {type: String, required: true, index: 4},
-  lastName: {type: String, required: true, index: 3},
-  email: {type: String, match: /.+@.+\..+/, trim: true, required: true, index: 1, unique: true},
+  firstName: {type: String, required: true, index: true},
+  lastName: {type: String, required: true, index: true},
+  email: {type: String, match: /.+@.+\..+/, trim: true, required: true, index: true, unique: true},
   dob: {
     type: Date,
     validate: [
@@ -34,7 +34,7 @@ const userSchema = new Schema({
   resetPasswordToken: {type: String},
   resetPasswordExpires: {type: Date},
   phone: Number,
-  roles: {type: String, enum: roles, index: 2},
+  roles: {type: String, enum: roles, index: true},
   address: {
     address1: {type: String, required: true},
     address2: {type: String},

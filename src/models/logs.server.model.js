@@ -3,8 +3,8 @@ const Schema = mongoose.Schema
 const mongoDB = require('../config/mongoose.collections.json')
 
 const logsSchema = new Schema({
-  code: {type: String, default: null, index: 1},
-  status: {type: String, index: 2},
+  code: {type: String, default: null, index: true},
+  status: {type: String, index: true},
   message: {type: String},
   stack: {type: String},
   createdOn: {type: Date, default: Date.now}
