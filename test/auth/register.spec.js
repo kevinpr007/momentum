@@ -2,7 +2,6 @@ const MongooseError = require('mongoose/lib/error')
 const chaiPromise = require('chai-as-promised')
 const chai = require('chai').use(chaiPromise)
 const mockgoose = require('./../config/mockgoose')()
-require('../../src/models/user.server.model.js')
 const expect = chai.expect
 
 describe('Registering as a new user', () => {
