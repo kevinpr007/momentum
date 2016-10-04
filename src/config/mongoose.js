@@ -1,7 +1,8 @@
 const config = require('./config')
 const mongoose = require('mongoose')
+const logger = require('./logger')
 
-module.exports = logger => {
+module.exports = () => {
   // TODO: Fix hardcode
   mongoose.set('debug', (coll, method, query, doc, options) => {
     let set = {

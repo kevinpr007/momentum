@@ -1,13 +1,12 @@
 const mongoose = require('../src/config/mongoose')
 const passport = require('../src/config/passport')
 const express = require('../src/config/express')
-const logger = require('../src/config/logger')
 const config = require('../src/config/config')
 const http = require('http')
 const port = config.PORT
 
-let db = mongoose(logger)
-let app = express(logger)
+let db = mongoose()
+let app = express()
 let auth = passport()
 let server = http.createServer(app)
 
