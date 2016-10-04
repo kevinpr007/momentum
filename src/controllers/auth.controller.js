@@ -42,7 +42,7 @@ let authController = (authService, userService, templateModel) => {
         token: `JWT ${authService.generateToken(usr)}`,
         user: usr
       })
-    }).then( () => {
+    }).then(() => {
       // Send email for new account
       let emailTemplate = require('../services/emails/new-account')(user, req.headers.host).getTemplate()
       let emailInfo = emailFactory(user.email, emailTemplate.subject, emailTemplate.html).getInfo()
