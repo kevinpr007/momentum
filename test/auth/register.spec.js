@@ -1,16 +1,17 @@
-const MongooseError = require('mongoose/lib/error')
-const chaiPromise = require('chai-as-promised')
-const chai = require('chai').use(chaiPromise)
+const chai = require('chai').use(require('chai-as-promised'))
 const mockgoose = require('./../config/mockgoose')()
+const MongooseError = require('mongoose/lib/error')
 const expect = chai.expect
 
 describe('Registering as a new user', () => {
   let sut
   let user
+  let userFactory
 
   before(() => {
     mockgoose.connect()
     sut = require('../../src/services/user.service.js')()
+    userFactory = require('../../src/helpers/user.factory')
   })
 
   beforeEach(() => {
@@ -29,11 +30,7 @@ describe('Registering as a new user', () => {
     }
   })
 
-  after(() => {
-    mockgoose.reset()
-  })
-
-  describe('Given a valid email, password, full name and address', () => {
+  describe(' Given a valid email, password, full name and address', () => {
     it('registers the user successfully', () => {
       return expect(sut.registerUser(user)).to.eventually.have.property('_id')
     })
@@ -41,8 +38,10 @@ describe('Registering as a new user', () => {
 
   describe('Given an already registered email', () => {
     it('will throw a write error', () => {
-      return expect(sut.registerUser(user))
-          .to.eventually.be.rejectedWith(MongooseError.WriteError)
+      userFactory(user).save().then(usr => {
+        return expect(sut.registerUser(user))
+            .to.eventually.be.rejectedWith(MongooseError.ValidationError)
+      })
     })
   })
 

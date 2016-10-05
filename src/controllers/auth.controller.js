@@ -60,7 +60,8 @@ let authController = (authService, userService, templateModel) => {
       return authService.resetToken(user)
     }).then(user => {
       // Confirm Reset Password Email
-      let emailTemplate = require('../services/emails/confirm-reset-password')(req.headers.host, user.resetPasswordToken).getTemplate()
+      let emailTemplate = require('../services/emails/confirm-reset-password')(req.headers.host,
+          user.resetPasswordToken).getTemplate()
       let emailInfo = emailFactory(user.email, emailTemplate.subject, emailTemplate.html).getInfo()
       return emailService(emailInfo).send()
     }).then(data => {
