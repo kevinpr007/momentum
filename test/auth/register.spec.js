@@ -1,6 +1,7 @@
 const chai = require('chai').use(require('chai-as-promised'))
 const mockgoose = require('./../config/mockgoose')()
 const MongooseError = require('mongoose/lib/error')
+const Promise = require('bluebird')
 const expect = chai.expect
 
 describe('Registering as a new user', () => {
@@ -38,10 +39,12 @@ describe('Registering as a new user', () => {
 
   describe('Given an already registered email', () => {
     it('will throw a write error', () => {
-      userFactory(user).save().then(usr => {
-        return expect(sut.registerUser(user))
-            .to.eventually.be.rejectedWith(MongooseError.ValidationError)
-      })
+      return Promise.all([
+        expect(userFactory(user).save)
+          .to.eventually.have.property('_id'),
+        expect(sut.registerUser(user))
+          .to.eventually.be.rejectedWith(MongooseError.WriteError)
+      ])
     })
   })
 
@@ -50,7 +53,7 @@ describe('Registering as a new user', () => {
       user.password = null
       user.email = 'test@dev.com'
       return expect(sut.registerUser(user))
-          .to.eventually.be.rejectedWith(MongooseError.ValidationError)
+        .to.eventually.be.rejectedWith(MongooseError.ValidationError)
     })
   })
 
@@ -59,7 +62,7 @@ describe('Registering as a new user', () => {
       user.address = null
       user.email = 'test@dev.com'
       return expect(sut.registerUser(user))
-          .to.eventually.throw()
+        .to.eventually.throw()
     })
   })
 })

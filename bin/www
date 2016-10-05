@@ -15,7 +15,6 @@ server.on('error', error => {
   if (error.syscall !== 'listen') throw error
   let bind = typeof port === 'string' ? `Pipe ${port}` : `Port ${port}`
 
-//TODO: Look and search the codes' meanings
   switch (error.code) {
     case 'EACCES':
       console.error(`${bind} requires elevated privileges`)
