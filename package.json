@@ -5,7 +5,7 @@
   "scripts": {
     "start": "cross-env NODE_ENV=development node ./bin/www",
     "startIntelliJ": "node %NODE_DEBUG_OPTION% ./bin/www",
-    "test": "cross-env NODE_ENV=development node node_modules/mocha/bin/mocha",
+    "test": "cross-env NODE_ENV=development node node_modules/mocha/bin/mocha test/*.spec.js",
     "standard": "standard --fix",
     "retire": " retire --node --verbose",
     "nodemon": "cross-env NODE_ENV=development nodemon ./bin/www --ignore public/",
@@ -63,8 +63,7 @@
     "passport": "^0.3.2",
     "passport-jwt": "^2.1.0",
     "passport-local": "^1.0.0",
-    "serve-favicon": "^2.3.0",
-    "underscore": "^1.8.3"
+    "serve-favicon": "^2.3.0"
   },
   "devDependencies": {
     "chai": "^3.5.0",

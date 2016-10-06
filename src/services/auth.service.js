@@ -5,7 +5,7 @@ const mongoose = require('mongoose')
 mongoose.Promise = Promise
 const User = mongoose.model('User')
 const tokenLife = config.TOKEN_LIFE
-const _ = require('underscore')
+const _ = require('lodash')
 
 let randomBytes = Promise
     .promisify(require('crypto').randomBytes)

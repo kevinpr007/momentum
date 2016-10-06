@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 mongoose.Promise = require('bluebird')
 const User = mongoose.model('User')
-const _ = require('underscore')
+const _ = require('lodash')
 
 let userService = () => {
   let getAll = () => {
@@ -17,7 +17,8 @@ let userService = () => {
   }
 
   let registerUser = user => {
-    return User.create(_.extend(user, User))
+    let temp = _.extend(user, User)
+    return User.create(temp)
   }
 
   return {
