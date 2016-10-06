@@ -47,5 +47,9 @@ scheduleSchema.virtual('show').get(function () {
   return `${this.service}: ${this.startDate} - ${this.endDate}`
 })
 
-scheduleSchema.set('toJSON', { getters: true, virtuals: true })
-mongoose.model(mongoDB.Model.Schedule, scheduleSchema)
+scheduleSchema.set('toJSON', { 
+  getters: true, 
+  virtuals: true 
+})
+
+exports.scheduleSchema = scheduleSchema

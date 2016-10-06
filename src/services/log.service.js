@@ -1,8 +1,8 @@
 const mongoose = require('mongoose')
 mongoose.Promise = require('bluebird')
 
-// TODO: Remove hardcode
-const Log = mongoose.model('Log')
+const logsSchema = require('../models/logs.server.model').logsSchema
+const Log = mongoose.model('Log', logsSchema)
 
 // TODO: Return a default message when is null
 let logService = () => {

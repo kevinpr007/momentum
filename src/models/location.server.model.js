@@ -50,5 +50,9 @@ const locationSchema = new Schema({
   collection: mongoDB.Collection.Location
 })
 
-locationSchema.set('toJSON', { getters: true, virtuals: true })
-mongoose.model(mongoDB.Model.Location, locationSchema)
+locationSchema.set('toJSON', { 
+  getters: true, 
+  virtuals: true 
+})
+
+exports.locationSchema = locationSchema

@@ -3,7 +3,9 @@ const jwt = require('jsonwebtoken')
 const Promise = require('bluebird')
 const mongoose = require('mongoose')
 mongoose.Promise = Promise
-const User = mongoose.model('User')
+
+const userSchema = require('../models/user.server.model').userSchema
+const User = mongoose.model('User', userSchema)
 const tokenLife = config.TOKEN_LIFE
 const _ = require('underscore')
 
