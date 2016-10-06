@@ -1,12 +1,11 @@
 const request = require('supertest')
-const mockgoose = require('./../config/mockgoose')()
+const mockgoose = require('./config/mockgoose')()
+
+let app = require('../src/config/express')()
 
 describe('Navigating to index page', () => {
-  let app
-
   before(() => {
     mockgoose.connect()
-    app = require('../../src/config/express')()
   })
 
   describe('Given a user that goes to the index route (GET /)', () => {
