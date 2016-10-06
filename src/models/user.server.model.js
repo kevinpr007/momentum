@@ -7,9 +7,25 @@ const config = require('../config/config')
 const Promise = require('bluebird')
 
 const userSchema = new Schema({
-  firstName: {type: String, required: true, index: true},
-  lastName: {type: String, required: true, index: true},
-  email: {type: String, match: /.+@.+\..+/, trim: true, required: true, index: true, unique: true},
+  firstName: {
+    type: String,
+    required: true,
+    index: true
+  },
+  lastName: {
+    type: String,
+    required: true,
+    index: true
+  },
+  email: {
+    type: String,
+    match: /.+@.+\..+/,
+    trim: true,
+    required: true,
+    index: {
+      unique: true
+    }
+  },
   dob: {
     type: Date,
     validate: [
@@ -31,19 +47,47 @@ const userSchema = new Schema({
   salt: {
     type: String
   },
-  resetPasswordToken: {type: String},
-  resetPasswordExpires: {type: Date},
-  phone: Number,
-  roles: {type: String, enum: roles, index: true},
-  address: {
-    address1: {type: String, required: true},
-    address2: {type: String},
-    city: {type: String, required: true},
-    state: {type: String, required: true},
-    zipCode: {type: String, required: true}
+  resetPasswordToken: {
+    type: String
   },
-  createdBy: {type: Schema.ObjectId, ref: mongoDB.Model.User},
-  createdOn: {type: Date, default: Date.now}
+  resetPasswordExpires: {
+    type: Date
+  },
+  phone: Number,
+  roles: {
+    type: String,
+    enum: roles,
+    index: true
+  },
+  address: {
+    address1: {
+      type: String,
+      required: true
+    },
+    address2: {
+      type: String
+    },
+    city: {
+      type: String,
+      required: true
+    },
+    state: {
+      type: String,
+      required: true
+    },
+    zipCode: {
+      type: String,
+      required: true
+    }
+  },
+  createdBy: {
+    type: Schema.ObjectId,
+    ref: mongoDB.Model.User
+  },
+  createdOn: {
+    type: Date,
+    default: Date.now
+  }
 }, {
   collection: mongoDB.Collection.User
 })
