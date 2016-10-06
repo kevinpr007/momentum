@@ -3,14 +3,32 @@ const Schema = mongoose.Schema
 const mongoDB = require('../config/mongoose.collections.json')
 
 const logsSchema = new Schema({
-  code: {type: String, default: null, index: true},
-  status: {type: String, index: true},
-  message: {type: String},
-  stack: {type: String},
-  createdOn: {type: Date, default: Date.now}
+  code: {
+    type: String,
+    default: null,
+    index: true
+  },
+  status: {
+    type: String,
+    index: true
+  },
+  message: {
+    type: String
+  },
+  stack: {
+    type: String
+  },
+  createdOn: {
+    type: Date,
+    default: Date.now
+  }
 }, {
   collection: mongoDB.Collection.Log,
-  capped: { size: 5242880, max: 5000, autoIndexId: true } // 5 Megas
+  capped: {
+    size: 5242880,
+    max: 5000,
+    autoIndexId: true
+  } // 5 Megas
 })
 
 logsSchema.virtual('getError').get(function () {

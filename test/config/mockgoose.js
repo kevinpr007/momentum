@@ -1,5 +1,3 @@
-process.env.NODE_ENV = 'development'
-
 const mongoose = require('mongoose')
 mongoose.Promise = require('bluebird')
 const mockgoose = require('mockgoose')
