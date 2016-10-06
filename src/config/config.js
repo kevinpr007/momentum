@@ -13,10 +13,10 @@ switch (ENV) {
     })
     break
   default:
-    throw new Error('Error setting the environment variables.')
+    throw new Error('Error setting the environment variables.\n')
 }
 
-console.log(`The environment variable selected is: ${ENV}`)
+console.log(`The environment variable selected is: ${ENV}\n`)
 
 module.exports = {
   NODE_ENV: process.env.NODE_ENV,

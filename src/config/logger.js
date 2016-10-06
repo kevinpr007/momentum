@@ -1,5 +1,11 @@
 const bunyan = require('bunyan')
+const bFormat = require('bunyan-format')
 const RotatingFileStream = require('bunyan-rotating-file-stream')
+
+let formatOut = bFormat({
+  outputMode: 'short',
+  levelInString: true
+})
 
 let serializer = data => {
   let query = JSON.stringify(data.query)
@@ -9,14 +15,12 @@ let serializer = data => {
 }
 
 module.exports = bunyan.createLogger({
-
-  // TODO: Change hardcode
   name: 'StylePoint',
   src: false,
   streams: [
     {
       level: 'info',
-      stream: process.stdout
+      stream: formatOut
     },
     {
       level: 'error',
