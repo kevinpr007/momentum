@@ -37,12 +37,16 @@ const workshiftSchema = new Schema({
     default: Date.now
   }
 }, {
-  collection: mongoDB.Collection.Workshift
-})
+    collection: mongoDB.Collection.Workshift
+  })
 
 workshiftSchema.virtual('show').get(function () {
   return `${this.day}: ${this.startDate} - ${this.endDate}`
 })
 
-workshiftSchema.set('toJSON', { getters: true, virtuals: true })
-mongoose.model(mongoDB.Model.Workshift, workshiftSchema)
+workshiftSchema.set('toJSON', {
+  getters: true,
+  virtuals: true
+})
+
+exports.workshiftSchema = workshiftSchema

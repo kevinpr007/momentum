@@ -135,4 +135,4 @@ userSchema.set('toJSON', {
   }
 })
 
-mongoose.model(mongoDB.Model.User, userSchema)
+exports.userSchema = userSchema

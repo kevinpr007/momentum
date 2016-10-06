@@ -1,11 +1,14 @@
 const chai = require('chai').use(require('chai-as-promised'))
-const mockgoose = require('./config/mockgoose')()
+const config = require('../src/config/config')
 const expect = chai.expect
 
 const MongooseError = require('mongoose/lib/error')
-const Promise = require('bluebird')
 const mongoose = require('mongoose')
-const User = mongoose.model('User')
+const Promise = require('bluebird')
+const mockgoose = require('./config/mockgoose')(mongoose)
+
+const userSchema = require('../src/models/user.server.model').userSchema
+const User = mongoose.model('User', userSchema)
 
 let userService = require('../src/services/user.service')()
 let authService = require('../src/services/auth.service')()
@@ -16,7 +19,7 @@ describe('Registering as a new user', () => {
   })
 
   after(() => {
-    mockgoose.reset()
+      mockgoose.reset()
   })
 
   describe('Given a valid email, password, full name and address', () => {
@@ -34,9 +37,9 @@ describe('Registering as a new user', () => {
       }
     }
 
-    it('registers the user successfully', () => {
+    it.only('registers the user successfully', () => {
       return expect(userService.registerUser(user))
-          .to.eventually.have.property('_id')
+        .to.eventually.have.property('_id')
     })
   })
 
@@ -56,7 +59,7 @@ describe('Registering as a new user', () => {
 
     it('will throw a validation error', () => {
       return expect(userService.registerUser(user))
-          .to.eventually.be.rejectedWith(MongooseError.ValidationError)
+        .to.eventually.be.rejectedWith(MongooseError.ValidationError)
     })
   })
 
@@ -70,7 +73,7 @@ describe('Registering as a new user', () => {
 
     it('will throw a validation error', () => {
       return expect(userService.registerUser(user))
-          .to.eventually.be.rejectedWith(MongooseError.ValidationError)
+        .to.eventually.be.rejectedWith(MongooseError.ValidationError)
     })
   })
 
@@ -92,9 +95,9 @@ describe('Registering as a new user', () => {
 
       return Promise.all([
         expect(userService.registerUser(user))
-            .to.eventually.have.property('_id'),
+          .to.eventually.have.property('_id'),
         expect(userService.registerUser(user))
-            .to.eventually.be.rejectedWith(MongooseError.WriteError)
+          .to.eventually.be.rejectedWith(MongooseError.WriteError)
       ])
     })
   })
