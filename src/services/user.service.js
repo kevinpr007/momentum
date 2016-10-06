@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 mongoose.Promise = require('bluebird')
 const User = mongoose.model('User')
-const userFactory = require('../helpers/user.factory')
+const _ = require('underscore')
 
 let userService = () => {
   let getAll = () => {
@@ -17,7 +17,7 @@ let userService = () => {
   }
 
   let registerUser = user => {
-    return userFactory(user).save()
+    return User.create(_.extend(user, User))
   }
 
   return {

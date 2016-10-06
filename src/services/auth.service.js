@@ -1,10 +1,11 @@
+const config = require('../config/config')
 const jwt = require('jsonwebtoken')
 const Promise = require('bluebird')
 const mongoose = require('mongoose')
 mongoose.Promise = Promise
 const User = mongoose.model('User')
-const config = require('../config/config')
 const tokenLife = config.TOKEN_LIFE
+const _ = require('underscore')
 
 let randomBytes = Promise
     .promisify(require('crypto').randomBytes)
@@ -18,6 +19,7 @@ let authService = () => {
 
   let resetToken = user => {
     let date = new Date()
+    user = _.extend(user, User)
     return randomBytes(parseInt(config.RANDOM_BYTES)).then(buffer => {
       user.resetPasswordToken = buffer.toString('hex')
       user.resetPasswordExpires = date.setSeconds(date.getSeconds() + parseInt(tokenLife))
