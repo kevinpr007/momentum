@@ -43,6 +43,7 @@
     "body-parser": "^1.15.2",
     "bower": "^1.7.9",
     "bunyan": "^1.8.1",
+    "bunyan-format": "^0.2.1",
     "bunyan-middleware": "^0.4.0",
     "bunyan-rotating-file-stream": "^1.6.1",
     "dotenv": "~2.0.0",
@@ -60,7 +61,8 @@
     "passport": "^0.3.2",
     "passport-jwt": "^2.1.0",
     "passport-local": "^1.0.0",
-    "serve-favicon": "^2.3.0"
+    "serve-favicon": "^2.3.0",
+    "underscore": "^1.8.3"
   },
   "devDependencies": {
     "chai": "^3.5.0",
