@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 const mongoDB = require('../config/mongoose.collections.json')
 
-const logsSchema = new Schema({
+const logSchema = new Schema({
   code: {
     type: String,
     default: null,
@@ -40,4 +40,4 @@ logsSchema.set('toJSON', {
   virtuals: true
 })
 
-exports.logsSchema = logsSchema
+module.exports = mongoose.model('Log', logSchema)

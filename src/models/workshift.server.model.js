@@ -49,4 +49,4 @@ workshiftSchema.set('toJSON', {
   virtuals: true
 })
 
-exports.workshiftSchema = workshiftSchema
+module.exports = mongoose.model('Workshift', workshiftSchema)

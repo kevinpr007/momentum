@@ -47,4 +47,4 @@ serviceSchema.set('toJSON', {
   virtuals: true 
 })
 
-exports.serviceSchema = serviceSchema
+module.exports = mongoose.model('Service', serviceSchema)

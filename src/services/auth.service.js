@@ -4,8 +4,7 @@ const Promise = require('bluebird')
 const mongoose = require('mongoose')
 mongoose.Promise = Promise
 
-const userSchema = require('../models/user.server.model').userSchema
-const User = mongoose.model('User', userSchema)
+const User = require('../models/user.server.model')
 const tokenLife = config.TOKEN_LIFE
 const _ = require('lodash')
 
