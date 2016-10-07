@@ -4,7 +4,6 @@ const expect = chai.expect
 
 const MongooseError = require('mongoose/lib/error')
 const mongoose = require('mongoose')
-const mockgoose = require('./config/mockgoose')(mongoose)
 const Promise = require('bluebird')
 
 describe('User registration', () => {
@@ -13,7 +12,6 @@ describe('User registration', () => {
   let userService
 
   before(() => {
-    mockgoose.connect()
     User = mongoose.model('User', require('../src/models/user.server.model').userSchema)
     userService = require('../src/services/user.service')()
   })
