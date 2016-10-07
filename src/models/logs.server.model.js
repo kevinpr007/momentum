@@ -31,11 +31,11 @@ const logSchema = new Schema({
   } // 5 Megas
 })
 
-logsSchema.virtual('getError').get(function () {
+logSchema.virtual('getError').get(function () {
   return `${this.code} - ${this.status} - ${this.message}`
 })
 
-logsSchema.set('toJSON', {
+logSchema.set('toJSON', {
   getters: true,
   virtuals: true
 })
