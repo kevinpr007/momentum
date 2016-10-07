@@ -6,17 +6,28 @@ const config = require('../../src/config/config')
  * 0 = disconnected, 1 = connected, 2 = connecting, 3 = disconnecting
  * */
 module.exports = mongoose => {
+  mongoose.Promise = require('bluebird')
+  
   let connect = () => {
-    return mockgoose(mongoose).then(() => {
-      if (mongoose.connection.readyState != 1) {
-        mongoose.connect(config.TEST_DB_URL)
-      }
-    }).catch(err => console.error(`\n${err}\n`))
+    mockgoose(mongoose)
+    mongoose.connect(config.TEST_DB_URL)
   }
 
   let reset = () => {
     return mongoose.isMocked ? mockgoose.reset() : false
   }
+
+  mongoose.connection.on('connected', () => {
+    console.log('Mongoose> connected: ')
+  })
+
+  mongoose.connection.on('error', err => {
+    console.log(`Mongoose> error: ${err}`)
+  })
+
+  mongoose.connection.on('disconnected', () => {
+    console.log('Mongoose> disconnected')
+  })
 
   return {
     connect: connect,

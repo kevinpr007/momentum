@@ -74,9 +74,9 @@
     "nodemon": "^1.10.2",
     "nsp": "^2.6.1",
     "retire": "^1.2.10",
+    "siege": "^0.2.0",
     "sinon": "^1.17.6",
     "standard": "*",
-    "supertest": "^2.0.0",
-    "siege": "^0.2.0"
+    "supertest": "^2.0.0"
   }
 }

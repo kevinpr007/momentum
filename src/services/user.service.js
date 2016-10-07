@@ -19,8 +19,7 @@ let userService = () => {
   }
 
   let registerUser = user => {
-    let temp = _.extend(user, User)
-    return User.create(temp)
+    return User.create(_.extend(user, User))
   }
 
   return {
