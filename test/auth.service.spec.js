@@ -13,12 +13,6 @@ let userService = require('../src/services/user.service')()
 let authService = require('../src/services/auth.service')()
 
 describe('User authentication', () => {
-  before(() => {
-  })
-
-  after(() => {
-  })
-
   describe('Given a user requesting to reset password with a valid email', () => {
     it('will create a new reset-password token')
   })
