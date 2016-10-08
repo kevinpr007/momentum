@@ -51,10 +51,15 @@ let authController = (authService, userService, templateModel) => {
   }
 
   let confirmResetPassword = (req, res, next) => {
+    templateModel.token = req.params.token
+    res.render('reset-password', templateModel)
+  }
+
+  let resetPassword = (req, res, next) => {
     userService.getByEmail(req.body.email).then(user => {
       if (!user) {
-        let err = new Error('Your request could not be processed as entered. Please try again.')
-        err.status = HttpStatus.UNPROCESSABLE_ENTITY
+        let err = new Error('Your request could not be processed as entered. User does not exist.')
+        err.status = HttpStatus.NOT_FOUND
         throw err
       }
       return authService.resetToken(user)
@@ -66,11 +71,6 @@ let authController = (authService, userService, templateModel) => {
     }).then(data => {
       res.status(HttpStatus.OK).json({data: data})
     }).catch(next)
-  }
-
-  let resetPassword = (req, res, next) => {
-    templateModel.token = req.params.token
-    res.render('reset-password', templateModel)
   }
 
   let newPassword = (req, res, next) => {
@@ -85,14 +85,23 @@ let authController = (authService, userService, templateModel) => {
       return user.isValidPassword(req.body.currentPassword)
     }).then(isMatch => {
       if (isMatch) {
-        user.password = req.body.confirmPassword
-        user.resetPasswordToken = undefined
-        user.resetPasswordExpires = undefined
-        return user.save()
+        return user.confirmPassword(req.body.password, req.body.confirmPassword)
       } else {
         let err = new Error('Invalid password. Please validate your current password.')
         err.status = HttpStatus.BAD_REQUEST
         throw err
+      }
+    }).then(isConfirmed => {
+        if(isConfirmed){
+          user.password = req.body.confirmPassword
+          user.resetPasswordToken = undefined
+          user.resetPasswordExpires = undefined
+          return userService.updateUser(user)
+        }
+        else{
+          let err = new Error('Invalid confirmation password. Please validate your new password.')
+          err.status = HttpStatus.BAD_REQUEST
+          throw err
       }
     }).then(user => {
       // Reset Password Email
