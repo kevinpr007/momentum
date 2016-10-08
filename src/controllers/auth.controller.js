@@ -16,7 +16,7 @@ let authController = (authService, userService, templateModel) => {
     }).then(isMatch => {
       if (isMatch) {
         res.status(HttpStatus.OK).json({
-          token: `JWT ${authService.generateToken(user)}`,
+          token: authService.getToken(user),
           user: user
         })
       } else {
@@ -39,7 +39,7 @@ let authController = (authService, userService, templateModel) => {
     }).then(usr => {
       user = usr
       res.status(HttpStatus.CREATED).json({
-        token: `JWT ${authService.generateToken(usr)}`,
+        token: authService.getToken(usr),
         user: usr
       })
     }).then(() => {
