@@ -92,16 +92,15 @@ let authController = (authService, userService, templateModel) => {
         throw err
       }
     }).then(isConfirmed => {
-        if(isConfirmed){
-          user.password = req.body.confirmPassword
-          user.resetPasswordToken = undefined
-          user.resetPasswordExpires = undefined
-          return userService.updateUser(user)
-        }
-        else{
-          let err = new Error('Invalid confirmation password. Please validate your new password.')
-          err.status = HttpStatus.BAD_REQUEST
-          throw err
+      if (isConfirmed) {
+        user.password = req.body.confirmPassword
+        user.resetPasswordToken = undefined
+        user.resetPasswordExpires = undefined
+        return userService.updateUser(user)
+      } else {
+        let err = new Error('Invalid confirmation password. Please validate your new password.')
+        err.status = HttpStatus.BAD_REQUEST
+        throw err
       }
     }).then(user => {
       // Reset Password Email
