@@ -1,16 +1,16 @@
-const chai = require('chai').use(require('chai-as-promised'))
+const chai = require('chai')
+chai.use(require('chai-as-promised'))
 const expect = chai.expect
 
-const MongooseError = require('mongoose/lib/error')
 const config = require('../../src/config/config')
 const Promise = require('bluebird')
 const mongoose = require('mongoose')
 mongoose.Promise = Promise
 
-let User = require('../../src/models/user.server.model.js')
-let userService = require('../../src/services/user.service.js')()
-
 describe('User validations', () => {
+
+  let User = require('../../src/models/user.server.model.js')
+
   describe('Given a user with no password', () => {
     let user = new User({
       firstName: 'Juan',
@@ -25,9 +25,11 @@ describe('User validations', () => {
       }
     })
 
-    it.only('will throw a validation error', () => {
-      return expect(user.validate()).to.eventually.be.
-        rejectedWith(MongooseError.ValidationError)
+    it('will throw a validation error', done => {
+      user.validate().catch(err => {
+        expect(err.errors).to.have.property('password')
+        done()
+      })
     })
   })
 
@@ -39,10 +41,18 @@ describe('User validations', () => {
       password: 'Qwerty123'
     })
 
-    it('will throw a validation error')
+    it('will throw a validation error', done => {
+      user.validate().catch(err => {
+        expect(err.errors).to.have.property('address.zipCode')
+        expect(err.errors).to.have.property('address.state')
+        expect(err.errors).to.have.property('address.city')
+        expect(err.errors).to.have.property('address.address1')
+        done()
+      })
+    })
   })
 
-  describe('Given an already registered email', () => {
+  describe('Given a valid email, password and complete address', () => {
     let user = new User({
       firstName: 'Juan',
       lastName: 'Del Pueblo',
@@ -57,6 +67,11 @@ describe('User validations', () => {
       }
     })
 
-    it('will throw a write error')
+    it('will pass all validations', done => {
+      user.validate().then(args => {
+        expect(args).to.equal(undefined)
+        done()
+      })
+    })
   })
 })

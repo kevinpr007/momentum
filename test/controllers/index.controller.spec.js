@@ -1,8 +1,9 @@
 const request = require('supertest')
 
-let app = require('../../src/config/express')()
+describe('Index route', () => {
 
-describe('Navigating to index page', () => {
+  let app = require('../../src/config/express')()
+
   describe('Given a user that goes to the index route (GET /)', () => {
     it('returns the home page', (done) => {
       request(app).get('/')
