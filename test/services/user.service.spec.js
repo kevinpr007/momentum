@@ -2,13 +2,13 @@ const chai = require('chai').use(require('chai-as-promised'))
 const expect = chai.expect
 
 const MongooseError = require('mongoose/lib/error')
-const config = require('../src/config/config')
+const config = require('../../src/config/config')
 const Promise = require('bluebird')
 const mongoose = require('mongoose')
 mongoose.Promise = Promise
 
-let User = require('../src/models/user.server.model')
-let userService = require('../src/services/user.service')()
+let User = require('../../src/models/user.server.model.js')
+let userService = require('../../src/services/user.service.js')()
 
 describe('User validations', () => {
   describe('Given a user with no password', () => {

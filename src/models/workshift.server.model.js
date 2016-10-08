@@ -37,8 +37,8 @@ const workshiftSchema = new Schema({
     default: Date.now
   }
 }, {
-    collection: mongoDB.Collection.Workshift
-  })
+  collection: mongoDB.Collection.Workshift
+})
 
 workshiftSchema.virtual('show').get(function () {
   return `${this.day}: ${this.startDate} - ${this.endDate}`

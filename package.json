@@ -5,7 +5,7 @@
   "scripts": {
     "start": "cross-env NODE_ENV=development node ./bin/www",
     "startIntelliJ": "node %NODE_DEBUG_OPTION% ./bin/www",
-    "test": "cross-env NODE_ENV=development node node_modules/mocha/bin/mocha test/*.spec.js",
+    "test": "cross-env NODE_ENV=development node node_modules/mocha/bin/mocha **/*.spec.js ",
     "standard": "standard --fix",
     "retire": " retire --node --verbose",
     "nodemon": "cross-env NODE_ENV=development nodemon ./bin/www --ignore public/",

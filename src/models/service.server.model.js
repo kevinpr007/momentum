@@ -42,9 +42,9 @@ serviceSchema.virtual('show').get(function () {
   return `${this.name}: ${this.price} - ${this.time}`
 })
 
-serviceSchema.set('toJSON', { 
-  getters: true, 
-  virtuals: true 
+serviceSchema.set('toJSON', {
+  getters: true,
+  virtuals: true
 })
 
 module.exports = mongoose.model('Service', serviceSchema)
