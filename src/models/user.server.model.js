@@ -82,7 +82,7 @@ userSchema.methods.isValidPassword = function (password) {
   })
 }
 
-userSchema.methods.confirmPassword = function (password, confirmPassword) {
+userSchema.methods.confirmPasswordValid = function (password, confirmPassword) {
   return new Promise((resolve, reject) => {
     if (password === null || password === undefined ||
         confirmPassword === null || confirmPassword === undefined) {

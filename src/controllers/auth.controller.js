@@ -75,7 +75,7 @@ let authController = (authService, userService, templateModel) => {
 
   let newPassword = (req, res, next) => {
     let user = null
-    authService.resetUserPassword(req.body.token).then(usr => {
+    authService.findByPasswordToken(req.body.token).then(usr => {
       if (!usr) {
         let err = new Error('Invalid token. Please confirm this action through your email.')
         err.status = HttpStatus.UNPROCESSABLE_ENTITY
@@ -85,7 +85,7 @@ let authController = (authService, userService, templateModel) => {
       return user.isValidPassword(req.body.currentPassword)
     }).then(isMatch => {
       if (isMatch) {
-        return user.confirmPassword(req.body.password, req.body.confirmPassword)
+        return user.confirmPasswordValid(req.body.password, req.body.confirmPassword)
       } else {
         let err = new Error('Invalid password. Please validate your current password.')
         err.status = HttpStatus.BAD_REQUEST

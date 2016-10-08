@@ -29,7 +29,7 @@ let authService = () => {
     })
   }
 
-  let resetUserPassword = token => {
+  let findByPasswordToken = token => {
     return User.findOne({
       resetPasswordToken: token,
       resetPasswordExpires: {
@@ -41,7 +41,7 @@ let authService = () => {
   return {
     resetToken: resetToken,
     getToken: getToken,
-    resetUserPassword: resetUserPassword
+    findByPasswordToken: findByPasswordToken
   }
 }
 
