@@ -96,7 +96,7 @@ let authController = (authService, userService, templateModel) => {
         user.password = req.body.confirmPassword
         user.resetPasswordToken = undefined
         user.resetPasswordExpires = undefined
-        return userService.updateUser(user)
+        return userService.upsertUser(user)
       } else {
         let err = new Error('Invalid confirmation password. Please validate your new password.')
         err.status = HttpStatus.BAD_REQUEST

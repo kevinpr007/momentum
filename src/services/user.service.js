@@ -20,7 +20,7 @@ let userService = () => {
     return userFactory(user).save()
   }
 
-  let updateUser = user => {
+  let upsertUser = user => {
     return user.save()
   }
 
@@ -29,7 +29,7 @@ let userService = () => {
     getById: getById,
     getByEmail: getByEmail,
     registerUser: registerUser,
-    updateUser: updateUser
+    upsertUser: upsertUser
   }
 }
 
