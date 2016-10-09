@@ -1,8 +1,3 @@
-const sinon = require('sinon')
-const chai = require('chai')
-chai.use(require('chai-as-promised'))
-const expect = chai.expect
-
 const config = require('../../src/config/config')
 const mongoose = require('mongoose')
 mongoose.Promise = require('bluebird')
