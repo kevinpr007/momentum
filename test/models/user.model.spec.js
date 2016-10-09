@@ -1,13 +1,14 @@
+const sinon = require('sinon')
 const chai = require('chai')
 chai.use(require('chai-as-promised'))
 const expect = chai.expect
 
 const config = require('../../src/config/config')
-const Promise = require('bluebird')
 const mongoose = require('mongoose')
-mongoose.Promise = Promise
+mongoose.Promise = require('bluebird')
+const bcrypt = require('bcrypt-nodejs')
 
-describe('User validations', () => {
+describe('User schema validations', () => {
 
   let User = require('../../src/models/user.server.model.js')
 
@@ -70,6 +71,26 @@ describe('User validations', () => {
     it('will pass all validations', done => {
       user.validate().then(args => {
         expect(args).to.equal(undefined)
+        done()
+      })
+    })
+  })
+
+  describe('Given a user validating his password', () => {
+    let user = new User({
+      password: bcrypt.hashSync('Qwerty123')
+    })
+
+    it('will return a fulfilled promise with value = true', done => {
+      user.isValidPassword('Qwerty123').then(result => {
+        expect(result).to.equal(true)
+        done()
+      })
+    })
+
+    it('will return a fulfilled promise with value = false', done => {
+      user.isValidPassword('Qwerty19q').then(result => {
+        expect(result).to.equal(false)
         done()
       })
     })
