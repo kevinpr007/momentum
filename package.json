@@ -75,6 +75,8 @@
     "retire": "^1.2.10",
     "siege": "^0.2.0",
     "sinon": "^1.17.6",
+    "sinon-as-promised": "^4.0.2",
+    "sinon-mongoose": "^1.3.0",
     "standard": "*",
     "supertest": "^2.0.0"
   }
