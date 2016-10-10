@@ -9,7 +9,7 @@
       address2: '{{street()}}',
       city: '{{city()}}',
       state: '{{state()}}',
-      zipCode: '{{integer(10000, 10000)}}'
+      zipCode: '{{integer(10000, 90000)}}'
     },
     createdBy: '{{objectId()}}'
   }
