@@ -90,4 +90,52 @@ describe('User schema validation tests', () => {
       }).catch(err => console.error(err))
     })
   })
+
+  describe('Given a user changing his password', () => {
+    let password = null
+    let confirmPassword = null
+    let user = new User()
+
+    it('will return a fulfilled promise with value = true', done => {
+      password = 'qwerty12345'
+      confirmPassword = 'qwerty12345'
+
+      user.confirmPasswordValid(password, confirmPassword).then(result => {
+        expect(result).to.equal(true)
+        done()
+      }).catch(err => console.error(err))
+    })
+
+    it('will return a fulfilled promise with value = false', done => {
+      password = 'qwerty12345'
+      confirmPassword = 'changed'
+
+      user.confirmPasswordValid(password, confirmPassword).then(result => {
+        expect(result).to.equal(false)
+        done()
+      }).catch(err => console.error(err))
+    })
+
+    it('will return a promise with an error ', done => {
+      let password = undefined
+      let confirmPassword = undefined
+      let errorMessage = 'Password and Confirm Password can not be null or undefined'
+
+      user.confirmPasswordValid(password, confirmPassword).then(result => {
+
+      }).catch(err => {
+          expect(err).to.equal(errorMessage)
+      })
+
+      password = null
+      confirmPassword = null
+      user.confirmPasswordValid(password, confirmPassword).then(result => {
+
+      }).catch(err => {
+          expect(err).to.equal(errorMessage)
+          done()
+      })
+    })
+
+  })
 })
