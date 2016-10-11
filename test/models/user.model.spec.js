@@ -1,7 +1,8 @@
-const config = require('../../src/config/config')
+const moment = require('moment')
 const mongoose = require('mongoose')
 mongoose.Promise = require('bluebird')
 const bcrypt = require('bcrypt-nodejs')
+const config = require('../../src/config/config')
 
 describe('User schema validation tests', () => {
 
@@ -109,7 +110,7 @@ describe('User schema validation tests', () => {
       user.confirmPasswordValid(password, confirmPassword).then(result => {
         expect(result).to.equal(true)
         done()
-      }).catch(err => console.error(err))
+      }).catch(err => done(err))
     })
 
     it('will return a fulfilled promise with value = false', done => {
@@ -119,29 +120,47 @@ describe('User schema validation tests', () => {
       user.confirmPasswordValid(password, confirmPassword).then(result => {
         expect(result).to.equal(false)
         done()
-      }).catch(err => console.error(err))
+      }).catch(err => done(err))
+    })
+  })
+
+  describe('Given a user with an invalid password due to an invalid length', () => {
+    let user = new User({
+      firstName: 'Juan',
+      lastName: 'Del Pueblo',
+      email: 'test@dev.com',
+      password: 'Qwe'
     })
 
-    it('will return a promise with an error ', done => {
-      let password = undefined
-      let confirmPassword = undefined
-      let errorMessage = 'Password and Confirm Password can not be null or undefined'
-
-      user.confirmPasswordValid(password, confirmPassword).then(result => {
-
-      }).catch(err => {
-          expect(err).to.equal(errorMessage)
-      })
-
-      password = null
-      confirmPassword = null
-      user.confirmPasswordValid(password, confirmPassword).then(result => {
-
-      }).catch(err => {
-          expect(err).to.equal(errorMessage)
-          done()
+    it('will throw a validation error', done => {
+      user.validate().catch(err => {
+        expect(err.errors).to.have.property('password')
+        done()
       })
     })
+  })
 
+  describe('Given a user with an invalid date of birth', () => {
+    let user = new User({
+      firstName: 'Juan',
+      lastName: 'Del Pueblo',
+      email: 'test@dev.com',
+      password: 'Qwerty123',
+      address: {
+        address1: '#123',
+        address2: 'Test St.',
+        city: 'San Juan',
+        state: 'P.R.',
+        zipCode: '00123-3322'
+      },
+      dob: moment(new Date()).add(1, 'd')
+    })
+
+    it('will throw a validation error', done => {
+      user.validate().catch(err => {
+        expect(err.errors).to.have.property('dob')
+        done()
+      })
+    })
   })
 })
