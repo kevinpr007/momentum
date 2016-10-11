@@ -71,7 +71,7 @@ describe('User schema validation tests', () => {
     })
   })
 
-  describe('Given a user validating his password', () => {
+  describe('Given a user requesting authentication with an valid password', () => {
     let user = new User({
       password: bcrypt.hashSync('Qwerty123')
     })
@@ -81,6 +81,12 @@ describe('User schema validation tests', () => {
         expect(result).to.equal(true)
         done()
       }).catch(err => done(err))
+    })
+  })
+
+  describe('Given a user requesting authentication with an invalid password', () => {
+    let user = new User({
+      password: bcrypt.hashSync('Qwerty123')
     })
 
     it('will return a fulfilled promise with value = false', done => {
