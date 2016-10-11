@@ -57,6 +57,7 @@
     "http-status-codes": "^1.0.6",
     "jsonwebtoken": "^7.1.9",
     "lodash": "~4.15.0",
+    "moment": "^2.15.1",
     "mongodb": "~2.2.9",
     "mongoose": "^4.5.10",
     "node-sass-middleware": "^0.9.8",
