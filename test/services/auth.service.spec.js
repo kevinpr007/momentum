@@ -18,6 +18,8 @@ describe('User authentication service test', () => {
 
     it('will create a new reset-password token', sinon.test(done => {
       authService.resetToken(user).then(user => {
+        mock.restore()
+        mock.verify()
         assert.notEqual(user.resetPasswordToken, null)
         done()
       }).catch(err => console.error(err))
@@ -41,6 +43,8 @@ describe('User authentication service test', () => {
       }).chain('exec').resolves(user)
 
       authService.findByPasswordToken(token).then(user => {
+        mock.restore()
+        mock.verify()
         assert.notEqual(user, null)
         assert.equal(user.resetPasswordToken, token)
         done()
