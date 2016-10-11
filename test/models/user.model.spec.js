@@ -67,7 +67,7 @@ describe('User schema validation tests', () => {
       user.validate().then(args => {
         expect(args).to.equal(undefined)
         done()
-      }).catch(err => console.error(err))
+      }).catch(err => done(err))
     })
   })
 
@@ -80,14 +80,14 @@ describe('User schema validation tests', () => {
       user.isValidPassword('Qwerty123').then(result => {
         expect(result).to.equal(true)
         done()
-      }).catch(err => console.error(err))
+      }).catch(err => done(err))
     })
 
     it('will return a fulfilled promise with value = false', done => {
       user.isValidPassword('Qwerty19q').then(result => {
         expect(result).to.equal(false)
         done()
-      }).catch(err => console.error(err))
+      }).catch(err => done(err))
     })
   })
 })
