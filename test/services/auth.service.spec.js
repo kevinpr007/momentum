@@ -40,7 +40,7 @@ describe('User authentication service test', () => {
         }
       }).chain('exec').resolves(user)
 
-      authService.resetUserPassword(token).then(user => {
+      authService.findByPasswordToken(token).then(user => {
         assert.notEqual(user, null)
         assert.equal(user.resetPasswordToken, token)
         done()
