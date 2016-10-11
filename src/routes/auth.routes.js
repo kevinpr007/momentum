@@ -6,7 +6,7 @@ module.exports = (router) => {
 
   router.post('/auth', authController.auth)
   router.post('/register', authController.register)
-  router.post('/reset-password', authController.newPassword)
-  router.get('/reset-password/:token', authController.resetPassword)
-  router.post('/confirm-reset-password', authController.confirmResetPassword)
+  router.post('/complete-reset-password', authController.newPassword)
+  router.get('/confirm-reset-password/:token', authController.confirmResetPassword)
+  router.post('/reset-password', authController.resetPassword)
 }

@@ -21,11 +21,16 @@ let userService = () => {
     return User.create(_.extend(user, User))
   }
 
+  let upsertUser = user => {
+    return user.save()
+  }
+
   return {
     getAll: getAll,
     getById: getById,
     getByEmail: getByEmail,
-    registerUser: registerUser
+    registerUser: registerUser,
+    upsertUser: upsertUser
   }
 }
 

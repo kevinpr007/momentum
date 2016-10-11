@@ -16,7 +16,7 @@ let authController = (authService, userService, templateModel) => {
     }).then(isMatch => {
       if (isMatch) {
         res.status(HttpStatus.OK).json({
-          token: `JWT ${authService.generateToken(user)}`,
+          token: authService.getToken(user),
           user: user
         })
       } else {
@@ -39,7 +39,7 @@ let authController = (authService, userService, templateModel) => {
     }).then(usr => {
       user = usr
       res.status(HttpStatus.CREATED).json({
-        token: `JWT ${authService.generateToken(usr)}`,
+        token: authService.getToken(usr),
         user: usr
       })
     }).then(() => {
@@ -50,10 +50,15 @@ let authController = (authService, userService, templateModel) => {
   }
 
   let confirmResetPassword = (req, res, next) => {
+    templateModel.token = req.params.token
+    res.render('reset-password', templateModel)
+  }
+
+  let resetPassword = (req, res, next) => {
     userService.getByEmail(req.body.email).then(user => {
       if (!user) {
-        let err = new Error('Your request could not be processed as entered. Please try again.')
-        err.status = HttpStatus.UNPROCESSABLE_ENTITY
+        let err = new Error('Your request could not be processed as entered. User does not exist.')
+        err.status = HttpStatus.NOT_FOUND
         throw err
       }
       return authService.resetToken(user)
@@ -68,14 +73,9 @@ let authController = (authService, userService, templateModel) => {
     }).catch(next)
   }
 
-  let resetPassword = (req, res, next) => {
-    templateModel.token = req.params.token
-    res.render('reset-password', templateModel)
-  }
-
   let newPassword = (req, res, next) => {
     let user = null
-    authService.resetUserPassword(req.body.token).then(usr => {
+    authService.findByPasswordToken(req.body.token).then(usr => {
       if (!usr) {
         let err = new Error('Invalid token. Please confirm this action through your email.')
         err.status = HttpStatus.UNPROCESSABLE_ENTITY
@@ -85,12 +85,20 @@ let authController = (authService, userService, templateModel) => {
       return user.isValidPassword(req.body.currentPassword)
     }).then(isMatch => {
       if (isMatch) {
+        return user.confirmPasswordValid(req.body.password, req.body.confirmPassword)
+      } else {
+        let err = new Error('Invalid password. Please validate your current password.')
+        err.status = HttpStatus.BAD_REQUEST
+        throw err
+      }
+    }).then(isConfirmed => {
+      if (isConfirmed) {
         user.password = req.body.confirmPassword
         user.resetPasswordToken = undefined
         user.resetPasswordExpires = undefined
-        return user.save()
+        return userService.upsertUser(user)
       } else {
-        let err = new Error('Invalid password. Please validate your current password.')
+        let err = new Error('Invalid confirmation password. Please validate your new password.')
         err.status = HttpStatus.BAD_REQUEST
         throw err
       }
