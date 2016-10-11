@@ -3,7 +3,7 @@ const mongoose = require('mongoose')
 mongoose.Promise = require('bluebird')
 const bcrypt = require('bcrypt-nodejs')
 
-describe('User schema validations', () => {
+describe('User schema validation tests', () => {
 
   let User = require('../../src/models/user.server.model.js')
 
@@ -67,7 +67,7 @@ describe('User schema validations', () => {
       user.validate().then(args => {
         expect(args).to.equal(undefined)
         done()
-      })
+      }).catch(err => console.error(err))
     })
   })
 
@@ -80,14 +80,14 @@ describe('User schema validations', () => {
       user.isValidPassword('Qwerty123').then(result => {
         expect(result).to.equal(true)
         done()
-      })
+      }).catch(err => console.error(err))
     })
 
     it('will return a fulfilled promise with value = false', done => {
       user.isValidPassword('Qwerty19q').then(result => {
         expect(result).to.equal(false)
         done()
-      })
+      }).catch(err => console.error(err))
     })
   })
 })
