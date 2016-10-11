@@ -1,7 +1,6 @@
 const request = require('supertest')
 
 describe('Index route', () => {
-
   let app = require('../../src/config/express')()
 
   describe('Given a user that goes to the index route (GET /)', () => {

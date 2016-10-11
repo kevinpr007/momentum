@@ -5,7 +5,6 @@ const bcrypt = require('bcrypt-nodejs')
 const config = require('../../src/config/config')
 
 describe('User schema validation tests', () => {
-
   let User = require('../../src/models/user.server.model.js')
 
   describe('Given a user with no password', () => {

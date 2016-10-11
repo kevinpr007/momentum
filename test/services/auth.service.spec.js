@@ -4,7 +4,6 @@ mongoose.Promise = require('bluebird')
 const config = require('../../src/config/config')
 
 describe('User authentication service test', () => {
-
   let User = require('../../src/models/user.server.model.js')
   let authService = require('../../src/services/auth.service.js')()
 
