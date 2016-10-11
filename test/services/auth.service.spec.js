@@ -18,15 +18,15 @@ describe('User authentication service test', () => {
   })
 
   describe('Given a user requesting to reset password with a valid email', () => {
-    let mock = sinon.mock(new User({
-      email: 'test@dev.com',
-      password: 'Qwerty123'
-    }))
+    it('will create a new reset-password token', sinon.test(function (done) {
+      let mock = this.mock(new User({
+        email: 'test@dev.com',
+        password: 'Qwerty123'
+      }))
+      let user = mock.object
 
-    let user = mock.object
-    mock.expects('save').resolves(user)
+      mock.expects('save').resolves(user)
 
-    it('will create a new reset-password token', sinon.test(done => {
       authService.resetToken(user).then(user => {
         mock.restore()
         mock.verify()
@@ -37,14 +37,14 @@ describe('User authentication service test', () => {
   })
 
   describe('Given a user resetting his/her password by providing a valid reset password token', () => {
-    let token = 'A1244'
-    let mock = sinon.mock(User)
-    let user = new User({
-      resetPasswordToken: token,
-      resetPasswordExpires: moment(new Date()).add(1, 'd')
-    })
+    it('will return a user by specified token', sinon.test(function (done) {
+      let token = 'A1244'
+      let mock = this.mock(User)
+      let user = new User({
+        resetPasswordToken: token,
+        resetPasswordExpires: moment(new Date()).add(1, 'd')
+      })
 
-    it('will return a user by specified token', sinon.test(done => {
       mock.expects('findOne').withArgs({
         resetPasswordToken: token,
         resetPasswordExpires: {
