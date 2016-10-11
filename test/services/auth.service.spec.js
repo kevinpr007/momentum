@@ -7,6 +7,16 @@ describe('User authentication service test', () => {
   let User = require('../../src/models/user.server.model.js')
   let authService = require('../../src/services/auth.service.js')()
 
+  describe('Given an authenticated user', () => {
+    let user = new User()
+
+    it('will generate a JWT token', done => {
+      let token = authService.getToken(user)
+      assert.notEqual(token, null)
+      done()
+    })
+  })
+
   describe('Given a user requesting to reset password with a valid email', () => {
     let mock = sinon.mock(new User({
       email: 'test@dev.com',
@@ -22,7 +32,7 @@ describe('User authentication service test', () => {
         mock.verify()
         assert.notEqual(user.resetPasswordToken, null)
         done()
-      }).catch(err => console.error(err))
+      }).catch(err => done(err))
     }))
   })
 
@@ -48,7 +58,7 @@ describe('User authentication service test', () => {
         assert.notEqual(user, null)
         assert.equal(user.resetPasswordToken, token)
         done()
-      }).catch(err => console.error(err))
+      }).catch(err => done(err))
     }))
   })
 })
