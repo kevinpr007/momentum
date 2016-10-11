@@ -1,6 +1,7 @@
-const config = require('../../src/config/config')
+const moment = require('moment')
 const mongoose = require('mongoose')
 mongoose.Promise = require('bluebird')
+const config = require('../../src/config/config')
 
 describe('User authentication service test', () => {
 
@@ -41,7 +42,7 @@ describe('User authentication service test', () => {
     let mock = sinon.mock(User)
     let user = new User({
       resetPasswordToken: token,
-      resetPasswordExpires: new Date().getDate() + 1
+      resetPasswordExpires: moment(new Date()).add(1, 'd')
     })
 
     it('will return a user by specified token', sinon.test(done => {
