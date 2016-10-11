@@ -16,6 +16,10 @@ let authService = () => {
     })
   }
 
+  let getToken = user => {
+    return `JWT ${generateToken(user)}`
+  }
+
   let resetToken = user => {
     let date = new Date()
     return randomBytes(parseInt(config.RANDOM_BYTES)).then(buffer => {
@@ -25,7 +29,7 @@ let authService = () => {
     })
   }
 
-  let resetUserPassword = token => {
+  let findByPasswordToken = token => {
     return User.findOne({
       resetPasswordToken: token,
       resetPasswordExpires: {
@@ -36,8 +40,8 @@ let authService = () => {
 
   return {
     resetToken: resetToken,
-    generateToken: generateToken,
-    resetUserPassword: resetUserPassword
+    getToken: getToken,
+    findByPasswordToken: findByPasswordToken
   }
 }
 

@@ -82,6 +82,17 @@ userSchema.methods.isValidPassword = function (password) {
   })
 }
 
+userSchema.methods.confirmPasswordValid = function (password, confirmPassword) {
+  return new Promise((resolve, reject) => {
+    if (password === null || password === undefined ||
+        confirmPassword === null || confirmPassword === undefined) {
+      reject('Password and Confirm Password can not be null or undefined')
+    }
+
+    resolve(password === confirmPassword)
+  })
+}
+
 userSchema.set('toJSON', {
   getters: true,
   virtuals: true,

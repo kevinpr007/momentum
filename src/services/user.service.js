@@ -20,11 +20,16 @@ let userService = () => {
     return userFactory(user).save()
   }
 
+  let upsertUser = user => {
+    return user.save()
+  }
+
   return {
     getAll: getAll,
     getById: getById,
     getByEmail: getByEmail,
-    registerUser: registerUser
+    registerUser: registerUser,
+    upsertUser: upsertUser
   }
 }
 
