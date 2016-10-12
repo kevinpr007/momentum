@@ -28,7 +28,6 @@ describe('User authentication service test', () => {
       mock.expects('save').resolves(user)
 
       authService.resetToken(user).then(user => {
-        mock.restore()
         mock.verify()
         assert.notEqual(user.resetPasswordToken, null)
         done()
@@ -53,7 +52,6 @@ describe('User authentication service test', () => {
       }).chain('exec').resolves(user)
 
       authService.findByPasswordToken(token).then(user => {
-        mock.restore()
         mock.verify()
         assert.notEqual(user, null)
         assert.equal(user.resetPasswordToken, token)

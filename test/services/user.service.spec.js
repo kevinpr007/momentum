@@ -18,7 +18,6 @@ describe('User service tests', () => {
           .chain('exec').resolves(user)
 
       userService.getByEmail('ivan@dev.com').then(user => {
-        mock.restore()
         mock.verify()
         assert.notEqual(user, null)
         expect(user).to.have.property('_id')
@@ -41,7 +40,6 @@ describe('User service tests', () => {
           .chain('exec').resolves(user)
 
       userService.getById(_id).then(user => {
-        mock.restore()
         mock.verify()
         assert.notEqual(user, null)
         done()
@@ -62,7 +60,6 @@ describe('User service tests', () => {
       mock.expects('find').chain('exec').resolves(users)
 
       userService.getAll().then(users => {
-        mock.restore()
         mock.verify()
         expect(users.length).to.equal(2)
         done()
