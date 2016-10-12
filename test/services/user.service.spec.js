@@ -1,3 +1,4 @@
+const moment = require('moment')
 const mongoose = require('mongoose')
 mongoose.Promise = require('bluebird')
 const config = require('../../src/config/config')
@@ -14,8 +15,8 @@ describe('User service tests', () => {
       })
 
       mock.expects('findOne').chain('where')
-          .withArgs('email', user.email)
-          .chain('exec').resolves(user)
+        .withArgs('email', user.email)
+        .chain('exec').resolves(user)
 
       userService.getByEmail('ivan@dev.com').then(user => {
         mock.verify()
@@ -36,8 +37,8 @@ describe('User service tests', () => {
       })
 
       mock.expects('findOne').chain('where')
-          .withArgs('_id', _id)
-          .chain('exec').resolves(user)
+        .withArgs('_id', _id)
+        .chain('exec').resolves(user)
 
       userService.getById(_id).then(user => {
         mock.verify()
@@ -68,10 +69,59 @@ describe('User service tests', () => {
   })
 
   describe('Given a request to register a new user', () => {
-    it('will create a new user')
+    it('will create a new user', sinon.test(function (done) {
+      let mock = this.mock(User)
+
+      let user = new User({
+        email: 'test@dev.com',
+        password: 'Qwerty123'
+      })
+
+      mock.expects('create').withArgs(user).resolves(user)
+
+      userService.registerUser(user).then(usr => {
+        mock.verify()
+        expect(usr).to.have.property('_id')
+        done()
+      }).catch(err => done(err))
+    }))
   })
 
   describe('Given a request to insert / update a user', () => {
-    it('will create a new user')
+    it('will create a new user if it doesn\'t exist', sinon.test(function (done) {
+      let mock = this.mock(new User({
+        email: 'test@dev.com',
+        password: 'Qwerty123'
+      }))
+
+      let user = mock.object
+
+      mock.expects('save').resolves(user)
+
+      userService.upsertUser(user).then(usr => {
+        mock.verify()
+        expect(usr).to.have.property('_id')
+        done()
+      }).catch(err => done(err))
+    }))
+
+    it('will update a user if it exist', sinon.test(function (done) {
+      let mock = this.mock(new User({
+        _id: 'abcd-1234',
+        email: 'test@dev.com',
+        password: 'Qwerty123'
+      }))
+
+      let user = mock.object
+
+      mock.expects('save').resolves(user)
+      user.dob = moment(new Date()).subtract(1, 'd')
+
+      userService.upsertUser(user).then(usr => {
+        mock.verify()
+        expect(usr).to.have.property('dob')
+        done()
+      }).catch(err => done(err))
+    }))
   })
 })
