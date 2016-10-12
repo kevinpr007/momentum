@@ -14,7 +14,7 @@ let userService = () => {
   }
 
   let getById = id => {
-    return User.findOne({_id: id}).exec()
+    return User.findOne().where('_id', id).exec()
   }
 
   let registerUser = user => {
