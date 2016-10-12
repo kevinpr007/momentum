@@ -1,7 +1,6 @@
 const moment = require('moment')
 const mongoose = require('mongoose')
 mongoose.Promise = require('bluebird')
-const config = require('../../src/config/config')
 
 describe('User service tests', () => {
   let User = require('../../src/models/user.server.model.js')
