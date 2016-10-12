@@ -5,5 +5,5 @@ const auth = require('passport').authenticate('jwt', {session: false})
 module.exports = router => {
   // TODO: Add the role features
   router.get('/users', auth, userController.getAllUsers)
-  router.get('/users/:userName', userController.getByUserEmail)
+  router.get('/users/:userName', auth, userController.getByUserEmail)
 }
