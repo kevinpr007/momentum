@@ -8,5 +8,3 @@ global.assert = chai.assert
 global.sinon = require('sinon')
 require('sinon-mongoose')
 require('sinon-as-promised')
-
-global.app = require('../../src/config/express')()
