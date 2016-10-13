@@ -1,5 +1,3 @@
-const request = require('supertest-as-promised')
-
 describe('User entity requests', () => {
   // api/users
   describe('Given a request to get all existing users', () => {

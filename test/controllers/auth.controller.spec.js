@@ -1,5 +1,3 @@
-const request = require('supertest-as-promised')
-
 describe('User authentication requests', () => {
   // api/register
   describe('Given a request to register a new user', () => {
@@ -22,13 +20,8 @@ describe('User authentication requests', () => {
 
   // api/confirm-reset-password/:token
   describe('Given a user requesting to reset password via email confirmation', () => {
-    it('returns Not Found (404) if token is not inside route', () => {
-      return request(app).get('/api/confirm-reset-password').expect(404)
-    })
-
-    it('returns Ok (200) with reset-password page', () => {
-      return request(app).get('/api/confirm-reset-password/123').expect(200)
-    })
+    it('returns Not Found (404) if token is not inside route')
+    it('returns Ok (200) with reset-password page')
   })
 
   // api/complete-reset-password
