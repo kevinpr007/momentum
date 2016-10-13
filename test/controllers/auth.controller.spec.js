@@ -1,7 +1,33 @@
+const mockReq = require('sinon-express-mock').mockReq
+const mockRes = require('sinon-express-mock').mockRes
+
 describe('User authentication requests', () => {
+
+  let userService = require('../../src/services/user.service')
+  let authService = require('../../src/services/auth.service')
+  let authController = require('../../src/controllers/auth.controller')
+
   // api/register
   describe('Given a request to register a new user', () => {
-    it('returns Internal Server Error (500) leaving required fields empty')
+    it.only('returns Internal Server Error (500) leaving required fields empty', sinon.test(() => {
+      let user = {
+        email: 'test@dev.com',
+        password: 'abcd1234'
+      }
+      let res = mockRes()
+      let req = mockReq({
+        email: user.email
+      })
+
+      let mockService = this.mock(userService())
+      mockService.expects('register').withArgs(user)
+          .resolves(user)
+
+      authController(null, mockService, null).register(req, res).then(result => {
+        console.error(result)
+      }).catch(err => console.error(err))
+    }))
+
     it('returns Created (201) with json containing JWT token and user object providing a valid request')
   })
 
