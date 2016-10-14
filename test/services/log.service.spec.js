@@ -6,13 +6,14 @@ describe('Log service tests', () => {
     const STATUS = 'Status Desc'
     const MESSAGE = 'Error Message'
 
-    let log = new Log({
-        code: ERROR_CODE,
-        status: STATUS,
-        Messages: MESSAGE
-    })
-
     describe('Given a Code of an existing log', () => {
+
+      let log = new Log({
+          code: ERROR_CODE,
+          status: STATUS,
+          Messages: MESSAGE
+      })
+
         it('will return a log models by a specified Code', sinon.test(function (done) {
             let logMock = sinon.mock(Log)
 
@@ -31,6 +32,13 @@ describe('Log service tests', () => {
     })
 
     describe('Given a Status of an existing log', () => {
+
+      let log = new Log({
+          code: ERROR_CODE,
+          status: STATUS,
+          Messages: MESSAGE
+      })
+
         it('will return a log models by a specified Status', sinon.test(function (done) {
             let logMock = sinon.mock(Log)
 
@@ -49,6 +57,13 @@ describe('Log service tests', () => {
     })
 
     describe('Using the getAll function', () => {
+
+      let log = new Log({
+          code: ERROR_CODE,
+          status: STATUS,
+          Messages: MESSAGE
+      })
+
         it('will return a list of all logs', sinon.test(function (done) {
             let logMock = sinon.mock(Log)
 
@@ -76,15 +91,28 @@ describe('Log service tests', () => {
     })
 
     describe('Given a log information', () => {
-        it('will save and return the log object', sinon.test(function (done) {
-            let mock = this.mock(log)
-            let stub = this.stub(Log.prototype, 'save')
-            mock.expects('save').resolves(log)
 
-            logService.saveLog(log).then(result => {
-                mock.verify()
-                //this.assert.calledOnce(stub)
-                expect(result.code).to.be.equal(ERROR_CODE)
+      let plainLog = {
+        code: ERROR_CODE,
+        status: STATUS,
+        Messages: MESSAGE
+      }
+
+      let log = new Log({
+          code: ERROR_CODE,
+          status: STATUS,
+          Messages: MESSAGE
+      })
+
+        it('will save and return the log object', sinon.test(function (done) {
+
+            this.stub(Log.prototype, 'save').yields(null, log)
+
+            logService.saveLog(plainLog).then(result => {
+                expect(Log.prototype.save.callCount).to.equal(1);
+                expect(result.code).to.be.equal(plainLog.code)
+                expect(result.message).to.be.equal(plainLog.message)
+                expect(result.status).to.be.equal(plainLog.status)
                 expect(result).to.have.property('_id')
                 done()
             }).catch(err => done(err))
