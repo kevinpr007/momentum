@@ -77,11 +77,14 @@ describe('Log service tests', () => {
 
     describe('Given a log information', () => {
         it('will save and return the log object', sinon.test(function (done) {
+            let mock = this.mock(log)
+            let stub = this.stub(Log.prototype, 'save')
+            mock.expects('save').resolves(log)
 
-            sinon.stub(Log.prototype, 'save').yields(null, log)
             logService.saveLog(log).then(result => {
+                mock.verify()
+                //this.assert.calledOnce(stub)
                 expect(result.code).to.be.equal(ERROR_CODE)
-                expect(Log.prototype.save.callCount).to.equal(1);
                 expect(result).to.have.property('_id')
                 done()
             }).catch(err => done(err))

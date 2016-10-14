@@ -2,6 +2,7 @@ const mongoose = require('mongoose')
 mongoose.Promise = require('bluebird')
 
 const Log = require('../models/logs.server.model')
+const _ = require('lodash')
 
 // TODO: Return a default message when is null
 let logService = () => {
@@ -29,8 +30,8 @@ let logService = () => {
   }
 
   let saveLog = (log) => {
-    let newInst = logFactory(log)
-    return newInst.save()
+    log = _.extend(log, Log)
+    return log.save()
   }
 
   return {
