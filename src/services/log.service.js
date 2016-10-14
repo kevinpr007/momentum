@@ -17,7 +17,6 @@ let logService = () => {
     return Log.find().where('status', status).exec()
   }
 
-  // TODO: Remove this factory from here
   let logFactory = (log) => {
     let newLog = new Log({
       code: log.code,
