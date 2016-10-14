@@ -2,7 +2,7 @@ describe('Logs schema validation tests', () => {
   describe('Given a Logs model', () => {
     let LogModel = require('../../src/models/logs.server.model.js')
 
-    it.only('Using the getError() function should return CODE - STATUS - MESSAGE', (done) => {
+    it('Using the getError() function should return CODE - STATUS - MESSAGE', (done) => {
       let log = new LogModel({
         code: "400",
         status: "error",
