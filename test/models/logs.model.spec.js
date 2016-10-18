@@ -4,9 +4,9 @@ describe('Logs schema validation tests', () => {
 
     it('Using the getError() function should return CODE - STATUS - MESSAGE', (done) => {
       let log = new LogModel({
-        code: "400",
-        status: "error",
-        message: "Not Found"
+        code: '400',
+        status: 'error',
+        message: 'Not Found'
       })
 
       expect(log.getError).to.be.equal('400 - error - Not Found')

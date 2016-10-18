@@ -87,7 +87,7 @@ describe('User service tests', () => {
   })
 
   describe('Given a request to insert / update a user', () => {
-    it('will create a new user if it doesn\'t exist', sinon.test(function (done) {
+    it("will create a new user if it doesn't exist", sinon.test(function (done) {
       let mock = this.mock(new User({
         email: 'test@dev.com',
         password: 'Qwerty123'

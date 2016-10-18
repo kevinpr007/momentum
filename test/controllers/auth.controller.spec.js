@@ -28,7 +28,6 @@ describe('User authentication requests', () => {
         .resolves(user)
 
       authController(null, mockUserService, null).register(req, res)
-      console.error(res)
     }))
 
     it('returns Created (201) with json containing JWT token and user object providing a valid request')
