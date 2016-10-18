@@ -18,7 +18,7 @@ let userService = () => {
   }
 
   let registerUser = user => {
-    return User.create(_.merge(User, user))
+    return User.create(_.merge(user, User))
   }
 
   let upsertUser = user => {
