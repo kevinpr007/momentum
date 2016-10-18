@@ -18,11 +18,11 @@ let userService = () => {
   }
 
   let registerUser = user => {
-    return User.create(_.extend(user, User))
+    return User.create(_.merge(User, user))
   }
 
   let upsertUser = user => {
-    return user.save()
+    return _.merge(User, user).save()
   }
 
   return {
