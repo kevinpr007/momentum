@@ -1,4 +1,4 @@
-describe.only('Email service test', () => {
+describe('Email service test', () => {
   describe('Given a basic information email template', () => {
 
     const transporter = require('../../src/config/nodemailer')

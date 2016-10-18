@@ -76,11 +76,10 @@ describe('User service tests', () => {
         password: 'Qwerty123'
       })
 
-      mock.expects('create').withArgs(user).resolves(user)
+      mock.expects('create').withArgs(user).once().resolves(user)
 
       userService.registerUser(user).then(usr => {
         mock.verify()
-        expect(usr).to.have.property('_id')
         done()
       }).catch(err => done(err))
     }))
@@ -94,31 +93,10 @@ describe('User service tests', () => {
       }))
 
       let user = mock.object
-
-      mock.expects('save').resolves(user)
-
-      userService.upsertUser(user).then(usr => {
-        mock.verify()
-        expect(usr).to.have.property('_id')
-        done()
-      }).catch(err => done(err))
-    }))
-
-    it('will update a user if it exist', sinon.test(function (done) {
-      let mock = this.mock(new User({
-        _id: 'abcd-1234',
-        email: 'test@dev.com',
-        password: 'Qwerty123'
-      }))
-
-      let user = mock.object
-
-      mock.expects('save').resolves(user)
-      user.dob = moment(new Date()).subtract(1, 'd')
+      mock.expects('save').once().resolves(user)
 
       userService.upsertUser(user).then(usr => {
         mock.verify()
-        expect(usr).to.have.property('dob')
         done()
       }).catch(err => done(err))
     }))
