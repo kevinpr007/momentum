@@ -1,16 +1,15 @@
 const cluster = require('express-cluster')
 
 cluster(function (worker) {
-  const mongoose = require('../src/config/mongoose')
-  const passport = require('../src/config/passport')
   const express = require('../src/config/express')
   const config = require('../src/config/config')
   const http = require('http')
   const port = config.PORT
 
-  let db = mongoose()
+  require('../src/config/mongoose')()
+  require('../src/config/passport')()
+
   let app = express()
-  let auth = passport()
   let server = http.createServer(app)
 
   server.listen(port)
@@ -38,16 +37,16 @@ cluster(function (worker) {
     console.log(`Listening on ${bind}`)
   })
 
-// TODO: Verify this area.
+  // TODO: Verify this area.
   module.exports = app
 }, {
-    // count: 5,       // number of workers: defaults to os.cpus().length
-    // respawn: true,  // respawn process on exit: defaults to true
+  // count: 5,       // number of workers: defaults to os.cpus().length
+  // respawn: true,  // respawn process on exit: defaults to true
   verbose: true // log what happens to console: defaults to false
 
-    // Attach the given function to each spawned worker. The function will
-    // be bound to the worker that sent the message so you can setup a two
-    // way message bus if you please. See examples/messaging.js for an
-    // example.
-    // workerListener: function(){}
+// Attach the given function to each spawned worker. The function will
+// be bound to the worker that sent the message so you can setup a two
+// way message bus if you please. See examples/messaging.js for an
+// example.
+// workerListener: function(){}
 })
