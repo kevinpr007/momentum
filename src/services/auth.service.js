@@ -9,7 +9,7 @@ const tokenLife = config.TOKEN_LIFE
 const _ = require('lodash')
 
 let randomBytes = Promise
-    .promisify(require('crypto').randomBytes)
+  .promisify(require('crypto').randomBytes)
 
 let authService = () => {
   let generateToken = user => {

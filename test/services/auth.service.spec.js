@@ -18,17 +18,12 @@ describe('User authentication service test', () => {
 
   describe('Given a user requesting to reset password with a valid email', () => {
     it('will create a new reset-password token', sinon.test(function (done) {
-      let mock = this.mock(new User({
-        email: 'test@dev.com',
-        password: 'Qwerty123'
-      }))
-      let user = mock.object
-
-      mock.expects('save').resolves(user)
+      let user = new User()
+      this.stub(user, 'save').resolves(user)
 
       authService.resetToken(user).then(user => {
-        mock.verify()
         assert.notEqual(user.resetPasswordToken, null)
+        expect(user.save.calledOnce).to.equal(true)
         done()
       }).catch(err => done(err))
     }))
@@ -37,22 +32,19 @@ describe('User authentication service test', () => {
   describe('Given a user resetting his/her password by providing a valid reset password token', () => {
     it('will return a user by specified token', sinon.test(function (done) {
       let token = 'A1244'
-      let mock = this.mock(User)
-      let user = new User({
-        resetPasswordToken: token,
-        resetPasswordExpires: moment(new Date()).add(1, 'd')
-      })
-
-      mock.expects('findOne').withArgs({
-        resetPasswordToken: token,
-        resetPasswordExpires: {
-          $gt: new Date()
+      let findOne = {
+        exec() {
+          return Promise.resolve(new User({
+            resetPasswordToken: token,
+            resetPasswordExpires: moment(new Date()).add(1, 'd')
+          }))
         }
-      }).chain('exec').resolves(user)
+      }
+      this.stub(User, 'findOne').returns(findOne)
 
       authService.findByPasswordToken(token).then(user => {
-        mock.verify()
         assert.notEqual(user, null)
+        expect(User.findOne.calledOnce).to.equal(true)
         assert.equal(user.resetPasswordToken, token)
         done()
       }).catch(err => done(err))
