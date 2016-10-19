@@ -10,7 +10,7 @@ describe('User authentication requests', () => {
   // api/register
   describe('Given a request to register a new user', () => {
     it('returns Internal Server Error (500) leaving required fields empty')
-    it('returns Unprocessable Entity (422) providing an already registered email', sinon.test(function () {
+    it('returns Unprocessable Entity (422) providing an already registered email', sinon.test(function (done) {
       let user = {
         email: 'test@dev.com',
         password: 'abcd1234'
@@ -21,13 +21,10 @@ describe('User authentication requests', () => {
         }
       })
       let res = mockRes()
+      this.stub(userService()).getByEmail().resolves(user)
 
-      let mock = this.mock(userService())
-      let mockUserService = mock.object
-      mock.expects('getByEmail').withArgs(req.body.email)
-        .resolves(user)
-
-      authController(null, mockUserService, null).register(req, res)
+      authController(null, stub, null).register(req, res)
+      done()
     }))
 
     it('returns Created (201) with json containing JWT token and user object providing a valid request')
