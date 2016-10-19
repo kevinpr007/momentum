@@ -1,6 +1,6 @@
 const moment = require('moment')
 const mongoose = require('mongoose')
-mongoose.Promise = require('bluebird')
+
 
 describe('User service tests', () => {
   let User = require('../../src/models/user.server.model.js')
@@ -14,8 +14,8 @@ describe('User service tests', () => {
       })
 
       mock.expects('findOne').chain('where')
-        .withArgs('email', user.email)
-        .chain('exec').resolves(user)
+          .withArgs('email', user.email)
+          .chain('exec').resolves(user)
 
       userService.getByEmail('ivan@dev.com').then(user => {
         mock.verify()
@@ -36,8 +36,8 @@ describe('User service tests', () => {
       })
 
       mock.expects('findOne').chain('where')
-        .withArgs('_id', _id)
-        .chain('exec').resolves(user)
+          .withArgs('_id', _id)
+          .chain('exec').resolves(user)
 
       userService.getById(_id).then(user => {
         mock.verify()
@@ -69,17 +69,13 @@ describe('User service tests', () => {
 
   describe('Given a request to register a new user', () => {
     it('will create a new user', sinon.test(function (done) {
-      let mock = this.mock(User)
+      let user = new User()
 
-      let user = new User({
-        email: 'test@dev.com',
-        password: 'Qwerty123'
-      })
+      let stub = this.stub(User, 'create')
+      stub.resolves(user)
 
-      mock.expects('create').withArgs(user).once().resolves(user)
-
-      userService.registerUser(user).then(usr => {
-        mock.verify()
+      userService.registerUser(user).then(() => {
+        expect(User.create.calledOnce).to.equal(true)
         done()
       }).catch(err => done(err))
     }))
@@ -87,16 +83,13 @@ describe('User service tests', () => {
 
   describe('Given a request to insert / update a user', () => {
     it("will create a new user if it doesn't exist", sinon.test(function (done) {
-      let mock = this.mock(new User({
-        email: 'test@dev.com',
-        password: 'Qwerty123'
-      }))
+      let user = new User()
 
-      let user = mock.object
-      mock.expects('save').once().resolves(user)
+      let stub = this.stub(user, 'save')
+      stub.resolves(user)
 
-      userService.upsertUser(user).then(usr => {
-        mock.verify()
+      userService.upsertUser(user).then(() => {
+        expect(user.save.calledOnce).to.equal(true)
         done()
       }).catch(err => done(err))
     }))
