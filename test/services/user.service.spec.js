@@ -1,26 +1,25 @@
 const moment = require('moment')
 const mongoose = require('mongoose')
 
-
 describe('User service tests', () => {
   let User = require('../../src/models/user.server.model.js')
   let userService = require('../../src/services/user.service.js')()
 
   describe('Given an email of an existing user', () => {
     it('will return user by specified email', sinon.test(function (done) {
-      let mock = this.mock(User)
-      let user = new User({
-        email: 'ivan@dev.com'
-      })
-
-      mock.expects('findOne').chain('where')
-          .withArgs('email', user.email)
-          .chain('exec').resolves(user)
+      let findOne = {
+        where(email) {
+          return this
+        },
+        exec() {
+          return Promise.resolve(new User())
+        }
+      }
+      this.stub(User, 'findOne').returns(findOne)
 
       userService.getByEmail('ivan@dev.com').then(user => {
-        mock.verify()
+        expect(User.findOne.calledOnce).to.equal(true)
         assert.notEqual(user, null)
-        expect(user).to.have.property('_id')
         done()
       }).catch(err => done(err))
     }))
@@ -28,19 +27,18 @@ describe('User service tests', () => {
 
   describe('Given an Id of an existing user', () => {
     it('will return user by specified Id', sinon.test(function (done) {
-      let _id = '1234-abcd'
-      let mock = this.mock(User)
-      let user = new User({
-        _id: _id,
-        email: 'test@dev.com'
-      })
+      let findOne = {
+        where(_id) {
+          return this
+        },
+        exec() {
+          return Promise.resolve(new User())
+        }
+      }
+      this.stub(User, 'findOne').returns(findOne)
 
-      mock.expects('findOne').chain('where')
-          .withArgs('_id', _id)
-          .chain('exec').resolves(user)
-
-      userService.getById(_id).then(user => {
-        mock.verify()
+      userService.getByEmail('test@dev.com').then(user => {
+        expect(User.findOne.calledOnce).to.equal(true)
         assert.notEqual(user, null)
         done()
       }).catch(err => done(err))
@@ -49,18 +47,16 @@ describe('User service tests', () => {
 
   describe('Given a request to retrieve all existing users', () => {
     it('will return all existing users', sinon.test(function (done) {
-      let mock = this.mock(User)
-      let users = [
-        new User({
-          email: 'test1@dev.com'
-        }), new User({
-          email: 'test2@dev.com'
-        })]
-
-      mock.expects('find').chain('exec').resolves(users)
+      let users = [new User(), new User()]
+      let find = {
+        exec() {
+          return Promise.resolve(users)
+        }
+      }
+      this.stub(User, 'find').returns(find)
 
       userService.getAll().then(users => {
-        mock.verify()
+        expect(User.find.calledOnce).to.equal(true)
         expect(users.length).to.equal(2)
         done()
       }).catch(err => done(err))
@@ -70,9 +66,7 @@ describe('User service tests', () => {
   describe('Given a request to register a new user', () => {
     it('will create a new user', sinon.test(function (done) {
       let user = new User()
-
-      let stub = this.stub(User, 'create')
-      stub.resolves(user)
+      this.stub(User, 'create').resolves(user)
 
       userService.registerUser(user).then(() => {
         expect(User.create.calledOnce).to.equal(true)
@@ -84,9 +78,7 @@ describe('User service tests', () => {
   describe('Given a request to insert / update a user', () => {
     it("will create a new user if it doesn't exist", sinon.test(function (done) {
       let user = new User()
-
-      let stub = this.stub(user, 'save')
-      stub.resolves(user)
+      this.stub(user, 'save').resolves(user)
 
       userService.upsertUser(user).then(() => {
         expect(user.save.calledOnce).to.equal(true)
