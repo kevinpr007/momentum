@@ -5,7 +5,7 @@
   "scripts": {
     "start": "cross-env NODE_ENV=development node ./bin/www",
     "startIntelliJ": "node %NODE_DEBUG_OPTION% ./bin/www",
-    "test": "cross-env NODE_ENV=development ./node_modules/.bin/istanbul test ./node_modules/mocha/bin/_mocha test/**/*.spec.js -- --require test/config/tests.config --recursive -R spec",
+    "test": "cross-env NODE_ENV=development ./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha -- test/**/*.spec.js --require test/config/tests.config --recursive -R spec",
     "standard": "standard --fix",
     "retire": " retire --node --verbose",
     "nodemon": "cross-env NODE_ENV=development nodemon ./bin/www --ignore public/",
