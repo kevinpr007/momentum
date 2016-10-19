@@ -7,10 +7,8 @@ describe('User authentication service test', () => {
   let authService = require('../../src/services/auth.service.js')()
 
   describe('Given an authenticated user', () => {
-    let user = new User()
-
     it('will generate a JWT token', done => {
-      let token = authService.getToken(user)
+      let token = authService.getToken(new User())
       assert.notEqual(token, null)
       done()
     })
