@@ -8,7 +8,7 @@ describe('User service tests', () => {
   describe('Given an email of an existing user', () => {
     it('will return user by specified email', sinon.test(function (done) {
       let findOne = {
-        where(email) {
+        where() {
           return this
         },
         exec() {
@@ -28,7 +28,7 @@ describe('User service tests', () => {
   describe('Given an Id of an existing user', () => {
     it('will return user by specified Id', sinon.test(function (done) {
       let findOne = {
-        where(_id) {
+        where() {
           return this
         },
         exec() {
@@ -37,7 +37,7 @@ describe('User service tests', () => {
       }
       this.stub(User, 'findOne').returns(findOne)
 
-      userService.getByEmail('test@dev.com').then(user => {
+      userService.getById('000-1234').then(user => {
         expect(User.findOne.calledOnce).to.equal(true)
         assert.notEqual(user, null)
         done()
