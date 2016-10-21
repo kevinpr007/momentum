@@ -3,8 +3,8 @@
 
 const logService = require('../../src/services/log.service')
 const Log = require('../../src/models/logs.server.model')
-
-var httpMocks = require('node-mocks-http')
+const HttpStatus = require('http-status-codes')
+const httpMocks = require('node-mocks-http')
 
 describe('Log controller test', () => {
 
@@ -49,7 +49,40 @@ describe('Log controller test', () => {
     }))
 
     // /logs Error
-    it('returns an error')
+    it('returns an error', sinon.test(function (done) {
+      let req = httpMocks.createRequest()
+      let res = httpMocks.createResponse({eventEmitter: require('events').EventEmitter})
+
+      let err = new Error('Error Message')
+      err.status = HttpStatus.INTERNAL_SERVER_ERROR
+
+      let PromiseTest = Promise.reject(err)
+
+      const namespace = {
+        MockService: require('../../src/services/log.service')
+      }
+
+      let methods = {
+        getAll() {
+          return PromiseTest
+        }
+      }
+
+      let next = (args) => {
+        try {
+          expect(args).to.be.a('Error')
+          expect(args.status).to.equal(HttpStatus.INTERNAL_SERVER_ERROR)
+          done()
+        } catch (err) {
+          done(err)
+        }
+      }
+
+      sinon.stub(namespace, 'MockService').returns(methods)
+      const logController = require('../../src/controllers/log.controller')(namespace.MockService())
+
+      logController.getAllLogs(req, res, next)
+    }))
   })
 
   // api/reset-password
@@ -57,5 +90,4 @@ describe('Log controller test', () => {
     it('returns Not Found (404) for non-existing users')
     it('returns Ok (200) with json containing email confirmation providing a valid email')
   })
-  
 })
