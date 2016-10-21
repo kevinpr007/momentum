@@ -7,7 +7,7 @@ describe('User authentication requests', () => {
   // api/register
   describe('Given a request to register a new user', () => {
     it('returns Internal Server Error (500) leaving required fields empty')
-    it.skip('returns Unprocessable Entity (422) providing an already registered email', sinon.test(function (done) {
+    it('returns Unprocessable Entity (422) providing an already registered email', sinon.test(function (done) {
       let user = {
         email: 'test@dev.com',
         password: 'abcd1234'
