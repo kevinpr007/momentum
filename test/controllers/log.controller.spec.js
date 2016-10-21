@@ -1,18 +1,19 @@
 const logService = require('../../src/services/log.service')
 let Log = require('../../src/models/logs.server.model')
+var httpMocks = require('node-mocks-http');
+var request22 = require('dupertest')
 
-describe.only('Log controller test', () => {
+
+describe('Log controller test', () => {
 
 // /logs
 // /logs/code/:code
 // /logs/status/:status
 
   describe('Given a request to get all logs in the system', () => {
-    it('returns an array of all logs in Database', sinon.test(function () {
+    it.only('returns an array of all logs in Database', sinon.test(function (done) {
         
         let logArr = [new Log({code: '200'}), new Log({code: '201'})]
-
-        let req = mockReq()
         let resultTest = Promise.resolve(logArr)
         
         const namespace = {
@@ -25,24 +26,43 @@ describe.only('Log controller test', () => {
           }
         }
 
-        let res = mockRes({
-          status(name){return name},
+        var req = httpMocks.createRequest()
+        var res = httpMocks.createResponse({eventEmitter: require('events').EventEmitter})
 
-          json(name){
-            return name
-          }
-        })
-        
         sinon.stub(namespace, 'Service').returns(object);
         const logController = require('../../src/controllers/log.controller')(namespace.Service())
+        
+        function next(arg){
+          
+          done(arg)
+          
+          // expect(1).to.equal(30)
+          // expect.verify()
+          // done()
+          // return new Error("asdasdasd")
+          
+          // try {
+          //   // expect(args).to.be.a('Error')
+          //   assert.notEqual(1, 1)
+          // } catch (err) {
+          //   done(err) 
+          // }
+         }
 
-          logController.getAllLogs(req, res).then(result => {
-          // expect(result.namespace.Service.calledOnce).to.equal(true)
-          expect(result[0].code).to.equal('200')
-          expect(result[1].code).to.equal('201')
+        res.on('end', function() {
+          let data = JSON.parse(res._getData())      
+          expect(namespace.Service.calledOnce).to.equal(true)
+          res._isJSON().should.be.true
+          expect(data[0].code).to.equal('200')
+          expect(data[1].code).to.equal('208')
           done()
         })
-        
+
+
+
+
+  logController.getAllLogs(req, res, next)  
+
     }))
 
     it('returns an error')
