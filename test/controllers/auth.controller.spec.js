@@ -2,38 +2,42 @@ const httpMocks = require('node-mocks-http')
 
 describe('User authentication requests', () => {
 
-  let userService = require('../../src/services/user.service')
-  let authService = require('../../src/services/auth.service')
   let authController = require('../../src/controllers/auth.controller')
+  let userService, authService, emailService
+
+  beforeEach(() => {
+    userService = require('../../src/services/user.service')
+    authService = require('../../src/services/auth.service')
+    emailService = require('../../src/services/email.service')
+  })
 
   // api/register
   describe('Given a request to register a new user', () => {
-    it('returns Internal Server Error (500) leaving required fields empty')
-    it('returns Unprocessable Entity (422) providing an already registered email', sinon.test(function (done) {
+    it('returns Internal Server Error (500) leaving required fields empty', sinon.test(function (done) {
       let user = {
         email: 'test@dev.com'
       }
-      let service = {
-        getByEmail() {
-          return Promise.resolve(user)
-        }
-      }
       let req = httpMocks.createRequest({
-          method: 'POST',
-          url: 'api/register',
-          body: {
-            email: user.email
-          }
-        })
+        method: 'POST',
+        url: 'api/register',
+        body: {
+          email: user.email
+        }
+      })
       let res = {}
-      let stub = this.stub(userService(), 'getByEmail').returns(service)
 
-      authController(null, stub(), null).register(req, res, next)
+      let error = new Error('Required fields missing.')
+      error.status = 500
+
+      userService = this.stub(userService())
+      userService.getByEmail.rejects(error)
+
+      authController(null, userService).register(req, res, next)
 
       function next (args) {
         try {
           expect(args).to.be.a('Error')
-          expect(args.status).to.equal(423) // TODO: change to 422
+          expect(args.status).to.equal(500)
           done()
         } catch (err) {
           done(err)
@@ -41,7 +45,59 @@ describe('User authentication requests', () => {
       }
     }))
 
-    it('returns Created (201) with json containing JWT token and user object providing a valid request')
+    it('returns Unprocessable Entity (422) providing an already registered email', sinon.test(function (done) {
+      let user = {
+        email: 'test@dev.com'
+      }
+      let req = httpMocks.createRequest({
+        method: 'POST',
+        url: 'api/register',
+        body: {
+          email: user.email
+        }
+      })
+      let res = {}
+      userService = this.stub(userService())
+      userService.getByEmail.resolves(user)
+
+      authController(null, userService).register(req, res, next)
+
+      function next (args) {
+        try {
+          expect(args).to.be.a('Error')
+          expect(args.status).to.equal(422)
+          done()
+        } catch (err) {
+          done(err)
+        }
+      }
+    }))
+
+    it.skip('returns Created (201) with json containing JWT token and user object providing a valid request', sinon.test(function (done) {
+      let user = {
+        email: 'test@dev.com'
+      }
+      let req = httpMocks.createRequest({
+        method: 'POST',
+        url: 'api/register',
+        body: {
+          email: user.email
+        }
+      })
+      let res = {}
+      let next = {}
+
+      userService = this.stub(userService())
+      userService.getByEmail.resolves(null)
+      userService.registerUser.resolves(user)
+
+      authService = this.stub(authService())
+      authService.getToken.returns('ABCD-1234')
+
+      //emailService
+
+      authController(authService, userService, emailService).register(req, res, next)
+    }))
   })
 
   // api/auth
