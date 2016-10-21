@@ -1,7 +1,7 @@
 const logService = require('../../src/services/log.service')
 let Log = require('../../src/models/logs.server.model')
 
-describe('Log controller test', () => {
+describe.only('Log controller test', () => {
 
 // /logs
 // /logs/code/:code
@@ -10,7 +10,9 @@ describe('Log controller test', () => {
   describe('Given a request to get all logs in the system', () => {
     it('returns an array of all logs in Database', sinon.test(function () {
         
-        let logArr = [new Log({code: '200'}), new Log({code: '201'})]        
+        let logArr = [new Log({code: '200'}), new Log({code: '201'})]
+
+        let req = mockReq()
         let resultTest = Promise.resolve(logArr)
         
         const namespace = {
@@ -23,14 +25,13 @@ describe('Log controller test', () => {
           }
         }
 
-        let req
-        let res = {
+        let res = mockRes({
           status(name){return name},
 
           json(name){
             return name
           }
-        }
+        })
         
         sinon.stub(namespace, 'Service').returns(object);
         const logController = require('../../src/controllers/log.controller')(namespace.Service())

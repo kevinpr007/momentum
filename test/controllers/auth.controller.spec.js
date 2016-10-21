@@ -7,14 +7,19 @@ describe('User authentication requests', () => {
   // api/register
   describe('Given a request to register a new user', () => {
     it('returns Internal Server Error (500) leaving required fields empty')
-    it('returns Unprocessable Entity (422) providing an already registered email', sinon.test(function (done) {
+    it.only('returns Unprocessable Entity (422) providing an already registered email', sinon.test(function (done) {
       let user = {
         email: 'test@dev.com',
         password: 'abcd1234'
-      }    
-      this.stub(userService()).getByEmail().resolves(user)
+      }
+      let service = {
+        getByEmail() {
+          return Promise.resolve(user)
+        }
+      }
+      let stub = this.stub(userService(), 'getByEmail').returns(service)
 
-      authController(null, stub, null).register(req, res)
+      authController(null, stub(), null).register(req, res)
       done()
     }))
 
