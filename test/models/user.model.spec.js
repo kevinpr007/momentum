@@ -1,6 +1,4 @@
 const moment = require('moment')
-const mongoose = require('mongoose')
-mongoose.Promise = require('bluebird')
 const bcrypt = require('bcrypt-nodejs')
 
 describe('User schema validation tests', () => {
