@@ -1,10 +1,7 @@
-const mockReq = require('sinon-express-mock').mockReq
-const mockRes = require('sinon-express-mock').mockRes
-
 const logService = require('../../src/services/log.service')
 let Log = require('../../src/models/logs.server.model')
 
-describe.only('Log controller test', () => {
+describe('Log controller test', () => {
 
 // /logs
 // /logs/code/:code
@@ -13,9 +10,7 @@ describe.only('Log controller test', () => {
   describe('Given a request to get all logs in the system', () => {
     it('returns an array of all logs in Database', sinon.test(function () {
         
-        let logArr = [new Log({code: '200'}), new Log({code: '201'})]
-
-        let req = mockReq()
+        let logArr = [new Log({code: '200'}), new Log({code: '201'})]        
         let resultTest = Promise.resolve(logArr)
         
         const namespace = {
@@ -28,13 +23,14 @@ describe.only('Log controller test', () => {
           }
         }
 
-        let res = mockRes({
+        let req
+        let res = {
           status(name){return name},
 
           json(name){
             return name
           }
-        })
+        }
         
         sinon.stub(namespace, 'Service').returns(object);
         const logController = require('../../src/controllers/log.controller')(namespace.Service())
