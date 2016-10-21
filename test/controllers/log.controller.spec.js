@@ -1,6 +1,3 @@
-// /logs/code/:code
-// /logs/status/:status
-
 const logService = require('../../src/services/log.service')
 const Log = require('../../src/models/logs.server.model')
 const HttpStatus = require('http-status-codes')
@@ -8,9 +5,9 @@ const httpMocks = require('node-mocks-http')
 
 describe('Log controller test', () => {
 
-  // /logs Success
+  // /logs
   describe('Given a request to get all logs in the system', () => {
-    it('returns an array of all logs in Database', sinon.test(function (done) {
+    it('it will returns an array of all logs in Database', sinon.test(function (done) {
       let req = httpMocks.createRequest()
       let res = httpMocks.createResponse({eventEmitter: require('events').EventEmitter})
 
@@ -48,8 +45,7 @@ describe('Log controller test', () => {
       logController.getAllLogs(req, res, next)
     }))
 
-    // /logs Error
-    it('returns an error', sinon.test(function (done) {
+    it('it will returns an error', sinon.test(function (done) {
       let req = httpMocks.createRequest()
       let res = httpMocks.createResponse({eventEmitter: require('events').EventEmitter})
 
@@ -85,9 +81,15 @@ describe('Log controller test', () => {
     }))
   })
 
-  // api/reset-password
-  describe('Given a user requesting to reset password', () => {
-    it('returns Not Found (404) for non-existing users')
-    it('returns Ok (200) with json containing email confirmation providing a valid email')
+  // /logs/code/:code
+  describe('Given a request to get all logs by a code', () => {
+    it('it will returns an array of all logs for that particular code')
+    it('it will returns an error')
+  })
+
+  // /logs/status/:status
+  describe('Given a request to get all logs by a status', () => {
+    it('it will returns an array of all logs for that particular status')
+    it('it will returns an error')
   })
 })
