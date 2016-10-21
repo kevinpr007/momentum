@@ -1,3 +1,5 @@
+const httpMocks = require('node-mocks-http')
+
 describe('User authentication requests', () => {
 
   let userService = require('../../src/services/user.service')
@@ -9,18 +11,34 @@ describe('User authentication requests', () => {
     it('returns Internal Server Error (500) leaving required fields empty')
     it('returns Unprocessable Entity (422) providing an already registered email', sinon.test(function (done) {
       let user = {
-        email: 'test@dev.com',
-        password: 'abcd1234'
+        email: 'test@dev.com'
       }
       let service = {
         getByEmail() {
           return Promise.resolve(user)
         }
       }
+      let req = httpMocks.createRequest({
+          method: 'POST',
+          url: 'api/register',
+          body: {
+            email: user.email
+          }
+        })
+      let res = {}
       let stub = this.stub(userService(), 'getByEmail').returns(service)
 
-      authController(null, stub(), null).register(req, res)
-      done()
+      authController(null, stub(), null).register(req, res, next)
+
+      function next (args) {
+        try {
+          expect(args).to.be.a('Error')
+          expect(args.status).to.equal(423) // TODO: change to 422
+          done()
+        } catch (err) {
+          done(err)
+        }
+      }
     }))
 
     it('returns Created (201) with json containing JWT token and user object providing a valid request')
