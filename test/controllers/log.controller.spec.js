@@ -1,95 +1,99 @@
-const logService = require('../../src/services/log.service')
 const Log = require('../../src/models/logs.server.model')
 const HttpStatus = require('http-status-codes')
 const httpMocks = require('node-mocks-http')
 
 describe('Log controller test', () => {
 
-  // /logs
-  describe('Given a request to get all logs in the system', () => {
-    it('it will returns an array of all logs in Database', sinon.test(function (done) {
-      let req = httpMocks.createRequest()
-      let res = httpMocks.createResponse({eventEmitter: require('events').EventEmitter})
+    let req, res, logController, namespace
 
-      let logArray = [new Log({code: '200'}), new Log({code: '201'})]
-      let PromiseTest = Promise.resolve(logArray)
+    beforeEach(() => {
+        req = httpMocks.createRequest()
+        res = httpMocks.createResponse({eventEmitter: require('events').EventEmitter})
 
-      const namespace = {
-        MockService: require('../../src/services/log.service')
-      }
-
-      let methods = {
-        getAll() {
-          return PromiseTest
+        namespace = {
+            mockLogService: require('../../src/services/log.service')
         }
-      }
+    })
 
-      let next = (err) => {
-        done(err)
-      }
+    afterEach(() => {
+        req, res, logController, namespace = null
+    })
 
-      sinon.stub(namespace, 'MockService').returns(methods)
-      const logController = require('../../src/controllers/log.controller')(namespace.MockService())
+    // /logs
+    describe('Given a request to get all logs in the system', () => {
+        it('it will returns an array of all logs in Database', sinon.test(function (done) {
 
-      res.on('end', function () {
-        let data = JSON.parse(res._getData())
+            let logArray = [new Log({code: '200'}), new Log({code: '201'})]
 
-        res._isJSON().should.be.true
-        expect(namespace.MockService.calledOnce).to.equal(true)
-        expect(data.length).to.equal(2)
-        expect(data[0].code).to.equal(logArray[0].code)
-        expect(data[1].code).to.equal(logArray[1].code)
-        done()
-      })
+            namespace = {
+                mockLogService: require('../../src/services/log.service')
+            }
 
-      logController.getAllLogs(req, res, next)
-    }))
+            let methods = {
+                getAll() {
+                    return Promise.resolve(logArray)
+                }
+            }
 
-    it('it will returns an error', sinon.test(function (done) {
-      let req = httpMocks.createRequest()
-      let res = httpMocks.createResponse({eventEmitter: require('events').EventEmitter})
+            let next = (err) => {
+                done(err)
+            }
 
-      let err = new Error('Error Message')
-      err.status = HttpStatus.INTERNAL_SERVER_ERROR
+            sinon.stub(namespace, 'mockLogService').returns(methods)
+            logController = require('../../src/controllers/log.controller')(namespace.mockLogService())
 
-      let PromiseTest = Promise.reject(err)
+            res.on('end', function () {
+                let data = JSON.parse(res._getData())
+                res._isJSON().should.be.true
+                expect(namespace.mockLogService.calledOnce).to.equal(true)
+                expect(data.length).to.equal(2)
+                expect(data[0].code).to.equal(logArray[0].code)
+                expect(data[1].code).to.equal(logArray[1].code)
+                done()
+            })
 
-      const namespace = {
-        MockService: require('../../src/services/log.service')
-      }
+            logController.getAllLogs(req, res, next)
+        }))
 
-      let methods = {
-        getAll() {
-          return PromiseTest
-        }
-      }
+        it('it will returns an error', sinon.test(function (done) {
 
-      let next = (args) => {
-        try {
-          expect(args).to.be.a('Error')
-          expect(args.status).to.equal(HttpStatus.INTERNAL_SERVER_ERROR)
-          done()
-        } catch (err) {
-          done(err)
-        }
-      }
+            let errMessage = 'Internal Error Message'
+            let err = new Error(errMessage)
+            err.status = HttpStatus.INTERNAL_SERVER_ERROR
 
-      sinon.stub(namespace, 'MockService').returns(methods)
-      const logController = require('../../src/controllers/log.controller')(namespace.MockService())
+            let methods = {
+                getAll() {
+                    return Promise.reject(err)
+                }
+            }
 
-      logController.getAllLogs(req, res, next)
-    }))
-  })
+            let next = (args) => {
+                try {
+                    expect(args).to.be.a('Error')
+                    expect(args.status).to.equal(HttpStatus.INTERNAL_SERVER_ERROR)
+                    expect(args.message).to.equal(errMessage)
+                    done()
+                } catch (err) {
+                    done(err)
+                }
+            }
 
-  // /logs/code/:code
-  describe('Given a request to get all logs by a code', () => {
-    it('it will returns an array of all logs for that particular code')
-    it('it will returns an error')
-  })
+            sinon.stub(namespace, 'mockLogService').returns(methods)
 
-  // /logs/status/:status
-  describe('Given a request to get all logs by a status', () => {
-    it('it will returns an array of all logs for that particular status')
-    it('it will returns an error')
-  })
+            logController = require('../../src/controllers/log.controller')(namespace.mockLogService())
+            logController.getAllLogs(req, res, next)
+        }))
+    })
+
+    // /logs/code/:code
+    describe('Given a request to get all logs by a code', () => {
+        it('it will returns an array of all logs for that particular code')
+        it('it will returns an error')
+    })
+
+    // /logs/status/:status
+    describe('Given a request to get all logs by a status', () => {
+        it('it will returns an array of all logs for that particular status')
+        it('it will returns an error')
+    })
 })

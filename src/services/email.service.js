@@ -10,7 +10,7 @@ module.exports = emailInfo => {
   }
 
   let send = () => {
-    //TODO: Verify this
+    // TODO: Verify this
     return new Promise((resolve, reject) => {
       transporter.sendMail(template, (err, data) => {
         if (err) {
