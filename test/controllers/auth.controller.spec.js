@@ -15,16 +15,12 @@ describe('User authentication requests', () => {
     emailService = require('../../src/services/email.service')
   })
 
-  // api/register
   describe('Given a request to register a new user', () => {
     it('returns Internal Server Error (500) leaving required fields empty', sinon.test(function (done) {
-      let user = {
-        email: 'test@dev.com'
-      }
       req.method = 'POST'
       req.url = 'api/register'
       req.body = {
-        email: user.email
+        email: 'test@dev.com'
       }
 
       let error = new Error('Required fields missing.')
@@ -39,6 +35,7 @@ describe('User authentication requests', () => {
         try {
           expect(args).to.be.a('Error')
           expect(args.status).to.equal(500)
+          assert.isTrue(userService.getByEmail.calledOnce)
           done()
         } catch (err) {
           done(err)
@@ -65,6 +62,7 @@ describe('User authentication requests', () => {
         try {
           expect(args).to.be.a('Error')
           expect(args.status).to.equal(422)
+          assert.isTrue(userService.getByEmail.calledOnce)
           done()
         } catch (err) {
           done(err)
@@ -92,15 +90,9 @@ describe('User authentication requests', () => {
 
       emailService = this.stub(emailService({
         from: 'test@dev.com'
-      }), 'send').returns({
-        send() {
-          return Promise.resolve({
-            sent: true
-          })
-        }
-      })
+      }))
 
-      authController(authService, userService, emailService()).register(req, res, next)
+      authController(authService, userService, emailService).register(req, res, next)
 
       res.on('end', () => {
         let data = JSON.parse(res._getData())
@@ -115,10 +107,58 @@ describe('User authentication requests', () => {
     }))
   })
 
-  // api/auth
   describe('Given a user requesting authentication', () => {
-    it('returns Bad Request (400) and will receive a json with error providing invalid credentials')
-    it('returns Internal Server Error (500) and will receive a json with error providing incomplete arguments')
+    it('returns Not Found (404) and will receive a json with error providing invalid credentials', sinon.test(function (done) {
+      req.method = 'POST'
+      req.url = 'api/auth'
+      req.body = {
+        email: 'test@dev.com'
+      }
+
+      userService = this.stub(userService())
+      userService.getByEmail.resolves(null)
+
+      authController(null, userService).auth(req, res, next)
+
+      function next (args) {
+        try {
+          expect(args).to.be.a('Error')
+          expect(args.status).to.equal(404)
+          assert.isTrue(userService.getByEmail.calledOnce)
+          done()
+        } catch (err) {
+          done(err)
+        }
+      }
+    }))
+
+    it('returns Internal Server Error (500) and will receive a json with error providing incomplete arguments', sinon.test(function (done) {
+      req.method = 'POST'
+      req.url = 'api/auth'
+      req.body = {
+        email: 'test@dev.com'
+      }
+
+      let error = new Error('Required fields missing.')
+      error.status = 500
+
+      userService = this.stub(userService())
+      userService.getByEmail.rejects(error)
+
+      authController(null, userService).register(req, res, next)
+
+      function next (args) {
+        try {
+          expect(args).to.be.a('Error')
+          expect(args.status).to.equal(500)
+          assert.isTrue(userService.getByEmail.calledOnce)
+          done()
+        } catch (err) {
+          done(err)
+        }
+      }
+    }))
+
     it('returns Ok (200) and will receive a json with JWT token providing valid credentials')
   })
 

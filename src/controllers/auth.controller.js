@@ -8,7 +8,7 @@ let authController = (authService, userService, templateModel) => {
     userService.getByEmail(req.body.email).then(usr => {
       if (!usr) {
         let err = new Error('Authentication failed. User not found.')
-        err.status = HttpStatus.BAD_REQUEST
+        err.status = HttpStatus.NOT_FOUND
         throw err
       }
       user = usr
@@ -62,8 +62,7 @@ let authController = (authService, userService, templateModel) => {
         throw err
       }
       return authService.resetToken(user)
-    }).then(user => {
-      // Confirm Reset Password Email
+    }).then(user => {     
       let emailTemplate = require('../services/emails/confirm-reset-password')(req.headers.host,
           user.resetPasswordToken).getTemplate()
       let emailInfo = emailFactory(user.email, emailTemplate.subject, emailTemplate.html).getInfo()
@@ -103,7 +102,6 @@ let authController = (authService, userService, templateModel) => {
         throw err
       }
     }).then(user => {
-      // Reset Password Email
       let emailTemplate = require('../services/emails/reset-password')().getTemplate()
       let emailInfo = emailFactory(user.email, emailTemplate.subject, emailTemplate.html).getInfo()
       return emailService(emailInfo).send()
