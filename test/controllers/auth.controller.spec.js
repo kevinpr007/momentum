@@ -3,9 +3,13 @@ const httpMocks = require('node-mocks-http')
 describe('User authentication requests', () => {
 
   let authController = require('../../src/controllers/auth.controller')
-  let userService, authService, emailService
+  let userService, authService, emailService, req, res
 
   beforeEach(() => {
+    req = httpMocks.createRequest()
+    res = httpMocks.createResponse({
+      eventEmitter: require('events').EventEmitter
+    })
     userService = require('../../src/services/user.service')
     authService = require('../../src/services/auth.service')
     emailService = require('../../src/services/email.service')
@@ -17,14 +21,11 @@ describe('User authentication requests', () => {
       let user = {
         email: 'test@dev.com'
       }
-      let req = httpMocks.createRequest({
-        method: 'POST',
-        url: 'api/register',
-        body: {
-          email: user.email
-        }
-      })
-      let res = {}
+      req.method = 'POST'
+      req.url = 'api/register'
+      req.body = {
+        email: user.email
+      }
 
       let error = new Error('Required fields missing.')
       error.status = 500
@@ -49,14 +50,12 @@ describe('User authentication requests', () => {
       let user = {
         email: 'test@dev.com'
       }
-      let req = httpMocks.createRequest({
-        method: 'POST',
-        url: 'api/register',
-        body: {
-          email: user.email
-        }
-      })
-      let res = {}
+      req.method = 'POST'
+      req.url = 'api/register'
+      req.body = {
+        email: user.email
+      }
+
       userService = this.stub(userService())
       userService.getByEmail.resolves(user)
 
@@ -73,19 +72,16 @@ describe('User authentication requests', () => {
       }
     }))
 
-    it.skip('returns Created (201) with json containing JWT token and user object providing a valid request', sinon.test(function (done) {
+    it('returns Created (201) with json containing JWT token and user object providing a valid request', sinon.test(function (done) {
       let user = {
         email: 'test@dev.com'
       }
-      let req = httpMocks.createRequest({
-        method: 'POST',
-        url: 'api/register',
-        body: {
-          email: user.email
-        }
-      })
-      let res = {}
-      let next = {}
+      req.method = 'POST'
+      req.url = 'api/register'
+      req.body = {
+        email: user.email
+      }
+      next = args => done(args)
 
       userService = this.stub(userService())
       userService.getByEmail.resolves(null)
@@ -94,9 +90,28 @@ describe('User authentication requests', () => {
       authService = this.stub(authService())
       authService.getToken.returns('ABCD-1234')
 
-      //emailService
+      emailService = this.stub(emailService({
+        from: 'test@dev.com'
+      }), 'send').returns({
+        send() {
+          return Promise.resolve({
+            sent: true
+          })
+        }
+      })
 
-      authController(authService, userService, emailService).register(req, res, next)
+      authController(authService, userService, emailService()).register(req, res, next)
+
+      res.on('end', () => {
+        let data = JSON.parse(res._getData())
+        expect(data).to.have.property('token')
+        expect(data).to.have.deep.property('user.email', user.email)
+
+        assert.isTrue(userService.getByEmail.calledOnce)
+        assert.isTrue(userService.registerUser.calledOnce)
+        assert.isTrue(authService.getToken.calledOnce)
+        done()
+      })
     }))
   })
 
