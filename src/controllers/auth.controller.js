@@ -1,8 +1,7 @@
 const HttpStatus = require('http-status-codes')
-const emailService = require('../services/email.service')
 const emailFactory = require('../helpers/email.factory')
 
-let authController = (authService, userService, templateModel) => {
+let authController = (authService, userService, emailService, templateModel) => {
   let auth = (req, res, next) => {
     let user = null
     userService.getByEmail(req.body.email).then(usr => {
