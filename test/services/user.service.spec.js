@@ -1,5 +1,4 @@
 const moment = require('moment')
-const mongoose = require('mongoose')
 
 describe('User service tests', () => {
   let User = require('../../src/models/user.server.model.js')
