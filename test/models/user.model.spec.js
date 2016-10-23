@@ -1,8 +1,10 @@
 const moment = require('moment')
+const mongoose = require('mongoose')
+mongoose.Promise = require('bluebird')
 const bcrypt = require('bcrypt-nodejs')
 
 describe('User schema validation tests', () => {
-  let User = require('../../src/models/user.server.model.js')
+  let User = require('../../src/models/user.server.model')
 
   describe('Given a user with no password', () => {
     let user = new User({
