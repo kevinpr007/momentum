@@ -12,9 +12,9 @@ describe('Email service test', () => {
     }
 
     it('will generate an email successfuly', sinon.test(function (done) {
-        
+
         this.stub(transporter, 'sendMail').yields(null, {success: true})
- 
+
         emailService(template).send().then(result => {
           assert.notEqual(result, null)
           expect(result).to.be.an('object');;;
@@ -26,12 +26,15 @@ describe('Email service test', () => {
     )
 
     it('will NOT generate an email successfuly', sinon.test(function (done) {
-        
-        this.stub(transporter, 'sendMail').yields({success: false}, null)
- 
+
+        let result = new Error('Error Message')
+        result.success = false
+
+        this.stub(transporter, 'sendMail').yields(result, null)
+
         emailService(template).send().catch(err => {
           assert.notEqual(err, null)
-          expect(err).to.be.an('object');
+          expect(err).to.be.an('Error');
           expect(err.success).to.be.equal(false)
           expect(transporter.sendMail.callCount).to.equal(1)
           done()
