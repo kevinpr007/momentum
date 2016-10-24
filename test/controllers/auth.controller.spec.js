@@ -34,7 +34,7 @@ describe('User authentication requests', () => {
 
       function next (args) {
         try {
-          expect(args).to.be.a('Error')
+          expect(args).to.be.an('Error')
           expect(args.status).to.equal(500)
           assert.isTrue(userService.getByEmail.calledOnce)
           done()
@@ -61,7 +61,7 @@ describe('User authentication requests', () => {
 
       function next (args) {
         try {
-          expect(args).to.be.a('Error')
+          expect(args).to.be.an('Error')
           expect(args.status).to.equal(422)
           assert.isTrue(userService.getByEmail.calledOnce)
           done()
@@ -130,7 +130,7 @@ describe('User authentication requests', () => {
 
       function next (args) {
         try {
-          expect(args).to.be.a('Error')
+          expect(args).to.be.an('Error')
           expect(args.status).to.equal(404)
           assert.isTrue(userService.getByEmail.calledOnce)
           done()
@@ -157,7 +157,7 @@ describe('User authentication requests', () => {
 
       function next (args) {
         try {
-          expect(args).to.be.a('Error')
+          expect(args).to.be.an('Error')
           expect(args.status).to.equal(500)
           assert.isTrue(userService.getByEmail.calledOnce)
           done()
@@ -186,7 +186,7 @@ describe('User authentication requests', () => {
 
       function next (args) {
         try {
-          expect(args).to.be.a('Error')
+          expect(args).to.be.an('Error')
           expect(args.status).to.equal(400)
           assert.isTrue(userService.getByEmail.calledOnce)
           done()
@@ -244,7 +244,7 @@ describe('User authentication requests', () => {
 
       function next (args) {
         try {
-          expect(args).to.be.a('Error')
+          expect(args).to.be.an('Error')
           expect(args.status).to.equal(404)
           assert.isTrue(userService.getByEmail.calledOnce)
           done()
