@@ -323,17 +323,148 @@ describe('User authentication requests', () => {
       }
 
       authController(null, null, null, templateModel).confirmResetPassword(req, res)
-      
+
       expect(res.statusCode).to.equal(200)
       done()
     }))
   })
 
-  // api/complete-reset-password
   describe('Given a user resetting password via reset-password page', () => {
-    it('returns Unprocessable Entity (422) providing an invalid token')
-    it('returns Bad Request (400) providing invalid current password')
-    it('returns Bad Request (400) providing invalid confirmation password')
-    it('returns Ok (200) with json containing email confirmation providing a valid request')
+    it('returns Unprocessable Entity (422) providing an invalid token', sinon.test(function (done) {
+      req.method = 'POST'
+      req.url = 'api/complete-reset-password'
+      req.body = {
+        token: 'ABCD-1234'
+      }
+
+      authService = this.stub(authService())
+      authService.findByPasswordToken.resolves(null)
+
+      authController(authService).newPassword(req, res, next)
+
+      function next (args) {
+        try {
+          expect(args).to.be.an('Error')
+          expect(args.status).to.equal(422)
+          assert.isTrue(authService.findByPasswordToken.calledOnce)
+          done()
+        } catch (err) {
+          done(err)
+        }
+      }
+    }))
+
+    it('returns Bad Request (400) providing invalid current password', sinon.test(function (done) {
+      req.method = 'POST'
+      req.url = 'api/complete-reset-password'
+      req.body = {
+        token: 'ABCD-1234'
+      }
+
+      let user = new User({
+        email: 'test@dev.com'
+      })
+      this.stub(user, 'isValidPassword').resolves(false)
+
+      authService = this.stub(authService())
+      authService.findByPasswordToken.resolves(user)
+
+      authController(authService).newPassword(req, res, next)
+
+      function next (args) {
+        try {
+          expect(args).to.be.an('Error')
+          expect(args.status).to.equal(400)
+          assert.isTrue(user.isValidPassword.calledOnce)
+          assert.isTrue(authService.findByPasswordToken.calledOnce)
+          done()
+        } catch (err) {
+          done(err)
+        }
+      }
+    }))
+
+    it('returns Bad Request (400) providing invalid confirmation password', sinon.test(function (done) {
+      req.method = 'POST'
+      req.url = 'api/complete-reset-password'
+      req.body = {
+        token: 'ABCD-1234'
+      }
+
+      let user = new User({
+        email: 'test@dev.com'
+      })
+
+      user = this.stub(user)
+      user.isValidPassword.resolves(true)
+      user.confirmPasswordValid.resolves(false)
+
+      authService = this.stub(authService())
+      authService.findByPasswordToken.resolves(user)
+
+      authController(authService).newPassword(req, res, next)
+
+      function next (args) {
+        try {
+          expect(args).to.be.an('Error')
+          expect(args.status).to.equal(400)
+          assert.isTrue(user.isValidPassword.calledOnce)
+          assert.isTrue(user.confirmPasswordValid.calledOnce)
+          assert.isTrue(authService.findByPasswordToken.calledOnce)
+          done()
+        } catch (err) {
+          done(err)
+        }
+      }
+    }))
+
+    it('returns Ok (200) with json containing email confirmation providing a valid request', sinon.test(function (done) {
+      req.method = 'POST'
+      req.url = 'api/complete-reset-password'
+      req.body = {
+        token: 'ABCD-1234',
+        currentPassword: 'qwerty',
+        password: 'test1',
+        confirmPassword: 'test1'
+      }
+
+      let user = new User({
+        email: 'test@dev.com'
+      })
+
+      user = this.stub(user)
+      user.isValidPassword.resolves(true)
+      user.confirmPasswordValid.resolves(true)
+
+      authService = this.stub(authService())
+      authService.findByPasswordToken.resolves(user)
+
+      userService = this.stub(userService())
+      userService.upsertUser.resolves(user)
+
+      emailService = this.stub(emailService({
+        to: 'test@dev.com'
+      }), 'send').returns({
+        send() {
+          return Promise.resolve({
+            sent: true
+          })
+        }
+      })
+
+      let next = {}
+      authController(authService, userService, emailService).newPassword(req, res, next)
+
+      res.on('end', () => {
+        let data = JSON.parse(res._getData())
+        expect(res.statusCode).to.equal(200)
+        assert.isTrue(user.isValidPassword.calledOnce)
+        assert.isTrue(user.confirmPasswordValid.calledOnce)
+        assert.isTrue(authService.findByPasswordToken.calledOnce)
+        assert.isTrue(userService.upsertUser.calledOnce)
+        expect(data.data).to.have.deep.property('sent', true)
+        done()
+      })
+    }))
   })
 })
