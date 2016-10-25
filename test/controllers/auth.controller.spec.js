@@ -452,7 +452,7 @@ describe('User authentication requests', () => {
         }
       })
 
-      let next = {}
+      let next = args => done(args)
       authController(authService, userService, emailService).newPassword(req, res, next)
 
       res.on('end', () => {
