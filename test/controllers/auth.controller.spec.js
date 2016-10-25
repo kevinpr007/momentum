@@ -295,10 +295,38 @@ describe('User authentication requests', () => {
     }))
   })
 
-  // api/confirm-reset-password/:token
   describe('Given a user requesting to reset password via email confirmation', () => {
-    it('returns Not Found (404) if token is not inside route')
-    it('returns Ok (200) with reset-password page')
+    it('returns Not Found (404) if token is not set inside route', sinon.test(function (done) {
+      templateModel = {}
+      req.method = 'GET'
+      req.url = 'api/confirm-reset-password'
+
+      authController(null, null, null, templateModel).confirmResetPassword(req, res, next)
+
+      function next (args) {
+        try {
+          expect(args).to.be.an('Error')
+          expect(args.status).to.equal(404)
+          done()
+        } catch (err) {
+          done(err)
+        }
+      }
+    }))
+
+    it('returns Ok (200) with reset-password page', sinon.test(function (done) {
+      templateModel = {}
+      req.method = 'GET'
+      req.url = 'api/confirm-reset-password'
+      req.params = {
+        token: 'ABCD-1234'
+      }
+
+      authController(null, null, null, templateModel).confirmResetPassword(req, res)
+      
+      expect(res.statusCode).to.equal(200)
+      done()
+    }))
   })
 
   // api/complete-reset-password
