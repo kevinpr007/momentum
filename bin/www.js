@@ -1,10 +1,13 @@
 const cluster = require('express-cluster')
+const ENV = process.env.NODE_ENV
 
-cluster(function (worker) {
+// cluster(function (worker) {
   const express = require('../src/config/express')
-  const config = require('../src/config/config')
+  const config = require('../src/config/config')()
+  config.setVariable(ENV)
+
   const http = require('http')
-  const port = config.PORT
+  const port = config.getVariable().PORT
 
   require('../src/config/mongoose')()
   require('../src/config/passport')()
@@ -39,14 +42,14 @@ cluster(function (worker) {
 
   // TODO: Verify this area.
   module.exports = app
-}, {
-  // count: 5,       // number of workers: defaults to os.cpus().length
-  // respawn: true,  // respawn process on exit: defaults to true
-  verbose: true // log what happens to console: defaults to false
+// }, {
+//   // count: 5,       // number of workers: defaults to os.cpus().length
+//   // respawn: true,  // respawn process on exit: defaults to true
+//   verbose: true // log what happens to console: defaults to false
 
-// Attach the given function to each spawned worker. The function will
-// be bound to the worker that sent the message so you can setup a two
-// way message bus if you please. See examples/messaging.js for an
-// example.
-// workerListener: function(){}
-})
+// // Attach the given function to each spawned worker. The function will
+// // be bound to the worker that sent the message so you can setup a two
+// // way message bus if you please. See examples/messaging.js for an
+// // example.
+// // workerListener: function(){}
+// })
