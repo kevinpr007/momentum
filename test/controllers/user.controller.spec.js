@@ -36,9 +36,54 @@ describe('User entity requests', () => {
     }))
   })
 
-  // api/users/:userName
   describe('Given a request to get a user by username', () => {
-    it('returns Not Found (404) providing invalid username')
-    it('returns Ok (200) with json containing user providing a valid username')
+    it('returns Not Found (404) providing a non-existing username', sinon.test(function (done) {
+      req.method = 'GET'
+      req.url = 'api/users'
+      req.params = {
+        userName: 'test@dev.com'
+      }
+
+      userService = this.stub(userService())
+      userService.getByEmail.resolves(null)
+
+      userController(userService).getByUserEmail(req, res, next)
+
+      function next (args) {
+        try {
+          expect(args).to.be.an('Error')
+          expect(args.status).to.equal(404)
+          assert.isTrue(userService.getByEmail.calledOnce)
+          done()
+        } catch (err) {
+          done(err)
+        }
+      }
+    }))
+
+    it('returns Ok (200) with json containing user providing a valid username', sinon.test(function (done) {
+      let user = new User({
+        email: 'test@dev.com'
+      })
+      req.method = 'GET'
+      req.url = 'api/users'
+      req.params = {
+        userName: 'test@dev.com'
+      }
+      next = args => done(args)
+
+      userService = this.stub(userService())
+      userService.getByEmail.resolves(user)
+      
+      userController(userService).getByUserEmail(req, res, next)
+
+      res.on('end', () => {
+        let data = JSON.parse(res._getData())
+        expect(res.statusCode).to.equal(200)
+        expect(data).to.have.property('email', user.email)
+        assert.isTrue(userService.getByEmail.calledOnce)
+        done()
+      })
+    }))
   })
 })
