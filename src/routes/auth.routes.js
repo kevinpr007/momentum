@@ -1,6 +1,6 @@
 const authService = require('../services/auth.service')()
 const userService = require('../services/user.service')()
-const emailService = require('../services/email.service')()
+const emailService = require('../services/email.service')
 
 module.exports = (router) => {
   const authController = require('../controllers/auth.controller')(authService, userService,
