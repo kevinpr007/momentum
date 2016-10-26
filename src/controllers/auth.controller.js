@@ -57,7 +57,7 @@ let authController = (authService, userService, emailService, templateModel) => 
       }
       templateModel.token = req.params.token
       res.render('reset-password', templateModel)
-    } catch(err) {
+    } catch (err) {
       next(err)
     }
   }
