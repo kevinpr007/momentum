@@ -12,16 +12,18 @@ describe('Index requests', () => {
     })
   })
 
-  describe('Given a user that goes to the index route (GET /)', () => {
-    it('returns the home page', done => {
-      templateModel = {}
-      req.method = 'GET'
-      req.url = '/'
+  describe('Given a request to StylePoint API', () => {
+    context('when requesting root url', () => {
+      it('returns the home page', done => {
+        templateModel = {}
+        req.method = 'GET'
+        req.url = '/'
 
-      indexController(templateModel).index(req, res)
+        indexController(templateModel).index(req, res)
 
-      expect(res.statusCode).to.equal(200)
-      done()
+        expect(res.statusCode).to.equal(200)
+        done()
+      })
     })
   })
 })
