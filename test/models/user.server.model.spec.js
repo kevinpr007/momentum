@@ -186,5 +186,19 @@ describe('User schema validation tests', () => {
         }).catch(err => done(err))
       })
     })
+
+    context('when passing a invalid password confirmation', sinon.test(function (done) {
+      it('will return an error', done => {
+        let password = null
+        let confirmPassword = null
+        let user = new User()
+
+        user.confirmPasswordValid(password, confirmPassword).catch(err => {
+          expect(err).to.be.an('Error')
+          expect(err.message).to.contain('Password and Confirm Password')
+          done()
+        })
+      })
+    }))
   })
 })
