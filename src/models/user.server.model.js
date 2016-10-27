@@ -3,7 +3,7 @@ const Schema = mongoose.Schema
 const bcrypt = require('bcrypt-nodejs')
 const mongoDB = require('../config/mongoose.collections.json')
 const roles = require('./roles.server.enum')()
-const config = require('../config/config')
+const config = require('../config/config')().getVariable()
 const Promise = require('bluebird')
 
 const userSchema = new Schema({

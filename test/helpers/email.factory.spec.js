@@ -1,5 +1,3 @@
-const config = require('../../src/config/config')
-
 describe('Email factory tests', () => {
   describe('Given a base information', () => {
 

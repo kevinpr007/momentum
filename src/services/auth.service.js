@@ -1,4 +1,4 @@
-const config = require('../config/config')
+const config = require('../config/config')().getVariable()
 const jwt = require('jsonwebtoken')
 const Promise = require('bluebird')
 const mongoose = require('mongoose')

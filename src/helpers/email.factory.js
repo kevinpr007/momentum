@@ -1,9 +1,9 @@
-const config = require('../config/config')()
+const config = require('../config/config')().getVariable()
 
 module.exports = (to, subject, html) => {
   let getInfo = () => {
     let info = {
-      from: config.getVariable().EMAIL,
+      from: config.EMAIL,
       to: to,
       subject: subject,
       html: html

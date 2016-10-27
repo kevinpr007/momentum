@@ -1,4 +1,4 @@
-const config = require('../config')()
+const config = require('../config')().getVariable()
 const Promise = require('bluebird')
 const passport = require('passport')
 const JwtStrategy = require('passport-jwt').Strategy
@@ -6,7 +6,7 @@ const ExtractJwt = require('passport-jwt').ExtractJwt
 
 const jwtOptions = {
   jwtFromRequest: ExtractJwt.fromAuthHeader(),
-  secretOrKey: config.getVariable().SECRET
+  secretOrKey: config.SECRET
 }
 
 module.exports = () => {
