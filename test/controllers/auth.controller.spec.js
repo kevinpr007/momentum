@@ -296,7 +296,7 @@ describe('User authentication requests', () => {
 
   describe('Given a user requesting to reset password via email confirmation', () => {
     it('returns Not Found (404) if token is not set inside route', sinon.test(function (done) {
-      templateModel = {}
+      let templateModel = {}
       req.method = 'GET'
       req.url = 'api/confirm-reset-password'
 
@@ -314,7 +314,7 @@ describe('User authentication requests', () => {
     }))
 
     it('returns Ok (200) with reset-password page', sinon.test(function (done) {
-      templateModel = {}
+      let templateModel = {}
       req.method = 'GET'
       req.url = 'api/confirm-reset-password'
       req.params = {
