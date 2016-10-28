@@ -200,5 +200,32 @@ describe('User schema validation tests', () => {
         })
       })
     }))
+
+    context('when saving a user', () => {
+      it('will return no error.', sinon.test(function (done) {
+
+      let password = 'Qwerty123'
+        let user = new User({
+          firstName: 'Juan',
+          lastName: 'Del Pueblo',
+          email: 'test@dev.com',
+          password: password,
+          address: {
+            address1: '#123',
+            address2: 'Test St.',
+            city: 'San Juan',
+            state: 'P.R.',
+            zipCode: '00123-3322'
+          }
+        })
+
+        user.save()
+        user.validate().then(args => {
+          expect(args).to.be.equal(undefined)
+          done()
+        })
+        
+      }))
+    })
   })
 })
