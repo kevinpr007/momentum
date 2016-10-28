@@ -132,6 +132,109 @@ describe('User schema validation tests', () => {
     })
   })
 
+  describe('Given a saved user instance', () => {
+    context('when passing all properties', () => {
+      it('will return no error', sinon.test(function (done) {
+        let password = 'Qwerty123'
+        let user = new User({
+          firstName: 'Juan',
+          lastName: 'Del Pueblo',
+          email: 'test@dev.com',
+          password: password,
+          address: {
+            address1: '#123',
+            address2: 'Test St.',
+            city: 'San Juan',
+            state: 'P.R.',
+            zipCode: '00123-3322'
+          }
+        })
+
+        user.save()
+        user.validate().then(args => {
+          expect(args).to.be.equal(undefined)
+          done()
+        })
+      }))
+    })
+
+    context('when generating salt for password fails', () => {
+      it('will return a GenSalt error', sinon.test(function (done) {
+        let password = 'Qwerty123'
+        let user = new User({
+          firstName: 'Juan',
+          lastName: 'Del Pueblo',
+          email: 'test@dev.com',
+          password: password,
+          address: {
+            address1: '#123',
+            address2: 'Test St.',
+            city: 'San Juan',
+            state: 'P.R.',
+            zipCode: '00123-3322'
+          }
+        })
+
+        this.stub(bcrypt, 'genSalt').yields('Error GenSalt Message', null)
+        user.save()
+        user.validate(function (err) {
+          expect(bcrypt.genSalt.calledOnce).to.equal(true)
+          done()
+        })
+      }))
+    })
+
+    context('when generating hash for password fails', () => {
+      it('will return a Hash error', sinon.test(function (done) {
+        let password = 'Qwerty123'
+        let user = new User({
+          firstName: 'Juan',
+          lastName: 'Del Pueblo',
+          email: 'test@dev.com',
+          password: password,
+          address: {
+            address1: '#123',
+            address2: 'Test St.',
+            city: 'San Juan',
+            state: 'P.R.',
+            zipCode: '00123-3322'
+          }
+        })
+
+        this.stub(bcrypt, 'hash').yields('Error Hash Message', null)
+        user.save()
+        user.validate(() => {
+          expect(bcrypt.hash.calledOnce).to.equal(true)
+          done()
+        })
+      }))
+
+      it('will return a Hash error', sinon.test(function (done) {
+        let password = 'Qwerty123'
+        let user = new User({
+          firstName: 'Juan',
+          lastName: 'Del Pueblo',
+          email: 'test@dev.com',
+          password: password,
+          address: {
+            address1: '#123',
+            address2: 'Test St.',
+            city: 'San Juan',
+            state: 'P.R.',
+            zipCode: '00123-3322'
+          }
+        })
+
+        this.stub(user, 'isModified').returns(false)
+        user.save()
+        user.validate(() => {
+          expect(user.isModified.calledOnce).to.equal(true)
+          done()
+        })
+      }))
+    })
+  })
+
   describe('Given a user requesting authentication', () => {
     context('when passing a valid password', () => {
       it('will return a fulfilled promise with value = true', done => {
@@ -187,7 +290,7 @@ describe('User schema validation tests', () => {
       })
     })
 
-    context('when passing a invalid password confirmation', sinon.test(function (done) {
+    context('when passing null values', sinon.test(function (done) {
       it('will return an error', done => {
         let password = null
         let confirmPassword = null
@@ -200,104 +303,5 @@ describe('User schema validation tests', () => {
         })
       })
     }))
-
-    context('when saving a user', () => {
-
-      it('will return no error.', sinon.test(function (done) {
-        let password = 'Qwerty123'
-        let user = new User({
-          firstName: 'Juan',
-          lastName: 'Del Pueblo',
-          email: 'test@dev.com',
-          password: password,
-          address: {
-            address1: '#123',
-            address2: 'Test St.',
-            city: 'San Juan',
-            state: 'P.R.',
-            zipCode: '00123-3322'
-          }
-        })
-
-        user.save()
-        user.validate().then(args => {
-          expect(args).to.be.equal(undefined)
-          done()
-        })
-      }))
-
-      it('will return a GenSalt error.', sinon.test(function (done) {
-        let password = 'Qwerty123'
-        let user = new User({
-          firstName: 'Juan',
-          lastName: 'Del Pueblo',
-          email: 'test@dev.com',
-          password: password,
-          address: {
-            address1: '#123',
-            address2: 'Test St.',
-            city: 'San Juan',
-            state: 'P.R.',
-            zipCode: '00123-3322'
-          }
-        })
-
-        this.stub(bcrypt, 'genSalt').yields('Error GenSalt Message', null)
-        user.save()
-        user.validate(function(err) {
-          expect(bcrypt.genSalt.calledOnce).to.equal(true)
-          done()
-        })
-      }))
-
-      it('will return a Hash error.', sinon.test(function (done) {
-        let password = 'Qwerty123'
-        let user = new User({
-          firstName: 'Juan',
-          lastName: 'Del Pueblo',
-          email: 'test@dev.com',
-          password: password,
-          address: {
-            address1: '#123',
-            address2: 'Test St.',
-            city: 'San Juan',
-            state: 'P.R.',
-            zipCode: '00123-3322'
-          }
-        })
-
-        this.stub(bcrypt, 'hash').yields('Error Hash Message', null)
-        user.save()
-        user.validate(function(err) {
-          expect(bcrypt.hash.calledOnce).to.equal(true)
-          done()
-        })
-      }))
-
-      it('will return a Hash error.', sinon.test(function (done) {
-        let password = 'Qwerty123'
-        let user = new User({
-          firstName: 'Juan',
-          lastName: 'Del Pueblo',
-          email: 'test@dev.com',
-          password: password,
-          address: {
-            address1: '#123',
-            address2: 'Test St.',
-            city: 'San Juan',
-            state: 'P.R.',
-            zipCode: '00123-3322'
-          }
-        })
-
-        this.stub(user, 'isModified').returns(false)
-        user.save()
-        user.validate(function(err) {
-          expect(user.isModified.calledOnce).to.equal(true)
-          done()
-        })
-      }))
-
-    })
   })
 })
