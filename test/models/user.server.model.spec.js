@@ -250,6 +250,30 @@ describe('User schema validation tests', () => {
         })
       }))
 
+      it.only('will return a GenSalt error.', sinon.test(function (done) {
+        let password = 'Qwerty123'
+        let user = new User({
+          firstName: 'Juan',
+          lastName: 'Del Pueblo',
+          email: 'test@dev.com',
+          password: password,
+          address: {
+            address1: '#123',
+            address2: 'Test St.',
+            city: 'San Juan',
+            state: 'P.R.',
+            zipCode: '00123-3322'
+          }
+        })
+
+        this.stub(bcrypt, 'hash').yields('Error Hash Message', null)
+        user.save()
+        user.validate(function(err) {
+          expect(bcrypt.hash.calledOnce).to.equal(true)
+          done()
+        })
+      }))
+
     })
   })
 })
