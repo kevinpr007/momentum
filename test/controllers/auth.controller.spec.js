@@ -1,7 +1,6 @@
 const httpMocks = require('node-mocks-http')
 
 describe('User authentication requests', () => {
-
   let User = require('../../src/models/user.server.model')
   let authController = require('../../src/controllers/auth.controller')
   let userService, authService, emailService, req, res
@@ -92,7 +91,7 @@ describe('User authentication requests', () => {
       emailService = this.stub(emailService({
         to: 'test@dev.com'
       }), 'send').returns({
-        send() {
+        send () {
           return Promise.resolve({
             sent: true
           })
@@ -274,7 +273,7 @@ describe('User authentication requests', () => {
       emailService = this.stub(emailService({
         to: 'test@dev.com'
       }), 'send').returns({
-        send() {
+        send () {
           return Promise.resolve({
             sent: true
           })
@@ -444,7 +443,7 @@ describe('User authentication requests', () => {
       emailService = this.stub(emailService({
         to: 'test@dev.com'
       }), 'send').returns({
-        send() {
+        send () {
           return Promise.resolve({
             sent: true
           })

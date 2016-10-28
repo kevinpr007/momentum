@@ -1,5 +1,4 @@
 describe('Logs schema validation tests', () => {
-
   let Log = require('../../src/models/logs.server.model.js')
 
   describe('Given a Log instance', () => {

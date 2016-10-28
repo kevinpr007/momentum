@@ -1,7 +1,6 @@
 const dotenv = require('dotenv')
 
 let configuration = () => {
-
   let setVariable = ENV => {
     switch (ENV) {
       case 'development':

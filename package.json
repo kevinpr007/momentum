@@ -34,8 +34,7 @@
   "homepage": "https://github.com/Ivan-Marquez/stylepoint#readme",
   "standard": {
     "ignore": [
-      "public/",
-      "test/"
+      "public/"
     ]
   },
   "dependencies": {

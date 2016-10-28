@@ -1,7 +1,6 @@
 const moment = require('moment')
 
 describe('User service tests', () => {
-  
   let User = require('../../src/models/user.server.model.js')
   let userService = require('../../src/services/user.service.js')()
 
@@ -9,10 +8,10 @@ describe('User service tests', () => {
     context('when requesting a user by email', () => {
       it('will return user by specified email', sinon.test(function (done) {
         let findOne = {
-          where() {
+          where () {
             return this
           },
-          exec() {
+          exec () {
             return Promise.resolve(new User())
           }
         }
@@ -29,10 +28,10 @@ describe('User service tests', () => {
     context('when requesting a user by Id', () => {
       it('will return user by specified Id', sinon.test(function (done) {
         let findOne = {
-          where() {
+          where () {
             return this
           },
-          exec() {
+          exec () {
             return Promise.resolve(new User())
           }
         }
@@ -50,7 +49,7 @@ describe('User service tests', () => {
       it('will return all existing users', sinon.test(function (done) {
         let users = [new User(), new User()]
         let find = {
-          exec() {
+          exec () {
             return Promise.resolve(users)
           }
         }

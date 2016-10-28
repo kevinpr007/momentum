@@ -1,7 +1,6 @@
 const httpMocks = require('node-mocks-http')
 
 describe('User entity requests', () => {
-
   let User = require('../../src/models/user.server.model')
   let userController = require('../../src/controllers/user.controller')
   let userService, req, res

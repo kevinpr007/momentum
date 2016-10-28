@@ -1,5 +1,4 @@
 describe('Email service test', () => {
-
   const transporter = require('../../src/config/nodemailer')
   const emailService = require('../../src/services/email.service')
 

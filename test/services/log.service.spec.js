@@ -7,7 +7,6 @@ describe('Log service tests', () => {
   const MESSAGE = 'Error Message'
 
   describe('Given a Code of an existing log', () => {
-
     let log = new Log({
       code: ERROR_CODE,
       status: STATUS,
@@ -32,7 +31,6 @@ describe('Log service tests', () => {
   })
 
   describe('Given a Status of an existing log', () => {
-
     let log = new Log({
       code: ERROR_CODE,
       status: STATUS,
@@ -57,7 +55,6 @@ describe('Log service tests', () => {
   })
 
   describe('Using the getAll function', () => {
-
     let log = new Log({
       code: ERROR_CODE,
       status: STATUS,
@@ -91,7 +88,6 @@ describe('Log service tests', () => {
   })
 
   describe('Given a log information', () => {
-
     let plainLog = {
       code: ERROR_CODE,
       status: STATUS,

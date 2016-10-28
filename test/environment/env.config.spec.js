@@ -1,5 +1,4 @@
 describe('Environment variables test', () => {
-
   beforeEach(() => {
     process.env.NODE_ENV = null
   })
