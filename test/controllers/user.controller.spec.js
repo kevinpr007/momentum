@@ -19,7 +19,7 @@ describe('User entity requests', () => {
         let users = [new User(), new User()]
         req.method = 'GET'
         req.url = 'api/users'
-        next = args => done(args)
+        let next = args => done(args)
 
         userService = this.stub(userService())
         userService.getAll.resolves(users)
@@ -70,7 +70,7 @@ describe('User entity requests', () => {
         req.params = {
           userName: 'test@dev.com'
         }
-        next = args => done(args)
+        let next = args => done(args)
 
         userService = this.stub(userService())
         userService.getByEmail.resolves(user)
