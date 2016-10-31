@@ -1,7 +1,8 @@
 const mongoose = require('mongoose')
 mongoose.Promise = require('bluebird')
-const User = mongoose.model('User')
-const userFactory = require('../helpers/user.factory')
+
+const User = require('../models/user.server.model')
+const _ = require('lodash')
 
 let userService = () => {
   let getAll = () => {
@@ -13,15 +14,15 @@ let userService = () => {
   }
 
   let getById = id => {
-    return User.findOne({_id: id}).exec()
+    return User.findOne().where('_id', id).exec()
   }
 
   let registerUser = user => {
-    return userFactory(user).save()
+    return User.create(_.merge(user, User))
   }
 
   let upsertUser = user => {
-    return user.save()
+    return _.merge(User, user).save()
   }
 
   return {

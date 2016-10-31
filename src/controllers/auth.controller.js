@@ -1,14 +1,13 @@
 const HttpStatus = require('http-status-codes')
-const emailService = require('../services/email.service')
 const emailFactory = require('../helpers/email.factory')
 
-let authController = (authService, userService, templateModel) => {
+let authController = (authService, userService, emailService, templateModel) => {
   let auth = (req, res, next) => {
     let user = null
     userService.getByEmail(req.body.email).then(usr => {
       if (!usr) {
         let err = new Error('Authentication failed. User not found.')
-        err.status = HttpStatus.BAD_REQUEST
+        err.status = HttpStatus.NOT_FOUND
         throw err
       }
       user = usr
@@ -43,7 +42,6 @@ let authController = (authService, userService, templateModel) => {
         user: usr
       })
     }).then(() => {
-      // Send email for new account
       let emailTemplate = require('../services/emails/new-account')(user, req.headers.host).getTemplate()
       let emailInfo = emailFactory(user.email, emailTemplate.subject, emailTemplate.html).getInfo()
       return emailService(emailInfo).send()
@@ -51,8 +49,17 @@ let authController = (authService, userService, templateModel) => {
   }
 
   let confirmResetPassword = (req, res, next) => {
-    templateModel.token = req.params.token
-    res.render('reset-password', templateModel)
+    try {
+      if (!req.params.token) {
+        let err = new Error('No token was provided.')
+        err.status = HttpStatus.NOT_FOUND
+        throw err
+      }
+      templateModel.token = req.params.token
+      res.render('reset-password', templateModel)
+    } catch (err) {
+      next(err)
+    }
   }
 
   let resetPassword = (req, res, next) => {
@@ -64,8 +71,8 @@ let authController = (authService, userService, templateModel) => {
       }
       return authService.resetToken(user)
     }).then(user => {
-      // Confirm Reset Password Email
-      let emailTemplate = require('../services/emails/confirm-reset-password')(req.headers.host, user.resetPasswordToken).getTemplate()
+      let emailTemplate = require('../services/emails/confirm-reset-password')(req.headers.host,
+        user.resetPasswordToken).getTemplate()
       let emailInfo = emailFactory(user.email, emailTemplate.subject, emailTemplate.html).getInfo()
       return emailService(emailInfo).send()
     }).then(data => {
@@ -103,7 +110,6 @@ let authController = (authService, userService, templateModel) => {
         throw err
       }
     }).then(user => {
-      // Reset Password Email
       let emailTemplate = require('../services/emails/reset-password')().getTemplate()
       let emailInfo = emailFactory(user.email, emailTemplate.subject, emailTemplate.html).getInfo()
       return emailService(emailInfo).send()

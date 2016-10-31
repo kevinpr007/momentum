@@ -1,4 +1,4 @@
-const config = require('../config/config')
+const config = require('../config/config')().getVariable()
 
 module.exports = (to, subject, html) => {
   let getInfo = () => {

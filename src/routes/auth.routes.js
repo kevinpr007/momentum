@@ -1,10 +1,11 @@
 const authService = require('../services/auth.service')()
 const userService = require('../services/user.service')()
+const emailService = require('../services/email.service')
 
 module.exports = (router) => {
-  const authController = require('../controllers/auth.controller')(authService, userService, router.templateModel)
+  const authController = require('../controllers/auth.controller')(authService, userService,
+    emailService, router.templateModel)
 
-  // TODO: Add a new middleware to have an automatic default authentication. I just want to add only the exceptions.
   router.post('/auth', authController.auth)
   router.post('/register', authController.register)
   router.post('/complete-reset-password', authController.newPassword)

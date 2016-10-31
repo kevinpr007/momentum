@@ -1,5 +1,5 @@
 const seeder = require('mongoose-seed')
-const config = require('../config')
+const config = require('../config')().getVariable()
 const _ = require('lodash')
 
 const mongoDB = require('../../config/mongoose.collections.json')

@@ -1,38 +1,24 @@
 const mongoose = require('mongoose')
 mongoose.Promise = require('bluebird')
+const _ = require('lodash')
 
-// TODO: Remove hardcode
-const Log = mongoose.model('Log')
+const Log = require('../models/logs.server.model')
 
-// TODO: Return a default message when is null
 let logService = () => {
   let getAll = () => {
     return Log.find().sort({createdOn: -1}).exec()
   }
 
-  let getByCode = (code) => {
+  let getByCode = code => {
     return Log.find().where('code', code).exec()
   }
 
-  let getByStatus = (status) => {
+  let getByStatus = status => {
     return Log.find().where('status', status).exec()
   }
 
-  // TODO: Remove this factory from here
-  let logFactory = (log) => {
-    let newLog = new Log({
-      code: log.code,
-      status: log.status,
-      message: log.message,
-      stack: log.stack,
-      createdOn: log.createdOn
-    })
-    return newLog
-  }
-
   let saveLog = (log) => {
-    let newInst = logFactory(log)
-    return newInst.save()
+    return _.merge(Log, log).save()
   }
 
   return {
