@@ -40,4 +40,4 @@ logSchema.set('toJSON', {
   virtuals: true
 })
 
-module.exports = mongoose.model('Log', logSchema)
+module.exports = mongoose.model(mongoDB.Model.Log, logSchema)

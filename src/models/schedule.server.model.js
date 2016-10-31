@@ -52,4 +52,4 @@ scheduleSchema.set('toJSON', {
   virtuals: true
 })
 
-module.exports = mongoose.model('Schedule', scheduleSchema)
+module.exports = mongoose.model(mongoDB.Model.Schedule, scheduleSchema)

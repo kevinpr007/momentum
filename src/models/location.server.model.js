@@ -55,4 +55,4 @@ locationSchema.set('toJSON', {
   virtuals: true
 })
 
-module.exports = mongoose.model('Location', locationSchema)
+module.exports = mongoose.model(mongoDB.Model.Location, locationSchema)
