@@ -1,6 +1,8 @@
 const mongoose = require('mongoose')
 mongoose.Promise = require('bluebird')
-const User = mongoose.model('User')
+
+const User = require('../models/user.server.model')
+const _ = require('lodash')
 
 let userService = () => {
   let getAll = () => {
@@ -12,24 +14,23 @@ let userService = () => {
   }
 
   let getById = id => {
-    return User.findOne({_id: id}, '-password -salt').exec()
+    return User.findOne().where('_id', id).exec()
   }
 
   let registerUser = user => {
-    let newUser = new User({
-      firstName: user.firstName,
-      lastName: user.lastName,
-      email: user.email,
-      password: user.password
-    })
-    return newUser.save()
+    return User.create(_.merge(user, User))
+  }
+
+  let upsertUser = user => {
+    return _.merge(User, user).save()
   }
 
   return {
     getAll: getAll,
     getById: getById,
     getByEmail: getByEmail,
-    registerUser: registerUser
+    registerUser: registerUser,
+    upsertUser: upsertUser
   }
 }
 

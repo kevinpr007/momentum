@@ -1,16 +1,19 @@
 {
   "name": "stylepoint",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Style Point is a schedule service that connects people to barbers and stylists at the time and location of your choice!",
   "scripts": {
-    "start": "node ./bin/www",
+    "start": "cross-env NODE_ENV=development node ./bin/www",
     "startIntelliJ": "node %NODE_DEBUG_OPTION% ./bin/www",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "cross-env NODE_ENV=development ./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha -- test/**/*.spec.js --require test/config/tests.bootstrap --recursive -R spec",
     "standard": "standard --fix",
     "retire": " retire --node --verbose",
-    "nodemon": "nodemon ./bin/www",
+    "nodemon": "cross-env NODE_ENV=development nodemon ./bin/www --ignore public/",
     "nsp": "nsp check",
-    "push": "npm run standard && npm run retire && npm run nsp"
+    "build": "npm run standard && npm run retire && npm run nsp",
+    "postinstall": "bower install",
+    "benchmark": "node benchmark/homepage.js",
+    "seed": "node  ./src/config/mongoose_seed/configuration"
   },
   "repository": {
     "type": "git",
@@ -29,21 +32,34 @@
     "url": "https://github.com/Ivan-Marquez/stylepoint/issues"
   },
   "homepage": "https://github.com/Ivan-Marquez/stylepoint#readme",
+  "standard": {
+    "ignore": [
+      "public/"
+    ]
+  },
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",
     "bluebird": "~3.4.3",
     "body-parser": "^1.15.2",
+    "bower": "^1.7.9",
     "bunyan": "^1.8.1",
+    "bunyan-format": "^0.2.1",
     "bunyan-middleware": "^0.4.0",
     "bunyan-rotating-file-stream": "^1.6.1",
+    "cross-env": "^3.1.1",
     "dotenv": "~2.0.0",
     "express": "^4.14.0",
+    "express-cluster": "0.0.4",
+    "handlebars-form-helpers": "^0.1.3",
+    "hbs": "^4.0.1",
+    "helmet": "^2.2.0",
     "http-status-codes": "^1.0.6",
     "jsonwebtoken": "^7.1.9",
-    "helmet": "^2.2.0",
     "lodash": "~4.15.0",
+    "moment": "^2.15.1",
     "mongodb": "~2.2.9",
     "mongoose": "^4.5.10",
+    "node-sass-middleware": "^0.9.8",
     "nodemailer": "^2.6.0",
     "passport": "^0.3.2",
     "passport-jwt": "^2.1.0",
@@ -51,10 +67,20 @@
     "serve-favicon": "^2.3.0"
   },
   "devDependencies": {
+    "chai": "^3.5.0",
+    "chai-as-promised": "^6.0.0",
     "debug": "~2.2.0",
+    "istanbul": "^0.4.5",
+    "mocha": "^3.1.0",
+    "mongoose-seed": "^0.3.1",
+    "node-mocks-http": "^1.5.4",
     "nodemon": "^1.10.2",
     "nsp": "^2.6.1",
     "retire": "^1.2.10",
+    "siege": "^0.2.0",
+    "sinon": "^1.17.6",
+    "sinon-as-promised": "^4.0.2",
+    "sinon-mongoose": "^1.3.0",
     "standard": "*"
   }
 }

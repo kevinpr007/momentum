@@ -3,12 +3,29 @@ const Schema = mongoose.Schema
 const bcrypt = require('bcrypt-nodejs')
 const mongoDB = require('../config/mongoose.collections.json')
 const roles = require('./roles.server.enum')()
-const config = require('../config/config')
+const config = require('../config/config')().getVariable()
+const Promise = require('bluebird')
 
 const userSchema = new Schema({
-  firstName: {type: String, required: true, index: 4},
-  lastName: {type: String, required: true, index: 3},
-  email: {type: String, match: /.+@.+\..+/, trim: true, required: true, index: 1, unique: true},
+  firstName: {
+    type: String,
+    required: true,
+    index: true
+  },
+  lastName: {
+    type: String,
+    required: true,
+    index: true
+  },
+  email: {
+    type: String,
+    match: /.+@.+\..+/,
+    trim: true,
+    required: true,
+    index: {
+      unique: true
+    }
+  },
   dob: {
     type: Date,
     validate: [
@@ -30,20 +47,47 @@ const userSchema = new Schema({
   salt: {
     type: String
   },
-  resetPasswordToken: {type: String},
-  resetPasswordExpires: {type: Date},
-  phone: Number,
-  roles: {type: String, enum: roles, index: 2},
-  address: {
-    address1: {type: String, required: true},
-    address2: {type: String},
-    city: {type: String, required: true},
-    state: {type: String, required: true},
-    // this field can have numbers like this 00718-12345
-    zipCode: {type: String, required: true}
+  resetPasswordToken: {
+    type: String
   },
-  createdBy: {type: Schema.ObjectId, ref: mongoDB.Model.User},
-  createdOn: {type: Date, default: Date.now}
+  resetPasswordExpires: {
+    type: Date
+  },
+  phone: Number,
+  roles: {
+    type: String,
+    enum: roles,
+    index: true
+  },
+  address: {
+    address1: {
+      type: String,
+      required: true
+    },
+    address2: {
+      type: String
+    },
+    city: {
+      type: String,
+      required: true
+    },
+    state: {
+      type: String,
+      required: true
+    },
+    zipCode: {
+      type: String,
+      required: true
+    }
+  },
+  createdBy: {
+    type: Schema.ObjectId,
+    ref: mongoDB.Model.User
+  },
+  createdOn: {
+    type: Date,
+    default: Date.now
+  }
 }, {
   collection: mongoDB.Collection.User
 })
@@ -71,12 +115,25 @@ userSchema.pre('save', function (next) {
   })
 })
 
-userSchema.methods.isValidPassword = function (password, cb) {
-  bcrypt.compare(password, this.password, (err, isMatch) => {
-    if (err) {
-      return cb(err)
+userSchema.methods.isValidPassword = function (password) {
+  return new Promise((resolve, reject) => {
+    bcrypt.compare(password, this.password, (err, isMatch) => {
+      if (err) {
+        reject(err)
+      }
+      resolve(isMatch)
+    })
+  })
+}
+
+userSchema.methods.confirmPasswordValid = function (password, confirmPassword) {
+  return new Promise((resolve, reject) => {
+    if (password === null || password === undefined ||
+        confirmPassword === null || confirmPassword === undefined) {
+      reject(new Error('Password and Confirm Password can not be null or undefined'))
     }
-    cb(null, isMatch)
+
+    resolve(password === confirmPassword)
   })
 }
 
@@ -89,4 +146,4 @@ userSchema.set('toJSON', {
   }
 })
 
-mongoose.model(mongoDB.Model.User, userSchema)
+module.exports = mongoose.model(mongoDB.Model.User, userSchema)

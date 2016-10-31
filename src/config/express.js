@@ -1,79 +1,73 @@
 const express = require('express')
 const router = express.Router()
-const path = require('path')
 const favicon = require('serve-favicon')
 const bodyParser = require('body-parser')
 const BunyanMiddleware = require('bunyan-middleware')
 const HttpStatus = require('http-status-codes')
 const helmet = require('helmet')
+const hbs = require('hbs')
+const hbsHelpers = require('handlebars-form-helpers')
+const logger = require('./logger')
 
-module.exports = logger => {
-  /**
-   * Express area
-   */
+module.exports = () => {
   let app = express()
 
   /**
-   * Security area
+   * Security middleware
    */
   app.use(helmet())
 
   /**
-   * Global App Config
+   * Parsing middleware
    */
-  app.use(BunyanMiddleware({
-    headerName: 'X-Request-Id',
-    propertyName: 'reqId',
-    logName: 'req_id',
-    obscureHeaders: [],
-    logger: logger
-  }))
-
-  app.use(bodyParser.json())
-
-  app.use(bodyParser.urlencoded({
-    extended: true
-  }))
-
-  app.use(favicon('./public/img/favicon.ico'))
-  app.use(express.static(path.join(__dirname, 'public')))
-
-  app.use(BunyanMiddleware({
-    headerName: 'X-Request-Id',
-    propertyName: 'reqId',
-    logName: 'req_id',
-    obscureHeaders: [],
-    logger: logger
-  }))
-
   app.use(bodyParser.json())
   app.use(bodyParser.urlencoded({
     extended: true
   }))
-
-  app.use(favicon('./public/img/favicon.ico'))
-  app.use(express.static(path.join(__dirname, 'public')))
 
   /**
-   * Routing Config
+   * Logging middleware
    */
-  app.use('/api', router)
+  app.use(BunyanMiddleware({
+    headerName: 'X-Request-Id',
+    propertyName: 'reqId',
+    logName: 'req_id',
+    obscureHeaders: [],
+    logger: logger
+  }))
 
+  /**
+   * Static Resources / View Engine middleware
+   */
+  app.use(favicon('./public/img/favicon.ico'))
+  app.use(express.static('./public'))
+
+  hbs.registerHelper('section', function (name, options) {
+    this.sections = {}
+    this.sections[name] = options.fn(this)
+  })
+  hbsHelpers.register(hbs.handlebars)
+  app.set('views', './src/views')
+  app.set('view engine', 'hbs')
+
+  /**
+   * Routing middleware
+   */
+  router.templateModel = {
+    year: new Date().getFullYear(),
+    gitUrl: require('../../package.json').homepage
+  }
+
+  app.use('/', router)
+  require('../routes/index.routes')(router)
+
+  app.use('/api', router)
   require('../routes/auth.routes')(router)
   require('../routes/user.routes')(router)
-
-  app.get('/', (request, response) => {
-    response.send('Hello World!')
-  })
-
-  app.use((req, res, next) => {
-    let err = new Error(HttpStatus.getStatusText(HttpStatus.NOT_FOUND))
-    err.status = HttpStatus.NOT_FOUND
-    next(err)
-  })
+  require('../routes/log.routes')(router)
 
   /**
-   * CORS Config
+   * CORS middleware
    */
   app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*')
@@ -85,10 +79,18 @@ module.exports = logger => {
   })
 
   /**
-   * Global Error Config
+   * Global Error middleware
    */
+  const logService = require('../services/log.service')()
+
+  app.use((req, res, next) => {
+    let err = new Error(HttpStatus.getStatusText(HttpStatus.NOT_FOUND))
+    err.status = HttpStatus.NOT_FOUND
+    next(err)
+  })
+
   app.use((err, req, res, next) => {
-    logger.error(err)
+    logService.saveLog(err)
     res.status(err.status || HttpStatus.INTERNAL_SERVER_ERROR).json({
       message: err.message,
       error: app.get('env') === 'development' ? err : {}

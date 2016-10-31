@@ -1,4 +1,4 @@
-const config = require('../config')
+const config = require('../config')().getVariable()
 const Promise = require('bluebird')
 const passport = require('passport')
 const JwtStrategy = require('passport-jwt').Strategy

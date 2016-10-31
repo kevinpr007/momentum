@@ -1,9 +1,10 @@
 # Intelli J
 .idea/
+.vscode/
 *.iml
 
 # Enviroment Variables
-.env
+.env_*
 
 # Logs
 *.log
@@ -36,6 +37,7 @@ build/Release
 # Dependency directories
 node_modules
 jspm_packages
+public/lib/
 
 # Optional npm cache directory
 .npm
