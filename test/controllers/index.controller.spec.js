@@ -1,5 +1,4 @@
 const httpMocks = require('node-mocks-http')
-const express = require('express')
 
 describe('Index requests', () => {
   let indexController = require('../../src/controllers/index.controller')

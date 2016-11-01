@@ -1,25 +1,28 @@
 describe('Log service tests', () => {
   let Log = require('../../src/models/logs.server.model')
   let logService = require('../../src/services/log.service')()
+  let log
 
   const ERROR_CODE = '404'
   const STATUS = 'Status Desc'
   const MESSAGE = 'Error Message'
 
+  beforeEach(() => {
+    log = new Log({
+      code: ERROR_CODE,
+      status: STATUS,
+      Messages: MESSAGE
+    })
+  })
+
   describe('Given a request to Log resource', () => {
     context('when requesting a log by code', () => {
       it('will return log(s) by specified code', sinon.test(function (done) {
-        let log = new Log({
-          code: ERROR_CODE,
-          status: STATUS,
-          Messages: MESSAGE
-        })
-
         let find = {
-          where () {
+          where() {
             return this
           },
-          exec () {
+          exec() {
             return Promise.resolve(log)
           }
         }
@@ -36,17 +39,17 @@ describe('Log service tests', () => {
 
     context('when requesting a log by status', () => {
       it('will return log(s) by specified status', sinon.test(function (done) {
-        let log = new Log({
+        log = new Log({
           code: ERROR_CODE,
           status: STATUS,
           Messages: MESSAGE
         })
 
         let find = {
-          where () {
+          where() {
             return this
           },
-          exec () {
+          exec() {
             return Promise.resolve(log)
           }
         }
@@ -66,10 +69,10 @@ describe('Log service tests', () => {
         let logs = [new Log(), new Log({code: '500'})]
 
         let find = {
-          sort () {
+          sort() {
             return this
           },
-          exec () {
+          exec() {
             return Promise.resolve(logs)
           }
         }
@@ -88,12 +91,12 @@ describe('Log service tests', () => {
 
     context('when requesting to insert / update a log', () => {
       it('will save and return the log object', sinon.test(function (done) {
-        let log = new Log({code: '500'})
-        this.stub(log, 'save').resolves(log)
+        let logCode = new Log({code: '500'})
+        this.stub(logCode, 'save').resolves(logCode)
 
-        logService.saveLog(log).then(result => {
+        logService.saveLog(logCode).then(result => {
           expect(result).to.have.property('code', '500')
-          expect(log.save.calledOnce).to.equal(true)
+          expect(logCode.save.calledOnce).to.equal(true)
           done()
         }).catch(err => done(err))
       }))

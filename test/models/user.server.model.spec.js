@@ -178,6 +178,7 @@ describe('User schema validation tests', () => {
         this.stub(bcrypt, 'genSalt').yields('Error GenSalt Message', null)
         user.save()
         user.validate(function (err) {
+          expect(err).to.equal(null)
           expect(bcrypt.genSalt.calledOnce).to.equal(true)
           done()
         })
@@ -290,8 +291,8 @@ describe('User schema validation tests', () => {
       })
     })
 
-    context('when passing null values', sinon.test(function (done) {
-      it('will return an error', done => {
+    context('when passing null values', () => {
+      it('will return an error', sinon.test(function (done) {
         let password = null
         let confirmPassword = null
         let user = new User()
@@ -301,7 +302,7 @@ describe('User schema validation tests', () => {
           expect(err.message).to.contain('Password and Confirm Password')
           done()
         })
-      })
-    }))
+      }))
+    })
   })
 })

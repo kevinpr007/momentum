@@ -1,5 +1,3 @@
-const moment = require('moment')
-
 describe('User service tests', () => {
   let User = require('../../src/models/user.server.model.js')
   let userService = require('../../src/services/user.service.js')()
