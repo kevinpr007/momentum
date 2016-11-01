@@ -10,3 +10,5 @@ Style Point is a schedule service that connects people to barbers and stylists a
 # License
 
 [PENDING](http://choosealicense.com/)
+
+// TODO: Add more information
