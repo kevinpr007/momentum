@@ -19,10 +19,10 @@ describe('Log service tests', () => {
     context('when requesting a log by code', () => {
       it('will return log(s) by specified code', sinon.test(function (done) {
         let find = {
-          where() {
+          where () {
             return this
           },
-          exec() {
+          exec () {
             return Promise.resolve(log)
           }
         }
@@ -46,10 +46,10 @@ describe('Log service tests', () => {
         })
 
         let find = {
-          where() {
+          where () {
             return this
           },
-          exec() {
+          exec () {
             return Promise.resolve(log)
           }
         }
@@ -69,10 +69,10 @@ describe('Log service tests', () => {
         let logs = [new Log(), new Log({code: '500'})]
 
         let find = {
-          sort() {
+          sort () {
             return this
           },
-          exec() {
+          exec () {
             return Promise.resolve(logs)
           }
         }
