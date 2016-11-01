@@ -8,6 +8,7 @@ const helmet = require('helmet')
 const hbs = require('hbs')
 const hbsHelpers = require('handlebars-form-helpers')
 const logger = require('./logger')
+const logService = require('../services/log.service')()
 
 module.exports = () => {
   let app = express()
@@ -58,6 +59,12 @@ module.exports = () => {
     gitUrl: require('../../package.json').homepage
   }
 
+  /**
+   * Routing Area
+   */
+  // TODO: Apply a General Security Routing to all path
+
+  // TODO: Add the role features to all required path
   app.use('/', router)
   require('../routes/index.routes')(router)
 
@@ -81,8 +88,6 @@ module.exports = () => {
   /**
    * Global Error middleware
    */
-  const logService = require('../services/log.service')()
-
   app.use((req, res, next) => {
     let err = new Error(HttpStatus.getStatusText(HttpStatus.NOT_FOUND))
     err.status = HttpStatus.NOT_FOUND

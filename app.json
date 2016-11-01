@@ -3,15 +3,5 @@
   "description": "Style Point is a schedule service that connects people to barbers and stylists at the time and location of your choice!",
   "repository": "https://github.com/Ivan-Marquez/stylepoint.git",
   "logo": "",
-  "success_url": "/",
-  "env": {
-    "HEROKU_APP_NAME": {
-      "required": true
-    },
-    "DB_URL": {
-      "description": "Mongodb connection for stylePoint db",
-      "required": true
-    }
-  },
-  "image": "heroku/nodejs"
+  "success_url": "/"
 }

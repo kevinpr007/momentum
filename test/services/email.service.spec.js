@@ -12,13 +12,13 @@ describe('Email service test', () => {
           html: `<p>Test Email</p>`
         }
 
-        this.stub(transporter, 'sendMail').yields(null, {success: true})
+        this.stub(transporter, 'sendMailAsync').resolves({success: true})
 
         emailService(template).send().then(result => {
           assert.notEqual(result, null)
           expect(result).to.be.an('object')
           expect(result.success).to.be.equal(true)
-          expect(transporter.sendMail.callCount).to.equal(1)
+          expect(transporter.sendMailAsync.callCount).to.equal(1)
           done()
         }).catch(err => done(err))
       }))
@@ -35,13 +35,13 @@ describe('Email service test', () => {
         let result = new Error('Error Message')
         result.success = false
 
-        this.stub(transporter, 'sendMail').yields(result, null)
+        this.stub(transporter, 'sendMailAsync').rejects(result)
 
         emailService(template).send().catch(err => {
           assert.notEqual(err, null)
           expect(err).to.be.an('Error')
           expect(err.success).to.be.equal(false)
-          expect(transporter.sendMail.callCount).to.equal(1)
+          expect(transporter.sendMailAsync.callCount).to.equal(1)
           done()
         })
       }))

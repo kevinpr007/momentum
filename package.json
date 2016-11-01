@@ -23,11 +23,12 @@
     "salon",
     "barber",
     "style",
+    "point", 
     "stylist",
     "appointment"
   ],
   "author": "Kevin Rivera, Ivan Marquez",
-  "license": "ISC",
+  "license": "// TODO: Add License",
   "bugs": {
     "url": "https://github.com/Ivan-Marquez/stylepoint/issues"
   },

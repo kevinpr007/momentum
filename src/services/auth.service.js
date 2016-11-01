@@ -8,8 +8,7 @@ const User = require('../models/user.server.model')
 const tokenLife = config.TOKEN_LIFE
 const _ = require('lodash')
 
-let randomBytes = Promise
-  .promisify(require('crypto').randomBytes)
+let randomBytes = Promise.promisify(require('crypto').randomBytes)
 
 let authService = () => {
   let generateToken = user => {

@@ -39,7 +39,6 @@ cluster(function (worker) {
     console.log(`Listening on ${bind}`)
   })
 
-  // TODO: Verify this area.
   module.exports = app
 }, {
   // count: 5,       // number of workers: defaults to os.cpus().length
