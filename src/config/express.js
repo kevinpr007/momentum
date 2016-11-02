@@ -9,6 +9,7 @@ const hbs = require('hbs')
 const hbsHelpers = require('handlebars-form-helpers')
 const logger = require('./logger')
 const logService = require('../services/log.service')()
+const package = require('../../package.json')
 
 module.exports = () => {
   let app = express()
@@ -56,7 +57,8 @@ module.exports = () => {
    */
   router.templateModel = {
     year: new Date().getFullYear(),
-    gitUrl: require('../../package.json').homepage
+    gitUrl: package.homepage,
+    version: package.version
   }
 
   /**
