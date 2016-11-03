@@ -16,20 +16,21 @@ describe('User entity requests', () => {
   describe('Given a request to User resource', () => {
     context('when requesting to retrieve all users', () => {
       it('returns Ok (200) with json array containing all existing users', sinon.test(function (done) {
-        let users = [new User(), new User()]
+        let result = [2, [new User(), new User()]]
         req.method = 'GET'
         req.url = 'api/users'
         let next = args => done(args)
 
         userService = this.stub(userService())
-        userService.getAll.resolves(users)
+        userService.getAll.resolves(result)
 
         userController(userService).getAllUsers(req, res, next)
 
         res.on('end', () => {
           let data = JSON.parse(res._getData())
-          expect(data.length).to.equal(2)
+          expect(data.total).to.equal(2)
           expect(res.statusCode).to.equal(200)
+          expect(data.items.length).to.equal(2)
           assert.isTrue(userService.getAll.calledOnce)
           done()
         })
