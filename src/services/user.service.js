@@ -1,12 +1,19 @@
 const mongoose = require('mongoose')
-mongoose.Promise = require('bluebird')
+const Promise = require('bluebird')
+mongoose.Promise = Promise
 
 const User = require('../models/user.server.model')
 const _ = require('lodash')
 
 let userService = () => {
-  let getAll = () => {
-    return User.find().exec()
+  let getAll = (page = 0, pageSize = 10) => {
+    page = Math.max(0, page)
+    return Promise.all([
+      User.count().exec(),
+      User.find().sort({
+        email: 'asc'
+      }).skip(pageSize * page).limit(pageSize).exec()
+    ])
   }
 
   let getByEmail = email => {
@@ -22,7 +29,7 @@ let userService = () => {
   }
 
   let upsertUser = user => {
-    return _.merge(User, user).save()
+    return _.merge(new User(), user).save()
   }
 
   return {
