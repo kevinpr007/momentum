@@ -1,9 +1,10 @@
 const HttpStatus = require('http-status-codes')
+let setHypermedia = require('../helpers/user-hypermedia')
 
 let userController = userService => {
   let getAllUsers = (req, res, next) => {
-    userService.getAll().then(users => {
-      return res.status(HttpStatus.OK).json(users)
+    userService.getAll().then(result => {
+      setHypermedia(req, res, result)
     }).catch(next)
   }
 
