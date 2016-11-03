@@ -1,5 +1,4 @@
 const seeder = require('mongoose-seed')
-const config = require('../config')().getVariable()
 const _ = require('lodash')
 
 const mongoDB = require('../../config/mongoose.collections.json')
@@ -11,6 +10,9 @@ const scheduleData = require('../mongoose_seed/schedule.seed')
 const workshiftData = require('../mongoose_seed/workshift.seed')
 
 let mainData = _.concat(userData, logData, locationData, serviceData, scheduleData, workshiftData)
+let config = require('../config')()
+config.setVariable(process.env.NODE_ENV)
+config = config.getVariable()
 
 // Connect to MongoDB via Mongoose
 seeder.connect(config.DB_URL, () => {

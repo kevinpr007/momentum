@@ -13,7 +13,7 @@
     "build": "npm run standard && npm run retire && npm run nsp",
     "postinstall": "bower install",
     "benchmark": "node benchmark/homepage.js",
-    "seed": "node  ./src/config/mongoose_seed/configuration"
+    "seed": "cross-env NODE_ENV=development node ./src/config/mongoose_seed/configuration"
   },
   "repository": {
     "type": "git",
