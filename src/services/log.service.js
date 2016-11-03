@@ -17,8 +17,8 @@ let logService = () => {
     return Log.find().where('status', status).exec()
   }
 
-  let saveLog = (log) => {
-    return _.merge(Log, log).save()
+  let saveLog = log => {
+    return _.merge(new Log(), log).save()
   }
 
   return {
