@@ -66,7 +66,7 @@ describe('User service tests', () => {
             return Promise.resolve(10)
           }
         }
-        
+
         this.stub(User, 'find').returns(find)
         this.stub(User, 'count').returns(count)
 
