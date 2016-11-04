@@ -1,3 +1,4 @@
+const config = require('../config/config')().getVariable()
 const mongoose = require('mongoose')
 const Promise = require('bluebird')
 mongoose.Promise = Promise
@@ -6,7 +7,7 @@ const User = require('../models/user.server.model')
 const _ = require('lodash')
 
 let userService = () => {
-  let getAll = (page = 0, pageSize = 10) => {
+  let getAll = (page = 0, pageSize = parseInt(config.PAGE_SIZE)) => {
     page = Math.max(0, page)
     return Promise.all([
       User.count().exec(),

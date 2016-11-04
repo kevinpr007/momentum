@@ -33,7 +33,7 @@ let configuration = () => {
       SALT_FACTOR: process.env.SALT_FACTOR,
       PASSWORD_LENGHT: process.env.PASSWORD_LENGHT,
       RANDOM_BYTES: process.env.RANDOM_BYTES,
-      DEFAULT_PAGINATION: process.env.DEFAULT_PAGINATION
+      PAGE_SIZE: process.env.PAGE_SIZE
     }
 
     return result
