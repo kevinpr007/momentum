@@ -28,7 +28,6 @@ describe('User entity requests', () => {
 
         res.on('end', () => {
           let result = JSON.parse(res._getData())
-          expect(result.total).to.equal(2)
           expect(res.statusCode).to.equal(200)
           expect(result.data.length).to.equal(2)
           assert.isTrue(userService.getAll.calledOnce)
