@@ -37,6 +37,22 @@ describe('Log entity requests', () => {
         })
       }))
 
+      it('returns Internal Server Error because have a NaN pagination value', sinon.test(function (done) {
+        req.params.page = 'Invalid'
+        let next = (err) => done(err)
+
+        logService = this.stub(logService())
+
+        try {
+          logController(logService).getAllLogs(req, res, next)
+        } catch (err) {
+          expect(err).to.be.a('Error')
+          expect(err.status).to.equal(HttpStatus.INTERNAL_SERVER_ERROR)
+          expect(err.message).to.contains('pagination')
+          done()
+        }
+      }))
+
       it('returns Internal Server Error (500) with error object', sinon.test(function (done) {
         let errMessage = 'Internal Error Message'
         let err = new Error(errMessage)
