@@ -4,7 +4,7 @@
   "description": "Style Point is a schedule service that connects people to barbers and stylists at the time and location of your choice!",
   "scripts": {
     "start": "cross-env NODE_ENV=development node ./bin/www",
-    "startIntelliJ": "node %NODE_DEBUG_OPTION% ./bin/www",
+    "startIntelliJ": "cross-env NODE_ENV=development node %NODE_DEBUG_OPTION% ./bin/www",
     "test": "cross-env NODE_ENV=development ./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha -- test/**/*.spec.js --require test/config/tests.bootstrap --recursive -R spec",
     "standard": "standard --fix",
     "retire": " retire --node --verbose",
