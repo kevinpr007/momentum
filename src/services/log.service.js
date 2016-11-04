@@ -1,12 +1,20 @@
 const mongoose = require('mongoose')
 mongoose.Promise = require('bluebird')
-const _ = require('lodash')
 
 const Log = require('../models/logs.server.model')
+const _ = require('lodash')
 
 let logService = () => {
-  let getAll = (page) => {
-    return Log.find().sort({createdOn: -1}).limit(parseInt(process.env.PAGE_SIZE)).skip(parseInt(process.env.PAGE_SIZE) * (page - 1)).exec()
+  let getAll = (page, pageSize) => {
+    page = Math.max(0, page)
+    return Promise.all([
+      Log.count().exec(),
+      Log.find()
+      .sort({createdOn: -1})
+      .skip(pageSize * page)
+      .limit(pageSize)
+      .exec()
+    ])
   }
 
   let getByCode = code => {

@@ -13,7 +13,8 @@ const logSchema = new Schema({
     index: true
   },
   message: {
-    type: String
+    type: String,
+    default: null
   },
   stack: {
     type: String
