@@ -1,7 +1,5 @@
-const config = require('../config/config')().getVariable()
 const mongoose = require('mongoose')
-const Promise = require('bluebird')
-mongoose.Promise = Promise
+mongoose.Promise = require('bluebird')
 
 const User = require('../models/user.server.model')
 const _ = require('lodash')
@@ -11,9 +9,11 @@ let userService = () => {
     page = Math.max(0, page)
     return Promise.all([
       User.count().exec(),
-      User.find().sort({
-        email: 'asc'
-      }).skip(pageSize * page).limit(pageSize).exec()
+      User.find()
+      .sort({email: 'asc'})
+      .skip(pageSize * page)
+      .limit(pageSize)
+      .exec()
     ])
   }
 
