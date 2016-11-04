@@ -27,10 +27,10 @@ describe('User entity requests', () => {
         userController(userService).getAllUsers(req, res, next)
 
         res.on('end', () => {
-          let data = JSON.parse(res._getData())
-          expect(data.total).to.equal(2)
+          let result = JSON.parse(res._getData())
+          expect(result.total).to.equal(2)
           expect(res.statusCode).to.equal(200)
-          expect(data.items.length).to.equal(2)
+          expect(result.data.length).to.equal(2)
           assert.isTrue(userService.getAll.calledOnce)
           done()
         })
