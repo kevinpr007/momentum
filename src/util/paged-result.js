@@ -12,7 +12,7 @@ module.exports = (page = 0, pageSize = parseInt(config.PAGE_SIZE), data) => {
     totalPages: totalPages,
     totalCount: data[0],
     data: data[1],
-    prevPage: page > 1 ? page - 1 : '',
-    nextPage: page < totalPages ? parseInt(page) + 1 : ''
+    prevPage: page > 1 ? page - 1 : null,
+    nextPage: page < totalPages ? parseInt(page) + 1 : null
   }
 }
