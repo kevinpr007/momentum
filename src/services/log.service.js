@@ -6,7 +6,7 @@ const Log = require('../models/logs.server.model')
 
 let logService = () => {
   let getAll = (page) => {
-    return Log.find().sort({createdOn: -1}).limit(parseInt(process.env.DEFAULT_PAGINATION)).skip(parseInt(process.env.DEFAULT_PAGINATION) * (page - 1)).exec()
+    return Log.find().sort({createdOn: -1}).limit(parseInt(process.env.PAGE_SIZE)).skip(parseInt(process.env.PAGE_SIZE) * (page - 1)).exec()
   }
 
   let getByCode = code => {
