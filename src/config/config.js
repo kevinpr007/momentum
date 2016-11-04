@@ -32,7 +32,8 @@ let configuration = () => {
       TOKEN_LIFE: process.env.TOKEN_LIFE,
       SALT_FACTOR: process.env.SALT_FACTOR,
       PASSWORD_LENGHT: process.env.PASSWORD_LENGHT,
-      RANDOM_BYTES: process.env.RANDOM_BYTES
+      RANDOM_BYTES: process.env.RANDOM_BYTES,
+      PAGE_SIZE: process.env.PAGE_SIZE
     }
 
     return result
