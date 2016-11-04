@@ -15,10 +15,11 @@ describe('Log entity requests', () => {
   })
 
   describe('Given a request to Log resource', () => {
-    context('when requesting to retrieve all logs in the system', () => {
+    context('when requesting to retrieve all logs in the system with pagination', () => {
       it('returns Ok (200) with json array containing all logs in database', sinon.test(function (done) {
         let logs = [new Log({code: '200'}), new Log({code: '201'})]
         let next = err => done(err)
+        req.params.page = 1
 
         logService = this.stub(logService())
         logService.getAll.resolves(logs)
@@ -40,6 +41,7 @@ describe('Log entity requests', () => {
         let errMessage = 'Internal Error Message'
         let err = new Error(errMessage)
         err.status = HttpStatus.INTERNAL_SERVER_ERROR
+        req.params.page = 1
 
         logService = this.stub(logService())
         logService.getAll.rejects(err)

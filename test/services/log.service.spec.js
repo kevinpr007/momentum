@@ -65,11 +65,17 @@ describe('Log service tests', () => {
     })
 
     context('when requesting all logs', () => {
-      it('will return a list of all logs', sinon.test(function (done) {
-        let logs = [new Log(), new Log({code: '500'})]
+      it('will return a list of logs with pagination', sinon.test(function (done) {
+        let logs = [new Log(), new Log(), new Log(), new Log(), new Log(), new Log(), new Log({code: '500'})]
 
         let find = {
           sort () {
+            return this
+          },
+          limit () {
+            return this
+          },
+          skip () {
             return this
           },
           exec () {
@@ -82,8 +88,8 @@ describe('Log service tests', () => {
         logService.getAll().then(result => {
           assert.notEqual(result, null)
           expect(result).to.be.an('Array')
-          assert.equal(result.length, 2)
-          expect(result[1].code).to.be.equal('500')
+          assert.equal(result.length, 7)
+          expect(result[6].code).to.be.equal('500')
           done()
         }).catch(err => done(err))
       }))
