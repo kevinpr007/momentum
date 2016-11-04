@@ -1,5 +1,5 @@
 const HttpStatus = require('http-status-codes')
-const emailFactory = require('../helpers/email.factory')
+const emailFactory = require('../util/email.factory')
 
 let authController = (authService, userService, emailService, templateModel) => {
   let auth = (req, res, next) => {
