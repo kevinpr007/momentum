@@ -10,10 +10,10 @@ let logService = () => {
     return Promise.all([
       Log.count().exec(),
       Log.find()
-      .sort({createdOn: -1})
-      .skip(pageSize * page)
-      .limit(pageSize)
-      .exec()
+        .sort({createdOn: -1})
+        .skip(pageSize * page)
+        .limit(pageSize)
+        .exec()
     ])
   }
 

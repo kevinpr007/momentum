@@ -82,14 +82,20 @@ describe('Log service tests', () => {
             return Promise.resolve(logs)
           }
         }
+        let count = {
+          exec () {
+            return Promise.resolve(10)
+          }
+        }
 
         this.stub(Log, 'find').returns(find)
+        this.stub(Log, 'count').returns(count)
 
         logService.getAll().then(result => {
           assert.notEqual(result, null)
           expect(result).to.be.an('Array')
-          assert.equal(result.length, 7)
-          expect(result[6].code).to.be.equal('500')
+          assert.equal(result[1].length, 7)
+          expect(result[1][6].code).to.be.equal('500')
           done()
         }).catch(err => done(err))
       }))
