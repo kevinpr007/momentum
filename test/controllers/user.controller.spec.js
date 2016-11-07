@@ -1,5 +1,6 @@
 const httpMocks = require('node-mocks-http')
 const HttpStatus = require('http-status-codes')
+const config = require('../../src/config/config')()
 
 describe('User entity requests', () => {
   let User = require('../../src/models/user.server.model')

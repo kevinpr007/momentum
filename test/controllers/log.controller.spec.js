@@ -1,5 +1,6 @@
 const HttpStatus = require('http-status-codes')
 const httpMocks = require('node-mocks-http')
+const config = require('../../src/config/config')()
 
 describe('Log entity requests', () => {
   let Log = require('../../src/models/logs.server.model')
