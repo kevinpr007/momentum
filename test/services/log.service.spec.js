@@ -1,9 +1,11 @@
+const HttpStatus = require('http-status-codes')
+
 describe('Log service tests', () => {
   let Log = require('../../src/models/logs.server.model')
   let logService = require('../../src/services/log.service')()
   let log
 
-  const ERROR_CODE = '404'
+  const ERROR_CODE = HttpStatus.NOT_FOUND.toString()
   const STATUS = 'Status Desc'
   const MESSAGE = 'Error Message'
 

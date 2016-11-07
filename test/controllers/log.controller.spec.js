@@ -6,6 +6,9 @@ describe('Log entity requests', () => {
   let logController = require('../../src/controllers/log.controller')
   let logService, req, res
 
+  const TOTAL_FIELD = 0
+  const DATA_FIELD = 1
+
   beforeEach(() => {
     req = httpMocks.createRequest()
     res = httpMocks.createResponse({
@@ -17,7 +20,9 @@ describe('Log entity requests', () => {
   describe('Given a request to Log resource', () => {
     context('when requesting to retrieve all logs in the database', () => {
       it('returns Ok (200) with json array with valid arguments', sinon.test(function (done) {
-        let result = [2, [new Log({code: '200'}), new Log({code: '201'})]]
+        let TotalCount = 2
+
+        let result = [TotalCount, [new Log({code: '200'}), new Log({code: '201'})]]
         let next = err => done(err)
         req.params.page = 1
 
@@ -31,8 +36,8 @@ describe('Log entity requests', () => {
           assert.isTrue(res._isJSON())
           assert.isTrue(logService.getAll.calledOnce)
           expect(response.data.length).to.equal(2)
-          expect(response.data[0].code).to.equal(result[1][0].code)
-          expect(response.data[1].code).to.equal(result[1][1].code)
+          expect(response.data[TOTAL_FIELD].code).to.equal(result[DATA_FIELD][0].code)
+          expect(response.data[DATA_FIELD].code).to.equal(result[DATA_FIELD][1].code)
           done()
         })
       }))
@@ -47,7 +52,7 @@ describe('Log entity requests', () => {
           logController(logService).getAllLogs(req, res, next)
         } catch (err) {
           expect(err).to.be.an('Error')
-          expect(err).to.have.property('status', 500)
+          expect(err).to.have.property('status', HttpStatus.INTERNAL_SERVER_ERROR)
           done()
         }
       }))
@@ -62,7 +67,7 @@ describe('Log entity requests', () => {
           logController(logService).getAllLogs(req, res, next)
         } catch (err) {
           expect(err).to.be.an('Error')
-          expect(err).to.have.property('status', 500)
+          expect(err).to.have.property('status', HttpStatus.INTERNAL_SERVER_ERROR)//
           done()
         }
       }))

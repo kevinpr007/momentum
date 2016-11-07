@@ -1,4 +1,5 @@
 const httpMocks = require('node-mocks-http')
+const HttpStatus = require('http-status-codes')
 
 describe('Index requests', () => {
   let indexController = require('../../src/controllers/index.controller')
@@ -20,7 +21,7 @@ describe('Index requests', () => {
 
         indexController(templateModel).index(req, res)
 
-        expect(res.statusCode).to.equal(200)
+        expect(res.statusCode).to.equal(HttpStatus.OK)
         done()
       })
     })
