@@ -61,6 +61,9 @@ module.exports = () => {
     version: package.version
   }
 
+  /**
+   * Routing Area
+   */
   // TODO: Apply a General Security Routing to all paths
   // TODO: Add the role features to all required paths
   app.use('/', router)
