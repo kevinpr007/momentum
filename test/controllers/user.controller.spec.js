@@ -16,9 +16,11 @@ describe('User entity requests', () => {
   describe('Given a request to User resource', () => {
     context('when requesting to retrieve all users', () => {
       it('returns Ok (200) with json array with valid arguments', sinon.test(function (done) {
-        let result = [2, [new User(), new User()]]
+        let result = [100, [new User(), new User()]]
         req.method = 'GET'
         req.url = 'api/users'
+        req.query.page = 5
+        req.query.pageSize = 10
         let next = args => done(args)
 
         userService = this.stub(userService())
