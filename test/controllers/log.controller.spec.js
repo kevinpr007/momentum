@@ -15,8 +15,8 @@ describe('Log entity requests', () => {
   })
 
   describe('Given a request to Log resource', () => {
-    context('when requesting to retrieve all logs with valid arguments', () => {
-      it('returns Ok (200) with json array containing all logs in database', sinon.test(function (done) {
+    context('when requesting to retrieve all logs in the database', () => {
+      it('returns Ok (200) with json array with valid arguments', sinon.test(function (done) {
         let result = [2, [new Log({code: '200'}), new Log({code: '201'})]]
         let next = err => done(err)
         req.params.page = 1
@@ -36,25 +36,33 @@ describe('Log entity requests', () => {
           done()
         })
       }))
-    })
 
-    context('when requesting to retrieve all logs sending a non-numeric page', () => {
-      it('returns Internal Server Error', sinon.test(function (done) {
-        req.params.page = 'Invalid'
-        let errMessage = 'Wrong pagination sent as argument'
-        let err = new Error(errMessage)
-        err.status = HttpStatus.INTERNAL_SERVER_ERROR
+      it('returns Internal Server Error (500) with invalid page as argument', sinon.test(function (done) {
+        req.query.page = 'Invalid'
+        let next = args => done(args)
 
         logService = this.stub(logService())
-        logService.getAll.rejects(err)
 
-        logController(logService).getAllLogs(req, res, next)
+        try {
+          logController(logService).getAllLogs(req, res, next)
+        } catch (err) {
+          expect(err).to.be.an('Error')
+          expect(err).to.have.property('status', 500)
+          done()
+        }
+      }))
 
-        function next (args) {
-          expect(args).to.be.a('Error')
-          assert.isTrue(logService.getAll.calledOnce)
-          expect(args.status).to.equal(HttpStatus.INTERNAL_SERVER_ERROR)
-          expect(args.message).to.contains('pagination')
+      it('returns Internal Server Error (500) with invalid page size as argument', sinon.test(function (done) {
+        req.query.pageSize = 'Invalid'
+        let next = args => done(args)
+
+        logService = this.stub(logService())
+
+        try {
+          logController(logService).getAllLogs(req, res, next)
+        } catch (err) {
+          expect(err).to.be.an('Error')
+          expect(err).to.have.property('status', 500)
           done()
         }
       }))

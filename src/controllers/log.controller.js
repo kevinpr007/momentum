@@ -7,7 +7,7 @@ let logController = (logService) => {
     let page = parseInt(req.query.page || 0)
 
     if (page == undefined || isNaN(page)) {
-      let err = new Error('You must provide a pagination number')
+      let err = new Error('You must provide a page number')
       err.status = HttpStatus.INTERNAL_SERVER_ERROR
       throw err
     }
