@@ -8,11 +8,8 @@ describe('Environment variables test', () => {
       it('will set NODE_ENV to "development"', sinon.test(function (done) {
         process.env.NODE_ENV = 'development'
         let envVariable = require('../../src/config/config')()
-        envVariable.setVariable(process.env.NODE_ENV)
 
-        let result = envVariable.getVariable()
-
-        expect(result.NODE_ENV).to.equal(process.env.NODE_ENV)
+        expect(envVariable.NODE_ENV).to.equal(process.env.NODE_ENV)
         done()
       }))
     })
@@ -21,22 +18,18 @@ describe('Environment variables test', () => {
       it('will set NODE_ENV to "staging"', sinon.test(function (done) {
         process.env.NODE_ENV = 'staging'
         let envVariable = require('../../src/config/config')()
-        envVariable.setVariable(process.env.NODE_ENV)
 
-        let result = envVariable.getVariable()
-
-        expect(result.NODE_ENV).to.equal(process.env.NODE_ENV)
+        expect(envVariable.NODE_ENV).to.equal(process.env.NODE_ENV)
         done()
       }))
     })
 
     context('when passing a null or unknown value', () => {
       it('will throw an error', sinon.test(function (done) {
-        process.env.NODE_ENV = process.env.NODE_ENV || 'unknown'
-        let envVariable = require('../../src/config/config')()
+        process.env.NODE_ENV = 'unknown'
 
         try {
-          envVariable.setVariable(process.env.NODE_ENV)
+          let envVariable = require('../../src/config/config')()
         } catch (args) {
           expect(args).to.be.a('Error')
           expect(args.message).to.contain('Error setting the environment')

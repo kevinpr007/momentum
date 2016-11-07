@@ -1,6 +1,6 @@
 const HttpStatus = require('http-status-codes')
 const pagedResult = require('../util/paged-result')
-const config = require('../config/config')().getVariable()
+const config = require('../config/config')()
 
 let userController = userService => {
   let getAllUsers = (req, res, next) => {

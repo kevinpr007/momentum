@@ -9,4 +9,4 @@ global.sinon = require('sinon')
 require('sinon-mongoose')
 require('sinon-as-promised')
 
-require('../../src/config/config')().setVariable(process.env.NODE_ENV)
+global.config = require('../../src/config/config')()

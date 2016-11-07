@@ -20,7 +20,6 @@ describe('User entity requests', () => {
         req.method = 'GET'
         req.url = 'api/users'
         req.query.page = 5
-        req.query.pageSize = 10
         let next = args => done(args)
 
         userService = this.stub(userService())

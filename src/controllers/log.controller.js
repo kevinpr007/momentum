@@ -1,6 +1,6 @@
 const HttpStatus = require('http-status-codes')
 const pagedResult = require('../util/paged-result')
-const config = require('../config/config')().getVariable()
+const config = require('../config/config')()
 
 let logController = (logService) => {
   let getAllLogs = (req, res, next) => {

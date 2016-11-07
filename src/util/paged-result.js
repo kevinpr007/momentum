@@ -1,6 +1,4 @@
 let config = require('../config/config')()
-config.setVariable(process.env.NODE_ENV)
-config = config.getVariable()
 
 /**
  * @pagedResult: It is required that the result parameter contains the total count

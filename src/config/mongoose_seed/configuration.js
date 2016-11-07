@@ -11,8 +11,6 @@ const workshiftData = require('../mongoose_seed/workshift.seed')
 
 let mainData = _.concat(userData, logData, locationData, serviceData, scheduleData, workshiftData)
 let config = require('../config')()
-config.setVariable(process.env.NODE_ENV)
-config = config.getVariable()
 
 // Connect to MongoDB via Mongoose
 seeder.connect(config.DB_URL, () => {
