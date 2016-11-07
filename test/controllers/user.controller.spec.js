@@ -34,9 +34,39 @@ describe('User entity requests', () => {
           done()
         })
       }))
-      
-      it.skip('returns Internal Server Error (500) with invalid arguments', sinon.test(function (done) {
-        // TODO: Test invalid args error!
+
+      it('returns Internal Server Error (500) with invalid page as argument', sinon.test(function (done) {
+        req.method = 'GET'
+        req.url = 'api/users'
+        req.query.page = 'invalid'
+        let next = args => done(args)
+
+        userService = this.stub(userService())
+
+        try {
+          userController(userService).getAllUsers(req, res, next)
+        } catch (err) {
+          expect(err).to.be.an('Error')
+          expect(err).to.have.property('status', 500)
+          done()
+        }
+      }))
+
+      it('returns Internal Server Error (500) with invalid page size as argument', sinon.test(function (done) {
+        req.method = 'GET'
+        req.url = 'api/users'
+        req.query.pageSize = 'invalid'
+        let next = args => done(args)
+
+        userService = this.stub(userService())
+
+        try {
+          userController(userService).getAllUsers(req, res, next)
+        } catch (err) {
+          expect(err).to.be.an('Error')
+          expect(err).to.have.property('status', 500)
+          done()
+        }
       }))
     })
 
