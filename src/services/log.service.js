@@ -1,12 +1,20 @@
 const mongoose = require('mongoose')
 mongoose.Promise = require('bluebird')
-const _ = require('lodash')
 
 const Log = require('../models/logs.server.model')
+const _ = require('lodash')
 
 let logService = () => {
-  let getAll = () => {
-    return Log.find().sort({createdOn: -1}).exec()
+  let getAll = (page, pageSize) => {
+    page = Math.max(0, page)
+    return Promise.all([
+      Log.count().exec(),
+      Log.find()
+        .sort({createdOn: -1})
+        .skip(pageSize * page)
+        .limit(pageSize)
+        .exec()
+    ])
   }
 
   let getByCode = code => {
@@ -17,8 +25,9 @@ let logService = () => {
     return Log.find().where('status', status).exec()
   }
 
-  let saveLog = (log) => {
-    return _.merge(Log, log).save()
+  let saveLog = log => {
+    //TODO: Fix the message field. It's always undefined
+    return _.merge(new Log(), log).save()
   }
 
   return {

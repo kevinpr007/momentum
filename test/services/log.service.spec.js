@@ -1,9 +1,11 @@
+const HttpStatus = require('http-status-codes')
+
 describe('Log service tests', () => {
   let Log = require('../../src/models/logs.server.model')
   let logService = require('../../src/services/log.service')()
   let log
 
-  const ERROR_CODE = '404'
+  const ERROR_CODE = HttpStatus.NOT_FOUND.toString()
   const STATUS = 'Status Desc'
   const MESSAGE = 'Error Message'
 
@@ -65,25 +67,37 @@ describe('Log service tests', () => {
     })
 
     context('when requesting all logs', () => {
-      it('will return a list of all logs', sinon.test(function (done) {
-        let logs = [new Log(), new Log({code: '500'})]
+      it('will return a list of logs with pagination', sinon.test(function (done) {
+        let logs = [new Log(), new Log(), new Log(), new Log(), new Log(), new Log(), new Log({code: '500'})]
 
         let find = {
           sort () {
+            return this
+          },
+          limit () {
+            return this
+          },
+          skip () {
             return this
           },
           exec () {
             return Promise.resolve(logs)
           }
         }
+        let count = {
+          exec () {
+            return Promise.resolve(10)
+          }
+        }
 
         this.stub(Log, 'find').returns(find)
+        this.stub(Log, 'count').returns(count)
 
         logService.getAll().then(result => {
           assert.notEqual(result, null)
           expect(result).to.be.an('Array')
-          assert.equal(result.length, 2)
-          expect(result[1].code).to.be.equal('500')
+          assert.equal(result[1].length, 7)
+          expect(result[1][6].code).to.be.equal('500')
           done()
         }).catch(err => done(err))
       }))

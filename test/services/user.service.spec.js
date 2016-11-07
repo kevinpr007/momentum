@@ -13,6 +13,7 @@ describe('User service tests', () => {
             return Promise.resolve(new User())
           }
         }
+
         this.stub(User, 'findOne').returns(findOne)
 
         userService.getByEmail('ivan@dev.com').then(user => {
@@ -47,14 +48,31 @@ describe('User service tests', () => {
       it('will return all existing users', sinon.test(function (done) {
         let users = [new User(), new User()]
         let find = {
+          sort () {
+            return this
+          },
+          skip () {
+            return this
+          },
+          limit () {
+            return this
+          },
           exec () {
             return Promise.resolve(users)
           }
         }
+        let count = {
+          exec () {
+            return Promise.resolve(10)
+          }
+        }
+
         this.stub(User, 'find').returns(find)
+        this.stub(User, 'count').returns(count)
 
         userService.getAll().then(users => {
           expect(User.find.calledOnce).to.equal(true)
+          expect(User.count.calledOnce).to.equal(true)
           expect(users.length).to.equal(2)
           done()
         }).catch(err => done(err))

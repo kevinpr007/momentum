@@ -1,9 +1,14 @@
 const httpMocks = require('node-mocks-http')
+const HttpStatus = require('http-status-codes')
+const config = require('../../src/config/config')()
 
 describe('User entity requests', () => {
   let User = require('../../src/models/user.server.model')
   let userController = require('../../src/controllers/user.controller')
   let userService, req, res
+
+  const TOTAL_FIELD = 0
+  const DATA_FIELD = 1
 
   beforeEach(() => {
     req = httpMocks.createRequest()
@@ -15,24 +20,60 @@ describe('User entity requests', () => {
 
   describe('Given a request to User resource', () => {
     context('when requesting to retrieve all users', () => {
-      it('returns Ok (200) with json array containing all existing users', sinon.test(function (done) {
-        let users = [new User(), new User()]
+      it('returns Ok (200) with json array with valid arguments', sinon.test(function (done) {
+        let TotalCount = 100
+        let result = [TotalCount, [new User(), new User()]]
         req.method = 'GET'
         req.url = 'api/users'
+        req.query.page = '5'
         let next = args => done(args)
 
         userService = this.stub(userService())
-        userService.getAll.resolves(users)
+        userService.getAll.resolves(result)
 
         userController(userService).getAllUsers(req, res, next)
 
         res.on('end', () => {
-          let data = JSON.parse(res._getData())
-          expect(data.length).to.equal(2)
-          expect(res.statusCode).to.equal(200)
+          let result = JSON.parse(res._getData())
+          expect(res.statusCode).to.equal(HttpStatus.OK)
+          expect(result.data.length).to.equal(2)
           assert.isTrue(userService.getAll.calledOnce)
           done()
         })
+      }))
+
+      it('returns Internal Server Error (500) with invalid page as argument', sinon.test(function (done) {
+        req.method = 'GET'
+        req.url = 'api/users'
+        req.query.page = 'invalid'
+        let next = args => done(args)
+
+        userService = this.stub(userService())
+
+        try {
+          userController(userService).getAllUsers(req, res, next)
+        } catch (err) {
+          expect(err).to.be.an('Error')
+          expect(err).to.have.property('status', HttpStatus.INTERNAL_SERVER_ERROR)
+          done()
+        }
+      }))
+
+      it('returns Internal Server Error (500) with invalid page size as argument', sinon.test(function (done) {
+        req.method = 'GET'
+        req.url = 'api/users'
+        req.query.pageSize = 'invalid'
+        let next = args => done(args)
+
+        userService = this.stub(userService())
+
+        try {
+          userController(userService).getAllUsers(req, res, next)
+        } catch (err) {
+          expect(err).to.be.an('Error')
+          expect(err).to.have.property('status', HttpStatus.INTERNAL_SERVER_ERROR)
+          done()
+        }
       }))
     })
 
@@ -52,7 +93,7 @@ describe('User entity requests', () => {
         function next (args) {
           try {
             expect(args).to.be.an('Error')
-            expect(args.status).to.equal(404)
+            expect(args.status).to.equal(HttpStatus.NOT_FOUND)
             assert.isTrue(userService.getByEmail.calledOnce)
             done()
           } catch (err) {
@@ -79,7 +120,7 @@ describe('User entity requests', () => {
 
         res.on('end', () => {
           let data = JSON.parse(res._getData())
-          expect(res.statusCode).to.equal(200)
+          expect(res.statusCode).to.equal(HttpStatus.OK)
           expect(data).to.have.property('email', user.email)
           assert.isTrue(userService.getByEmail.calledOnce)
           done()

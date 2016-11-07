@@ -1,4 +1,5 @@
 const httpMocks = require('node-mocks-http')
+const HttpStatus = require('http-status-codes')
 
 describe('User authentication requests', () => {
   let User = require('../../src/models/user.server.model')
@@ -25,7 +26,7 @@ describe('User authentication requests', () => {
         }
 
         let error = new Error('Required fields missing.')
-        error.status = 500
+        error.status = HttpStatus.INTERNAL_SERVER_ERROR
 
         userService = this.stub(userService())
         userService.getByEmail.rejects(error)
@@ -35,7 +36,7 @@ describe('User authentication requests', () => {
         function next (args) {
           try {
             expect(args).to.be.an('Error')
-            expect(args.status).to.equal(500)
+            expect(args.status).to.equal(HttpStatus.INTERNAL_SERVER_ERROR)
             assert.isTrue(userService.getByEmail.calledOnce)
             done()
           } catch (err) {
@@ -64,7 +65,7 @@ describe('User authentication requests', () => {
         function next (args) {
           try {
             expect(args).to.be.an('Error')
-            expect(args.status).to.equal(422)
+            expect(args.status).to.equal(HttpStatus.UNPROCESSABLE_ENTITY)
             assert.isTrue(userService.getByEmail.calledOnce)
             done()
           } catch (err) {
@@ -137,7 +138,7 @@ describe('User authentication requests', () => {
         function next (args) {
           try {
             expect(args).to.be.an('Error')
-            expect(args.status).to.equal(404)
+            expect(args.status).to.equal(HttpStatus.NOT_FOUND)
             assert.isTrue(userService.getByEmail.calledOnce)
             done()
           } catch (err) {
@@ -156,7 +157,7 @@ describe('User authentication requests', () => {
         }
 
         let error = new Error('Required fields missing.')
-        error.status = 500
+        error.status = HttpStatus.INTERNAL_SERVER_ERROR
 
         userService = this.stub(userService())
         userService.getByEmail.rejects(error)
@@ -166,7 +167,7 @@ describe('User authentication requests', () => {
         function next (args) {
           try {
             expect(args).to.be.an('Error')
-            expect(args.status).to.equal(500)
+            expect(args.status).to.equal(HttpStatus.INTERNAL_SERVER_ERROR)
             assert.isTrue(userService.getByEmail.calledOnce)
             done()
           } catch (err) {
@@ -197,7 +198,7 @@ describe('User authentication requests', () => {
         function next (args) {
           try {
             expect(args).to.be.an('Error')
-            expect(args.status).to.equal(400)
+            expect(args.status).to.equal(HttpStatus.BAD_REQUEST)
             assert.isTrue(userService.getByEmail.calledOnce)
             done()
           } catch (err) {
@@ -231,7 +232,7 @@ describe('User authentication requests', () => {
 
         res.on('end', () => {
           let data = JSON.parse(res._getData())
-          expect(res.statusCode).to.equal(200)
+          expect(res.statusCode).to.equal(HttpStatus.OK)
           expect(data).to.have.property('token', 'ABCD-1234')
           assert.isTrue(authService.getToken.calledOnce)
           assert.isTrue(userService.getByEmail.calledOnce)
@@ -258,7 +259,7 @@ describe('User authentication requests', () => {
         function next (args) {
           try {
             expect(args).to.be.an('Error')
-            expect(args.status).to.equal(404)
+            expect(args.status).to.equal(HttpStatus.NOT_FOUND)
             assert.isTrue(userService.getByEmail.calledOnce)
             done()
           } catch (err) {
@@ -301,7 +302,7 @@ describe('User authentication requests', () => {
 
         res.on('end', () => {
           let data = JSON.parse(res._getData())
-          expect(res.statusCode).to.equal(200)
+          expect(res.statusCode).to.equal(HttpStatus.OK)
           expect(data.data).to.have.deep.property('sent', true)
           assert.isTrue(authService.resetToken.calledOnce)
           assert.isTrue(userService.getByEmail.calledOnce)
@@ -323,7 +324,7 @@ describe('User authentication requests', () => {
         function next (args) {
           try {
             expect(args).to.be.an('Error')
-            expect(args.status).to.equal(404)
+            expect(args.status).to.equal(HttpStatus.NOT_FOUND)
             done()
           } catch (err) {
             done(err)
@@ -343,7 +344,7 @@ describe('User authentication requests', () => {
 
         authController(null, null, null, templateModel).confirmResetPassword(req, res)
 
-        expect(res.statusCode).to.equal(200)
+        expect(res.statusCode).to.equal(HttpStatus.OK)
         done()
       }))
     })
@@ -366,7 +367,7 @@ describe('User authentication requests', () => {
         function next (args) {
           try {
             expect(args).to.be.an('Error')
-            expect(args.status).to.equal(422)
+            expect(args.status).to.equal(HttpStatus.UNPROCESSABLE_ENTITY)
             assert.isTrue(authService.findByPasswordToken.calledOnce)
             done()
           } catch (err) {
@@ -397,7 +398,7 @@ describe('User authentication requests', () => {
         function next (args) {
           try {
             expect(args).to.be.an('Error')
-            expect(args.status).to.equal(400)
+            expect(args.status).to.equal(HttpStatus.BAD_REQUEST)
             assert.isTrue(user.isValidPassword.calledOnce)
             assert.isTrue(authService.findByPasswordToken.calledOnce)
             done()
@@ -432,7 +433,7 @@ describe('User authentication requests', () => {
         function next (args) {
           try {
             expect(args).to.be.an('Error')
-            expect(args.status).to.equal(400)
+            expect(args.status).to.equal(HttpStatus.BAD_REQUEST)
             assert.isTrue(user.isValidPassword.calledOnce)
             assert.isTrue(user.confirmPasswordValid.calledOnce)
             assert.isTrue(authService.findByPasswordToken.calledOnce)
@@ -484,7 +485,7 @@ describe('User authentication requests', () => {
 
         res.on('end', () => {
           let data = JSON.parse(res._getData())
-          expect(res.statusCode).to.equal(200)
+          expect(res.statusCode).to.equal(HttpStatus.OK)
           assert.isTrue(user.isValidPassword.calledOnce)
           assert.isTrue(user.confirmPasswordValid.calledOnce)
           assert.isTrue(authService.findByPasswordToken.calledOnce)

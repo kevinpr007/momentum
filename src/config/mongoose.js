@@ -1,4 +1,4 @@
-const config = require('./config')().getVariable()
+const config = require('./config')()
 const mongoose = require('mongoose')
 const logger = require('./logger')
 

@@ -5,8 +5,16 @@ const User = require('../models/user.server.model')
 const _ = require('lodash')
 
 let userService = () => {
-  let getAll = () => {
-    return User.find().exec()
+  let getAll = (page, pageSize) => {
+    page = Math.max(0, page)
+    return Promise.all([
+      User.count().exec(),
+      User.find()
+        .sort({email: 'asc'})
+        .skip(pageSize * page)
+        .limit(pageSize)
+        .exec()
+    ])
   }
 
   let getByEmail = email => {
@@ -22,7 +30,7 @@ let userService = () => {
   }
 
   let upsertUser = user => {
-    return _.merge(User, user).save()
+    return _.merge(new User(), user).save()
   }
 
   return {

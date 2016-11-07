@@ -3,10 +3,9 @@ const cluster = require('express-cluster')
 cluster(function (worker) {
   const express = require('../src/config/express')
   const config = require('../src/config/config')()
-  config.setVariable(process.env.NODE_ENV)
 
   const http = require('http')
-  const port = config.getVariable().PORT
+  const port = config.PORT
 
   require('../src/config/mongoose')()
   require('../src/config/passport')()

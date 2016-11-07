@@ -1,5 +1,5 @@
 describe('Email factory tests', () => {
-  const factory = require('../../src/helpers/email.factory')
+  const factory = require('../../src/util/email.factory')
 
   describe('Given a base information to send an email', () => {
     context('when passing an object with all email properties', () => {
