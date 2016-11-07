@@ -10,10 +10,10 @@ let userService = () => {
     return Promise.all([
       User.count().exec(),
       User.find()
-      .sort({email: 'asc'})
-      .skip(pageSize * page)
-      .limit(pageSize)
-      .exec()
+        .sort({email: 'asc'})
+        .skip(pageSize * page)
+        .limit(pageSize)
+        .exec()
     ])
   }
 

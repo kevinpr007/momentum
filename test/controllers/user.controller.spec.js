@@ -15,7 +15,7 @@ describe('User entity requests', () => {
 
   describe('Given a request to User resource', () => {
     context('when requesting to retrieve all users', () => {
-      it('returns Ok (200) with json array containing all existing users', sinon.test(function (done) {
+      it('returns Ok (200) with json array with valid arguments', sinon.test(function (done) {
         let result = [2, [new User(), new User()]]
         req.method = 'GET'
         req.url = 'api/users'
@@ -33,6 +33,10 @@ describe('User entity requests', () => {
           assert.isTrue(userService.getAll.calledOnce)
           done()
         })
+      }))
+      
+      it.skip('returns Internal Server Error (500) with invalid arguments', sinon.test(function (done) {
+        // TODO: Test invalid args error!
       }))
     })
 
