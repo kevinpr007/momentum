@@ -24,7 +24,7 @@ describe('Log entity requests', () => {
 
         let result = [TotalCount, [new Log({code: '200'}), new Log({code: '201'})]]
         let next = err => done(err)
-        req.query.page = 1
+        req.query.page = '1'
 
         logService = this.stub(logService())
         logService.getAll.resolves(result)

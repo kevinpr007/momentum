@@ -4,8 +4,8 @@ const config = require('../config/config')()
 
 let userController = userService => {
   let getAllUsers = (req, res, next) => {
+    
     let page = parseInt(req.query.page || 0)
-
     if (page == undefined || isNaN(page)) {
       let err = new Error('You must provide a page number')
       err.status = HttpStatus.INTERNAL_SERVER_ERROR
