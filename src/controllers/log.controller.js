@@ -14,7 +14,7 @@ let logController = (logService) => {
 
     let pageSize = parseInt(req.query.pageSize || config.PAGE_SIZE)
     if (pageSize == undefined || isNaN(pageSize)) {
-      let err = new Error('Page Size must be a number')
+      let err = new Error('Page size must be a number')
       err.status = HttpStatus.INTERNAL_SERVER_ERROR
       throw err
     }
