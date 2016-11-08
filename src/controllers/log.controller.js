@@ -4,7 +4,6 @@ const config = require('../config/config')()
 
 let logController = (logService) => {
   let getAllLogs = (req, res, next) => {
-    
     let page = parseInt(req.query.page || 0)
     if (page == undefined || isNaN(page)) {
       let err = new Error('You must provide a page number')
