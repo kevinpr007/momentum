@@ -19,8 +19,8 @@ let userController = userService => {
     }
 
     userService.getAll(page, pageSize).then(users => {
-      res.body = pagedResult(page, pageSize, users)
       res.status(HttpStatus.OK)
+      res.body = pagedResult(page, pageSize, users)
       next()
     }).catch(next)
   }
@@ -32,8 +32,8 @@ let userController = userService => {
         err.status = HttpStatus.NOT_FOUND
         throw err
       }
-      res.body = user
       res.status(HttpStatus.OK)
+      res.body = user
       next()
     }).catch(next)
   }
