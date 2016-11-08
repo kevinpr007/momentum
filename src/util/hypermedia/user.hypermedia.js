@@ -2,12 +2,16 @@ const _ = require('lodash')
 
 module.exports = router => {
   let setLinks = (req, user, map) => {
-    user.links = []
-    user.links.push({
-      href: `${req.protocol}://${req.headers.host}${map.get('getAllUsers').path}/${user.email}`,
+    let baseUrl = `${req.protocol}://${req.headers.host}`
+    user.links = [{
+      href: `${baseUrl}${map.get('getAllUsers').path}/${user.email}`,
       rel: 'self',
       method: map.get('getAllUsers').method
-    })
+    }, {
+      href: `${baseUrl}${map.get('auth').path}`,
+      rel: 'auth',
+      method: map.get('auth').method
+    }]
     return user
   }
 
@@ -15,9 +19,9 @@ module.exports = router => {
     try {
       let routeMap = require('../route-map')(router)
       if ('data' in res.body) {
-        res.body.data = _.each(res.body.data, elem => setLinks(req, elem._doc, routeMap))
+        res.body.data = _.each(res.body.data, item => setLinks(req, item._doc, routeMap))
       } else {
-        res.body = setLinks(req, res.body._doc, routeMap)
+        res.body._doc = setLinks(req, res.body._doc, routeMap)
       }
       res.json(res.body)
     } catch (err) {
