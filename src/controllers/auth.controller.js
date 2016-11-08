@@ -14,10 +14,10 @@ let authController = (authService, userService, emailService, templateModel) => 
       return user.isValidPassword(req.body.password)
     }).then(isMatch => {
       if (isMatch) {
-        res.status(HttpStatus.OK).json({
-          token: authService.getToken(user),
-          user: user
-        })
+        res.status(HttpStatus.OK)
+        user._doc.token = authService.getToken(user)
+        res.body = user
+        next()
       } else {
         let err = new Error('Authentication failed. Wrong password.')
         err.status = HttpStatus.BAD_REQUEST
@@ -37,10 +37,10 @@ let authController = (authService, userService, emailService, templateModel) => 
       return userService.registerUser(req.body)
     }).then(usr => {
       user = usr
-      res.status(HttpStatus.CREATED).json({
-        token: authService.getToken(usr),
-        user: usr
-      })
+      res.status(HttpStatus.CREATED)
+      usr._doc.token = authService.getToken(usr)
+      res.body = usr
+      next()
     }).then(() => {
       let emailTemplate = require('../services/emails/new-account')(user, req.headers.host).getTemplate()
       let emailInfo = emailFactory(user.email, emailTemplate.subject, emailTemplate.html).getInfo()
