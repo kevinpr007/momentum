@@ -1,8 +1,9 @@
 const userService = require('../services/user.service')()
 const userController = require('../controllers/user.controller')(userService)
 const auth = require('passport').authenticate('jwt', {session: false})
+const setHypermedia = require('../util/hypermedia/user.hypermedia')
 
 module.exports = router => {
-  router.get('/users', auth, userController.getAllUsers)
-  router.get('/users/:userName', auth, userController.getByUserEmail)
+  router.get('/users', auth, userController.getAllUsers, setHypermedia)
+  router.get('/users/:userName', auth, userController.getByUserEmail, setHypermedia)
 }

@@ -4,7 +4,6 @@ const config = require('../config/config')()
 
 let userController = userService => {
   let getAllUsers = (req, res, next) => {
-    
     let page = parseInt(req.query.page || 0)
     if (page == undefined || isNaN(page)) {
       let err = new Error('You must provide a page number')
@@ -20,8 +19,9 @@ let userController = userService => {
     }
 
     userService.getAll(page, pageSize).then(users => {
-      let data = pagedResult(page, pageSize, users)
-      return res.status(HttpStatus.OK).json(data)
+      res.body = pagedResult(page, pageSize, users)
+      res.status(HttpStatus.OK)
+      next()
     }).catch(next)
   }
 
@@ -32,7 +32,9 @@ let userController = userService => {
         err.status = HttpStatus.NOT_FOUND
         throw err
       }
-      res.status(HttpStatus.OK).json(user)
+      res.body = user
+      res.status(HttpStatus.OK)
+      next()
     }).catch(next)
   }
 
