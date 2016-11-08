@@ -25,7 +25,7 @@ describe('User entity requests', () => {
         let result = [TotalCount, [new User(), new User()]]
         req.method = 'GET'
         req.url = 'api/users'
-        req.query.page = '5'
+        req.query.page = '2'
         let next = args => done(args)
 
         userService = this.stub(userService())
