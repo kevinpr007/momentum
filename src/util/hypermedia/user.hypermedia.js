@@ -1,27 +1,27 @@
 const _ = require('lodash')
+const routes = require('../../routes/routes.config')
 
-module.exports = router => {
-  let setLinks = (req, user, map) => {
+module.exports = () => {
+  let setLinks = (req, user) => {
     let baseUrl = `${req.protocol}://${req.headers.host}`
     user.links = [{
-      href: `${baseUrl}${map.get('getAllUsers').path}/${user.email}`,
+      href: `${baseUrl}${routes.get('getUsers').path}/${user.email}`,
       rel: 'self',
-      method: map.get('getAllUsers').method
+      method: routes.get('getUsers').method
     }, {
-      href: `${baseUrl}${map.get('auth').path}`,
+      href: `${baseUrl}${routes.get('auth').path}`,
       rel: 'auth',
-      method: map.get('auth').method
+      method: routes.get('auth').method
     }]
     return user
   }
 
   let setResponse = (req, res, next) => {
     try {
-      let routeMap = require('../route-map')(router)
       if ('data' in res.body) {
-        res.body.data = _.each(res.body.data, item => setLinks(req, item._doc, routeMap))
+        res.body.data = _.each(res.body.data, item => setLinks(req, item._doc))
       } else {
-        res.body._doc = setLinks(req, res.body._doc, routeMap)
+        res.body._doc = setLinks(req, res.body._doc)
       }
       res.json(res.body)
     } catch (err) {
