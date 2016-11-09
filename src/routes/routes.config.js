@@ -12,27 +12,27 @@ routeMap.set('index', {
  * @Authentication routes
  */
 routeMap.set('auth', {
-    path: '/auth',
+    path: '/api/auth',
     method: 'POST'
 })
 
 routeMap.set('register', {
-    path: '/register',
+    path: '/api/register',
     method: 'POST'
 })
 
 routeMap.set('newPassword', {
-    path: '/complete-reset-password',
+    path: '/api/complete-reset-password',
     method: 'POST'
 })
 
 routeMap.set('confirmResetPassword', {
-    path: '/confirm-reset-password/:token',
+    path: '/api/confirm-reset-password/:token',
     method: 'GET'
 })
 
 routeMap.set('resetPassword', {
-    path: '/reset-password',
+    path: '/api/reset-password',
     method: 'POST'
 })
 
@@ -40,12 +40,12 @@ routeMap.set('resetPassword', {
  * @User routes
  */
 routeMap.set('getUsers', {
-    path: '/users',
+    path: '/api/users',
     method: 'GET'
 })
 
 routeMap.set('getByUserEmail', {
-    path: '/users/:userName',
+    path: '/api/users/:userName',
     method: 'GET'
 })
 
@@ -53,17 +53,17 @@ routeMap.set('getByUserEmail', {
  * @Log routes
  */
 routeMap.set('getLogs', {
-    path: '/logs',
+    path: '/api/logs',
     method: 'GET'
 })
 
 routeMap.set('getByLogCode', {
-    path: '/logs/:code',
+    path: '/api/logs/:code',
     method: 'GET'
 })
 
 routeMap.set('getByLogStatus', {
-    path: '/logs/:status',
+    path: '/api/logs/:status',
     method: 'GET'
 })
 
