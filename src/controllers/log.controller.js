@@ -20,8 +20,9 @@ let logController = (logService) => {
 
     logService.getAll(page, pageSize)
     .then(logs => {
-      let data = pagedResult(page, pageSize, logs)
-      res.status(HttpStatus.OK).json(data)
+      res.body = pagedResult(page, pageSize, logs)
+      next()
+      res.status(HttpStatus.OK).json(res.body)
     })
     .catch(next)
   }
