@@ -8,11 +8,8 @@ module.exports = () => {
       href: `${baseUrl}${routes.get('getUsers').path}/${user.email}`,
       rel: 'self',
       method: routes.get('getUsers').method
-    }, {
-      href: `${baseUrl}${routes.get('auth').path}`,
-      rel: 'auth',
-      method: routes.get('auth').method
     }]
+
     return user
   }
 
