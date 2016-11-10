@@ -20,7 +20,7 @@ module.exports = () => {
       } else {
         res.body._doc = setLinks(req, res.body._doc)
       }
-      res.json(res.body)
+      return res.body
     } catch (err) {
       next(err)
     }
