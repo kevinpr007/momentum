@@ -32,9 +32,9 @@ let userController = userService => {
         err.status = HttpStatus.NOT_FOUND
         throw err
       }
-      res.status(HttpStatus.OK)
       res.body = user
       next()
+      res.status(HttpStatus.OK).json(res.body)
     }).catch(next)
   }
 
