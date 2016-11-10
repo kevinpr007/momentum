@@ -19,9 +19,9 @@ let userController = userService => {
     }
 
     userService.getAll(page, pageSize).then(users => {
-      res.status(HttpStatus.OK)
       res.body = pagedResult(page, pageSize, users)
       next()
+      res.status(HttpStatus.OK).json(res.body)
     }).catch(next)
   }
 

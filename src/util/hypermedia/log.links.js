@@ -1,5 +1,4 @@
-module.exports = (entity, baseUrl, routes, regex) => {
-    
+module.exports = (entity, baseUrl, routes, regex) => {    
     return entity.links = [{
       href: `${baseUrl}${routes.get('getLogs').path}`,
       rel: 'self',
@@ -15,5 +14,4 @@ module.exports = (entity, baseUrl, routes, regex) => {
       rel: 'self',
       method: routes.get('getByLogStatus').method
     }]
-
 }
