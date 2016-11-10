@@ -17,12 +17,30 @@ let logService = () => {
     ])
   }
 
-  let getByCode = code => {
-    return Log.find().where('code', code).exec()
+  let getByCode = (code, page, pageSize) => {
+    page = Math.max(0, page)
+    return Promise.all([
+      Log.find().where('code', code).count().exec(),
+      Log.find()
+        .where('code', code)
+        .sort({createdOn: -1})
+        .skip(pageSize * page)
+        .limit(pageSize)
+        .exec()
+    ])
   }
 
-  let getByStatus = status => {
-    return Log.find().where('status', status).exec()
+  let getByStatus = (status,page, pageSize) => {
+    page = Math.max(0, page)
+    return Promise.all([
+      Log.find().where('status', status).count().exec(),
+      Log.find()
+        .where('status', status)
+        .sort({createdOn: -1})
+        .skip(pageSize * page)
+        .limit(pageSize)
+        .exec()
+    ])
   }
 
   let saveLog = log => {

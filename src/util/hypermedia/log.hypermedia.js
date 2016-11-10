@@ -1,5 +1,6 @@
 const _ = require('lodash')
 const routes = require('../../routes/routes.config')
+const REGEX = /\/:\w+/
 
 module.exports = () => {
   let setLinks = (req, log) => {
@@ -8,6 +9,16 @@ module.exports = () => {
       href: `${baseUrl}${routes.get('getLogs').path}`,
       rel: 'self',
       method: routes.get('getLogs').method
+    },
+    {
+      href: `${baseUrl}${routes.get('getByLogCode').path}`.replace(REGEX, `/${log.code}`),
+      rel: 'self',
+      method: routes.get('getByLogCode').method
+    },
+    {
+      href: `${baseUrl}${routes.get('getByLogStatus').path}`.replace(REGEX, `/${log.status}`),
+      rel: 'self',
+      method: routes.get('getByLogStatus').method
     }]
 
     return log

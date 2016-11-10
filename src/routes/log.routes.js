@@ -5,6 +5,6 @@ const routes = require('./routes.config')
 
 module.exports = router => {
   router.get(routes.get('getLogs').path, logController.getAllLogs, logHypermedia.setResponse)
-  router.get(routes.get('getByLogCode').path, logController.getByCode)
-  router.get(routes.get('getByLogStatus').path, logController.getByStatus)
+  router.get(routes.get('getByLogCode').path, logController.getByCode, logHypermedia.setResponse)
+  router.get(routes.get('getByLogStatus').path, logController.getByStatus, logHypermedia.setResponse)
 }

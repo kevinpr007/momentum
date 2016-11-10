@@ -60,12 +60,12 @@ routeMap.set('getLogs', {
 })
 
 routeMap.set('getByLogCode', {
-  path: '/api/logs/:code',
+  path: '/api/logsByCode/:code',
   method: GET
 })
 
 routeMap.set('getByLogStatus', {
-  path: '/api/logs/:status',
+  path: '/api/logsByStatus/:status',
   method: GET
 })
 
