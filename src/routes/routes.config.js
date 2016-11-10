@@ -1,6 +1,6 @@
 let routeMap = new Map()
-const GET = 'GET', POST = 'POST', 
-      PUT = 'PUT', DELETE = 'DELETE'
+const GET = 'GET', POST = 'POST',
+  PUT = 'PUT', DELETE = 'DELETE'
 
 /**
  * @Index routes
@@ -53,6 +53,7 @@ routeMap.set('getByUserEmail', {
 
 /**
  * @Log routes
+ * TODO: Check route constraints.
  */
 routeMap.set('getLogs', {
   path: '/api/logs',

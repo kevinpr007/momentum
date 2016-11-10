@@ -41,7 +41,7 @@ let logController = (logService) => {
       err.status = HttpStatus.INTERNAL_SERVER_ERROR
       throw err
     }
-    
+
     logService.getByCode(req.params.code, page, pageSize)
     .then(logs => {
       res.body = pagedResult(page, pageSize, logs)
@@ -65,7 +65,7 @@ let logController = (logService) => {
       err.status = HttpStatus.INTERNAL_SERVER_ERROR
       throw err
     }
-    
+
     logService.getByStatus(req.params.status, page, pageSize)
     .then(logs => {
       res.body = pagedResult(page, pageSize, logs)

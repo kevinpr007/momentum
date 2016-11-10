@@ -30,7 +30,7 @@ let logService = () => {
     ])
   }
 
-  let getByStatus = (status,page, pageSize) => {
+  let getByStatus = (status, page, pageSize) => {
     page = Math.max(0, page)
     return Promise.all([
       Log.find().where('status', status).count().exec(),

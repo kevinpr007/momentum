@@ -12,19 +12,19 @@ module.exports = () => {
   let getLinks = (entity, baseUrl, routes, model) => {
     switch (model) {
       case mongoDB.Model.Log:
-        //TODO: Business Logic
+        // TODO: Business Logic
         require('./log.links')(entity, baseUrl, routes, REGEX)
-        break;
-    
-    case mongoDB.Model.User:
-        //TODO: Business Logic
+        break
+
+      case mongoDB.Model.User:
+        // TODO: Business Logic
         require('./user.links')(entity, baseUrl, routes, REGEX)
-        break;
+        break
 
       default:
         throw new Error('Entity not defined')
     }
-  }   
+  }
 
   let setResponse = (req, res, next) => {
     try {
