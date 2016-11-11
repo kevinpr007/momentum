@@ -7,9 +7,6 @@ describe('User entity requests', () => {
   let userController = require('../../src/controllers/user.controller')
   let userService, req, res
 
-  const TOTAL_FIELD = 0
-  const DATA_FIELD = 1
-
   beforeEach(() => {
     req = httpMocks.createRequest()
     res = httpMocks.createResponse({
