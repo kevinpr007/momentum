@@ -1,4 +1,7 @@
-module.exports = (entity, baseUrl, routes, regex) => {
+const routes = require('../../routes/routes.config')
+
+module.exports = (entity, baseUrl) => {
+  let regex = /\/:\w+/ // TODO: Remove after routes are standardized.
   // TODO: Business Logic
   return entity.links = [{
     href: `${baseUrl}${routes.get('getLogs').path}`,

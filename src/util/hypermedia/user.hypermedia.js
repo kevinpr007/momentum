@@ -1,4 +1,6 @@
-module.exports = (entity, baseUrl, routes) => {
+const routes = require('../../routes/routes.config')
+
+module.exports = (entity, baseUrl) => {
   // TODO: Business Logic
   return entity.links = [{
     href: `${baseUrl}${routes.get('getUsers').path}/${entity.email}`,

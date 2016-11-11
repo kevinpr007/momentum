@@ -1,21 +1,19 @@
 const mongoDB = require('../../config/mongoose.collections.json')
-const routes = require('../../routes/routes.config')
 const _ = require('lodash')
 
 class Hypermedia {
   constructor (req, model) {
     this.baseUrl = `${req.protocol}://${req.headers.host}`
     this.model = model
-    this.REGEX = /\/:\w+/
   }
 
   setLinks (entity) {
     switch (this.model) {
       case mongoDB.Model.Log:
-        require('./log.hypermedia.js')(entity, this.baseUrl, routes, this.REGEX)
+        require('./log.hypermedia.js')(entity, this.baseUrl)
         break
       case mongoDB.Model.User:
-        require('./user.hypermedia.js')(entity, this.baseUrl, routes)
+        require('./user.hypermedia.js')(entity, this.baseUrl)
         break
       default:
         throw new Error('Entity not defined')
