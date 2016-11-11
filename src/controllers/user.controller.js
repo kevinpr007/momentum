@@ -12,7 +12,7 @@ let userController = userService => {
     pagValidations(page, pageSize).getValidation()
 
     userService.getAll(page, pageSize).then(users => {
-      users = pagedResult(page, pageSize, users)      
+      users = pagedResult(page, pageSize, users)
       res.status(HttpStatus.OK).json(hypermedia.setResponse(req, users, next))
     }).catch(next)
   }
@@ -23,7 +23,7 @@ let userController = userService => {
         let err = new Error('User not found.')
         err.status = HttpStatus.NOT_FOUND
         throw err
-      }      
+      }
       res.status(HttpStatus.OK).json(hypermedia.setResponse(req, user, next))
     }).catch(next)
   }

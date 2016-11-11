@@ -36,7 +36,7 @@ let authController = (authService, userService, emailService, templateModel) => 
       return userService.registerUser(req.body)
     }).then(usr => {
       user = usr
-      user._doc.token = authService.getToken(user)      
+      user._doc.token = authService.getToken(user)
       res.status(HttpStatus.CREATED).json(hypermedia.setResponse(req, user, next))
     }).then(() => {
       let emailTemplate = require('../services/emails/new-account')(user, req.headers.host).getTemplate()

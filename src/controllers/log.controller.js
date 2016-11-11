@@ -27,7 +27,7 @@ let logController = (logService) => {
 
     logService.getByCode(req.params.code, page, pageSize)
     .then(logs => {
-      logs = pagedResult(page, pageSize, logs)      
+      logs = pagedResult(page, pageSize, logs)
       res.status(HttpStatus.OK).json(hypermedia.setResponse(req, logs, next))
     })
     .catch(next)
