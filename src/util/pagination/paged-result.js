@@ -1,4 +1,4 @@
-let config = require('../config/config')()
+let config = require('../../config/config')()
 const TOTAL_COUNT_FIELD = 0
 const DATA_FIELD = 1
 
