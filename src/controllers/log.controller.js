@@ -1,22 +1,14 @@
 const HttpStatus = require('http-status-codes')
-const pagedResult = require('../util/paged-result')
+const pagedResult = require('../util/pagination/paged-result')
 const config = require('../config/config')()
+const pagValidations = require('../util/pagination/validations')
 
 let logController = (logService) => {
   let getAllLogs = (req, res, next) => {
     let page = parseInt(req.query.page || 0)
-    if (page == undefined || isNaN(page)) {
-      let err = new Error('You must provide a page number')
-      err.status = HttpStatus.INTERNAL_SERVER_ERROR
-      throw err
-    }
-
     let pageSize = parseInt(req.query.pageSize || config.PAGE_SIZE)
-    if (pageSize == undefined || isNaN(pageSize)) {
-      let err = new Error('Page size must be a number')
-      err.status = HttpStatus.INTERNAL_SERVER_ERROR
-      throw err
-    }
+
+    pagValidations(page, pageSize).getValidation()
 
     logService.getAll(page, pageSize)
     .then(logs => {
@@ -29,18 +21,9 @@ let logController = (logService) => {
 
   let getByCode = (req, res, next) => {
     let page = parseInt(req.query.page || 0)
-    if (page == undefined || isNaN(page)) {
-      let err = new Error('You must provide a page number')
-      err.status = HttpStatus.INTERNAL_SERVER_ERROR
-      throw err
-    }
-
     let pageSize = parseInt(req.query.pageSize || config.PAGE_SIZE)
-    if (pageSize == undefined || isNaN(pageSize)) {
-      let err = new Error('Page size must be a number')
-      err.status = HttpStatus.INTERNAL_SERVER_ERROR
-      throw err
-    }
+
+    pagValidations(page, pageSize).getValidation()
 
     logService.getByCode(req.params.code, page, pageSize)
     .then(logs => {
@@ -53,18 +36,9 @@ let logController = (logService) => {
 
   let getByStatus = (req, res, next) => {
     let page = parseInt(req.query.page || 0)
-    if (page == undefined || isNaN(page)) {
-      let err = new Error('You must provide a page number')
-      err.status = HttpStatus.INTERNAL_SERVER_ERROR
-      throw err
-    }
-
     let pageSize = parseInt(req.query.pageSize || config.PAGE_SIZE)
-    if (pageSize == undefined || isNaN(pageSize)) {
-      let err = new Error('Page size must be a number')
-      err.status = HttpStatus.INTERNAL_SERVER_ERROR
-      throw err
-    }
+
+    pagValidations(page, pageSize).getValidation()
 
     logService.getByStatus(req.params.status, page, pageSize)
     .then(logs => {
