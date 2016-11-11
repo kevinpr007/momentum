@@ -14,8 +14,7 @@ let logController = (logService) => {
     logService.getAll(page, pageSize)
     .then(logs => {
       logs = pagedResult(page, pageSize, logs)
-      let model = logs[0].constructor.modelName
-      res.status(HttpStatus.OK).json(new Hypermedia(req, model).setResponse(logs, next))
+      res.status(HttpStatus.OK).json(new Hypermedia(req).setResponse(logs, next))
     })
     .catch(next)
   }
@@ -29,8 +28,7 @@ let logController = (logService) => {
     logService.getByCode(req.params.code, page, pageSize)
     .then(logs => {
       logs = pagedResult(page, pageSize, logs)
-      let model = logs[0].constructor.modelName
-      res.status(HttpStatus.OK).json(new Hypermedia(req, model).setResponse(logs, next))
+      res.status(HttpStatus.OK).json(new Hypermedia(req).setResponse(logs, next))
     })
     .catch(next)
   }
@@ -44,8 +42,7 @@ let logController = (logService) => {
     logService.getByStatus(req.params.status, page, pageSize)
     .then(logs => {
       logs = pagedResult(page, pageSize, logs)
-      let model = logs[0].constructor.modelName
-      res.status(HttpStatus.OK).json(new Hypermedia(req, model).setResponse(logs, next))
+      res.status(HttpStatus.OK).json(new Hypermedia(req).setResponse(logs, next))
     })
     .catch(next)
   }

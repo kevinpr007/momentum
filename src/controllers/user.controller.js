@@ -13,8 +13,7 @@ let userController = userService => {
 
     userService.getAll(page, pageSize).then(users => {
       users = pagedResult(page, pageSize, users)
-      let model = users.data[0].constructor.modelName
-      res.status(HttpStatus.OK).json(new Hypermedia(req, model).setResponse(users, next))
+      res.status(HttpStatus.OK).json(new Hypermedia(req).setResponse(users, next))
     }).catch(next)
   }
 
@@ -25,8 +24,7 @@ let userController = userService => {
         err.status = HttpStatus.NOT_FOUND
         throw err
       }
-      let model = user.constructor.modelName
-      res.status(HttpStatus.OK).json(new Hypermedia(req, model).setResponse(user, next))
+      res.status(HttpStatus.OK).json(new Hypermedia(req).setResponse(user, next))
     }).catch(next)
   }
 
