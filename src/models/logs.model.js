@@ -39,7 +39,11 @@ logSchema.virtual('getError').get(function () {
 
 logSchema.set('toJSON', {
   getters: true,
-  virtuals: true
+  virtuals: true,
+  transform: (doc, ret) => {
+    delete ret.id
+    return ret
+  }
 })
 
 module.exports = mongoose.model(mongoDB.Model.Log, logSchema)
