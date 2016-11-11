@@ -13,6 +13,7 @@ let logService = () => {
         .sort({createdOn: -1})
         .skip(pageSize * page)
         .limit(pageSize)
+        .select({code: 1, status: 1, message: 1})
         .exec()
     ])
   }
