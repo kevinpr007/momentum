@@ -36,7 +36,7 @@ describe('Log service tests', () => {
           exec () {
             return Promise.resolve(log)
           },
-          count() {
+          count () {
             return {
               exec () {
                 return Promise.resolve(1)
@@ -79,7 +79,7 @@ describe('Log service tests', () => {
           exec () {
             return Promise.resolve(log)
           },
-          count() {
+          count () {
             return {
               exec () {
                 return Promise.resolve(1)

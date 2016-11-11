@@ -12,12 +12,10 @@ module.exports = () => {
   let getLinks = (entity, baseUrl, routes, model) => {
     switch (model) {
       case mongoDB.Model.Log:
-        // TODO: Business Logic
         require('./log.hypermedia.js')(entity, baseUrl, routes, REGEX)
         break
 
       case mongoDB.Model.User:
-        // TODO: Business Logic
         require('./user.hypermedia.js')(entity, baseUrl, routes, REGEX)
         break
 
