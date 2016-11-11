@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 mongoose.Promise = require('bluebird')
 
-const Log = require('../models/logs.server.model')
+const Log = require('../models/logs.model')
 const _ = require('lodash')
 
 let logService = () => {

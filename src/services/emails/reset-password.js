@@ -1,6 +1,6 @@
 module.exports = () => {
   let getTemplate = () => {
-    let template = {
+    return {
       subject: 'Style Point: Password Changed',
       html: `
         <p>
@@ -10,7 +10,6 @@ module.exports = () => {
         </p>
     `
     }
-    return template
   }
 
   return {

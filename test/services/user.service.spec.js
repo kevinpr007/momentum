@@ -1,5 +1,5 @@
 describe('User service tests', () => {
-  let User = require('../../src/models/user.server.model.js')
+  let User = require('../../src/models/user.model.js')
   let userService = require('../../src/services/user.service.js')()
 
   describe('Given a request to User resource', () => {

@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 mongoose.Promise = require('bluebird')
 
-const User = require('../models/user.server.model')
+const User = require('../models/user.model')
 const _ = require('lodash')
 
 let userService = () => {
@@ -13,6 +13,7 @@ let userService = () => {
         .sort({email: 'asc'})
         .skip(pageSize * page)
         .limit(pageSize)
+        .select({email: 1, firstName: 1, lastName: 1, phone: 1})
         .exec()
     ])
   }

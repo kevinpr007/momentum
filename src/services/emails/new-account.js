@@ -1,6 +1,6 @@
 module.exports = (user, host) => {
   let getTemplate = () => {
-    let template = {
+    return {
       subject: 'Style Point: New Account',
       html: `
         <p>
@@ -16,7 +16,6 @@ module.exports = (user, host) => {
         </p>
     `
     }
-    return template
   }
 
   return {

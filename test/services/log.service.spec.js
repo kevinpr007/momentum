@@ -1,7 +1,7 @@
 const HttpStatus = require('http-status-codes')
 
 describe('Log service tests', () => {
-  let Log = require('../../src/models/logs.server.model')
+  let Log = require('../../src/models/logs.model')
   let logService = require('../../src/services/log.service')()
   let log
 
