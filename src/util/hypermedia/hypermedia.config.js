@@ -24,6 +24,7 @@ module.exports = () => {
       default:
         throw new Error('Entity not defined')
     }
+    return entity
   }
 
   let setResponse = (req, res, next) => {
@@ -32,7 +33,7 @@ module.exports = () => {
         let model = res.body.data[0].constructor.modelName
         res.body.data = _.each(res.body.data, item => setLinks(req, item._doc, model))
       } else {
-        let model = res.body._doc.constructor.modelName
+        let model = res.body.constructor.modelName
         res.body._doc = setLinks(req, res.body._doc, model)
       }
       return res.body
