@@ -1,7 +1,7 @@
 const Hypermedia = require('../util/hypermedia/hypermedia.config')
 const HttpStatus = require('http-status-codes')
 const pagedResult = require('../util/pagination/paged-result')
-const pagValidations = require('../util/pagination/validations')
+const getPageValidations = require('../util/pagination/page-validations')
 const config = require('../config/config')()
 
 let userController = userService => {
@@ -9,7 +9,7 @@ let userController = userService => {
     let page = parseInt(req.query.page || 0)
     let pageSize = parseInt(req.query.pageSize || config.PAGE_SIZE)
 
-    pagValidations(page, pageSize).getValidation()
+    getPageValidations(page, pageSize)
 
     userService.getAll(page, pageSize).then(users => {
       users = pagedResult(page, pageSize, users)

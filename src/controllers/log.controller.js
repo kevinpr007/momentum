@@ -2,14 +2,14 @@ const Hypermedia = require('../util/hypermedia/hypermedia.config')
 const HttpStatus = require('http-status-codes')
 const pagedResult = require('../util/pagination/paged-result')
 const config = require('../config/config')()
-const pagValidations = require('../util/pagination/validations')
+const getPageValidations = require('../util/pagination/page-validations')
 
 let logController = (logService) => {
   let getAllLogs = (req, res, next) => {
     let page = parseInt(req.query.page || 0)
     let pageSize = parseInt(req.query.pageSize || config.PAGE_SIZE)
 
-    pagValidations(page, pageSize).getValidation()
+    getPageValidations(page, pageSize)
 
     logService.getAll(page, pageSize)
     .then(logs => {
@@ -23,7 +23,7 @@ let logController = (logService) => {
     let page = parseInt(req.query.page || 0)
     let pageSize = parseInt(req.query.pageSize || config.PAGE_SIZE)
 
-    pagValidations(page, pageSize).getValidation()
+    getPageValidations(page, pageSize)
 
     logService.getByCode(req.params.code, page, pageSize)
     .then(logs => {
@@ -37,7 +37,7 @@ let logController = (logService) => {
     let page = parseInt(req.query.page || 0)
     let pageSize = parseInt(req.query.pageSize || config.PAGE_SIZE)
 
-    pagValidations(page, pageSize).getValidation()
+    getPageValidations(page, pageSize)
 
     logService.getByStatus(req.params.status, page, pageSize)
     .then(logs => {
