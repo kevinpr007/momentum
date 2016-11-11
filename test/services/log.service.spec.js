@@ -138,11 +138,11 @@ describe('Log service tests', () => {
     context('when requesting to insert / update a log', () => {
       it('will save and return the log object', sinon.test(function (done) {
         let logCode = new Log({code: '500'})
-        this.stub(logCode, 'save').resolves(logCode)
+        this.stub(Log.prototype, 'save').yields(null, logCode)
 
         logService.saveLog(logCode).then(result => {
           expect(result).to.have.property('code', '500')
-          expect(logCode.save.calledOnce).to.equal(true)
+          expect(Log.prototype.save.calledOnce).to.equal(true)
           done()
         }).catch(err => done(err))
       }))

@@ -78,7 +78,9 @@ describe('Log entity requests', () => {
       it('returns Ok (200) with json array containing all logs for that particular code', sinon.test(function (done) {
         let codeStr = '200'
         req.params.code = codeStr
-        let log = new Log({code: codeStr})
+
+        let totalCount = 1
+        let log = [totalCount, [new Log({code: codeStr})]]
         let next = (err) => done(err)
 
         logService = this.stub(logService())
@@ -87,10 +89,10 @@ describe('Log entity requests', () => {
         logController(logService).getByCode(req, res, next)
 
         res.on('end', function () {
-          let data = JSON.parse(res._getData())
+          let data = JSON.parse(res._getData()).data
           assert.isTrue(res._isJSON())
           assert.isTrue(logService.getByCode.calledOnce)
-          expect(data.code).to.equal(codeStr)
+          expect(data[0].code).to.equal(codeStr)
           done()
         })
       }))
@@ -122,7 +124,9 @@ describe('Log entity requests', () => {
       it('returns Ok (200) with json array containing all logs for that particular status', sinon.test(function (done) {
         let codeStr = 'success'
         req.params.status = codeStr
-        let log = new Log({status: codeStr})
+
+        let totalCount = 1
+        let log = [totalCount, [new Log({status: codeStr})]]
         let next = (err) => done(err)
 
         logService = this.stub(logService())
@@ -131,10 +135,10 @@ describe('Log entity requests', () => {
         logController(logService).getByStatus(req, res, next)
 
         res.on('end', function () {
-          let data = JSON.parse(res._getData())
+          let data = JSON.parse(res._getData()).data
           assert.isTrue(res._isJSON())
           assert.isTrue(logService.getByStatus.calledOnce)
-          expect(data.status).to.equal(codeStr)
+          expect(data[0].status).to.equal(codeStr)
           done()
         })
       }))
