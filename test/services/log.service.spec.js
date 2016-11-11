@@ -24,8 +24,24 @@ describe('Log service tests', () => {
           where () {
             return this
           },
+          sort () {
+            return this
+          },
+          skip () {
+            return this
+          },
+          limit () {
+            return this
+          },
           exec () {
             return Promise.resolve(log)
+          },
+          count() {
+            return {
+              exec () {
+                return Promise.resolve(1)
+              }
+            }
           }
         }
 
@@ -33,7 +49,7 @@ describe('Log service tests', () => {
 
         logService.getByCode(ERROR_CODE).then(result => {
           assert.notEqual(result, null)
-          expect(result.code).to.be.equal(ERROR_CODE)
+          expect(result[1].code).to.be.equal(ERROR_CODE)
           done()
         }).catch(err => done(err))
       }))
@@ -51,8 +67,24 @@ describe('Log service tests', () => {
           where () {
             return this
           },
+          sort () {
+            return this
+          },
+          skip () {
+            return this
+          },
+          limit () {
+            return this
+          },
           exec () {
             return Promise.resolve(log)
+          },
+          count() {
+            return {
+              exec () {
+                return Promise.resolve(1)
+              }
+            }
           }
         }
 
@@ -60,7 +92,7 @@ describe('Log service tests', () => {
 
         logService.getByStatus(STATUS).then(result => {
           assert.notEqual(result, null)
-          expect(result.status).to.be.equal(STATUS)
+          expect(result[1].status).to.be.equal(STATUS)
           done()
         }).catch(err => done(err))
       }))
