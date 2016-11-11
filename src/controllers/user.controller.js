@@ -1,4 +1,4 @@
-const hypermedia = require('../util/hypermedia/hypermedia.config')()
+const Hypermedia = require('../util/hypermedia/hypermedia.config')
 const HttpStatus = require('http-status-codes')
 const pagedResult = require('../util/pagination/paged-result')
 const pagValidations = require('../util/pagination/validations')
@@ -13,7 +13,8 @@ let userController = userService => {
 
     userService.getAll(page, pageSize).then(users => {
       users = pagedResult(page, pageSize, users)
-      res.status(HttpStatus.OK).json(hypermedia.setResponse(req, users, next))
+      let model = users.data[0].constructor.modelName
+      res.status(HttpStatus.OK).json(new Hypermedia(req, model).setResponse(users, next))
     }).catch(next)
   }
 
@@ -24,7 +25,8 @@ let userController = userService => {
         err.status = HttpStatus.NOT_FOUND
         throw err
       }
-      res.status(HttpStatus.OK).json(hypermedia.setResponse(req, user, next))
+      let model = user.constructor.modelName
+      res.status(HttpStatus.OK).json(new Hypermedia(req, model).setResponse(user, next))
     }).catch(next)
   }
 
