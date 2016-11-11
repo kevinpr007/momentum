@@ -1,6 +1,9 @@
+const GET = 'GET'
+const POST = 'POST'
+const PUT = 'PUT'
+const DELETE = 'DELETE'
+
 let routeMap = new Map()
-const GET = 'GET', POST = 'POST',
-  PUT = 'PUT', DELETE = 'DELETE'
 
 /**
  * @Index routes
