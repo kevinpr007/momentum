@@ -13,12 +13,12 @@ module.exports = () => {
     switch (model) {
       case mongoDB.Model.Log:
         // TODO: Business Logic
-        require('./log.links')(entity, baseUrl, routes, REGEX)
+        require('./log.hypermedia.js')(entity, baseUrl, routes, REGEX)
         break
 
       case mongoDB.Model.User:
         // TODO: Business Logic
-        require('./user.links')(entity, baseUrl, routes, REGEX)
+        require('./user.hypermedia.js')(entity, baseUrl, routes, REGEX)
         break
 
       default:
