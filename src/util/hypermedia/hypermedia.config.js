@@ -12,12 +12,10 @@ module.exports = () => {
   let getLinks = (entity, baseUrl, routes, model) => {
     switch (model) {
       case mongoDB.Model.Log:
-        // TODO: Business Logic
         require('./log.hypermedia.js')(entity, baseUrl, routes, REGEX)
         break
 
-      case mongoDB.Model.User:
-        // TODO: Business Logic
+      case mongoDB.Model.User:        
         require('./user.hypermedia.js')(entity, baseUrl, routes, REGEX)
         break
 
@@ -27,16 +25,16 @@ module.exports = () => {
     return entity
   }
 
-  let setResponse = (req, res, next) => {
+  let setResponse = (req, entity, next) => {
     try {
-      if ('data' in res.body) {
-        let model = res.body.data[0].constructor.modelName
-        res.body.data = _.each(res.body.data, item => setLinks(req, item._doc, model))
+      if ('data' in entity) {
+        let model = entity.data[0].constructor.modelName
+        entity.data = _.each(entity.data, item => setLinks(req, item._doc, model))
       } else {
-        let model = res.body.constructor.modelName
-        res.body._doc = setLinks(req, res.body._doc, model)
+        let model = entity.constructor.modelName
+        entity._doc = setLinks(req, entity._doc, model)
       }
-      return res.body
+      return entity
     } catch (err) {
       next(err)
     }

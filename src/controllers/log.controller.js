@@ -1,3 +1,4 @@
+const hypermedia = require('../util/hypermedia/hypermedia.config')()
 const HttpStatus = require('http-status-codes')
 const pagedResult = require('../util/paged-result')
 const config = require('../config/config')()
@@ -20,9 +21,8 @@ let logController = (logService) => {
 
     logService.getAll(page, pageSize)
     .then(logs => {
-      res.body = pagedResult(page, pageSize, logs)
-      next()
-      res.status(HttpStatus.OK).json(res.body)
+      logs = pagedResult(page, pageSize, logs)
+      res.status(HttpStatus.OK).json(hypermedia.setResponse(req, logs, next))
     })
     .catch(next)
   }
@@ -44,9 +44,8 @@ let logController = (logService) => {
 
     logService.getByCode(req.params.code, page, pageSize)
     .then(logs => {
-      res.body = pagedResult(page, pageSize, logs)
-      next()
-      res.status(HttpStatus.OK).json(res.body)
+      logs = pagedResult(page, pageSize, logs)      
+      res.status(HttpStatus.OK).json(hypermedia.setResponse(req, logs, next))
     })
     .catch(next)
   }
@@ -68,9 +67,8 @@ let logController = (logService) => {
 
     logService.getByStatus(req.params.status, page, pageSize)
     .then(logs => {
-      res.body = pagedResult(page, pageSize, logs)
-      next()
-      res.status(HttpStatus.OK).json(res.body)
+      logs = pagedResult(page, pageSize, logs)
+      res.status(HttpStatus.OK).json(hypermedia.setResponse(req, logs, next))
     })
     .catch(next)
   }

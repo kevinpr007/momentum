@@ -1,3 +1,4 @@
+const hypermedia = require('../util/hypermedia/hypermedia.config')()
 const HttpStatus = require('http-status-codes')
 const pagedResult = require('../util/paged-result')
 const config = require('../config/config')()
@@ -19,9 +20,8 @@ let userController = userService => {
     }
 
     userService.getAll(page, pageSize).then(users => {
-      res.body = pagedResult(page, pageSize, users)
-      next()
-      res.status(HttpStatus.OK).json(res.body)
+      users = pagedResult(page, pageSize, users)      
+      res.status(HttpStatus.OK).json(hypermedia.setResponse(req, users, next))
     }).catch(next)
   }
 
@@ -31,10 +31,8 @@ let userController = userService => {
         let err = new Error('User not found.')
         err.status = HttpStatus.NOT_FOUND
         throw err
-      }
-      res.body = user
-      next()
-      res.status(HttpStatus.OK).json(res.body)
+      }      
+      res.status(HttpStatus.OK).json(hypermedia.setResponse(req, user, next))
     }).catch(next)
   }
 
