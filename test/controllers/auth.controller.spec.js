@@ -110,7 +110,7 @@ describe('User authentication requests', () => {
           let data = JSON.parse(res._getData())
           expect(res.statusCode).to.equal(201)
           expect(data).to.have.property('token', 'ABCD-1234')
-          expect(data).to.have.deep.property('user.email', user.email)
+          expect(data).to.have.property('email', user.email)
 
           assert.isTrue(userService.getByEmail.calledOnce)
           assert.isTrue(userService.registerUser.calledOnce)
