@@ -1,4 +1,5 @@
 const mongoDB = require('../../config/mongoose.collections.json')
+const HttpStatus = require('http-status-codes')
 const _ = require('lodash')
 
 class Hypermedia {
@@ -15,7 +16,9 @@ class Hypermedia {
         require('./user.hypermedia.js')(entity, this.baseUrl)
         break
       default:
-        throw new Error('Entity not defined')
+        let err = new Error('Entity not defined')
+        err.status = HttpStatus.INTERNAL_SERVER_ERROR
+        throw err
     }
     return entity
   }
