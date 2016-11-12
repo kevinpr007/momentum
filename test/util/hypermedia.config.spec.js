@@ -1,4 +1,5 @@
 let Log = require('../../src/models/logs.server.model')
+const HttpStatus = require('http-status-codes')
 
 describe('Hypermedia tests', () => {
   const Hypermedia = require('../../src/util/hypermedia/hypermedia.config')
@@ -32,7 +33,7 @@ describe('Hypermedia tests', () => {
     })
 
     context('when passing an entity', () => {
-      it.only('will generate the related links for that particular entity', sinon.test(function (done) {
+      it('will generate the related links for that particular entity', sinon.test(function (done) {
         let entity = new Log({code: '200'})
 
         let hl = new Hypermedia(req)
@@ -43,6 +44,28 @@ describe('Hypermedia tests', () => {
         expect(entity).to.be.instanceof(Log)
         expect(entity._doc).to.have.property('links')
         done()
+      }))
+    })
+
+    context('when passing an entity that does not exist', () => {
+      it('will thrown an exception', sinon.test(function (done) {
+        let entity = new Log({code: '500'})
+        entity.constructor.modelName = 'Invalid'
+
+        let hl = new Hypermedia(req)
+
+        entity = hl.setResponse(entity, next)
+
+        function next (args) {
+          try {
+            expect(args).to.be.an('Error')
+            expect(args.status).to.equal(HttpStatus.INTERNAL_SERVER_ERROR)
+            expect(args.message).to.contains('Entity')
+            done()
+          } catch (err) {
+            done(err)
+          }
+        }
       }))
     })
   })
