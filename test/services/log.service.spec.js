@@ -112,6 +112,9 @@ describe('Log service tests', () => {
           skip () {
             return this
           },
+          select () {
+            return this
+          },
           exec () {
             return Promise.resolve(logs)
           }

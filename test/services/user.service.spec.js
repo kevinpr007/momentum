@@ -57,6 +57,9 @@ describe('User service tests', () => {
           limit () {
             return this
           },
+          select() {
+            return this
+          },
           exec () {
             return Promise.resolve(users)
           }
