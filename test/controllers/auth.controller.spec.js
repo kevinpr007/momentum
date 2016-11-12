@@ -2,7 +2,7 @@ const httpMocks = require('node-mocks-http')
 const HttpStatus = require('http-status-codes')
 
 describe('User authentication requests', () => {
-  let User = require('../../src/models/user.server.model')
+  let User = require('../../src/models/user.model')
   let authController = require('../../src/controllers/auth.controller')
   let userService, authService, emailService, req, res
 

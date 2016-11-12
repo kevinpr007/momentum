@@ -1,7 +1,7 @@
 const moment = require('moment')
 
 describe('User authentication service test', () => {
-  let User = require('../../src/models/user.server.model.js')
+  let User = require('../../src/models/user.model.js')
   let authService = require('../../src/services/auth.service.js')()
 
   describe('Given an authentication request', () => {

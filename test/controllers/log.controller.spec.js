@@ -3,7 +3,7 @@ const httpMocks = require('node-mocks-http')
 const config = require('../../src/config/config')()
 
 describe('Log entity requests', () => {
-  let Log = require('../../src/models/logs.server.model')
+  let Log = require('../../src/models/logs.model')
   let logController = require('../../src/controllers/log.controller')
   let logService, req, res
 

@@ -1,4 +1,4 @@
-let Log = require('../../src/models/logs.server.model')
+let Log = require('../../src/models/logs.model')
 const HttpStatus = require('http-status-codes')
 
 describe('Hypermedia tests', () => {
