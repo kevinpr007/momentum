@@ -32,6 +32,23 @@ describe('Hypermedia tests', () => {
       }))
     })
 
+    context('when passing an empty list', () => {
+      it('will return an empty array inside entity.data property', sinon.test(function (done) {
+        let entities = {
+          data: []
+        }
+
+        let hl = new Hypermedia(req)
+        let next = args => done(args)
+
+        entities = hl.setResponse(entities, next)
+
+        expect(entities.data).to.be.instanceof(Array)
+        expect(entities.data).to.have.length(0)
+        done()
+      }))
+    })
+
     context('when passing an entity', () => {
       it('will generate the related links for that particular entity', sinon.test(function (done) {
         let entity = new Log({code: '200'})
