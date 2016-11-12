@@ -23,8 +23,10 @@ class Hypermedia {
   setResponse (entity, next) {
     try {
       if ('data' in entity) {
-        let model = entity.data[0].constructor.modelName
-        entity.data = _.each(entity.data, item => this.setLinks(model, item._doc))
+        if (entity.data.length > 0) {
+          let model = entity.data[0].constructor.modelName
+          entity.data = _.each(entity.data, item => this.setLinks(model, item._doc))
+        }
       } else {
         entity._doc = this.setLinks(entity.constructor.modelName, entity._doc)
       }
