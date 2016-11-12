@@ -7,7 +7,6 @@ const DATA_FIELD = 1
  * of records at index 0 and the array of items at index 1.
  */
 module.exports = (req, page = 0, pageSize = parseInt(config.PAGE_SIZE), data) => {
-
   const REGEX = /(\?(page)=(\d+))/gi
   let host = `${req.protocol}://${req.headers.host}`
   let url = `${req.originalUrl.replace(REGEX, '')}`

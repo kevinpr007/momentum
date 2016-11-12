@@ -57,7 +57,7 @@ describe('User service tests', () => {
           limit () {
             return this
           },
-          select() {
+          select () {
             return this
           },
           exec () {
