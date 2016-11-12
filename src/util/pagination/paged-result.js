@@ -18,7 +18,7 @@ module.exports = (req, page = 0, pageSize = parseInt(config.PAGE_SIZE), data) =>
     totalPages: totalPages,
     totalCount: data[TOTAL_COUNT_FIELD],
     data: data[DATA_FIELD],
-    prevPage: page > 1 ? `${host}${url}?page=${parseInt(page - 1)}` : null,
+    prevPage: page >= 1 ? `${host}${url}?page=${parseInt(page - 1)}` : null,
     nextPage: page < totalPages ? `${host}${url}?page=${parseInt(page + 1)}` : null
   }
 }
