@@ -12,7 +12,7 @@ let userController = userService => {
     getPageValidations(page, pageSize)
 
     userService.getAll(page, pageSize).then(users => {
-      users = pagedResult(page, pageSize, users)
+      users = pagedResult(req, page, pageSize, users)
       res.status(HttpStatus.OK).json(new Hypermedia(req).setResponse(users, next))
     }).catch(next)
   }
