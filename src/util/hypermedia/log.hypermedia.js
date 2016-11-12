@@ -1,18 +1,19 @@
 const routes = require('../../routes/routes.config')
+const slugify = require('slugify')
 
-module.exports = (entity, baseUrl) => {
+module.exports = (log, baseUrl) => {
   // TODO: Business Logic
-  return entity.links = [{
+  return log.links = [{
     href: `${baseUrl}${routes.get('getLogs').path}`,
     rel: 'collection',
     method: routes.get('getLogs').method
   }, {
-    href: `${baseUrl}${routes.get('getLogs').path}/${entity.code}`,
+    href: `${baseUrl}${routes.get('getLogs').path}/${log.code}`,
     rel: 'code-filter',
     method: routes.get('getByLogCode').method
   },
   {
-    href: `${baseUrl}${routes.get('getLogs').path}/${entity.status}`,
+    href: `${baseUrl}${routes.get('getLogs').path}/${slugify(log.status || '')}`,
     rel: 'status-filter',
     method: routes.get('getByLogStatus').method
   }]

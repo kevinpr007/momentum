@@ -33,6 +33,7 @@ let logService = () => {
 
   let getByStatus = (status, page, pageSize) => {
     page = Math.max(0, page)
+    status = status.replace(/-/g, ' ')
     return Promise.all([
       Log.find().where('status', status).count().exec(),
       Log.find()
