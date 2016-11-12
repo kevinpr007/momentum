@@ -56,8 +56,6 @@ let logService = () => {
   }
 
   let saveLog = log => {
-    // TODO: Fix the message field. It's always undefined
-    // return _.merge(new Log(), log).save()
     let logInst = logFactory(log)
     return logInst.save()
   }
