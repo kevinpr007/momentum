@@ -56,7 +56,6 @@ routeMap.set('getByUserEmail', {
 
 /**
  * @Log routes
- * TODO: Check route constraints.
  */
 routeMap.set('getLogs', {
   path: '/api/logs',
@@ -64,12 +63,12 @@ routeMap.set('getLogs', {
 })
 
 routeMap.set('getByLogCode', {
-  path: '/api/logsByCode/:code',
+  path: '/api/logs/:code(\\d+)',
   method: GET
 })
 
 routeMap.set('getByLogStatus', {
-  path: '/api/logsByStatus/:status',
+  path: '/api/logs/:status',
   method: GET
 })
 
