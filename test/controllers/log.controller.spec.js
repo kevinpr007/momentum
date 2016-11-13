@@ -68,7 +68,7 @@ describe('Log entity requests', () => {
           logController(logService).getAllLogs(req, res, next)
         } catch (err) {
           expect(err).to.be.an('Error')
-          expect(err).to.have.property('status', HttpStatus.INTERNAL_SERVER_ERROR)//
+          expect(err).to.have.property('status', HttpStatus.INTERNAL_SERVER_ERROR)
           done()
         }
       }))
