@@ -9,7 +9,7 @@ const hbs = require('hbs')
 const hbsHelpers = require('handlebars-form-helpers')
 const logger = require('./logger')
 const logService = require('../services/log.service')()
-const package = require('../../package.json')
+const config = require('../../package.json')
 
 module.exports = () => {
   let app = express()
@@ -57,8 +57,8 @@ module.exports = () => {
    */
   router.templateModel = {
     year: new Date().getFullYear(),
-    gitUrl: package.homepage,
-    version: package.version
+    gitUrl: config.homepage,
+    version: config.version
   }
 
   // TODO: Apply a General Security Routing to all paths

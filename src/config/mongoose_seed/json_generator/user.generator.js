@@ -10,7 +10,7 @@
     resetPasswordToken: '{{guid()}}',
     resetPasswordExpires: '',
     phone: '{{integer(1000000000, 1999999999)}}',
-    roles: '{{random("SuperAdmin", "Admin", "Manager", "Employee", "User")}}',
+    roles: '{{random("sysAdmin", "Admin", "Manager", "Employee", "User")}}',
     address: {
       address1: '{{street()}}',
       city: '{{city()}}',
