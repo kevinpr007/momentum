@@ -16,12 +16,12 @@ let config = require('../config')()
 seeder.connect(config.DB_URL, () => {
     // Load Mongoose models
   seeder.loadModels([
-    './src/models/user.server.model',
-    './src/models/logs.server.model',
-    './src/models/location.server.model',
-    './src/models/service.server.model',
-    './src/models/schedule.server.model',
-    './src/models/workshift.server.model'
+    './src/models/user.model',
+    './src/models/logs.model',
+    './src/models/location.model',
+    './src/models/service.model',
+    './src/models/schedule.model',
+    './src/models/workshift.model'
   ])
 
     // Clear specified collections
