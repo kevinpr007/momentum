@@ -33,7 +33,7 @@ let logService = () => {
 
   let getByStatus = (status, page, pageSize) => {
     page = Math.max(0, page)
-    status = status.replace(/-/g, ' ')
+    status = status.replace(/-/g, ' ') //TODO: Remove this and slugify
     return Promise.all([
       Log.find().where('status', status).count().exec(),
       Log.find()
