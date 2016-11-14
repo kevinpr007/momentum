@@ -1,8 +1,8 @@
 const moment = require('moment')
 
 describe('User authentication service test', () => {
-  let User = require('../../src/models/user.model.js')
-  let authService = require('../../src/services/auth.service.js')()
+  let User = require('../../src/models/user.model')
+  let authService = require('../../src/services/auth.service')()
 
   describe('Given an authentication request', () => {
     context('when a user provides proper credentials', () => {

@@ -1,6 +1,6 @@
 describe('User service tests', () => {
-  let User = require('../../src/models/user.model.js')
-  let userService = require('../../src/services/user.service.js')()
+  let User = require('../../src/models/user.model')
+  let userService = require('../../src/services/user.service')()
 
   describe('Given a request to User resource', () => {
     context('when requesting a user by email', () => {

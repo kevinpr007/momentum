@@ -10,10 +10,10 @@ class Hypermedia {
   setLinks (model, entity) {
     switch (model) {
       case mongoDB.Model.Log:
-        require('./log.hypermedia.js')(entity, this.baseUrl)
+        require('./log.hypermedia')(entity, this.baseUrl)
         break
       case mongoDB.Model.User:
-        require('./user.hypermedia.js')(entity, this.baseUrl)
+        require('./user.hypermedia')(entity, this.baseUrl)
         break
       default:
         let err = new Error('Entity not defined')
