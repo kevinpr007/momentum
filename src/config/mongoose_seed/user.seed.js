@@ -110,7 +110,7 @@ var data = [
         'resetPasswordToken': '125fd19d-fa4e-4104-bdc8-ac681fe517a4',
         'resetPasswordExpires': '',
         'phone': 1725980268,
-        'roles': 'SuperAdmin',
+        'roles': 'sysAdmin',
         'address': {
           'address1': 'Ross Street',
           'city': 'Shindler',
@@ -205,7 +205,7 @@ var data = [
         'resetPasswordToken': '24ddf209-69f5-4fce-9ac0-55be6a04ac06',
         'resetPasswordExpires': '',
         'phone': 1500542388,
-        'roles': 'SuperAdmin',
+        'roles': 'sysAdmin',
         'address': {
           'address1': 'Regent Place',
           'city': 'Caroline',
@@ -414,7 +414,7 @@ var data = [
         'resetPasswordToken': '968c2398-94e7-48be-a730-c1265e36a4eb',
         'resetPasswordExpires': '',
         'phone': 1261945182,
-        'roles': 'SuperAdmin',
+        'roles': 'sysAdmin',
         'address': {
           'address1': 'Degraw Street',
           'city': 'Olney',
@@ -452,7 +452,7 @@ var data = [
         'resetPasswordToken': 'f1cdafc8-8dcf-4fce-b45d-a98b1f31d044',
         'resetPasswordExpires': '',
         'phone': 1078068200,
-        'roles': 'SuperAdmin',
+        'roles': 'sysAdmin',
         'address': {
           'address1': 'Pleasant Place',
           'city': 'Aguila',
@@ -737,7 +737,7 @@ var data = [
         'resetPasswordToken': '64a194d2-d6ef-4360-b59a-965e1b7386e5',
         'resetPasswordExpires': '',
         'phone': 1746562666,
-        'roles': 'SuperAdmin',
+        'roles': 'sysAdmin',
         'address': {
           'address1': 'Amity Street',
           'city': 'Belva',
@@ -756,7 +756,7 @@ var data = [
         'resetPasswordToken': 'f86572f7-8a79-4878-8e15-1c547dce32c8',
         'resetPasswordExpires': '',
         'phone': 1024496641,
-        'roles': 'SuperAdmin',
+        'roles': 'sysAdmin',
         'address': {
           'address1': 'Visitation Place',
           'city': 'Trona',
@@ -889,7 +889,7 @@ var data = [
         'resetPasswordToken': '146b9d6b-12ff-4bad-be4d-20b50377beed',
         'resetPasswordExpires': '',
         'phone': 1860519393,
-        'roles': 'SuperAdmin',
+        'roles': 'sysAdmin',
         'address': {
           'address1': 'Rost Place',
           'city': 'Beason',
@@ -1022,7 +1022,7 @@ var data = [
         'resetPasswordToken': 'c51f30ca-c3b8-4b49-bf63-e9eafe7465ce',
         'resetPasswordExpires': '',
         'phone': 1801319496,
-        'roles': 'SuperAdmin',
+        'roles': 'sysAdmin',
         'address': {
           'address1': 'Coffey Street',
           'city': 'Cleary',
@@ -1060,7 +1060,7 @@ var data = [
         'resetPasswordToken': '7cd6a9a1-d7ba-45d1-a069-a8f5354ecb57',
         'resetPasswordExpires': '',
         'phone': 1414894665,
-        'roles': 'SuperAdmin',
+        'roles': 'sysAdmin',
         'address': {
           'address1': 'Gates Avenue',
           'city': 'Ribera',
@@ -1155,7 +1155,7 @@ var data = [
         'resetPasswordToken': '0757d32a-47a2-4005-bb82-8a579712c133',
         'resetPasswordExpires': '',
         'phone': 1770878645,
-        'roles': 'SuperAdmin',
+        'roles': 'sysAdmin',
         'address': {
           'address1': 'Herkimer Court',
           'city': 'Coaldale',
@@ -1231,7 +1231,7 @@ var data = [
         'resetPasswordToken': '2741cc73-e504-4c17-af54-a7c4635cf9b4',
         'resetPasswordExpires': '',
         'phone': 1330442164,
-        'roles': 'SuperAdmin',
+        'roles': 'sysAdmin',
         'address': {
           'address1': 'Division Place',
           'city': 'Wilsonia',
@@ -1269,7 +1269,7 @@ var data = [
         'resetPasswordToken': '19d0d6c4-f17e-4d2d-918c-22d677937e69',
         'resetPasswordExpires': '',
         'phone': 1836296949,
-        'roles': 'SuperAdmin',
+        'roles': 'sysAdmin',
         'address': {
           'address1': 'Hawthorne Street',
           'city': 'Roulette',
@@ -1288,7 +1288,7 @@ var data = [
         'resetPasswordToken': 'eadb16a4-4ba3-41d0-b3e8-2ea80f8d4395',
         'resetPasswordExpires': '',
         'phone': 1393228131,
-        'roles': 'SuperAdmin',
+        'roles': 'sysAdmin',
         'address': {
           'address1': 'Jackson Place',
           'city': 'Southview',
@@ -1326,7 +1326,7 @@ var data = [
         'resetPasswordToken': '99f1574a-6f36-4a48-b842-b0ea878f8e9e',
         'resetPasswordExpires': '',
         'phone': 1124515687,
-        'roles': 'SuperAdmin',
+        'roles': 'sysAdmin',
         'address': {
           'address1': 'Drew Street',
           'city': 'Riegelwood',
@@ -1345,7 +1345,7 @@ var data = [
         'resetPasswordToken': '2de235f6-dadb-4e4b-96d6-cc995f5ee396',
         'resetPasswordExpires': '',
         'phone': 1605107212,
-        'roles': 'SuperAdmin',
+        'roles': 'sysAdmin',
         'address': {
           'address1': 'Lois Avenue',
           'city': 'Riviera',
@@ -1383,7 +1383,7 @@ var data = [
         'resetPasswordToken': 'b07953ac-ff96-463a-8905-a8d42535b6c0',
         'resetPasswordExpires': '',
         'phone': 1951066648,
-        'roles': 'SuperAdmin',
+        'roles': 'sysAdmin',
         'address': {
           'address1': 'Lester Court',
           'city': 'Osage',
@@ -1421,7 +1421,7 @@ var data = [
         'resetPasswordToken': '3a553bbd-b6b7-4497-bc09-db3eff1df460',
         'resetPasswordExpires': '',
         'phone': 1336210998,
-        'roles': 'SuperAdmin',
+        'roles': 'sysAdmin',
         'address': {
           'address1': 'Throop Avenue',
           'city': 'Groton',
@@ -1516,7 +1516,7 @@ var data = [
         'resetPasswordToken': '9ab5dde4-af68-4cad-9df1-5c47033bfbbc',
         'resetPasswordExpires': '',
         'phone': 1779204579,
-        'roles': 'SuperAdmin',
+        'roles': 'sysAdmin',
         'address': {
           'address1': 'Richardson Street',
           'city': 'Cloverdale',
@@ -1535,7 +1535,7 @@ var data = [
         'resetPasswordToken': '18f2d665-1e0e-4237-867a-9204f60999ed',
         'resetPasswordExpires': '',
         'phone': 1369610841,
-        'roles': 'SuperAdmin',
+        'roles': 'sysAdmin',
         'address': {
           'address1': 'Prince Street',
           'city': 'Sunnyside',
@@ -1554,7 +1554,7 @@ var data = [
         'resetPasswordToken': 'f7fb5f08-535c-43ab-b555-4d8664308b7e',
         'resetPasswordExpires': '',
         'phone': 1142182374,
-        'roles': 'SuperAdmin',
+        'roles': 'sysAdmin',
         'address': {
           'address1': 'Aster Court',
           'city': 'Brule',
@@ -1687,7 +1687,7 @@ var data = [
         'resetPasswordToken': '267099de-7cde-46f4-80f1-05c9158eab82',
         'resetPasswordExpires': '',
         'phone': 1016808436,
-        'roles': 'SuperAdmin',
+        'roles': 'sysAdmin',
         'address': {
           'address1': 'Dare Court',
           'city': 'Remington',
@@ -1820,7 +1820,7 @@ var data = [
         'resetPasswordToken': '280271d9-d9af-4148-a75c-dd0dfba089e6',
         'resetPasswordExpires': '',
         'phone': 1915111609,
-        'roles': 'SuperAdmin',
+        'roles': 'sysAdmin',
         'address': {
           'address1': 'Opal Court',
           'city': 'Taft',

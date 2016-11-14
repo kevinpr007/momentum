@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 const mongoDB = require('../config/mongoose.collections.json')
-const types = require('./schedule-types.server.enum')()
+const types = require('./schedule-types.enum')()
 
 const scheduleSchema = new Schema({
   startDate: {
@@ -49,7 +49,11 @@ scheduleSchema.virtual('show').get(function () {
 
 scheduleSchema.set('toJSON', {
   getters: true,
-  virtuals: true
+  virtuals: true,
+  transform: (doc, ret) => {
+    delete ret.id
+    return ret
+  }
 })
 
 module.exports = mongoose.model(mongoDB.Model.Schedule, scheduleSchema)

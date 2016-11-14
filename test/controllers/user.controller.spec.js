@@ -3,12 +3,9 @@ const HttpStatus = require('http-status-codes')
 const config = require('../../src/config/config')()
 
 describe('User entity requests', () => {
-  let User = require('../../src/models/user.server.model')
+  let User = require('../../src/models/user.model')
   let userController = require('../../src/controllers/user.controller')
   let userService, req, res
-
-  const TOTAL_FIELD = 0
-  const DATA_FIELD = 1
 
   beforeEach(() => {
     req = httpMocks.createRequest()
@@ -25,7 +22,7 @@ describe('User entity requests', () => {
         let result = [TotalCount, [new User(), new User()]]
         req.method = 'GET'
         req.url = 'api/users'
-        req.query.page = '5'
+        req.query.page = '2'
         let next = args => done(args)
 
         userService = this.stub(userService())

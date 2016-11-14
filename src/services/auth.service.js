@@ -1,10 +1,11 @@
+const HttpStatus = require('http-status-codes')
 const config = require('../config/config')()
 const jwt = require('jsonwebtoken')
 const Promise = require('bluebird')
 const mongoose = require('mongoose')
 mongoose.Promise = Promise
 
-const User = require('../models/user.server.model')
+const User = require('../models/user.model')
 const tokenLife = config.TOKEN_LIFE
 const _ = require('lodash')
 
@@ -40,10 +41,22 @@ let authService = () => {
     }).exec()
   }
 
+  let authorize = roles => {
+    return (req, res, next) => {
+      if (!roles.includes(req.user.roles)) { //TODO: Check if a user could have multiple roles.
+        let err = new Error('Your user does not have the required role(s) to execute this action.')
+        err.status = HttpStatus.UNAUTHORIZED
+        throw err
+      }
+      next()
+    }
+  }
+
   return {
     resetToken: resetToken,
     getToken: getToken,
-    findByPasswordToken: findByPasswordToken
+    findByPasswordToken: findByPasswordToken,
+    authorize: authorize
   }
 }
 

@@ -4,7 +4,7 @@ mongoose.Promise = require('bluebird')
 const bcrypt = require('bcrypt-nodejs')
 
 describe('User schema validation tests', () => {
-  let User = require('../../src/models/user.server.model')
+  let User = require('../../src/models/user.model')
 
   describe('Given a user instance', () => {
     context('when password is not present', () => {

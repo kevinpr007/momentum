@@ -1,5 +1,5 @@
 describe('Logs schema validation tests', () => {
-  let Log = require('../../src/models/logs.server.model.js')
+  let Log = require('../../src/models/logs.model')
 
   describe('Given a Log instance', () => {
     context('when using getError() function', () => {

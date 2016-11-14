@@ -1,8 +1,8 @@
 const moment = require('moment')
 
 describe('User authentication service test', () => {
-  let User = require('../../src/models/user.server.model.js')
-  let authService = require('../../src/services/auth.service.js')()
+  let User = require('../../src/models/user.model')
+  let authService = require('../../src/services/auth.service')()
 
   describe('Given an authentication request', () => {
     context('when a user provides proper credentials', () => {
@@ -11,6 +11,42 @@ describe('User authentication service test', () => {
         assert.notEqual(token, null)
         done()
       })
+    })
+
+    context('when requesting an action that requires an authorization role', () => {
+      it('will be authorized to proceed with the request when user has proper role', sinon.test(function (done) {
+        let roles = ['Admin']
+        let req = {
+          user: new User({
+            roles: 'Admin'
+          })
+        }
+        let spy = this.spy(next)
+
+        authService.authorize(roles)(req, null, spy)
+
+        function next () {
+          assert.isTrue(spy.calledOnce)
+          done()
+        }
+      }))
+
+      it('will generate an Unauthorized (401) error when user has an invalid role', sinon.test(function (done) {
+        let roles = ['sysAdmin']
+        let req = {
+          user: new User({
+            roles: 'Admin'
+          })
+        }
+
+        try {
+          authService.authorize(roles)(req)
+        } catch (err) {
+          expect(err).to.be.an('Error')
+          expect(err).to.have.property('status', 401)
+          done()
+        }
+      }))
     })
   })
 
@@ -32,7 +68,7 @@ describe('User authentication service test', () => {
       it('will return a user by specified token', sinon.test(function (done) {
         let token = 'A1244'
         let findOne = {
-          exec () {
+          exec() {
             return Promise.resolve(new User({
               resetPasswordToken: token,
               resetPasswordExpires: moment(new Date()).add(1, 'd')

@@ -9,7 +9,7 @@ const hbs = require('hbs')
 const hbsHelpers = require('handlebars-form-helpers')
 const logger = require('./logger')
 const logService = require('../services/log.service')()
-const package = require('../../package.json')
+const config = require('../../package.json')
 
 module.exports = () => {
   let app = express()
@@ -57,19 +57,14 @@ module.exports = () => {
    */
   router.templateModel = {
     year: new Date().getFullYear(),
-    gitUrl: package.homepage,
-    version: package.version
+    gitUrl: config.homepage,
+    version: config.version
   }
 
-  /**
-   * Routing Area
-   */
   // TODO: Apply a General Security Routing to all paths
   // TODO: Add the role features to all required paths
   app.use('/', router)
   require('../routes/index.routes')(router)
-
-  app.use('/api', router)
   require('../routes/auth.routes')(router)
   require('../routes/user.routes')(router)
   require('../routes/log.routes')(router)

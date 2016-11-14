@@ -1,27 +1,19 @@
+const Hypermedia = require('../util/hypermedia/hypermedia.config')
 const HttpStatus = require('http-status-codes')
-const pagedResult = require('../util/paged-result')
+const pagedResult = require('../util/pagination/paged-result')
+const getPageValidations = require('../util/pagination/page-validations')
 const config = require('../config/config')()
 
 let userController = userService => {
   let getAllUsers = (req, res, next) => {
-    
     let page = parseInt(req.query.page || 0)
-    if (page == undefined || isNaN(page)) {
-      let err = new Error('You must provide a page number')
-      err.status = HttpStatus.INTERNAL_SERVER_ERROR
-      throw err
-    }
-
     let pageSize = parseInt(req.query.pageSize || config.PAGE_SIZE)
-    if (pageSize == undefined || isNaN(pageSize)) {
-      let err = new Error('Page size must be a number')
-      err.status = HttpStatus.INTERNAL_SERVER_ERROR
-      throw err
-    }
+
+    getPageValidations(page, pageSize)
 
     userService.getAll(page, pageSize).then(users => {
-      let data = pagedResult(page, pageSize, users)
-      return res.status(HttpStatus.OK).json(data)
+      users = pagedResult(req, page, pageSize, users)
+      res.status(HttpStatus.OK).json(new Hypermedia(req).setResponse(users, next))
     }).catch(next)
   }
 
@@ -32,7 +24,7 @@ let userController = userService => {
         err.status = HttpStatus.NOT_FOUND
         throw err
       }
-      res.status(HttpStatus.OK).json(user)
+      res.status(HttpStatus.OK).json(new Hypermedia(req).setResponse(user, next))
     }).catch(next)
   }
 

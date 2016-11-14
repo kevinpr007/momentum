@@ -1,7 +1,7 @@
 const HttpStatus = require('http-status-codes')
 
 describe('Log service tests', () => {
-  let Log = require('../../src/models/logs.server.model')
+  let Log = require('../../src/models/logs.model')
   let logService = require('../../src/services/log.service')()
   let log
 
@@ -24,8 +24,24 @@ describe('Log service tests', () => {
           where () {
             return this
           },
+          sort () {
+            return this
+          },
+          skip () {
+            return this
+          },
+          limit () {
+            return this
+          },
           exec () {
             return Promise.resolve(log)
+          },
+          count () {
+            return {
+              exec () {
+                return Promise.resolve(1)
+              }
+            }
           }
         }
 
@@ -33,7 +49,7 @@ describe('Log service tests', () => {
 
         logService.getByCode(ERROR_CODE).then(result => {
           assert.notEqual(result, null)
-          expect(result.code).to.be.equal(ERROR_CODE)
+          expect(result[1].code).to.be.equal(ERROR_CODE)
           done()
         }).catch(err => done(err))
       }))
@@ -51,8 +67,24 @@ describe('Log service tests', () => {
           where () {
             return this
           },
+          sort () {
+            return this
+          },
+          skip () {
+            return this
+          },
+          limit () {
+            return this
+          },
           exec () {
             return Promise.resolve(log)
+          },
+          count () {
+            return {
+              exec () {
+                return Promise.resolve(1)
+              }
+            }
           }
         }
 
@@ -60,7 +92,7 @@ describe('Log service tests', () => {
 
         logService.getByStatus(STATUS).then(result => {
           assert.notEqual(result, null)
-          expect(result.status).to.be.equal(STATUS)
+          expect(result[1].status).to.be.equal(STATUS)
           done()
         }).catch(err => done(err))
       }))
@@ -78,6 +110,9 @@ describe('Log service tests', () => {
             return this
           },
           skip () {
+            return this
+          },
+          select () {
             return this
           },
           exec () {
@@ -106,11 +141,11 @@ describe('Log service tests', () => {
     context('when requesting to insert / update a log', () => {
       it('will save and return the log object', sinon.test(function (done) {
         let logCode = new Log({code: '500'})
-        this.stub(logCode, 'save').resolves(logCode)
+        this.stub(Log.prototype, 'save').yields(null, logCode)
 
         logService.saveLog(logCode).then(result => {
           expect(result).to.have.property('code', '500')
-          expect(logCode.save.calledOnce).to.equal(true)
+          expect(Log.prototype.save.calledOnce).to.equal(true)
           done()
         }).catch(err => done(err))
       }))
