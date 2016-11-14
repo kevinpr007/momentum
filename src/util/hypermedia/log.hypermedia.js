@@ -13,7 +13,7 @@ module.exports = (log, baseUrl) => {
     method: routes.get('getByLogCode').method
   },
   {
-    href: `${baseUrl}${routes.get('getLogs').path}/${slugify(log.status || '')}`, //TODO: Remove this and slugify
+    href: `${baseUrl}${routes.get('getLogs').path}/${slugify(log.status || '')}`, // TODO: Remove this and slugify
     rel: 'status-filter',
     method: routes.get('getByLogStatus').method
   }]

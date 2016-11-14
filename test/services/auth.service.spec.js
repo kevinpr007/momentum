@@ -68,7 +68,7 @@ describe('User authentication service test', () => {
       it('will return a user by specified token', sinon.test(function (done) {
         let token = 'A1244'
         let findOne = {
-          exec() {
+          exec () {
             return Promise.resolve(new User({
               resetPasswordToken: token,
               resetPasswordExpires: moment(new Date()).add(1, 'd')
