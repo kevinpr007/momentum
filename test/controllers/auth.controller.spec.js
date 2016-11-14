@@ -2,7 +2,7 @@ const httpMocks = require('node-mocks-http')
 const HttpStatus = require('http-status-codes')
 
 describe('User authentication requests', () => {
-  let User = require('../../src/models/user.server.model')
+  let User = require('../../src/models/user.model')
   let authController = require('../../src/controllers/auth.controller')
   let userService, authService, emailService, req, res
 
@@ -77,9 +77,9 @@ describe('User authentication requests', () => {
 
     context('when providing a valid request', () => {
       it('returns Created (201) with json containing JWT token and user object', sinon.test(function (done) {
-        let user = {
+        let user = new User({
           email: 'test@dev.com'
-        }
+        })
         req.method = 'POST'
         req.url = 'api/register'
         req.body = {
@@ -110,7 +110,7 @@ describe('User authentication requests', () => {
           let data = JSON.parse(res._getData())
           expect(res.statusCode).to.equal(201)
           expect(data).to.have.property('token', 'ABCD-1234')
-          expect(data).to.have.deep.property('user.email', user.email)
+          expect(data).to.have.property('email', user.email)
 
           assert.isTrue(userService.getByEmail.calledOnce)
           assert.isTrue(userService.registerUser.calledOnce)

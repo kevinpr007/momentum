@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 mongoose.Promise = require('bluebird')
 
-const Log = require('../models/logs.server.model')
+const Log = require('../models/logs.model')
 const _ = require('lodash')
 
 let logService = () => {
@@ -13,21 +13,52 @@ let logService = () => {
         .sort({createdOn: -1})
         .skip(pageSize * page)
         .limit(pageSize)
+        .select({code: 1, status: 1, message: 1})
         .exec()
     ])
   }
 
-  let getByCode = code => {
-    return Log.find().where('code', code).exec()
+  let getByCode = (code, page, pageSize) => {
+    page = Math.max(0, page)
+    return Promise.all([
+      Log.find().where('code', code).count().exec(),
+      Log.find()
+        .where('code', code)
+        .sort({createdOn: -1})
+        .skip(pageSize * page)
+        .limit(pageSize)
+        .exec()
+    ])
   }
 
-  let getByStatus = status => {
-    return Log.find().where('status', status).exec()
+  let getByStatus = (status, page, pageSize) => {
+    page = Math.max(0, page)
+    status = status.replace(/-/g, ' ') //TODO: Remove this and slugify
+    return Promise.all([
+      Log.find().where('status', status).count().exec(),
+      Log.find()
+        .where('status', status)
+        .sort({createdOn: -1})
+        .skip(pageSize * page)
+        .limit(pageSize)
+        .exec()
+    ])
+  }
+
+  let logFactory = (log) => {
+    let newLog = new Log({
+      code: log.code,
+      status: log.status,
+      message: log.message,
+      stack: log.stack,
+      createdOn: log.createdOn
+    })
+    return newLog
   }
 
   let saveLog = log => {
-    //TODO: Fix the message field. It's always undefined
-    return _.merge(new Log(), log).save()
+    let logInst = logFactory(log)
+    return logInst.save()
   }
 
   return {

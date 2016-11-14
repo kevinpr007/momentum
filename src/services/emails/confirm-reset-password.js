@@ -1,6 +1,6 @@
 module.exports = (host, token) => {
   let getTemplate = () => {
-    let template = {
+    return {
       subject: 'Style Point: Reset your password',
       html: `
         <p>
@@ -11,7 +11,6 @@ module.exports = (host, token) => {
         </p>
     `
     }
-    return template
   }
 
   return {

@@ -1,4 +1,4 @@
-const days = require('./days.server.enum')()
+const days = require('./days.enum')()
 const mongoDB = require('../config/mongoose.collections.json')
 
 const mongoose = require('mongoose')
@@ -46,7 +46,11 @@ workshiftSchema.virtual('show').get(function () {
 
 workshiftSchema.set('toJSON', {
   getters: true,
-  virtuals: true
+  virtuals: true,
+  transform: (doc, ret) => {
+    delete ret.id
+    return ret
+  }
 })
 
 module.exports = mongoose.model(mongoDB.Model.Workshift, workshiftSchema)

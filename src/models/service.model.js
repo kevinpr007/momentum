@@ -44,7 +44,11 @@ serviceSchema.virtual('show').get(function () {
 
 serviceSchema.set('toJSON', {
   getters: true,
-  virtuals: true
+  virtuals: true,
+  transform: (doc, ret) => {
+    delete ret.id
+    return ret
+  }
 })
 
 module.exports = mongoose.model(mongoDB.Model.Service, serviceSchema)

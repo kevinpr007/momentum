@@ -1,3 +1,4 @@
+const Hypermedia = require('../util/hypermedia/hypermedia.config')
 const HttpStatus = require('http-status-codes')
 const emailFactory = require('../util/email.factory')
 
@@ -14,10 +15,8 @@ let authController = (authService, userService, emailService, templateModel) => 
       return user.isValidPassword(req.body.password)
     }).then(isMatch => {
       if (isMatch) {
-        res.status(HttpStatus.OK).json({
-          token: authService.getToken(user),
-          user: user
-        })
+        user._doc.token = authService.getToken(user)
+        res.status(HttpStatus.OK).json(new Hypermedia(req).setResponse(user, next))
       } else {
         let err = new Error('Authentication failed. Wrong password.')
         err.status = HttpStatus.BAD_REQUEST
@@ -37,10 +36,8 @@ let authController = (authService, userService, emailService, templateModel) => 
       return userService.registerUser(req.body)
     }).then(usr => {
       user = usr
-      res.status(HttpStatus.CREATED).json({
-        token: authService.getToken(usr),
-        user: usr
-      })
+      user._doc.token = authService.getToken(user)
+      res.status(HttpStatus.CREATED).json(new Hypermedia(req).setResponse(user, next))
     }).then(() => {
       let emailTemplate = require('../services/emails/new-account')(user, req.headers.host).getTemplate()
       let emailInfo = emailFactory(user.email, emailTemplate.subject, emailTemplate.html).getInfo()
