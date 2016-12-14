@@ -1,7 +1,7 @@
 {
-  "name": "stylepoint",
+  "name": "momentum",
   "version": "1.0.0",
-  "description": "Style Point is a schedule service that connects people to barbers and stylists at the time and location of your choice!",
+  "description": "Momentum is a scheduler that connects people to any service at the time and location of your choice!",
   "scripts": {
     "start": "cross-env NODE_ENV=development node ./bin/www",
     "startIntelliJ": "cross-env NODE_ENV=development node %NODE_DEBUG_OPTION% ./bin/www",
@@ -17,7 +17,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Ivan-Marquez/stylepoint.git"
+    "url": "git+https://github.com/Ivan-Marquez/momentum.git"
   },
   "keywords": [
     "salon",
@@ -30,9 +30,9 @@
   "author": "Kevin Rivera, Ivan Marquez",
   "license": "PENDING",
   "bugs": {
-    "url": "https://github.com/Ivan-Marquez/stylepoint/issues"
+    "url": "https://github.com/Ivan-Marquez/momentum/issues"
   },
-  "homepage": "https://github.com/Ivan-Marquez/stylepoint#readme",
+  "homepage": "https://github.com/Ivan-Marquez/momentum#readme",
   "standard": {
     "ignore": [
       "public/"
