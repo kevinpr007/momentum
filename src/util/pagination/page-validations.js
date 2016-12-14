@@ -1,5 +1,5 @@
 const HttpStatus = require('http-status-codes')
-
+// @TODO: Change to middleware.
 module.exports = (page, pageSize) => {
   if (page == undefined || isNaN(page)) {
     let err = new Error('You must provide a page number')

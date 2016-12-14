@@ -29,8 +29,8 @@ let userController = userService => {
   }
 
   return {
-    getAllUsers: getAllUsers,
-    getByUserEmail: getByUserEmail
+    getAllUsers,
+    getByUserEmail
   }
 }
 

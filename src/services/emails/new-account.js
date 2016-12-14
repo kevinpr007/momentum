@@ -19,6 +19,6 @@ module.exports = (user, host) => {
   }
 
   return {
-    getTemplate: getTemplate
+    getTemplate
   }
 }

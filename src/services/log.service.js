@@ -62,10 +62,10 @@ let logService = () => {
   }
 
   return {
-    getAll: getAll,
-    getByCode: getByCode,
-    getByStatus: getByStatus,
-    saveLog: saveLog
+    getAll,
+    getByCode,
+    getByStatus,
+    saveLog
   }
 }
 

@@ -14,6 +14,6 @@ module.exports = (host, token) => {
   }
 
   return {
-    getTemplate: getTemplate
+    getTemplate
   }
 }
