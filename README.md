@@ -1,5 +1,5 @@
-# Style Point
-Style Point is a schedule service that connects people to barbers and stylists at the time and location of your choice!
+# Momentum
+Momentum is a scheduler that connects people to any service at the time and location of your choice!
 
 # Status
 [![Build Status](https://travis-ci.org/Ivan-Marquez/stylepoint.svg?branch=master)](https://travis-ci.org/Ivan-Marquez/stylepoint)
