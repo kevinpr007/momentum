@@ -35,11 +35,11 @@ let userService = () => {
   }
 
   return {
-    getAll: getAll,
-    getById: getById,
-    getByEmail: getByEmail,
-    registerUser: registerUser,
-    upsertUser: upsertUser
+    getAll,
+    getById,
+    getByEmail,
+    registerUser,
+    upsertUser
   }
 }
 

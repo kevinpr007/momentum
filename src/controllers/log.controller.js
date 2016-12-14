@@ -48,9 +48,9 @@ let logController = (logService) => {
   }
 
   return {
-    getAllLogs: getAllLogs,
-    getByCode: getByCode,
-    getByStatus: getByStatus
+    getAllLogs,
+    getByCode,
+    getByStatus
   }
 }
 

@@ -8,11 +8,11 @@
     "Log": "Log"
   },
   "Collection": {
-    "Location": "sp_location",
-    "User": "sp_user",
-    "Workshift": "sp_workshift",
-    "Service": "sp_service",
-    "Schedule": "sp_schedule",
-    "Log": "sp_log"
+    "Location": "m_location",
+    "User": "m_user",
+    "Workshift": "m_workshift",
+    "Service": "m_service",
+    "Schedule": "m_schedule",
+    "Log": "m_log"
   }
 }

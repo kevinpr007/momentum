@@ -14,6 +14,6 @@ module.exports = emailInfo => {
   }
 
   return {
-    send: send
+    send
   }
 }

@@ -26,7 +26,7 @@ seeder.connect(config.DB_URL, () => {
 
     // Clear specified collections
   seeder.clearModels([mongoDB.Model.User, mongoDB.Model.Location, mongoDB.Model.Service, mongoDB.Model.Schedule,
-      mongoDB.Model.Workshift], () => {
+    mongoDB.Model.Workshift], () => {
       // Callback to populate DB once collections have been cleared
     seeder.populateModels(mainData)
   })

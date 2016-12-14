@@ -53,10 +53,10 @@ let authService = () => {
   }
 
   return {
-    resetToken: resetToken,
-    getToken: getToken,
-    findByPasswordToken: findByPasswordToken,
-    authorize: authorize
+    resetToken,
+    getToken,
+    findByPasswordToken,
+    authorize
   }
 }
 

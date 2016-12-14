@@ -4,7 +4,7 @@ let indexController = (templateModel) => {
   }
 
   return {
-    index: index
+    index
   }
 }
 

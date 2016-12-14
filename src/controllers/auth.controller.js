@@ -116,11 +116,11 @@ let authController = (authService, userService, emailService, templateModel) => 
   }
 
   return {
-    auth: auth,
-    register: register,
-    newPassword: newPassword,
-    resetPassword: resetPassword,
-    confirmResetPassword: confirmResetPassword
+    auth,
+    register,
+    newPassword,
+    resetPassword,
+    confirmResetPassword
   }
 }
 

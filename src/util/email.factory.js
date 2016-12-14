@@ -13,6 +13,6 @@ module.exports = (to, subject, html) => {
   }
 
   return {
-    getInfo: getInfo
+    getInfo
   }
 }
