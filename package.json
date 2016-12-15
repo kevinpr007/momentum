@@ -14,7 +14,7 @@
     "postinstall": "bower install",
     "benchmark": "node benchmark/homepage.js",
     "seed": "cross-env NODE_ENV=development node ./src/config/mongoose_seed/configuration",
-    "docs": "./node_modules/.bin/apidoc -i src/ -o docs/"
+    "docs": "./node_modules/.bin/apidoc -i src/routes/ -o docs/"
   },
   "repository": {
     "type": "git",
