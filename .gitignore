@@ -6,6 +6,7 @@
 .vscode/
 .vs/
 bin/
+!bin/*.js
 obj/
 *.sln
 *.njsproj

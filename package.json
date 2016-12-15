@@ -72,6 +72,7 @@
     "slugify": "^1.0.2"
   },
   "devDependencies": {
+    "apidoc": "^0.16.1",
     "chai": "^3.5.0",
     "chai-as-promised": "^6.0.0",
     "debug": "~2.2.0",
