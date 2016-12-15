@@ -1,10 +1,17 @@
 # Intelli J
 .idea/
-.vscode/
 *.iml
 
+# Visual Studio
+.vscode/
+.vs/
+bin/
+obj/
+*.sln
+*.njsproj
+
 # Enviroment Variables
-.env_*
+.env*
 
 # Logs
 *.log
