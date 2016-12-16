@@ -37,11 +37,6 @@ module.exports = router => {
   *           "links": [
   *             {
   *               "method": "GET",
-  *               "rel": "collection",
-  *               "href": "http://localhost:8080/api/users"
-  *             },
-  *             {
-  *               "method": "GET",
   *               "rel": "self",
   *               "href": "http://localhost:8080/api/users/amparoanderson@glukgluk.com"
   *             }
@@ -110,6 +105,7 @@ module.exports = router => {
   *
   * @apiParam {String} email User's email.
   *
+  * @apiSuccess {Array} links Available hypermedia links for a specific resource.
   * @apiSuccess {Guid} _id User's document id.
   * @apiSuccess {String} firstName User's first name.
   * @apiSuccess {String} lastName User's last name.
@@ -131,11 +127,6 @@ module.exports = router => {
   *     HTTP/1.1 200 OK
   *     {
   *       "links": [
-  *         {
-  *           "method": "GET",
-  *           "rel": "collection",
-  *           "href": "http://localhost:8080/api/users"
-  *         },
   *         {
   *           "method": "GET",
   *           "rel": "self",
