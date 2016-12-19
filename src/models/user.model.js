@@ -55,7 +55,7 @@ const userSchema = new Schema({
   },
   phone: Number,
   roles: {
-    type: String,
+    type: [String],
     enum: roles,
     index: true
   },
