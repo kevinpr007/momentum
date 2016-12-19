@@ -230,5 +230,34 @@
 			"**/"
 		],
 		"description": "API annotations to use with services that return a collection of resources. Authentication responses included."
+	},
+	"API Parameter Field":{
+		"prefix": "api_param",
+		"body":[
+			"* @apiParam {${1:type}} ${2:fieldName} ${3:description}"
+		],
+		"description": "API parameter field configuration."
+	},
+	"API Success Response Field": {
+		"prefix": "api_success",
+		"body": [
+			"* @apiSuccess {${1:type}} ${2:fieldName} ${3:description}"
+		],
+		"description": "API respose field configuration."
+	},
+	"API Error Response Field": {
+		"prefix": "api_error",
+		"body": [
+			"* @apiError ${1:errorName} ${2:description}",
+			"* @apiErrorExample ${1:errorName}:",
+			"*     HTTP/1.1 ${3:errorCode} ${4:error description}",
+			"*     {",
+			"*       \"message\": \"${4:error description}\",",
+			"*       \"error\": {",
+			"*         \"status\": ${3:errorCode}",
+			"*       }",
+			"*     }"
+		],
+		"description": "API error response configuration."
 	}
 }
