@@ -15,7 +15,7 @@ describe('User authentication service test', () => {
 
     context('when requesting an action that requires an authorization role', () => {
       it('will be authorized to proceed with the request when user has proper role', sinon.test(function (done) {
-        let roles = ['Admin']
+        let roles = ['Admin', 'sysAdmin']
         let req = {
           user: new User({
             roles: 'Admin'
