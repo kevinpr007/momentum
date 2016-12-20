@@ -111,6 +111,13 @@ module.exports = router => {
   * @apiSuccess {Link} nextPage Link to navigate to collection's next page.
   * @apiSuccess {Array} data Array of resource objects with hypermedia links.
   * @apiSuccess {Array} links Available hypermedia links for a specific resource.
+  * @apiSuccess {Guid} _id Log's document id.
+  * @apiSuccess {String} stack Log's stack trace (if any).
+  * @apiSuccess {Date} createdOn Document's created date. 
+  * @apiSuccess {String} message Log's message.
+  * @apiSuccess {String} status Log's status.
+  * @apiSuccess {String} code Log's code.
+  * @apiSuccess {String} getError Code - status - message combination
   *
   * @apiSuccessExample Success-Response:
   *     HTTP/1.1 200 OK
