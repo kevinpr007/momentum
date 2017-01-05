@@ -21,6 +21,7 @@ const userSchema = new Schema({
     type: String,
     match: /.+@.+\..+/,
     trim: true,
+    lowercase: true,
     required: true,
     index: {
       unique: true
