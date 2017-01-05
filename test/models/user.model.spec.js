@@ -93,6 +93,31 @@ describe('User schema validation tests', () => {
       })
     })
 
+    context('when a user set the email in UPPERCASE', () => {
+      it('will automatically change it to lowercase', done => {
+        let email = 'TEST@DEV.COM'
+
+        let user = new User({
+          firstName: 'Juan',
+          lastName: 'Del Pueblo',
+          email: email,
+          password: 'Qwerty123',
+          address: {
+            address1: '#123',
+            address2: 'Test St.',
+            city: 'San Juan',
+            state: 'P.R.',
+            zipCode: '00123-3322'
+          }
+        })
+
+        user.save()
+
+        expect(user.email).to.equal(email.toLowerCase())
+        done()
+      })
+    })
+
     context('when password contains an invalid length', () => {
       it('will throw a validation error', done => {
         let user = new User({
