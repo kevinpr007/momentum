@@ -51,7 +51,7 @@ module.exports = router => {
   *         ...
   *       ],
   *       "prevPage": null,
-  *       "nextPage": "http://localhost:8080/api/users?page=2"  
+  *       "nextPage": "http://localhost:8080/api/users?page=2"
   *     }
   *
   * @apiError UNAUTHORIZED_TOKEN Unauthorized request (not authenticated or invalid token provided).
@@ -73,7 +73,7 @@ module.exports = router => {
   *         "status": 401
   *       }
   *     }
-  * 
+  *
   * @apiError INVALID_PAGE_NUMBER Invalid page number provided.
   * @apiErrorExample INVALID_PAGE_NUMBER:
   *     HTTP/1.1 500 Internal Server Error
@@ -83,7 +83,7 @@ module.exports = router => {
   *         "status": 500
   *       }
   *     }
-  * 
+  *
   * @apiError INVALID_PAGE_SIZE Invalid page size provided.
   * @apiErrorExample INVALID_PAGE_SIZE:
   *     HTTP/1.1 500 Internal Server Error
