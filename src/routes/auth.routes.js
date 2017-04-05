@@ -27,7 +27,6 @@ module.exports = (router) => {
   * @apiParam {String} zipCode Zip code.
   *
   * @apiSuccess {Array} links Available hypermedia links for a specific resource.
-  * @apiSuccess {type} fieldName description
   *
   * @apiSuccessExample Success-Response:
   *     HTTP/1.1 200 OK
@@ -55,7 +54,7 @@ module.exports = (router) => {
   *       "fullName": "John Smith"
   *     }
   *
-  * @apiError USER_ALREADY_REGISTERED description
+  * @apiError USER_ALREADY_REGISTERED You get this error when the email all ready exist in the system
   * @apiErrorExample USER_ALREADY_REGISTERED:
   *     HTTP/1.1 422 error Email address is already registered.
   *     {
