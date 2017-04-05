@@ -66,6 +66,30 @@ module.exports = (router) => {
   **/
   router.post(routes.get('register').path, authController.register)
   router.post(routes.get('newPassword').path, authController.newPassword)
+
+  /**
+  * @api {GET} /api/confirm-reset-password/:token Confirmation New Password
+  * @apiVersion 0.0.1
+  * @apiName confirmResetPassword
+  * @apiGroup Auth
+  *
+  * @apiParam {String} Token This token will be use to validate the account
+  *
+  * @apiSuccess {HTML} Webpage confirm-reset-password you will get a html page to enter the new password. This will not use in the API.
+  *
+  * @apiSuccessExample Success-Response:
+  *     HTTP/1.1 200 OK
+  *
+  * @apiError Not_Found You will get this error when token is not provide.
+  * @apiErrorExample Not Found:
+  *     HTTP/1.1 404 Not Found
+  *     {
+  *       "message": "Not Found",
+  *       "error": {
+  *         "status": 404
+  *       }
+  *     }
+  **/
   router.get(routes.get('confirmResetPassword').path, authController.confirmResetPassword)
   router.post(routes.get('resetPassword').path, authController.resetPassword)
 }
