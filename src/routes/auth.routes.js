@@ -91,5 +91,46 @@ module.exports = (router) => {
   *     }
   **/
   router.get(routes.get('confirmResetPassword').path, authController.confirmResetPassword)
+
+  /**
+  * @api {post} /api/reset-password Reset Password
+  * @apiVersion 0.0.1
+  * @apiName resetPassword
+  * @apiGroup Auth
+  *
+  * @apiParam {string} email It's the email you want to apply the reset password
+  *
+  * @apiSuccess {Object} data Include all the information related to the email
+  *
+  * @apiSuccessExample Success-Response:
+  *     HTTP/1.1 200 OK
+  *     {
+  *       "data": {
+  *         "accepted": [
+  *           "email..."
+  *           ],
+  *         "rejected": [],
+  *         "response": "250 2.0.0 OK 1491436379 c68sm5669107uac.27 - gsmtp",
+  *         "envelope": {
+  *           "from": "email system...",
+  *           "to": [
+  *             "email..."
+  *           ]
+  *         },
+  *         "messageId": "<2810ef8e-acaa-d1af-0396-838c6c336840@gmail.com>"
+  *       }
+  *   }
+  *
+  * @apiError NOT_FOUND Email not found
+  * @apiErrorExample NOT_FOUND:
+  *     HTTP/1.1 404 Not Found
+  *     {
+  *      "message": "Your request could not be processed as entered. User does not exist.",
+  *      "error": {
+  *        "status": 404
+  *      }
+  *    }
+  *
+  **/
   router.post(routes.get('resetPassword').path, authController.resetPassword)
 }
