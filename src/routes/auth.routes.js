@@ -122,7 +122,7 @@ module.exports = (router) => {
 *
 * @apiError BAD_REQUEST2 Bad Request using new password does not match
 * @apiErrorExample BAD_REQUEST:
-*     HTTP/1.1 400 error Bad Request 
+*     HTTP/1.1 400 error Bad Request
 *     {
 *       "message": "Invalid confirmation password. Please validate your new password.",
 *       "error": {
