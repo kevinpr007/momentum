@@ -43,7 +43,7 @@ let authService = () => {
 
   let authorize = roles => {
     return (req, res, next) => {
-      if (!roles.includes(req.user.roles)) { // TODO: Check if a user could have multiple roles.
+      if (_.intersection(roles, req.user.roles).length == 0) {
         let err = new Error('Your user does not have the required role(s) to execute this action.')
         err.status = HttpStatus.UNAUTHORIZED
         throw err

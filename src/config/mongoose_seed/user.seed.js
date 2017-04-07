@@ -1,1912 +1,2160 @@
 const mongoDB = require('../../config/mongoose.collections.json')
 
 // Data array containing seed data - documents organized by Model
-var data = [
-  {
-    'model': mongoDB.Model.User,
-    'documents': [
-      {
-        'firstName': 'Thornton',
-        'lastName': 'Sanchez',
-        'email': 'thorntonsanchez@glukgluk.com',
-        'dob': '2002-01-02 07:26:10',
-        'password': 'Maine16410',
-        'salt': 'e381aa0e-c47c-4065-8a98-2d6b4c6b4567',
-        'resetPasswordToken': '48d847af-4eea-4b1c-8792-10fb0d5b274a',
-        'resetPasswordExpires': '',
-        'phone': 1465185052,
-        'roles': 'Manager',
-        'address': {
-          'address1': 'Legion Street',
-          'city': 'Centerville',
-          'state': 'Federated States Of Micronesia',
-          'zipCode': 16542
-        },
-        'createdBy': '57fb18864860b7155b746434'
-      },
-      {
-        'firstName': 'Guy',
-        'lastName': 'Mendez',
-        'email': 'guymendez@glukgluk.com',
-        'dob': '1996-07-21 07:09:27',
-        'password': 'Texas18373',
-        'salt': '75afe6d3-3ecc-4a6c-94f2-f9ad6f5ce74f',
-        'resetPasswordToken': '334d7941-b2f9-48df-ba83-c42b50dbf642',
-        'resetPasswordExpires': '',
-        'phone': 1840488428,
-        'roles': 'Manager',
-        'address': {
-          'address1': 'Ludlam Place',
-          'city': 'Lemoyne',
-          'state': 'Iowa',
-          'zipCode': 39929
-        },
-        'createdBy': '57fb18868ae5688aeb25c4d0'
-      },
-      {
-        'firstName': 'Amparo',
-        'lastName': 'Anderson',
-        'email': 'amparoanderson@glukgluk.com',
-        'dob': '2007-07-02 08:52:44',
-        'password': 'Alaska18050',
-        'salt': '766e48a5-0dfb-4aab-a959-e57c5ef6dde3',
-        'resetPasswordToken': 'bcf16cec-f2f5-4eef-af1b-64c4979c0bab',
-        'resetPasswordExpires': '',
-        'phone': 1007841724,
-        'roles': 'Employee',
-        'address': {
-          'address1': 'Carroll Street',
-          'city': 'Elrama',
-          'state': 'Wyoming',
-          'zipCode': 44632
-        },
-        'createdBy': '57fb1886c585331b15573f97'
-      },
-      {
-        'firstName': 'Hardin',
-        'lastName': 'Webster',
-        'email': 'hardinwebster@glukgluk.com',
-        'dob': '1998-02-04 01:38:42',
-        'password': 'Kansas15320',
-        'salt': '14e1bbb7-d20b-4f82-ba9c-add6dd1fe3a3',
-        'resetPasswordToken': 'a1699193-0420-42e3-b958-a2f5956c6e2b',
-        'resetPasswordExpires': '',
-        'phone': 1937655786,
-        'roles': 'User',
-        'address': {
-          'address1': 'Krier Place',
-          'city': 'Chemung',
-          'state': 'West Virginia',
-          'zipCode': 77860
-        },
-        'createdBy': '57fb1886b8d3b7d42ffee92f'
-      },
-      {
-        'firstName': 'Rosemary',
-        'lastName': 'Summers',
-        'email': 'rosemarysummers@glukgluk.com',
-        'dob': '2012-11-01 03:43:30',
-        'password': 'Wisconsin14384',
-        'salt': '70a904b8-37c2-486c-b1e3-cc26135b1c53',
-        'resetPasswordToken': '1e186f4b-d507-4d04-b0ac-2aa2051e996f',
-        'resetPasswordExpires': '',
-        'phone': 1502899630,
-        'roles': 'Manager',
-        'address': {
-          'address1': 'Billings Place',
-          'city': 'Vicksburg',
-          'state': 'South Dakota',
-          'zipCode': 28341
-        },
-        'createdBy': '57fb18867cdb2474ad2eb457'
-      },
-      {
-        'firstName': 'Jenifer',
-        'lastName': 'Snider',
-        'email': 'jenifersnider@glukgluk.com',
-        'dob': '2014-09-30 09:03:01',
-        'password': 'District Of Columbia10259',
-        'salt': '278ec3f8-974e-404e-964f-7f4680b96bb8',
-        'resetPasswordToken': '125fd19d-fa4e-4104-bdc8-ac681fe517a4',
-        'resetPasswordExpires': '',
-        'phone': 1725980268,
-        'roles': 'sysAdmin',
-        'address': {
-          'address1': 'Ross Street',
-          'city': 'Shindler',
-          'state': 'South Carolina',
-          'zipCode': 70000
-        },
-        'createdBy': '57fb1886bdc702961abaabda'
-      },
-      {
-        'firstName': 'Aurora',
-        'lastName': 'Woods',
-        'email': 'aurorawoods@glukgluk.com',
-        'dob': '1995-08-09 05:39:59',
-        'password': 'Kentucky11882',
-        'salt': 'e5645c62-49b2-4fa1-94f7-1243f1eabc2a',
-        'resetPasswordToken': '6cb4bfeb-cf60-4d0d-8815-b997077d03e7',
-        'resetPasswordExpires': '',
-        'phone': 1183642911,
-        'roles': 'User',
-        'address': {
-          'address1': 'Kings Hwy',
-          'city': 'Crayne',
-          'state': 'Tennessee',
-          'zipCode': 37849
-        },
-        'createdBy': '57fb18867ccfd9b6bab78a09'
-      },
-      {
-        'firstName': 'Stacie',
-        'lastName': 'Meyers',
-        'email': 'staciemeyers@glukgluk.com',
-        'dob': '2014-06-14 01:29:26',
-        'password': 'North Dakota16802',
-        'salt': '7f6c0ba2-adfd-4dc2-90aa-a7b6b6a3f351',
-        'resetPasswordToken': '159fdf45-4497-41f4-8ac8-51f7bf578aec',
-        'resetPasswordExpires': '',
-        'phone': 1250595939,
-        'roles': 'User',
-        'address': {
-          'address1': 'Brighton Court',
-          'city': 'Walton',
-          'state': 'American Samoa',
-          'zipCode': 56783
-        },
-        'createdBy': '57fb1886887ac5ce59d34370'
-      },
-      {
-        'firstName': 'Collier',
-        'lastName': 'Hopper',
-        'email': 'collierhopper@glukgluk.com',
-        'dob': '2013-06-15 09:27:30',
-        'password': 'Connecticut19929',
-        'salt': '8b02535c-ae62-4dad-857e-aecfc7f95a22',
-        'resetPasswordToken': '3ec351bd-9476-437d-9782-33364d6ed2a0',
-        'resetPasswordExpires': '',
-        'phone': 1438324924,
-        'roles': 'Employee',
-        'address': {
-          'address1': 'Schaefer Street',
-          'city': 'Bagtown',
-          'state': 'Palau',
-          'zipCode': 24012
-        },
-        'createdBy': '57fb18863b41189c7a3d7a0b'
-      },
-      {
-        'firstName': 'Connie',
-        'lastName': 'David',
-        'email': 'conniedavid@glukgluk.com',
-        'dob': '1992-10-23 11:29:57',
-        'password': 'New York10495',
-        'salt': 'e4027758-3800-428c-89d0-a2bbc12b02d9',
-        'resetPasswordToken': 'b0823660-b2f1-40ee-81c4-d7c07f3d0ed9',
-        'resetPasswordExpires': '',
-        'phone': 1977050391,
-        'roles': 'Admin',
-        'address': {
-          'address1': 'Woodside Avenue',
-          'city': 'Townsend',
-          'state': 'Oregon',
-          'zipCode': 65884
-        },
-        'createdBy': '57fb1886d1807882509fbb4f'
-      },
-      {
-        'firstName': 'Gallagher',
-        'lastName': 'Harding',
-        'email': 'gallagherharding@glukgluk.com',
-        'dob': '2004-12-05 09:05:08',
-        'password': 'New Mexico17455',
-        'salt': '61b09805-b483-4064-a91e-8db01ef03680',
-        'resetPasswordToken': '24ddf209-69f5-4fce-9ac0-55be6a04ac06',
-        'resetPasswordExpires': '',
-        'phone': 1500542388,
-        'roles': 'sysAdmin',
-        'address': {
-          'address1': 'Regent Place',
-          'city': 'Caroline',
-          'state': 'Hawaii',
-          'zipCode': 28391
-        },
-        'createdBy': '57fb1886395421c928283bad'
-      },
-      {
-        'firstName': 'Hollie',
-        'lastName': 'Maxwell',
-        'email': 'holliemaxwell@glukgluk.com',
-        'dob': '1997-05-02 10:24:46',
-        'password': 'Virgin Islands16876',
-        'salt': '766fc036-ff17-4b4c-98bc-171f5d9ecf1c',
-        'resetPasswordToken': '61082f7c-fc9d-496f-825f-3e6ab5fdf863',
-        'resetPasswordExpires': '',
-        'phone': 1819103835,
-        'roles': 'User',
-        'address': {
-          'address1': 'Kane Place',
-          'city': 'Vandiver',
-          'state': 'Missouri',
-          'zipCode': 83004
-        },
-        'createdBy': '57fb18860766dea29f2fcb67'
-      },
-      {
-        'firstName': 'Dorothy',
-        'lastName': 'Little',
-        'email': 'dorothylittle@glukgluk.com',
-        'dob': '2000-08-13 08:24:44',
-        'password': 'Georgia18013',
-        'salt': 'c1add177-fa84-4738-80e9-697e6d410470',
-        'resetPasswordToken': '5b8da614-2b11-4a0c-879c-f8b0b22f4c10',
-        'resetPasswordExpires': '',
-        'phone': 1315087620,
-        'roles': 'Manager',
-        'address': {
-          'address1': 'Blake Court',
-          'city': 'Joes',
-          'state': 'Massachusetts',
-          'zipCode': 62295
-        },
-        'createdBy': '57fb18864a73817e69915c38'
-      },
-      {
-        'firstName': 'Sears',
-        'lastName': 'Bennett',
-        'email': 'searsbennett@glukgluk.com',
-        'dob': '1990-02-21 09:58:07',
-        'password': 'Delaware13015',
-        'salt': '68dd199e-711f-42ce-831b-a52923c2afd6',
-        'resetPasswordToken': 'eb737092-c8e2-474a-9275-5e80345d3451',
-        'resetPasswordExpires': '',
-        'phone': 1478264656,
-        'roles': 'Manager',
-        'address': {
-          'address1': 'Gerald Court',
-          'city': 'Fairhaven',
-          'state': 'Ohio',
-          'zipCode': 23820
-        },
-        'createdBy': '57fb18863943f702c0001fd7'
-      },
-      {
-        'firstName': 'Stevenson',
-        'lastName': 'Odonnell',
-        'email': 'stevensonodonnell@glukgluk.com',
-        'dob': '1999-08-02 01:48:25',
-        'password': 'Colorado13048',
-        'salt': 'aa7c17b1-ef5d-4661-9e83-a300173271fc',
-        'resetPasswordToken': '2eccf354-2763-47f2-8b59-1958014c95b3',
-        'resetPasswordExpires': '',
-        'phone': 1314849041,
-        'roles': 'Employee',
-        'address': {
-          'address1': 'Meeker Avenue',
-          'city': 'Drummond',
-          'state': 'New Hampshire',
-          'zipCode': 14737
-        },
-        'createdBy': '57fb1886e21242607fab2798'
-      },
-      {
-        'firstName': 'Stuart',
-        'lastName': 'Gibbs',
-        'email': 'stuartgibbs@glukgluk.com',
-        'dob': '2007-09-11 09:30:05',
-        'password': 'Rhode Island16726',
-        'salt': '6b5216e2-0929-4690-b8d4-aa93c376a900',
-        'resetPasswordToken': '0a553dbd-1578-4498-9d09-a9b011a0a77e',
-        'resetPasswordExpires': '',
-        'phone': 1144408611,
-        'roles': 'Manager',
-        'address': {
-          'address1': 'Willoughby Avenue',
-          'city': 'Henrietta',
-          'state': 'Alabama',
-          'zipCode': 87180
-        },
-        'createdBy': '57fb188645f5f948523a34ac'
-      },
-      {
-        'firstName': 'Morgan',
-        'lastName': 'Clay',
-        'email': 'morganclay@glukgluk.com',
-        'dob': '2011-04-01 07:45:25',
-        'password': 'Oklahoma17689',
-        'salt': 'a5370c83-c4cf-49aa-b91d-ee27b49fcf28',
-        'resetPasswordToken': 'e6e846f2-9be9-429d-8426-bcafd4d4ae1f',
-        'resetPasswordExpires': '',
-        'phone': 1391150534,
-        'roles': 'Manager',
-        'address': {
-          'address1': 'Arion Place',
-          'city': 'Bloomington',
-          'state': 'North Carolina',
-          'zipCode': 33410
-        },
-        'createdBy': '57fb1886dbbee27f52b59c54'
-      },
-      {
-        'firstName': 'Liliana',
-        'lastName': 'Short',
-        'email': 'lilianashort@glukgluk.com',
-        'dob': '2012-05-03 08:28:12',
-        'password': 'Northern Mariana Islands11465',
-        'salt': '2a3e7bfd-c62b-440d-8ef4-48f2f667119d',
-        'resetPasswordToken': '98141ecb-6af9-44bc-aa96-1fe450a399e8',
-        'resetPasswordExpires': '',
-        'phone': 1951542923,
-        'roles': 'User',
-        'address': {
-          'address1': 'Glenmore Avenue',
-          'city': 'Blandburg',
-          'state': 'California',
-          'zipCode': 18102
-        },
-        'createdBy': '57fb188627a4ed0d23aebc50'
-      },
-      {
-        'firstName': 'Gould',
-        'lastName': 'Hayden',
-        'email': 'gouldhayden@glukgluk.com',
-        'dob': '2003-07-16 06:54:24',
-        'password': 'New Jersey14233',
-        'salt': 'ab420518-9873-4576-9ccb-2ea1e9767617',
-        'resetPasswordToken': 'f02f22f4-8a05-4790-af14-04ea85cd44b1',
-        'resetPasswordExpires': '',
-        'phone': 1400341512,
-        'roles': 'Admin',
-        'address': {
-          'address1': 'Livonia Avenue',
-          'city': 'Kapowsin',
-          'state': 'Guam',
-          'zipCode': 13642
-        },
-        'createdBy': '57fb1886246bce00762fd25a'
-      },
-      {
-        'firstName': 'Marquita',
-        'lastName': 'Rollins',
-        'email': 'marquitarollins@glukgluk.com',
-        'dob': '2014-04-12 04:51:37',
-        'password': 'Idaho15060',
-        'salt': 'c80a10a6-5f82-494c-8b6a-0569a09613b7',
-        'resetPasswordToken': '7d73811e-10a9-4448-8aa7-60590e108216',
-        'resetPasswordExpires': '',
-        'phone': 1798087158,
-        'roles': 'Manager',
-        'address': {
-          'address1': 'Hendrickson Street',
-          'city': 'Grill',
-          'state': 'Puerto Rico',
-          'zipCode': 34956
-        },
-        'createdBy': '57fb18869fb59eb0eba08a0b'
-      },
-      {
-        'firstName': 'William',
-        'lastName': 'Black',
-        'email': 'williamblack@glukgluk.com',
-        'dob': '2004-06-09 01:56:36',
-        'password': 'Utah19452',
-        'salt': '48e9dbec-c472-47d8-b3af-b6f5230cfb60',
-        'resetPasswordToken': '26887cfa-0bd4-4827-a188-d379ebf3885d',
-        'resetPasswordExpires': '',
-        'phone': 1896427557,
-        'roles': 'Admin',
-        'address': {
-          'address1': 'Atlantic Avenue',
-          'city': 'Trail',
-          'state': 'Louisiana',
-          'zipCode': 25904
-        },
-        'createdBy': '57fb1886204002732e2cd05c'
-      },
-      {
-        'firstName': 'Lynda',
-        'lastName': 'Jordan',
-        'email': 'lyndajordan@glukgluk.com',
-        'dob': '2009-07-06 11:43:24',
-        'password': 'Virginia13228',
-        'salt': '7126559f-a684-43fd-b9d8-dc071455f60e',
-        'resetPasswordToken': '968c2398-94e7-48be-a730-c1265e36a4eb',
-        'resetPasswordExpires': '',
-        'phone': 1261945182,
-        'roles': 'sysAdmin',
-        'address': {
-          'address1': 'Degraw Street',
-          'city': 'Olney',
-          'state': 'Illinois',
-          'zipCode': 22867
-        },
-        'createdBy': '57fb1886081a1523e859ea56'
-      },
-      {
-        'firstName': 'Autumn',
-        'lastName': 'Cooper',
-        'email': 'autumncooper@glukgluk.com',
-        'dob': '1992-01-10 11:32:50',
-        'password': 'Arizona16830',
-        'salt': '26bea85d-ff1e-4f2d-9762-0f9bb339c856',
-        'resetPasswordToken': 'e8ecc570-9c7b-4009-a132-b399a35fb210',
-        'resetPasswordExpires': '',
-        'phone': 1594939152,
-        'roles': 'Admin',
-        'address': {
-          'address1': 'Gaylord Drive',
-          'city': 'Mahtowa',
-          'state': 'Montana',
-          'zipCode': 34068
-        },
-        'createdBy': '57fb18864fb2fbb224d91c07'
-      },
-      {
-        'firstName': 'Nichols',
-        'lastName': 'Cameron',
-        'email': 'nicholscameron@glukgluk.com',
-        'dob': '1999-01-07 02:05:28',
-        'password': 'Nebraska15263',
-        'salt': 'a00a610f-3ca3-4700-9ca7-c2cd8b7eeb38',
-        'resetPasswordToken': 'f1cdafc8-8dcf-4fce-b45d-a98b1f31d044',
-        'resetPasswordExpires': '',
-        'phone': 1078068200,
-        'roles': 'sysAdmin',
-        'address': {
-          'address1': 'Pleasant Place',
-          'city': 'Aguila',
-          'state': 'Vermont',
-          'zipCode': 62367
-        },
-        'createdBy': '57fb1886e54620390e0eb5ff'
-      },
-      {
-        'firstName': 'Kelly',
-        'lastName': 'Dillon',
-        'email': 'kellydillon@glukgluk.com',
-        'dob': '2003-10-11 05:55:00',
-        'password': 'Minnesota10372',
-        'salt': '04407f14-d639-48a4-80d2-13377ac7eb34',
-        'resetPasswordToken': '8c4d0b70-2bfe-4990-a6d6-63e0983020a9',
-        'resetPasswordExpires': '',
-        'phone': 1948695424,
-        'roles': 'Employee',
-        'address': {
-          'address1': 'Osborn Street',
-          'city': 'Idamay',
-          'state': 'Mississippi',
-          'zipCode': 17743
-        },
-        'createdBy': '57fb1886e2b08c2f092b6dc3'
-      },
-      {
-        'firstName': 'Sherrie',
-        'lastName': 'Mccarty',
-        'email': 'sherriemccarty@glukgluk.com',
-        'dob': '1999-04-29 02:15:56',
-        'password': 'Marshall Islands14770',
-        'salt': 'e97578f9-5d45-492c-9591-7574862c0119',
-        'resetPasswordToken': '4bdac66f-0c4c-4b5a-9126-19bcde9115ae',
-        'resetPasswordExpires': '',
-        'phone': 1399289592,
-        'roles': 'Manager',
-        'address': {
-          'address1': 'Wyckoff Street',
-          'city': 'Lindcove',
-          'state': 'Washington',
-          'zipCode': 87231
-        },
-        'createdBy': '57fb18867885a9c283194b11'
-      },
-      {
-        'firstName': 'Iva',
-        'lastName': 'Mays',
-        'email': 'ivamays@glukgluk.com',
-        'dob': '1993-09-30 10:01:40',
-        'password': 'Indiana16313',
-        'salt': '8126ac80-68ae-4d3f-b018-7cd6e1d6a3ca',
-        'resetPasswordToken': '513263e8-aeb2-40d9-9c67-f1032a89f5f3',
-        'resetPasswordExpires': '',
-        'phone': 1055298532,
-        'roles': 'User',
-        'address': {
-          'address1': 'Homecrest Court',
-          'city': 'Romeville',
-          'state': 'Arkansas',
-          'zipCode': 16741
-        },
-        'createdBy': '57fb1886c7fa0a75cb4ae156'
-      },
-      {
-        'firstName': 'Bernadette',
-        'lastName': 'Schwartz',
-        'email': 'bernadetteschwartz@glukgluk.com',
-        'dob': '2012-10-15 07:55:29',
-        'password': 'Florida18334',
-        'salt': 'b1fc1e64-d626-4146-acf5-2f6d63f6bdd6',
-        'resetPasswordToken': 'dd182d51-a1fd-458c-aaac-a38a04fd3fd5',
-        'resetPasswordExpires': '',
-        'phone': 1908791826,
-        'roles': 'Manager',
-        'address': {
-          'address1': 'Hanson Place',
-          'city': 'Curtice',
-          'state': 'Michigan',
-          'zipCode': 42136
-        },
-        'createdBy': '57fb1886deceabfa8545e23a'
-      },
-      {
-        'firstName': 'Lawson',
-        'lastName': 'Paul',
-        'email': 'lawsonpaul@glukgluk.com',
-        'dob': '2005-05-29 10:22:09',
-        'password': 'Pennsylvania14257',
-        'salt': '76d99acd-07f8-40a0-9ebd-321e956250c1',
-        'resetPasswordToken': '9c706bc0-b38d-4c23-a4a1-72faf337932b',
-        'resetPasswordExpires': '',
-        'phone': 1223080912,
-        'roles': 'Employee',
-        'address': {
-          'address1': 'Underhill Avenue',
-          'city': 'Jennings',
-          'state': 'Nevada',
-          'zipCode': 75164
-        },
-        'createdBy': '57fb18861cc760a84832fc4a'
-      },
-      {
-        'firstName': 'Kimberly',
-        'lastName': 'York',
-        'email': 'kimberlyyork@glukgluk.com',
-        'dob': '2000-03-24 07:31:54',
-        'password': 'Maine18320',
-        'salt': '3d72fca2-918e-4f67-a2db-bec7478edb17',
-        'resetPasswordToken': '32a005ab-07ec-42ad-87cf-bbc7f3855053',
-        'resetPasswordExpires': '',
-        'phone': 1393894733,
-        'roles': 'Admin',
-        'address': {
-          'address1': 'Whitty Lane',
-          'city': 'Belvoir',
-          'state': 'Federated States Of Micronesia',
-          'zipCode': 34224
-        },
-        'createdBy': '57fb188693a68bac2d503362'
-      },
-      {
-        'firstName': 'Lacey',
-        'lastName': 'Alexander',
-        'email': 'laceyalexander@glukgluk.com',
-        'dob': '1998-01-29 01:39:43',
-        'password': 'Texas14957',
-        'salt': 'ff4fe204-0238-4a01-b7f7-2fdf6507af98',
-        'resetPasswordToken': 'ed20d74b-17b8-44bb-9a2b-ea6576f4a651',
-        'resetPasswordExpires': '',
-        'phone': 1780012378,
-        'roles': 'Employee',
-        'address': {
-          'address1': 'Martense Street',
-          'city': 'Mappsville',
-          'state': 'Iowa',
-          'zipCode': 64398
-        },
-        'createdBy': '57fb1886cfb951354b06d443'
-      },
-      {
-        'firstName': 'Garner',
-        'lastName': 'Odom',
-        'email': 'garnerodom@glukgluk.com',
-        'dob': '1990-05-26 11:06:25',
-        'password': 'Alaska17869',
-        'salt': 'a691d6bc-4025-4648-a7cf-7f018c43eaac',
-        'resetPasswordToken': '16dabeeb-c195-4225-b32d-0c2ed25649e8',
-        'resetPasswordExpires': '',
-        'phone': 1311852867,
-        'roles': 'User',
-        'address': {
-          'address1': 'Strickland Avenue',
-          'city': 'Leming',
-          'state': 'Wyoming',
-          'zipCode': 83455
-        },
-        'createdBy': '57fb1886c7d762113e317218'
-      },
-      {
-        'firstName': 'Campbell',
-        'lastName': 'Hunt',
-        'email': 'campbellhunt@glukgluk.com',
-        'dob': '2009-04-26 06:18:19',
-        'password': 'Kansas19619',
-        'salt': '5017bf52-6b8c-49af-a251-6111193c8d05',
-        'resetPasswordToken': '54a534b2-ce77-4748-ace1-52048f42123a',
-        'resetPasswordExpires': '',
-        'phone': 1274216411,
-        'roles': 'User',
-        'address': {
-          'address1': 'Hegeman Avenue',
-          'city': 'Cassel',
-          'state': 'West Virginia',
-          'zipCode': 26262
-        },
-        'createdBy': '57fb1886f68e834bea32b24b'
-      },
-      {
-        'firstName': 'Josie',
-        'lastName': 'Aguilar',
-        'email': 'josieaguilar@glukgluk.com',
-        'dob': '1995-04-30 07:43:14',
-        'password': 'Wisconsin19378',
-        'salt': '2373c754-27fa-4344-9f1a-72d46fe26d77',
-        'resetPasswordToken': '06293dbd-f8ea-4a7f-a44b-bdc99117a109',
-        'resetPasswordExpires': '',
-        'phone': 1205988897,
-        'roles': 'User',
-        'address': {
-          'address1': 'Grafton Street',
-          'city': 'Castleton',
-          'state': 'South Dakota',
-          'zipCode': 77558
-        },
-        'createdBy': '57fb188658c13fd6c8327cfa'
-      },
-      {
-        'firstName': 'Ebony',
-        'lastName': 'Munoz',
-        'email': 'ebonymunoz@glukgluk.com',
-        'dob': '2004-08-24 09:48:21',
-        'password': 'District Of Columbia12090',
-        'salt': 'a7642982-fd66-415e-89b1-6ee4ab8a1bf1',
-        'resetPasswordToken': 'a9bfd5f7-7b4c-4817-9294-5cff662c69fe',
-        'resetPasswordExpires': '',
-        'phone': 1279640833,
-        'roles': 'Manager',
-        'address': {
-          'address1': 'Schenck Avenue',
-          'city': 'Lacomb',
-          'state': 'South Carolina',
-          'zipCode': 48432
-        },
-        'createdBy': '57fb1886891ff4ff30c607da'
-      },
-      {
-        'firstName': 'Chase',
-        'lastName': 'Williams',
-        'email': 'chasewilliams@glukgluk.com',
-        'dob': '2012-05-11 04:53:22',
-        'password': 'Kentucky15755',
-        'salt': '58cd539b-bef7-4dfb-938d-b92a2c760833',
-        'resetPasswordToken': '86fcff25-c50b-475f-91ec-448235b9564c',
-        'resetPasswordExpires': '',
-        'phone': 1685864813,
-        'roles': 'Admin',
-        'address': {
-          'address1': 'Sharon Street',
-          'city': 'Sandston',
-          'state': 'Tennessee',
-          'zipCode': 10816
-        },
-        'createdBy': '57fb1886e82c3e7a2e92694f'
-      },
-      {
-        'firstName': 'Erica',
-        'lastName': 'Knight',
-        'email': 'ericaknight@glukgluk.com',
-        'dob': '1997-03-26 08:28:12',
-        'password': 'North Dakota12313',
-        'salt': 'cd26e6ce-ce30-4fb1-9ad9-bf549b28388e',
-        'resetPasswordToken': 'cc9f53e1-8900-4025-921f-ac7273140137',
-        'resetPasswordExpires': '',
-        'phone': 1320653560,
-        'roles': 'Manager',
-        'address': {
-          'address1': 'Liberty Avenue',
-          'city': 'Layhill',
-          'state': 'American Samoa',
-          'zipCode': 14901
-        },
-        'createdBy': '57fb188682bb4a58f8e82c53'
-      },
-      {
-        'firstName': 'Roth',
-        'lastName': 'Bass',
-        'email': 'rothbass@glukgluk.com',
-        'dob': '2008-03-02 09:16:33',
-        'password': 'Connecticut14534',
-        'salt': 'b7fb86c5-3cff-4d97-9099-f7aed59ec7d0',
-        'resetPasswordToken': 'f27eb94f-8fb8-4ccf-b02b-6246b450ee74',
-        'resetPasswordExpires': '',
-        'phone': 1433135494,
-        'roles': 'Admin',
-        'address': {
-          'address1': 'Downing Street',
-          'city': 'Grandview',
-          'state': 'Palau',
-          'zipCode': 85321
-        },
-        'createdBy': '57fb1886716257ddb74f7b5c'
-      },
-      {
-        'firstName': 'Fleming',
-        'lastName': 'Case',
-        'email': 'flemingcase@glukgluk.com',
-        'dob': '2013-01-05 06:05:46',
-        'password': 'New York18855',
-        'salt': 'a17d021d-9da8-4876-996e-be21ba542301',
-        'resetPasswordToken': '64a194d2-d6ef-4360-b59a-965e1b7386e5',
-        'resetPasswordExpires': '',
-        'phone': 1746562666,
-        'roles': 'sysAdmin',
-        'address': {
-          'address1': 'Amity Street',
-          'city': 'Belva',
-          'state': 'Oregon',
-          'zipCode': 45111
-        },
-        'createdBy': '57fb188681d3998654f793d9'
-      },
-      {
-        'firstName': 'Hillary',
-        'lastName': 'Lynch',
-        'email': 'hillarylynch@glukgluk.com',
-        'dob': '2012-07-16 07:08:51',
-        'password': 'New Mexico15482',
-        'salt': 'c0923b12-c7d8-4588-a08a-74bbf93ad9a3',
-        'resetPasswordToken': 'f86572f7-8a79-4878-8e15-1c547dce32c8',
-        'resetPasswordExpires': '',
-        'phone': 1024496641,
-        'roles': 'sysAdmin',
-        'address': {
-          'address1': 'Visitation Place',
-          'city': 'Trona',
-          'state': 'Hawaii',
-          'zipCode': 14025
-        },
-        'createdBy': '57fb18864a55ec5e7d32b230'
-      },
-      {
-        'firstName': 'Randall',
-        'lastName': 'Britt',
-        'email': 'randallbritt@glukgluk.com',
-        'dob': '2005-08-03 03:24:46',
-        'password': 'Virgin Islands14148',
-        'salt': '452edf33-6594-49d6-9de7-405615e4daa8',
-        'resetPasswordToken': '3f99e5f5-8cad-40f5-8cb8-8cc0573481c1',
-        'resetPasswordExpires': '',
-        'phone': 1750227250,
-        'roles': 'Manager',
-        'address': {
-          'address1': 'Jaffray Street',
-          'city': 'Winfred',
-          'state': 'Missouri',
-          'zipCode': 57022
-        },
-        'createdBy': '57fb18864f5f843359a94805'
-      },
-      {
-        'firstName': 'Grimes',
-        'lastName': 'Blake',
-        'email': 'grimesblake@glukgluk.com',
-        'dob': '2010-05-18 10:36:06',
-        'password': 'Georgia11522',
-        'salt': 'cf1fdbed-3c9c-4df5-b43f-4ac91ac5bf18',
-        'resetPasswordToken': 'e7facd01-019d-4c92-b16a-992d0fbca99f',
-        'resetPasswordExpires': '',
-        'phone': 1632271376,
-        'roles': 'User',
-        'address': {
-          'address1': 'Moore Place',
-          'city': 'Orick',
-          'state': 'Massachusetts',
-          'zipCode': 17725
-        },
-        'createdBy': '57fb18868f6856580ab624a5'
-      },
-      {
-        'firstName': 'Chasity',
-        'lastName': 'Chase',
-        'email': 'chasitychase@glukgluk.com',
-        'dob': '2000-04-04 01:50:33',
-        'password': 'Delaware19344',
-        'salt': 'c9f14264-e41b-4432-909a-3955c2671e66',
-        'resetPasswordToken': 'c5559b4b-936a-4618-a8d8-b77a7a75c796',
-        'resetPasswordExpires': '',
-        'phone': 1048750860,
-        'roles': 'Manager',
-        'address': {
-          'address1': 'Haring Street',
-          'city': 'Worcester',
-          'state': 'Ohio',
-          'zipCode': 35131
-        },
-        'createdBy': '57fb1886cb120aaa592b7fee'
-      },
-      {
-        'firstName': 'Head',
-        'lastName': 'Hensley',
-        'email': 'headhensley@glukgluk.com',
-        'dob': '2005-11-27 04:26:51',
-        'password': 'Colorado11063',
-        'salt': '22adcf88-aa4a-4989-a40b-cf2675e42175',
-        'resetPasswordToken': 'c960db4f-158a-44fd-8269-1416af8b94dd',
-        'resetPasswordExpires': '',
-        'phone': 1353893330,
-        'roles': 'User',
-        'address': {
-          'address1': 'Noll Street',
-          'city': 'Beechmont',
-          'state': 'New Hampshire',
-          'zipCode': 81412
-        },
-        'createdBy': '57fb1886078cf600d2534c50'
-      },
-      {
-        'firstName': 'Pittman',
-        'lastName': 'Sanford',
-        'email': 'pittmansanford@glukgluk.com',
-        'dob': '1996-03-15 08:54:31',
-        'password': 'Rhode Island16726',
-        'salt': 'dde971d6-2bd4-4069-99bd-a2d580bc2f97',
-        'resetPasswordToken': 'f0665660-1d7e-4767-a7a4-df60f93ae4a7',
-        'resetPasswordExpires': '',
-        'phone': 1178803039,
-        'roles': 'Employee',
-        'address': {
-          'address1': 'Pooles Lane',
-          'city': 'Breinigsville',
-          'state': 'Alabama',
-          'zipCode': 19024
-        },
-        'createdBy': '57fb1886afb04b0b77bbde4f'
-      },
-      {
-        'firstName': 'Trudy',
-        'lastName': 'Branch',
-        'email': 'trudybranch@glukgluk.com',
-        'dob': '1995-11-08 01:49:52',
-        'password': 'Oklahoma10392',
-        'salt': '5507b1ea-a698-4009-9437-57c23b1b017a',
-        'resetPasswordToken': 'e8a09c8a-4578-4ec7-8e66-4c97185420c1',
-        'resetPasswordExpires': '',
-        'phone': 1654247481,
-        'roles': 'Employee',
-        'address': {
-          'address1': 'Claver Place',
-          'city': 'Dunlo',
-          'state': 'North Carolina',
-          'zipCode': 20792
-        },
-        'createdBy': '57fb1886dc1daf06bbd007ec'
-      },
-      {
-        'firstName': 'Glenna',
-        'lastName': 'Juarez',
-        'email': 'glennajuarez@glukgluk.com',
-        'dob': '1993-01-12 03:35:50',
-        'password': 'Northern Mariana Islands12272',
-        'salt': 'c9b0efc5-330a-45bf-95a5-464d2e1d054a',
-        'resetPasswordToken': '146b9d6b-12ff-4bad-be4d-20b50377beed',
-        'resetPasswordExpires': '',
-        'phone': 1860519393,
-        'roles': 'sysAdmin',
-        'address': {
-          'address1': 'Rost Place',
-          'city': 'Beason',
-          'state': 'California',
-          'zipCode': 53697
-        },
-        'createdBy': '57fb18865822ed9ce644ce8a'
-      },
-      {
-        'firstName': 'Benita',
-        'lastName': 'Vang',
-        'email': 'benitavang@glukgluk.com',
-        'dob': '2008-04-27 08:30:26',
-        'password': 'New Jersey19682',
-        'salt': '7a738b33-3c86-4659-a5c9-25917c98193c',
-        'resetPasswordToken': 'f9b75ea5-cad2-41cc-8744-b869a8323acf',
-        'resetPasswordExpires': '',
-        'phone': 1964088950,
-        'roles': 'Employee',
-        'address': {
-          'address1': 'Tompkins Place',
-          'city': 'Englevale',
-          'state': 'Guam',
-          'zipCode': 58801
-        },
-        'createdBy': '57fb1886cc36ffb2d93f282e'
-      },
-      {
-        'firstName': 'Kerri',
-        'lastName': 'Gallagher',
-        'email': 'kerrigallagher@glukgluk.com',
-        'dob': '1996-03-10 08:36:38',
-        'password': 'Idaho10562',
-        'salt': 'aa3a19e4-5322-4efc-ba2b-d37dd66956ee',
-        'resetPasswordToken': '033420b5-4b4b-4134-87fe-343cdc87227f',
-        'resetPasswordExpires': '',
-        'phone': 1597535469,
-        'roles': 'User',
-        'address': {
-          'address1': 'Lake Place',
-          'city': 'Dellview',
-          'state': 'Puerto Rico',
-          'zipCode': 59093
-        },
-        'createdBy': '57fb1886e6525abf002f8512'
-      },
-      {
-        'firstName': 'Cortez',
-        'lastName': 'Oconnor',
-        'email': 'cortezoconnor@glukgluk.com',
-        'dob': '2001-06-12 07:18:23',
-        'password': 'Utah13910',
-        'salt': 'b196598c-9818-476e-9489-c3b5838eb952',
-        'resetPasswordToken': '4d3250c6-feaa-479a-9f3f-9d456a4ee476',
-        'resetPasswordExpires': '',
-        'phone': 1705507895,
-        'roles': 'Admin',
-        'address': {
-          'address1': 'Jodie Court',
-          'city': 'Sterling',
-          'state': 'Louisiana',
-          'zipCode': 27770
-        },
-        'createdBy': '57fb18869d7bfb03dd41dd97'
-      },
-      {
-        'firstName': 'Berry',
-        'lastName': 'Patterson',
-        'email': 'berrypatterson@glukgluk.com',
-        'dob': '1993-11-15 11:21:13',
-        'password': 'Virginia18890',
-        'salt': '3ebc75ea-a4fb-4bf3-8731-1524ef33e511',
-        'resetPasswordToken': '5b86af62-7b82-4b02-9677-61dc9e5e7ac6',
-        'resetPasswordExpires': '',
-        'phone': 1425490383,
-        'roles': 'Employee',
-        'address': {
-          'address1': 'Fayette Street',
-          'city': 'Greenfields',
-          'state': 'Illinois',
-          'zipCode': 89164
-        },
-        'createdBy': '57fb188690f90d5293510817'
-      },
-      {
-        'firstName': 'Jensen',
-        'lastName': 'Bradford',
-        'email': 'jensenbradford@glukgluk.com',
-        'dob': '1991-05-01 04:49:20',
-        'password': 'Arizona18534',
-        'salt': 'ebf05f01-93e6-477e-ac12-ce66c0a991f0',
-        'resetPasswordToken': 'c65806f6-bb17-41ee-bab5-dd0cafc4e7d2',
-        'resetPasswordExpires': '',
-        'phone': 1308713558,
-        'roles': 'Admin',
-        'address': {
-          'address1': 'Ralph Avenue',
-          'city': 'Rosine',
-          'state': 'Montana',
-          'zipCode': 55508
-        },
-        'createdBy': '57fb1886b866f375e0f4cf51'
-      },
-      {
-        'firstName': 'Hubbard',
-        'lastName': 'Mercer',
-        'email': 'hubbardmercer@glukgluk.com',
-        'dob': '1996-04-07 05:28:52',
-        'password': 'Nebraska14335',
-        'salt': '551eff02-92af-47d8-bced-32cf8c4f9ca8',
-        'resetPasswordToken': '3b07622a-32ef-48f4-acdb-d3ba97ffea36',
-        'resetPasswordExpires': '',
-        'phone': 1770696232,
-        'roles': 'Admin',
-        'address': {
-          'address1': 'Varet Street',
-          'city': 'Homeland',
-          'state': 'Vermont',
-          'zipCode': 87448
-        },
-        'createdBy': '57fb1886556c3708b35575af'
-      },
-      {
-        'firstName': 'Tamera',
-        'lastName': 'Valenzuela',
-        'email': 'tameravalenzuela@glukgluk.com',
-        'dob': '2009-01-23 01:35:00',
-        'password': 'Minnesota13363',
-        'salt': '4a9707c2-83eb-4861-9090-9c55519a6d62',
-        'resetPasswordToken': 'c51f30ca-c3b8-4b49-bf63-e9eafe7465ce',
-        'resetPasswordExpires': '',
-        'phone': 1801319496,
-        'roles': 'sysAdmin',
-        'address': {
-          'address1': 'Coffey Street',
-          'city': 'Cleary',
-          'state': 'Mississippi',
-          'zipCode': 21948
-        },
-        'createdBy': '57fb18862b142d5ad46af365'
-      },
-      {
-        'firstName': 'Jacobs',
-        'lastName': 'Bird',
-        'email': 'jacobsbird@glukgluk.com',
-        'dob': '1991-02-03 12:54:13',
-        'password': 'Marshall Islands19572',
-        'salt': '8be4d451-e73b-42d9-8f87-dbb40dc97646',
-        'resetPasswordToken': '3f513503-523e-4d03-8083-07da3be976d4',
-        'resetPasswordExpires': '',
-        'phone': 1326778277,
-        'roles': 'Manager',
-        'address': {
-          'address1': 'Imlay Street',
-          'city': 'Gracey',
-          'state': 'Washington',
-          'zipCode': 78299
-        },
-        'createdBy': '57fb18865ba0660ff68ee41d'
-      },
-      {
-        'firstName': 'Colette',
-        'lastName': 'Peterson',
-        'email': 'colettepeterson@glukgluk.com',
-        'dob': '1996-08-29 12:21:33',
-        'password': 'Indiana17749',
-        'salt': '47bb2789-f1cd-4284-aadf-63111bbf4d2b',
-        'resetPasswordToken': '7cd6a9a1-d7ba-45d1-a069-a8f5354ecb57',
-        'resetPasswordExpires': '',
-        'phone': 1414894665,
-        'roles': 'sysAdmin',
-        'address': {
-          'address1': 'Gates Avenue',
-          'city': 'Ribera',
-          'state': 'Arkansas',
-          'zipCode': 43939
-        },
-        'createdBy': '57fb1886b9a8e5d49b874daa'
-      },
-      {
-        'firstName': 'Monique',
-        'lastName': 'Robbins',
-        'email': 'moniquerobbins@glukgluk.com',
-        'dob': '2010-10-28 09:14:24',
-        'password': 'Florida15118',
-        'salt': '3544ea18-6ab3-4921-8e2d-b58fb6b7325f',
-        'resetPasswordToken': '8cb8eb6f-9b91-41d1-96da-b8c1a2757c02',
-        'resetPasswordExpires': '',
-        'phone': 1473885732,
-        'roles': 'Manager',
-        'address': {
-          'address1': 'Monument Walk',
-          'city': 'Cornucopia',
-          'state': 'Michigan',
-          'zipCode': 67751
-        },
-        'createdBy': '57fb18869e1d7d8c60cc79e6'
-      },
-      {
-        'firstName': 'Tonia',
-        'lastName': 'Stanton',
-        'email': 'toniastanton@glukgluk.com',
-        'dob': '2001-02-25 06:15:00',
-        'password': 'Pennsylvania15481',
-        'salt': '4c85d1dd-f42d-4b59-bf2a-26d49335881c',
-        'resetPasswordToken': '0d0381fa-3b88-4bcd-9c03-d1776fa9a01d',
-        'resetPasswordExpires': '',
-        'phone': 1360389891,
-        'roles': 'Manager',
-        'address': {
-          'address1': 'Remsen Street',
-          'city': 'Bladensburg',
-          'state': 'Nevada',
-          'zipCode': 12476
-        },
-        'createdBy': '57fb18866a09cf66486512ca'
-      },
-      {
-        'firstName': 'Mcknight',
-        'lastName': 'Drake',
-        'email': 'mcknightdrake@glukgluk.com',
-        'dob': '1999-10-21 12:07:16',
-        'password': 'Maine10163',
-        'salt': 'e53a6cf9-524f-4892-954d-43cc9b36ba4e',
-        'resetPasswordToken': 'b1bf7349-302d-4430-9ec5-9788068811d0',
-        'resetPasswordExpires': '',
-        'phone': 1667923151,
-        'roles': 'Employee',
-        'address': {
-          'address1': 'Norman Avenue',
-          'city': 'Conway',
-          'state': 'Federated States Of Micronesia',
-          'zipCode': 21804
-        },
-        'createdBy': '57fb18861ac2de580352184e'
-      },
-      {
-        'firstName': 'Michael',
-        'lastName': 'Delgado',
-        'email': 'michaeldelgado@glukgluk.com',
-        'dob': '1992-05-09 05:48:30',
-        'password': 'Texas10969',
-        'salt': 'c91d8b61-5595-4fe6-9ce5-0bd8993c63f4',
-        'resetPasswordToken': '981560fe-fab7-4b14-b154-253fb4f31ff1',
-        'resetPasswordExpires': '',
-        'phone': 1430596508,
-        'roles': 'Employee',
-        'address': {
-          'address1': 'Etna Street',
-          'city': 'Ola',
-          'state': 'Iowa',
-          'zipCode': 86482
-        },
-        'createdBy': '57fb188654c14ebb98aba559'
-      },
-      {
-        'firstName': 'Lucia',
-        'lastName': 'Singleton',
-        'email': 'luciasingleton@glukgluk.com',
-        'dob': '1997-06-23 07:45:03',
-        'password': 'Alaska13536',
-        'salt': 'e1f6a5d3-b6f6-47c8-80d0-0a1d92e57d05',
-        'resetPasswordToken': '0757d32a-47a2-4005-bb82-8a579712c133',
-        'resetPasswordExpires': '',
-        'phone': 1770878645,
-        'roles': 'sysAdmin',
-        'address': {
-          'address1': 'Herkimer Court',
-          'city': 'Coaldale',
-          'state': 'Wyoming',
-          'zipCode': 52240
-        },
-        'createdBy': '57fb1886585744ab5ac94619'
-      },
-      {
-        'firstName': 'Nicole',
-        'lastName': 'Weaver',
-        'email': 'nicoleweaver@glukgluk.com',
-        'dob': '2003-12-15 07:36:11',
-        'password': 'Kansas16088',
-        'salt': '62191603-5d9b-4075-864f-7df991a2e30c',
-        'resetPasswordToken': '6a746cb5-58c1-4ed9-934b-4f5049babe91',
-        'resetPasswordExpires': '',
-        'phone': 1323255043,
-        'roles': 'User',
-        'address': {
-          'address1': 'Dekalb Avenue',
-          'city': 'Riverton',
-          'state': 'West Virginia',
-          'zipCode': 89024
-        },
-        'createdBy': '57fb1886cd130a0e1deb4a41'
-      },
-      {
-        'firstName': 'Ashley',
-        'lastName': 'Cummings',
-        'email': 'ashleycummings@glukgluk.com',
-        'dob': '1998-11-24 01:28:54',
-        'password': 'Wisconsin17834',
-        'salt': 'e602f73a-0ac4-444c-a79e-952ae049817c',
-        'resetPasswordToken': 'fdfaaa1d-1606-422a-9592-2953ad78a1d0',
-        'resetPasswordExpires': '',
-        'phone': 1319592367,
-        'roles': 'Employee',
-        'address': {
-          'address1': 'Randolph Street',
-          'city': 'Bynum',
-          'state': 'South Dakota',
-          'zipCode': 36594
-        },
-        'createdBy': '57fb1886d4bf7ff4aadb9375'
-      },
-      {
-        'firstName': 'Cassie',
-        'lastName': 'Frazier',
-        'email': 'cassiefrazier@glukgluk.com',
-        'dob': '1998-07-23 01:22:43',
-        'password': 'District Of Columbia16191',
-        'salt': 'de81c116-6fbb-4326-a8c4-30f54d1c7d7a',
-        'resetPasswordToken': 'f8ac1bdf-0c17-44d9-92b7-621dd359ab60',
-        'resetPasswordExpires': '',
-        'phone': 1622056838,
-        'roles': 'Manager',
-        'address': {
-          'address1': 'Kenmore Terrace',
-          'city': 'Celeryville',
-          'state': 'South Carolina',
-          'zipCode': 66654
-        },
-        'createdBy': '57fb188683f0805584b6079d'
-      },
-      {
-        'firstName': 'Edwina',
-        'lastName': 'Mayo',
-        'email': 'edwinamayo@glukgluk.com',
-        'dob': '2005-06-02 07:00:14',
-        'password': 'Kentucky18750',
-        'salt': '859143f1-0356-4f45-aaf7-809be526ef9c',
-        'resetPasswordToken': '2741cc73-e504-4c17-af54-a7c4635cf9b4',
-        'resetPasswordExpires': '',
-        'phone': 1330442164,
-        'roles': 'sysAdmin',
-        'address': {
-          'address1': 'Division Place',
-          'city': 'Wilsonia',
-          'state': 'Tennessee',
-          'zipCode': 85619
-        },
-        'createdBy': '57fb18861eacc2cfbf68cf9f'
-      },
-      {
-        'firstName': 'Nguyen',
-        'lastName': 'Best',
-        'email': 'nguyenbest@glukgluk.com',
-        'dob': '1998-11-15 05:51:16',
-        'password': 'North Dakota17543',
-        'salt': '571122ab-b760-4d62-9bc5-1165a30ec4c0',
-        'resetPasswordToken': 'a6dd0487-da0c-467f-80cb-82f132622ade',
-        'resetPasswordExpires': '',
-        'phone': 1513168405,
-        'roles': 'Admin',
-        'address': {
-          'address1': 'Sands Street',
-          'city': 'Berwind',
-          'state': 'American Samoa',
-          'zipCode': 67762
-        },
-        'createdBy': '57fb188689948a23ab59e26a'
-      },
-      {
-        'firstName': 'Marlene',
-        'lastName': 'Valencia',
-        'email': 'marlenevalencia@glukgluk.com',
-        'dob': '2005-01-07 01:51:40',
-        'password': 'Connecticut15562',
-        'salt': 'da4f5da9-c041-40e2-8016-86920cc6957d',
-        'resetPasswordToken': '19d0d6c4-f17e-4d2d-918c-22d677937e69',
-        'resetPasswordExpires': '',
-        'phone': 1836296949,
-        'roles': 'sysAdmin',
-        'address': {
-          'address1': 'Hawthorne Street',
-          'city': 'Roulette',
-          'state': 'Palau',
-          'zipCode': 37637
-        },
-        'createdBy': '57fb18867c6b911249ed3947'
-      },
-      {
-        'firstName': 'Vinson',
-        'lastName': 'Rocha',
-        'email': 'vinsonrocha@glukgluk.com',
-        'dob': '2015-04-12 04:01:00',
-        'password': 'New York10166',
-        'salt': '90a64527-c1a5-4a71-946e-f02cd2eedd6a',
-        'resetPasswordToken': 'eadb16a4-4ba3-41d0-b3e8-2ea80f8d4395',
-        'resetPasswordExpires': '',
-        'phone': 1393228131,
-        'roles': 'sysAdmin',
-        'address': {
-          'address1': 'Jackson Place',
-          'city': 'Southview',
-          'state': 'Oregon',
-          'zipCode': 78046
-        },
-        'createdBy': '57fb1886529864b653582791'
-      },
-      {
-        'firstName': 'Cash',
-        'lastName': 'Weiss',
-        'email': 'cashweiss@glukgluk.com',
-        'dob': '2015-03-12 06:21:18',
-        'password': 'New Mexico18413',
-        'salt': '115e311e-e08d-49ce-a8b9-c50cef2a6768',
-        'resetPasswordToken': '258b4a8e-1d15-455a-9132-da832f2c0272',
-        'resetPasswordExpires': '',
-        'phone': 1600070127,
-        'roles': 'Admin',
-        'address': {
-          'address1': 'Taylor Street',
-          'city': 'Iberia',
-          'state': 'Hawaii',
-          'zipCode': 54245
-        },
-        'createdBy': '57fb188612122135b91c6d68'
-      },
-      {
-        'firstName': 'Kathryn',
-        'lastName': 'Alford',
-        'email': 'kathrynalford@glukgluk.com',
-        'dob': '1998-10-01 06:35:15',
-        'password': 'Virgin Islands17734',
-        'salt': '098635df-fbf9-4af9-8cea-248939fa676e',
-        'resetPasswordToken': '99f1574a-6f36-4a48-b842-b0ea878f8e9e',
-        'resetPasswordExpires': '',
-        'phone': 1124515687,
-        'roles': 'sysAdmin',
-        'address': {
-          'address1': 'Drew Street',
-          'city': 'Riegelwood',
-          'state': 'Missouri',
-          'zipCode': 10568
-        },
-        'createdBy': '57fb1886eda7d65f265e87b8'
-      },
-      {
-        'firstName': 'Elma',
-        'lastName': 'Oneil',
-        'email': 'elmaoneil@glukgluk.com',
-        'dob': '1993-10-28 10:53:52',
-        'password': 'Georgia19398',
-        'salt': 'b0b3494b-c2a7-485e-9e11-e9832eca7ebf',
-        'resetPasswordToken': '2de235f6-dadb-4e4b-96d6-cc995f5ee396',
-        'resetPasswordExpires': '',
-        'phone': 1605107212,
-        'roles': 'sysAdmin',
-        'address': {
-          'address1': 'Lois Avenue',
-          'city': 'Riviera',
-          'state': 'Massachusetts',
-          'zipCode': 23571
-        },
-        'createdBy': '57fb1886aa8f7995c8590248'
-      },
-      {
-        'firstName': 'Matilda',
-        'lastName': 'Porter',
-        'email': 'matildaporter@glukgluk.com',
-        'dob': '2002-01-09 02:17:45',
-        'password': 'Delaware12099',
-        'salt': 'b2e2a2a0-cb76-4c0b-9a24-bda2582b1beb',
-        'resetPasswordToken': '4d1ea88b-7a8d-4955-a1ef-743667e98233',
-        'resetPasswordExpires': '',
-        'phone': 1528369188,
-        'roles': 'User',
-        'address': {
-          'address1': 'Doscher Street',
-          'city': 'Boykin',
-          'state': 'Ohio',
-          'zipCode': 65915
-        },
-        'createdBy': '57fb18861a97f68de8081924'
-      },
-      {
-        'firstName': 'Mcdaniel',
-        'lastName': 'Curry',
-        'email': 'mcdanielcurry@glukgluk.com',
-        'dob': '2011-09-26 05:08:20',
-        'password': 'Colorado14274',
-        'salt': '71b7e2d5-4ec9-4e4b-9f26-6a0c362d34a4',
-        'resetPasswordToken': 'b07953ac-ff96-463a-8905-a8d42535b6c0',
-        'resetPasswordExpires': '',
-        'phone': 1951066648,
-        'roles': 'sysAdmin',
-        'address': {
-          'address1': 'Lester Court',
-          'city': 'Osage',
-          'state': 'New Hampshire',
-          'zipCode': 14790
-        },
-        'createdBy': '57fb1886f9028f151ed31132'
-      },
-      {
-        'firstName': 'Manning',
-        'lastName': 'Wyatt',
-        'email': 'manningwyatt@glukgluk.com',
-        'dob': '1998-07-15 08:54:07',
-        'password': 'Rhode Island11023',
-        'salt': 'edf4ef2a-8247-4e9b-9a51-0dbb4b3d510e',
-        'resetPasswordToken': '7ae54182-9fbf-45ef-a8e0-794867200d07',
-        'resetPasswordExpires': '',
-        'phone': 1950264749,
-        'roles': 'Employee',
-        'address': {
-          'address1': 'Hutchinson Court',
-          'city': 'Efland',
-          'state': 'Alabama',
-          'zipCode': 52015
-        },
-        'createdBy': '57fb1886c0773a1f44ffece6'
-      },
-      {
-        'firstName': 'Judy',
-        'lastName': 'Soto',
-        'email': 'judysoto@glukgluk.com',
-        'dob': '1999-07-30 03:26:00',
-        'password': 'Oklahoma13074',
-        'salt': '1017dac7-7b4e-4f94-8878-ad71976e20e6',
-        'resetPasswordToken': '3a553bbd-b6b7-4497-bc09-db3eff1df460',
-        'resetPasswordExpires': '',
-        'phone': 1336210998,
-        'roles': 'sysAdmin',
-        'address': {
-          'address1': 'Throop Avenue',
-          'city': 'Groton',
-          'state': 'North Carolina',
-          'zipCode': 64385
-        },
-        'createdBy': '57fb18862f115f5de0fdf4aa'
-      },
-      {
-        'firstName': 'Lorie',
-        'lastName': 'Rasmussen',
-        'email': 'lorierasmussen@glukgluk.com',
-        'dob': '1996-08-29 07:58:46',
-        'password': 'Northern Mariana Islands10407',
-        'salt': 'd201777e-d893-4cb4-a3a9-06ddd1398209',
-        'resetPasswordToken': '67df96d3-ef05-44e4-a828-c8df34241de0',
-        'resetPasswordExpires': '',
-        'phone': 1387531119,
-        'roles': 'User',
-        'address': {
-          'address1': 'Kingsway Place',
-          'city': 'Venice',
-          'state': 'California',
-          'zipCode': 22215
-        },
-        'createdBy': '57fb188645058ccab7fe6145'
-      },
-      {
-        'firstName': 'Ollie',
-        'lastName': 'Hancock',
-        'email': 'olliehancock@glukgluk.com',
-        'dob': '2006-03-14 09:31:07',
-        'password': 'New Jersey15839',
-        'salt': '61dfd214-8034-4ab6-bccf-eccdbafcc8a0',
-        'resetPasswordToken': 'd169299f-a8d3-4d08-8b27-60669b4d6707',
-        'resetPasswordExpires': '',
-        'phone': 1181152975,
-        'roles': 'User',
-        'address': {
-          'address1': 'Chester Avenue',
-          'city': 'Caspar',
-          'state': 'Guam',
-          'zipCode': 18229
-        },
-        'createdBy': '57fb1886f21ba090c1dc84e6'
-      },
-      {
-        'firstName': 'Cannon',
-        'lastName': 'Townsend',
-        'email': 'cannontownsend@glukgluk.com',
-        'dob': '1997-08-25 12:02:12',
-        'password': 'Idaho10511',
-        'salt': 'e62faa0f-2e9b-40ad-b7d0-69e85551637d',
-        'resetPasswordToken': '9108cdbf-7f66-4f81-ae33-0a34fa8a70b5',
-        'resetPasswordExpires': '',
-        'phone': 1569620009,
-        'roles': 'User',
-        'address': {
-          'address1': 'Lincoln Road',
-          'city': 'Adamstown',
-          'state': 'Puerto Rico',
-          'zipCode': 20828
-        },
-        'createdBy': '57fb18866acb36ee51eae421'
-      },
-      {
-        'firstName': 'Branch',
-        'lastName': 'Sampson',
-        'email': 'branchsampson@glukgluk.com',
-        'dob': '2004-03-11 10:27:25',
-        'password': 'Utah14365',
-        'salt': '24375753-db40-43c4-b58d-4129f9442a61',
-        'resetPasswordToken': 'ae87aa05-314e-48c2-bca0-dcf32b8fdb62',
-        'resetPasswordExpires': '',
-        'phone': 1471705290,
-        'roles': 'Manager',
-        'address': {
-          'address1': 'Garden Street',
-          'city': 'Orason',
-          'state': 'Louisiana',
-          'zipCode': 76384
-        },
-        'createdBy': '57fb18867d84e84ed3d71cb5'
-      },
-      {
-        'firstName': 'Vega',
-        'lastName': 'Wall',
-        'email': 'vegawall@glukgluk.com',
-        'dob': '1995-04-05 01:00:44',
-        'password': 'Virginia14714',
-        'salt': '4f8f30ec-ecd0-4dd4-9011-af347f748a29',
-        'resetPasswordToken': '9ab5dde4-af68-4cad-9df1-5c47033bfbbc',
-        'resetPasswordExpires': '',
-        'phone': 1779204579,
-        'roles': 'sysAdmin',
-        'address': {
-          'address1': 'Richardson Street',
-          'city': 'Cloverdale',
-          'state': 'Illinois',
-          'zipCode': 55008
-        },
-        'createdBy': '57fb1886fdd3b6fd26426079'
-      },
-      {
-        'firstName': 'Wilkins',
-        'lastName': 'Carney',
-        'email': 'wilkinscarney@glukgluk.com',
-        'dob': '2003-12-10 01:28:08',
-        'password': 'Arizona15004',
-        'salt': 'f64038ce-089e-4a37-9718-414cebc23c31',
-        'resetPasswordToken': '18f2d665-1e0e-4237-867a-9204f60999ed',
-        'resetPasswordExpires': '',
-        'phone': 1369610841,
-        'roles': 'sysAdmin',
-        'address': {
-          'address1': 'Prince Street',
-          'city': 'Sunnyside',
-          'state': 'Montana',
-          'zipCode': 26688
-        },
-        'createdBy': '57fb18864a03b3a750cfeba5'
-      },
-      {
-        'firstName': 'Hope',
-        'lastName': 'Vargas',
-        'email': 'hopevargas@glukgluk.com',
-        'dob': '1996-03-22 05:56:48',
-        'password': 'Nebraska14708',
-        'salt': '5e88d452-8c18-4966-a6e9-deed39e4eec3',
-        'resetPasswordToken': 'f7fb5f08-535c-43ab-b555-4d8664308b7e',
-        'resetPasswordExpires': '',
-        'phone': 1142182374,
-        'roles': 'sysAdmin',
-        'address': {
-          'address1': 'Aster Court',
-          'city': 'Brule',
-          'state': 'Vermont',
-          'zipCode': 13063
-        },
-        'createdBy': '57fb1886106de4fcc922860c'
-      },
-      {
-        'firstName': 'Patel',
-        'lastName': 'Woodward',
-        'email': 'patelwoodward@glukgluk.com',
-        'dob': '1996-04-03 12:29:40',
-        'password': 'Minnesota16194',
-        'salt': 'bbbcd6d2-e383-42a0-935f-283512b314ed',
-        'resetPasswordToken': 'cf6ea030-a7d3-4b17-93d4-44422e9e85cd',
-        'resetPasswordExpires': '',
-        'phone': 1925530662,
-        'roles': 'Manager',
-        'address': {
-          'address1': 'Amber Street',
-          'city': 'Jessie',
-          'state': 'Mississippi',
-          'zipCode': 26690
-        },
-        'createdBy': '57fb18862cde0680b806a8d1'
-      },
-      {
-        'firstName': 'Rutledge',
-        'lastName': 'Clemons',
-        'email': 'rutledgeclemons@glukgluk.com',
-        'dob': '2002-07-18 01:21:21',
-        'password': 'Marshall Islands10194',
-        'salt': 'decebe8c-1dd1-466a-aec0-a6fdfd3cc72d',
-        'resetPasswordToken': 'a55a0e4d-fb6f-4cce-8599-2a021f968f96',
-        'resetPasswordExpires': '',
-        'phone': 1869042045,
-        'roles': 'Employee',
-        'address': {
-          'address1': 'Frank Court',
-          'city': 'National',
-          'state': 'Washington',
-          'zipCode': 75361
-        },
-        'createdBy': '57fb1886e041589ec65e4d4c'
-      },
-      {
-        'firstName': 'Erin',
-        'lastName': 'Copeland',
-        'email': 'erincopeland@glukgluk.com',
-        'dob': '1998-11-23 12:01:34',
-        'password': 'Indiana16761',
-        'salt': '7869016d-a31c-4467-90b4-31a8090b3c15',
-        'resetPasswordToken': 'c47a0836-a45e-4f38-9549-60119c873052',
-        'resetPasswordExpires': '',
-        'phone': 1802068327,
-        'roles': 'Employee',
-        'address': {
-          'address1': 'Lawton Street',
-          'city': 'Advance',
-          'state': 'Arkansas',
-          'zipCode': 26018
-        },
-        'createdBy': '57fb1886a6b70f3e600e6a06'
-      },
-      {
-        'firstName': 'Carmen',
-        'lastName': 'Castaneda',
-        'email': 'carmencastaneda@glukgluk.com',
-        'dob': '2008-12-20 07:09:13',
-        'password': 'Florida18499',
-        'salt': 'a044d3e4-2e29-4510-8c99-15c98302b189',
-        'resetPasswordToken': '482c617f-17ba-4e31-9bb6-636bb4a08bab',
-        'resetPasswordExpires': '',
-        'phone': 1093312623,
-        'roles': 'Admin',
-        'address': {
-          'address1': 'Garnet Street',
-          'city': 'Dexter',
-          'state': 'Michigan',
-          'zipCode': 43752
-        },
-        'createdBy': '57fb1886ce9d620caaac9ecf'
-      },
-      {
-        'firstName': 'Diana',
-        'lastName': 'Hopkins',
-        'email': 'dianahopkins@glukgluk.com',
-        'dob': '2013-06-19 12:28:35',
-        'password': 'Pennsylvania19865',
-        'salt': '624c7ca5-a928-456a-8ffb-eb2bcfa6f867',
-        'resetPasswordToken': 'd2b70623-66dd-4980-81b1-a0dd0b19995a',
-        'resetPasswordExpires': '',
-        'phone': 1862795171,
-        'roles': 'Manager',
-        'address': {
-          'address1': 'Linden Boulevard',
-          'city': 'Marbury',
-          'state': 'Nevada',
-          'zipCode': 73506
-        },
-        'createdBy': '57fb18868deff295b5d29ef7'
-      },
-      {
-        'firstName': 'Bradshaw',
-        'lastName': 'Schmidt',
-        'email': 'bradshawschmidt@glukgluk.com',
-        'dob': '1996-08-28 03:10:49',
-        'password': 'Maine10932',
-        'salt': 'df36a5e0-2963-4ef0-b611-1016448dff2c',
-        'resetPasswordToken': '9f9afd7c-e043-47fc-a897-92bf7dbeb954',
-        'resetPasswordExpires': '',
-        'phone': 1572055208,
-        'roles': 'Employee',
-        'address': {
-          'address1': 'Schweikerts Walk',
-          'city': 'Foscoe',
-          'state': 'Federated States Of Micronesia',
-          'zipCode': 69961
-        },
-        'createdBy': '57fb1886b281039e6afe03b0'
-      },
-      {
-        'firstName': 'Booth',
-        'lastName': 'Ayers',
-        'email': 'boothayers@glukgluk.com',
-        'dob': '1999-06-27 08:05:47',
-        'password': 'Texas16442',
-        'salt': '9f9f4744-8d51-429b-ab3c-65d3e65cbf8c',
-        'resetPasswordToken': '267099de-7cde-46f4-80f1-05c9158eab82',
-        'resetPasswordExpires': '',
-        'phone': 1016808436,
-        'roles': 'sysAdmin',
-        'address': {
-          'address1': 'Dare Court',
-          'city': 'Remington',
-          'state': 'Iowa',
-          'zipCode': 62322
-        },
-        'createdBy': '57fb18866c47306af31e334c'
-      },
-      {
-        'firstName': 'Katherine',
-        'lastName': 'Knox',
-        'email': 'katherineknox@glukgluk.com',
-        'dob': '1995-10-15 10:08:27',
-        'password': 'Alaska11336',
-        'salt': '8bc6c57e-4ea3-43a3-87c3-c3c6db464dd9',
-        'resetPasswordToken': '8930515a-0443-443a-b303-f8d09e853f29',
-        'resetPasswordExpires': '',
-        'phone': 1480841020,
-        'roles': 'Employee',
-        'address': {
-          'address1': 'Colonial Court',
-          'city': 'Ogema',
-          'state': 'Wyoming',
-          'zipCode': 27918
-        },
-        'createdBy': '57fb1886aa0eb56956b6ef34'
-      },
-      {
-        'firstName': 'Lyons',
-        'lastName': 'Mcconnell',
-        'email': 'lyonsmcconnell@glukgluk.com',
-        'dob': '1996-12-11 05:06:12',
-        'password': 'Kansas10163',
-        'salt': '1f8977dc-c9de-41c1-96fe-abdfc5741f02',
-        'resetPasswordToken': 'd9ad4a93-5849-4f29-b688-88e6ef1dbb52',
-        'resetPasswordExpires': '',
-        'phone': 1593198270,
-        'roles': 'Employee',
-        'address': {
-          'address1': 'Highland Place',
-          'city': 'Boling',
-          'state': 'West Virginia',
-          'zipCode': 27153
-        },
-        'createdBy': '57fb18862a43080eff55dfc8'
-      },
-      {
-        'firstName': 'Earline',
-        'lastName': 'Rosa',
-        'email': 'earlinerosa@glukgluk.com',
-        'dob': '2007-05-20 06:23:29',
-        'password': 'Wisconsin19039',
-        'salt': '119c2d09-81d6-4e41-94d2-3faf6f74fec8',
-        'resetPasswordToken': 'a8c78d5a-d7f5-464c-9e99-157e31b7dbab',
-        'resetPasswordExpires': '',
-        'phone': 1784495050,
-        'roles': 'Employee',
-        'address': {
-          'address1': 'Granite Street',
-          'city': 'Fulford',
-          'state': 'South Dakota',
-          'zipCode': 70818
-        },
-        'createdBy': '57fb188644de0349c4399d2f'
-      },
-      {
-        'firstName': 'Ballard',
-        'lastName': 'White',
-        'email': 'ballardwhite@glukgluk.com',
-        'dob': '1999-08-05 02:03:18',
-        'password': 'District Of Columbia19373',
-        'salt': '4c1fec2b-1117-478a-bc16-8cc0b0b7b9f0',
-        'resetPasswordToken': '62d40f4b-c9ab-44dc-ba3a-9ba0eb86dea1',
-        'resetPasswordExpires': '',
-        'phone': 1710177511,
-        'roles': 'Manager',
-        'address': {
-          'address1': 'Exeter Street',
-          'city': 'Bennett',
-          'state': 'South Carolina',
-          'zipCode': 12862
-        },
-        'createdBy': '57fb188691f880348b86b38a'
-      },
-      {
-        'firstName': 'Holcomb',
-        'lastName': 'Wooten',
-        'email': 'holcombwooten@glukgluk.com',
-        'dob': '2015-03-04 12:39:01',
-        'password': 'Kentucky18199',
-        'salt': 'ce811642-5e73-4aa0-8ac8-8a56e7413264',
-        'resetPasswordToken': 'dfbe0e5e-749b-48d9-bef6-bbb85f0a4569',
-        'resetPasswordExpires': '',
-        'phone': 1457882381,
-        'roles': 'Employee',
-        'address': {
-          'address1': 'Jardine Place',
-          'city': 'Gorst',
-          'state': 'Tennessee',
-          'zipCode': 30977
-        },
-        'createdBy': '57fb1886b95e60255515631a'
-      },
-      {
-        'firstName': 'Gardner',
-        'lastName': 'Pope',
-        'email': 'gardnerpope@glukgluk.com',
-        'dob': '2014-05-07 03:41:40',
-        'password': 'North Dakota19270',
-        'salt': '87684dfa-5c9d-420a-92c0-f346b970c5a6',
-        'resetPasswordToken': '8cb7c2d5-67f1-41f6-8db7-f0469015c49c',
-        'resetPasswordExpires': '',
-        'phone': 1439124972,
-        'roles': 'Employee',
-        'address': {
-          'address1': 'Dunne Court',
-          'city': 'Teasdale',
-          'state': 'American Samoa',
-          'zipCode': 63023
-        },
-        'createdBy': '57fb188669079e8b7b153e7e'
-      },
-      {
-        'firstName': 'Rosella',
-        'lastName': 'Swanson',
-        'email': 'rosellaswanson@glukgluk.com',
-        'dob': '2012-09-26 05:15:51',
-        'password': 'Connecticut12821',
-        'salt': '1e31bffb-a1b8-4d82-bed2-e075ead51ee4',
-        'resetPasswordToken': '280271d9-d9af-4148-a75c-dd0dfba089e6',
-        'resetPasswordExpires': '',
-        'phone': 1915111609,
-        'roles': 'sysAdmin',
-        'address': {
-          'address1': 'Opal Court',
-          'city': 'Taft',
-          'state': 'Palau',
-          'zipCode': 69195
-        },
-        'createdBy': '57fb18862360f1c4e3fe8e79'
-      },
-      {
-        'firstName': 'Mildred',
-        'lastName': 'Giles',
-        'email': 'mildredgiles@glukgluk.com',
-        'dob': '2015-10-26 08:47:04',
-        'password': 'New York10226',
-        'salt': 'b8d6338d-acd6-4508-895b-d903487bbb4b',
-        'resetPasswordToken': '478f686c-d425-4bde-884c-b693aba2c0ff',
-        'resetPasswordExpires': '',
-        'phone': 1738280328,
-        'roles': 'User',
-        'address': {
-          'address1': 'Cleveland Street',
-          'city': 'Bodega',
-          'state': 'Oregon',
-          'zipCode': 45413
-        },
-        'createdBy': '57fb1886eb2b92d57ad4779a'
-      },
-      {
-        'firstName': 'Francis',
-        'lastName': 'Cabrera',
-        'email': 'franciscabrera@glukgluk.com',
-        'dob': '1998-04-26 06:19:17',
-        'password': 'New Mexico17398',
-        'salt': '3b709616-05b0-4657-a463-d876775d2291',
-        'resetPasswordToken': '9917b10d-d9a3-41d4-bcd1-74a14e56adce',
-        'resetPasswordExpires': '',
-        'phone': 1257272420,
-        'roles': 'Manager',
-        'address': {
-          'address1': 'Branton Street',
-          'city': 'Dante',
-          'state': 'Hawaii',
-          'zipCode': 32802
-        },
-        'createdBy': '57fb1886c59f74707cf0d153'
-      },
-      {
-        'firstName': 'Nikki',
-        'lastName': 'Spence',
-        'email': 'nikkispence@glukgluk.com',
-        'dob': '2000-08-15 06:56:05',
-        'password': 'Virgin Islands12484',
-        'salt': 'af0a50ed-a7fb-4e7b-b3e2-3b45655fc6c0',
-        'resetPasswordToken': '1703de8b-28c3-4c70-a702-052e9e81e765',
-        'resetPasswordExpires': '',
-        'phone': 1429041681,
-        'roles': 'Manager',
-        'address': {
-          'address1': 'Wyckoff Avenue',
-          'city': 'Coldiron',
-          'state': 'Missouri',
-          'zipCode': 60068
-        },
-        'createdBy': '57fb188673de49a169fd6fa3'
-      },
-      {
-        'firstName': 'Steele',
-        'lastName': 'Castillo',
-        'email': 'steelecastillo@glukgluk.com',
-        'dob': '2015-10-22 05:54:59',
-        'password': 'Georgia16208',
-        'salt': 'c9c532f9-8fa2-4487-9249-22a98128f5c1',
-        'resetPasswordToken': 'f6072ea3-c317-4b95-be8f-8d2b6b5bb005',
-        'resetPasswordExpires': '',
-        'phone': 1292638429,
-        'roles': 'User',
-        'address': {
-          'address1': 'Times Placez',
-          'city': 'Chamizal',
-          'state': 'Massachusetts',
-          'zipCode': 57227
-        },
-        'createdBy': '57fb1886b51e4be23e50bcd3'
-      }
-    ]
-  }
-]
+var data = {
+  'model': mongoDB.Model.User,
+  'documents': [
+    {
+      'firstName': 'Rich',
+      'lastName': 'Ortiz',
+      'email': 'richortiz@gluid.com',
+      'dob': '2005-07-24 11:45:30',
+      'password': 'Maine17290',
+      'salt': 'fb880278-ccc3-4b8a-a0bd-1204de177703',
+      'resetPasswordToken': '3bca6b66-d97f-4e19-9324-97037625ee78',
+      'resetPasswordExpires': '',
+      'phone': 1088615191,
+      'roles': [
+        'Manager'
+      ],
+      'address': {
+        'address1': 'Conklin Avenue',
+        'city': 'Windsor',
+        'state': 'South Dakota',
+        'zipCode': 24488
+      },
+      'createdBy': '5857f60f59bb9fb914c9c652'
+    },
+    {
+      'firstName': 'Myers',
+      'lastName': 'Ramsey',
+      'email': 'myersramsey@gluid.com',
+      'dob': '2005-09-06 12:39:01',
+      'password': 'Palau19866',
+      'salt': '09e9a51d-acbf-4356-b875-917f6fb0f7d4',
+      'resetPasswordToken': 'f94d72c2-3612-4758-a12a-9089c9a52973',
+      'resetPasswordExpires': '',
+      'phone': 1050533429,
+      'roles': [
+        'User'
+      ],
+      'address': {
+        'address1': 'Beard Street',
+        'city': 'Belva',
+        'state': 'Montana',
+        'zipCode': 30540
+      },
+      'createdBy': '5857f60f4d363096463bde3d'
+    },
+    {
+      'firstName': 'Juliette',
+      'lastName': 'Gomez',
+      'email': 'juliettegomez@gluid.com',
+      'dob': '1997-07-03 06:44:01',
+      'password': 'Arkansas19835',
+      'salt': 'd1758570-30ef-4c08-85fd-26479d133439',
+      'resetPasswordToken': 'c0bee68a-b7e4-4527-bfae-4f3cbb14e1a8',
+      'resetPasswordExpires': '',
+      'phone': 1883686064,
+      'roles': [
+        'Employee'
+      ],
+      'address': {
+        'address1': 'Classon Avenue',
+        'city': 'Collins',
+        'state': 'Vermont',
+        'zipCode': 48297
+      },
+      'createdBy': '5857f60fa72132422746cea3'
+    },
+    {
+      'firstName': 'Erin',
+      'lastName': 'Grant',
+      'email': 'eringrant@gluid.com',
+      'dob': '2001-11-06 07:03:10',
+      'password': 'New Jersey19074',
+      'salt': '1746fccf-e769-447a-998b-11a9d58bc59a',
+      'resetPasswordToken': 'b7a3ee54-4a1a-4069-a681-503e5eed1d75',
+      'resetPasswordExpires': '',
+      'phone': 1988859681,
+      'roles': [
+        'User',
+        'Admin'
+      ],
+      'address': {
+        'address1': 'Sedgwick Street',
+        'city': 'Buxton',
+        'state': 'Federated States Of Micronesia',
+        'zipCode': 87922
+      },
+      'createdBy': '5857f60f121ab5ffe9e9a341'
+    },
+    {
+      'firstName': 'Willa',
+      'lastName': 'Merritt',
+      'email': 'willamerritt@gluid.com',
+      'dob': '1994-06-14 01:32:05',
+      'password': 'North Dakota10261',
+      'salt': 'a5818ed9-dea3-4840-ad0a-9f61de4a186c',
+      'resetPasswordToken': '4a53add6-e49e-4a8d-b7a2-811d3a2a66e1',
+      'resetPasswordExpires': '',
+      'phone': 1680648394,
+      'roles': [
+        'Manager'
+      ],
+      'address': {
+        'address1': 'Lawton Street',
+        'city': 'Stevens',
+        'state': 'New York',
+        'zipCode': 79764
+      },
+      'createdBy': '5857f60f373bbd31e511ea3f'
+    },
+    {
+      'firstName': 'Alisa',
+      'lastName': 'Chang',
+      'email': 'alisachang@gluid.com',
+      'dob': '1998-06-16 07:42:44',
+      'password': 'Nebraska19856',
+      'salt': '0fcad309-b2c2-4a01-88f4-6639228766db',
+      'resetPasswordToken': '8c1c36de-6ac2-4d24-96f2-0f8f379aaf0c',
+      'resetPasswordExpires': '',
+      'phone': 1694276450,
+      'roles': [
+        'Manager',
+        'sysAdmin'
+      ],
+      'address': {
+        'address1': 'Hart Place',
+        'city': 'Grantville',
+        'state': 'District Of Columbia',
+        'zipCode': 79584
+      },
+      'createdBy': '5857f60fa91915711a1666bb'
+    },
+    {
+      'firstName': 'Gardner',
+      'lastName': 'Bennett',
+      'email': 'gardnerbennett@gluid.com',
+      'dob': '2011-02-15 02:42:51',
+      'password': 'Massachusetts14647',
+      'salt': '657e24ae-5efc-45c2-8c1d-8eb5ca1f846a',
+      'resetPasswordToken': 'c30c9241-97b6-403a-8030-25d8aa65db58',
+      'resetPasswordExpires': '',
+      'phone': 1454021661,
+      'roles': [
+        'Manager'
+      ],
+      'address': {
+        'address1': 'Sullivan Place',
+        'city': 'Wakarusa',
+        'state': 'Illinois',
+        'zipCode': 84492
+      },
+      'createdBy': '5857f60f2f0a86a98fc70de0'
+    },
+    {
+      'firstName': 'Lorie',
+      'lastName': 'Kelly',
+      'email': 'loriekelly@gluid.com',
+      'dob': '2003-11-26 12:25:41',
+      'password': 'Michigan12270',
+      'salt': '85e37ba2-4866-4c2e-8f5c-cb12afc1d3a7',
+      'resetPasswordToken': 'd21c6a38-6b80-400f-b042-f81c3c04a5a8',
+      'resetPasswordExpires': '',
+      'phone': 1904159545,
+      'roles': [
+        'Admin',
+        'Manager'
+      ],
+      'address': {
+        'address1': 'Love Lane',
+        'city': 'Winston',
+        'state': 'Washington',
+        'zipCode': 62527
+      },
+      'createdBy': '5857f60f7b0d9698473ac27b'
+    },
+    {
+      'firstName': 'Sonja',
+      'lastName': 'Phelps',
+      'email': 'sonjaphelps@gluid.com',
+      'dob': '2015-05-14 01:17:45',
+      'password': 'American Samoa13830',
+      'salt': '394509c8-f1eb-40cc-adef-a0e22c06b63a',
+      'resetPasswordToken': '00ea7d73-6d8d-4abf-b747-83acd5239ac9',
+      'resetPasswordExpires': '',
+      'phone': 1709535578,
+      'roles': [
+        'sysAdmin',
+        'Employee'
+      ],
+      'address': {
+        'address1': 'Lee Avenue',
+        'city': 'Naomi',
+        'state': 'Guam',
+        'zipCode': 14733
+      },
+      'createdBy': '5857f60f8754b165c998d2e5'
+    },
+    {
+      'firstName': 'Rae',
+      'lastName': 'Key',
+      'email': 'raekey@gluid.com',
+      'dob': '2013-12-09 12:48:18',
+      'password': 'Colorado15633',
+      'salt': '62182751-d648-4aad-b3f5-e2cb427b2164',
+      'resetPasswordToken': 'fd6ea76d-1b08-4a40-9a52-a1d40d54b047',
+      'resetPasswordExpires': '',
+      'phone': 1320459000,
+      'roles': [
+        'User'
+      ],
+      'address': {
+        'address1': 'Gatling Place',
+        'city': 'Stewart',
+        'state': 'Nevada',
+        'zipCode': 41309
+      },
+      'createdBy': '5857f60fc57b2b3888e2e5a4'
+    },
+    {
+      'firstName': 'Adrian',
+      'lastName': 'Williamson',
+      'email': 'adrianwilliamson@gluid.com',
+      'dob': '2003-10-06 06:43:01',
+      'password': 'Iowa13931',
+      'salt': '9e2dd32f-8937-42db-b8f2-12c934f5b95d',
+      'resetPasswordToken': 'ca3cb464-b0e5-41dd-9a81-63ebc184d003',
+      'resetPasswordExpires': '',
+      'phone': 1602031431,
+      'roles': [
+        'Admin',
+        'sysAdmin'
+      ],
+      'address': {
+        'address1': 'Church Avenue',
+        'city': 'Thornport',
+        'state': 'Mississippi',
+        'zipCode': 29412
+      },
+      'createdBy': '5857f60f3592ce8a03df5ab2'
+    },
+    {
+      'firstName': 'Hurst',
+      'lastName': 'Montgomery',
+      'email': 'hurstmontgomery@gluid.com',
+      'dob': '1998-01-18 03:09:20',
+      'password': 'Northern Mariana Islands15617',
+      'salt': '2c46a312-ca9b-45b5-8f84-a1918218246b',
+      'resetPasswordToken': '74bd546a-5807-4ddf-83ec-cb23380d6dc6',
+      'resetPasswordExpires': '',
+      'phone': 1425698865,
+      'roles': [
+        'Manager',
+        'Employee'
+      ],
+      'address': {
+        'address1': 'Hampton Place',
+        'city': 'Noxen',
+        'state': 'New Mexico',
+        'zipCode': 80343
+      },
+      'createdBy': '5857f60f2ecc05109c0442b4'
+    },
+    {
+      'firstName': 'Chambers',
+      'lastName': 'Witt',
+      'email': 'chamberswitt@gluid.com',
+      'dob': '1997-11-11 05:35:05',
+      'password': 'Oklahoma19475',
+      'salt': '8479428b-70fd-4055-8cbc-bc44a07a81af',
+      'resetPasswordToken': '3795ef6d-103c-40ec-b5e2-d66b723deb0d',
+      'resetPasswordExpires': '',
+      'phone': 1588878003,
+      'roles': [
+        'User'
+      ],
+      'address': {
+        'address1': 'Eckford Street',
+        'city': 'Mappsville',
+        'state': 'Rhode Island',
+        'zipCode': 44132
+      },
+      'createdBy': '5857f60f42e301434935b660'
+    },
+    {
+      'firstName': 'Katharine',
+      'lastName': 'Cameron',
+      'email': 'katharinecameron@gluid.com',
+      'dob': '2008-08-22 05:31:13',
+      'password': 'Texas11008',
+      'salt': '34a1ff3f-ce52-4850-a2d3-617fd235ceea',
+      'resetPasswordToken': 'e353aaf0-17c6-4db7-b1c8-d01776d052e1',
+      'resetPasswordExpires': '',
+      'phone': 1947293940,
+      'roles': [
+        'sysAdmin'
+      ],
+      'address': {
+        'address1': 'Bartlett Street',
+        'city': 'Brecon',
+        'state': 'Virgin Islands',
+        'zipCode': 52113
+      },
+      'createdBy': '5857f60ffbd44b74ee721f2b'
+    },
+    {
+      'firstName': 'Donna',
+      'lastName': 'Levy',
+      'email': 'donnalevy@gluid.com',
+      'dob': '1995-02-10 12:07:38',
+      'password': 'Wyoming16943',
+      'salt': 'f2860532-b000-441b-b035-bcfcb84c0723',
+      'resetPasswordToken': 'd64ba767-6489-4a16-b93e-76fe2db79b7a',
+      'resetPasswordExpires': '',
+      'phone': 1689317406,
+      'roles': [
+        'Admin'
+      ],
+      'address': {
+        'address1': 'Church Lane',
+        'city': 'Wedgewood',
+        'state': 'Louisiana',
+        'zipCode': 35948
+      },
+      'createdBy': '5857f60f58ceb377246d8723'
+    },
+    {
+      'firstName': 'Bishop',
+      'lastName': 'Shannon',
+      'email': 'bishopshannon@gluid.com',
+      'dob': '2008-03-22 04:15:54',
+      'password': 'Arizona15968',
+      'salt': 'b6e6c159-a18b-489f-a442-13a9d45544ac',
+      'resetPasswordToken': '0f1fbdfe-ed52-42de-afe4-7a7006fbc97e',
+      'resetPasswordExpires': '',
+      'phone': 1846723061,
+      'roles': [
+        'Manager'
+      ],
+      'address': {
+        'address1': 'Dearborn Court',
+        'city': 'Echo',
+        'state': 'Pennsylvania',
+        'zipCode': 11887
+      },
+      'createdBy': '5857f60fb8d773977cb413f9'
+    },
+    {
+      'firstName': 'Wong',
+      'lastName': 'Franklin',
+      'email': 'wongfranklin@gluid.com',
+      'dob': '1991-10-01 01:44:16',
+      'password': 'Wisconsin15211',
+      'salt': '90d7091f-2a47-43e7-8d47-f82e6320e41a',
+      'resetPasswordToken': '047c3e5c-e205-4f98-9a6e-909ad362095c',
+      'resetPasswordExpires': '',
+      'phone': 1741616823,
+      'roles': [
+        'Employee',
+        'sysAdmin'
+      ],
+      'address': {
+        'address1': 'Denton Place',
+        'city': 'Franklin',
+        'state': 'Ohio',
+        'zipCode': 42904
+      },
+      'createdBy': '5857f60ffbb47e61e2eb25cd'
+    },
+    {
+      'firstName': 'Blackburn',
+      'lastName': 'Porter',
+      'email': 'blackburnporter@gluid.com',
+      'dob': '1999-11-17 01:39:41',
+      'password': 'Kansas16679',
+      'salt': 'c2512b4d-23e3-4482-a397-ad45c17beb98',
+      'resetPasswordToken': '76ae884a-cf07-4e02-9fe5-9153a62acb6e',
+      'resetPasswordExpires': '',
+      'phone': 1455031297,
+      'roles': [
+        'User'
+      ],
+      'address': {
+        'address1': 'Junius Street',
+        'city': 'Fairlee',
+        'state': 'Idaho',
+        'zipCode': 89108
+      },
+      'createdBy': '5857f60fb9783105574782a1'
+    },
+    {
+      'firstName': 'Rosanna',
+      'lastName': 'Dunn',
+      'email': 'rosannadunn@gluid.com',
+      'dob': '2015-04-28 02:13:36',
+      'password': 'Marshall Islands12874',
+      'salt': 'ad12ab5a-d0bb-44a9-86e6-d85b5e853163',
+      'resetPasswordToken': 'b4ddada5-c271-4eca-97ac-abff9690733e',
+      'resetPasswordExpires': '',
+      'phone': 1899014980,
+      'roles': [
+        'Manager'
+      ],
+      'address': {
+        'address1': 'Kingsland Avenue',
+        'city': 'Gulf',
+        'state': 'North Carolina',
+        'zipCode': 73590
+      },
+      'createdBy': '5857f60f94369f4a604408db'
+    },
+    {
+      'firstName': 'Snow',
+      'lastName': 'Smith',
+      'email': 'snowsmith@gluid.com',
+      'dob': '2015-10-15 07:30:17',
+      'password': 'Georgia17544',
+      'salt': '2879f848-c848-405c-a257-fbf50bc4f8a5',
+      'resetPasswordToken': 'dcc57427-ea91-45e1-9db1-3a0756692f35',
+      'resetPasswordExpires': '',
+      'phone': 1720595548,
+      'roles': [
+        'User',
+        'sysAdmin'
+      ],
+      'address': {
+        'address1': 'Tillary Street',
+        'city': 'Goodville',
+        'state': 'Kentucky',
+        'zipCode': 67828
+      },
+      'createdBy': '5857f60f7c18333e02a2925d'
+    },
+    {
+      'firstName': 'Cobb',
+      'lastName': 'Carver',
+      'email': 'cobbcarver@gluid.com',
+      'dob': '2000-07-26 09:42:23',
+      'password': 'Minnesota10293',
+      'salt': '4a7095cb-0552-404d-8184-efbb4152b71c',
+      'resetPasswordToken': 'e1c7b20e-8198-401f-a914-04c671c1c0d1',
+      'resetPasswordExpires': '',
+      'phone': 1665368537,
+      'roles': [
+        'Employee',
+        'User'
+      ],
+      'address': {
+        'address1': 'Montana Place',
+        'city': 'Cartwright',
+        'state': 'Oregon',
+        'zipCode': 45817
+      },
+      'createdBy': '5857f60fdffa79e83935161e'
+    },
+    {
+      'firstName': 'Kristine',
+      'lastName': 'Carrillo',
+      'email': 'kristinecarrillo@gluid.com',
+      'dob': '2005-04-08 09:56:30',
+      'password': 'Puerto Rico17802',
+      'salt': '0bd1fc4b-9285-4da7-931a-5c4187dbdd23',
+      'resetPasswordToken': 'fc37f04d-c89e-4c06-90e6-fe89636e9f21',
+      'resetPasswordExpires': '',
+      'phone': 1435533629,
+      'roles': [
+        'User'
+      ],
+      'address': {
+        'address1': 'Louisa Street',
+        'city': 'Urie',
+        'state': 'Alaska',
+        'zipCode': 29656
+      },
+      'createdBy': '5857f60fa9617f037f759903'
+    },
+    {
+      'firstName': 'Warner',
+      'lastName': 'Huff',
+      'email': 'warnerhuff@gluid.com',
+      'dob': '2004-08-08 06:24:23',
+      'password': 'Virginia14024',
+      'salt': 'e7bebd53-293f-4836-b413-1939626f12e9',
+      'resetPasswordToken': '0929aa2f-af02-4991-a170-67241415a68d',
+      'resetPasswordExpires': '',
+      'phone': 1201052150,
+      'roles': [
+        'Employee'
+      ],
+      'address': {
+        'address1': 'Huron Street',
+        'city': 'Kempton',
+        'state': 'New Hampshire',
+        'zipCode': 77728
+      },
+      'createdBy': '5857f60f22dd7dfa207a4394'
+    },
+    {
+      'firstName': 'Effie',
+      'lastName': 'Rosales',
+      'email': 'effierosales@gluid.com',
+      'dob': '2009-02-02 09:51:50',
+      'password': 'Tennessee16847',
+      'salt': '70a21dc7-a091-4816-b260-c61f36120b05',
+      'resetPasswordToken': '9642084e-2e74-4919-913f-a9e02b5a3d0d',
+      'resetPasswordExpires': '',
+      'phone': 1345029886,
+      'roles': [
+        'sysAdmin',
+        'Manager'
+      ],
+      'address': {
+        'address1': 'Herkimer Place',
+        'city': 'Shindler',
+        'state': 'West Virginia',
+        'zipCode': 55097
+      },
+      'createdBy': '5857f60f419177a550ca92e7'
+    },
+    {
+      'firstName': 'Carlene',
+      'lastName': 'Daniels',
+      'email': 'carlenedaniels@gluid.com',
+      'dob': '2007-06-30 09:30:22',
+      'password': 'Indiana15790',
+      'salt': '13a33d0d-8d27-41d2-985c-1639cc56c363',
+      'resetPasswordToken': '29fa136a-6b73-43a9-a8f0-96469cb97ebb',
+      'resetPasswordExpires': '',
+      'phone': 1695974904,
+      'roles': [
+        'User'
+      ],
+      'address': {
+        'address1': 'Carroll Street',
+        'city': 'Tilden',
+        'state': 'Alabama',
+        'zipCode': 55643
+      },
+      'createdBy': '5857f60ffbf0f72315230916'
+    },
+    {
+      'firstName': 'Wise',
+      'lastName': 'Rojas',
+      'email': 'wiserojas@gluid.com',
+      'dob': '2002-11-26 02:37:58',
+      'password': 'Connecticut17665',
+      'salt': 'b18ee103-80aa-4461-b399-4cab3f6f9f42',
+      'resetPasswordToken': '4e908091-1fa1-4d4e-ad95-5f1efebb1d50',
+      'resetPasswordExpires': '',
+      'phone': 1007194349,
+      'roles': [
+        'sysAdmin'
+      ],
+      'address': {
+        'address1': 'Woodrow Court',
+        'city': 'Roland',
+        'state': 'Florida',
+        'zipCode': 78609
+      },
+      'createdBy': '5857f60f9fb1b9a812a90518'
+    },
+    {
+      'firstName': 'Johanna',
+      'lastName': 'Norton',
+      'email': 'johannanorton@gluid.com',
+      'dob': '2000-07-05 10:00:12',
+      'password': 'Delaware19068',
+      'salt': 'cf5fffbc-82b1-4ce4-97cb-5bf707eb3d3c',
+      'resetPasswordToken': '7f75a96e-ec9a-4124-a490-af5697a7233d',
+      'resetPasswordExpires': '',
+      'phone': 1485769261,
+      'roles': [
+        'Manager',
+        'sysAdmin'
+      ],
+      'address': {
+        'address1': 'Amber Street',
+        'city': 'Abrams',
+        'state': 'Maryland',
+        'zipCode': 30569
+      },
+      'createdBy': '5857f60fbbba3778220e24d1'
+    },
+    {
+      'firstName': 'Phelps',
+      'lastName': 'Ramos',
+      'email': 'phelpsramos@gluid.com',
+      'dob': '1998-10-15 06:51:58',
+      'password': 'Missouri18877',
+      'salt': '2f6cdff8-3ab8-4b2c-a4cd-ff5765055a74',
+      'resetPasswordToken': 'ab37205c-612f-4d86-891a-c0af3fc5b565',
+      'resetPasswordExpires': '',
+      'phone': 1174171777,
+      'roles': [
+        'sysAdmin'
+      ],
+      'address': {
+        'address1': 'Kensington Street',
+        'city': 'Oasis',
+        'state': 'California',
+        'zipCode': 67276
+      },
+      'createdBy': '5857f60f0583c3a2eda48000'
+    },
+    {
+      'firstName': 'Ofelia',
+      'lastName': 'Gross',
+      'email': 'ofeliagross@gluid.com',
+      'dob': '2014-03-18 07:37:43',
+      'password': 'Utah14091',
+      'salt': '9aa55a19-5811-4108-9b0e-ec0d20d71c15',
+      'resetPasswordToken': 'be180856-b161-42aa-9459-3464d770b35b',
+      'resetPasswordExpires': '',
+      'phone': 1430497393,
+      'roles': [
+        'sysAdmin'
+      ],
+      'address': {
+        'address1': 'Central Avenue',
+        'city': 'Baker',
+        'state': 'Hawaii',
+        'zipCode': 87815
+      },
+      'createdBy': '5857f60ff8f7fc8dd61fcbe2'
+    },
+    {
+      'firstName': 'Fry',
+      'lastName': 'Maxwell',
+      'email': 'frymaxwell@gluid.com',
+      'dob': '2015-08-27 03:56:49',
+      'password': 'Maine19079',
+      'salt': '7a81bb29-0568-4f04-a697-59e81f59fbc0',
+      'resetPasswordToken': '0346ef49-8784-4e9b-90b9-1d4e1893cb25',
+      'resetPasswordExpires': '',
+      'phone': 1099208886,
+      'roles': [
+        'Employee'
+      ],
+      'address': {
+        'address1': 'Amherst Street',
+        'city': 'Kimmell',
+        'state': 'South Dakota',
+        'zipCode': 77108
+      },
+      'createdBy': '5857f60f5893c8ca9834afc8'
+    },
+    {
+      'firstName': 'Alana',
+      'lastName': 'Adams',
+      'email': 'alanaadams@gluid.com',
+      'dob': '1999-06-12 05:54:48',
+      'password': 'Palau11821',
+      'salt': '3c634935-dea5-40ad-981b-4185d153e66e',
+      'resetPasswordToken': '75259fd9-f63b-4155-aa8d-4010c0eecdaf',
+      'resetPasswordExpires': '',
+      'phone': 1375366470,
+      'roles': [
+        'User',
+        'sysAdmin'
+      ],
+      'address': {
+        'address1': 'Schenck Place',
+        'city': 'Kilbourne',
+        'state': 'Montana',
+        'zipCode': 69647
+      },
+      'createdBy': '5857f60fcc4d071466e3d37c'
+    },
+    {
+      'firstName': 'Wilkerson',
+      'lastName': 'Herring',
+      'email': 'wilkersonherring@gluid.com',
+      'dob': '2010-04-05 01:09:55',
+      'password': 'Arkansas11726',
+      'salt': '6ee2f580-b6ed-49f9-ba3f-de8338586f80',
+      'resetPasswordToken': '6a10cacb-0d45-4fcf-9e98-a95d3bfc6da7',
+      'resetPasswordExpires': '',
+      'phone': 1594894982,
+      'roles': [
+        'Manager'
+      ],
+      'address': {
+        'address1': 'Voorhies Avenue',
+        'city': 'Nadine',
+        'state': 'Vermont',
+        'zipCode': 22436
+      },
+      'createdBy': '5857f60f7ae5f036b94f4df7'
+    },
+    {
+      'firstName': 'Beryl',
+      'lastName': 'Santana',
+      'email': 'berylsantana@gluid.com',
+      'dob': '2014-06-12 09:28:20',
+      'password': 'New Jersey13702',
+      'salt': '79735f2d-ae58-4a5c-9733-b3e12172cb12',
+      'resetPasswordToken': 'dfc72cb7-bf90-4c92-9734-e09b00f7cede',
+      'resetPasswordExpires': '',
+      'phone': 1017289046,
+      'roles': [
+        'Admin',
+        'Manager'
+      ],
+      'address': {
+        'address1': 'Fulton Street',
+        'city': 'Draper',
+        'state': 'Federated States Of Micronesia',
+        'zipCode': 26403
+      },
+      'createdBy': '5857f60f42ca5be0f79be2d3'
+    },
+    {
+      'firstName': 'Hilda',
+      'lastName': 'Hopkins',
+      'email': 'hildahopkins@gluid.com',
+      'dob': '2000-04-30 01:32:52',
+      'password': 'North Dakota13224',
+      'salt': '184a7fbf-8961-460c-aa76-6f67cb71320c',
+      'resetPasswordToken': '77e348c2-da19-413c-a5b6-c57f92cf4034',
+      'resetPasswordExpires': '',
+      'phone': 1492840151,
+      'roles': [
+        'Employee',
+        'User'
+      ],
+      'address': {
+        'address1': 'Chester Court',
+        'city': 'Ronco',
+        'state': 'New York',
+        'zipCode': 51094
+      },
+      'createdBy': '5857f60fef5f01301446323d'
+    },
+    {
+      'firstName': 'Mcconnell',
+      'lastName': 'Cole',
+      'email': 'mcconnellcole@gluid.com',
+      'dob': '2005-08-13 11:37:13',
+      'password': 'Nebraska14570',
+      'salt': '5c3810a0-1f9d-4158-89ed-9ee41c39836f',
+      'resetPasswordToken': '71e9ca63-2898-4d21-b6f2-31da91ae58ca',
+      'resetPasswordExpires': '',
+      'phone': 1898752687,
+      'roles': [
+        'Manager'
+      ],
+      'address': {
+        'address1': 'Roebling Street',
+        'city': 'Barronett',
+        'state': 'District Of Columbia',
+        'zipCode': 13175
+      },
+      'createdBy': '5857f60fb65caab32359e818'
+    },
+    {
+      'firstName': 'Olson',
+      'lastName': 'Salas',
+      'email': 'olsonsalas@gluid.com',
+      'dob': '2009-09-07 01:53:08',
+      'password': 'Massachusetts14749',
+      'salt': '25cd8f70-9906-4dd9-8723-1eedc0290273',
+      'resetPasswordToken': '0154530e-6b8f-4483-a78c-e8730a0c7999',
+      'resetPasswordExpires': '',
+      'phone': 1144889269,
+      'roles': [
+        'Employee',
+        'User'
+      ],
+      'address': {
+        'address1': 'Beekman Place',
+        'city': 'Waterford',
+        'state': 'Illinois',
+        'zipCode': 67796
+      },
+      'createdBy': '5857f60f9064a0f36e88edb4'
+    },
+    {
+      'firstName': 'Whitley',
+      'lastName': 'Clay',
+      'email': 'whitleyclay@gluid.com',
+      'dob': '2006-03-24 02:04:33',
+      'password': 'Michigan14767',
+      'salt': '56fd0dba-29cb-45f7-a8b4-cff9a2dbf510',
+      'resetPasswordToken': '3283d4b4-319b-4598-a7c8-cdefc2840504',
+      'resetPasswordExpires': '',
+      'phone': 1211383225,
+      'roles': [
+        'Admin',
+        'User'
+      ],
+      'address': {
+        'address1': 'Williams Place',
+        'city': 'Nipinnawasee',
+        'state': 'Washington',
+        'zipCode': 86177
+      },
+      'createdBy': '5857f60f4d91eaeb8c35123d'
+    },
+    {
+      'firstName': 'Felecia',
+      'lastName': 'Larson',
+      'email': 'felecialarson@gluid.com',
+      'dob': '2007-10-19 06:14:35',
+      'password': 'American Samoa18088',
+      'salt': '30581a84-ba9b-463c-9c04-4e1005c2ccfe',
+      'resetPasswordToken': 'cd253537-1fcc-4762-9a20-273ac991088e',
+      'resetPasswordExpires': '',
+      'phone': 1607087161,
+      'roles': [
+        'Manager',
+        'User'
+      ],
+      'address': {
+        'address1': 'Halleck Street',
+        'city': 'Ruffin',
+        'state': 'Guam',
+        'zipCode': 65246
+      },
+      'createdBy': '5857f60f6c8ce104335592af'
+    },
+    {
+      'firstName': 'Joyner',
+      'lastName': 'Berger',
+      'email': 'joynerberger@gluid.com',
+      'dob': '1998-08-11 02:14:21',
+      'password': 'Colorado18883',
+      'salt': '256d0bbe-fbb8-4b9d-ab07-fcd32470cf56',
+      'resetPasswordToken': 'c85fde18-4094-4561-b0c6-5e93556611e1',
+      'resetPasswordExpires': '',
+      'phone': 1256427282,
+      'roles': [
+        'User',
+        'sysAdmin'
+      ],
+      'address': {
+        'address1': 'Homecrest Court',
+        'city': 'Cecilia',
+        'state': 'Nevada',
+        'zipCode': 88038
+      },
+      'createdBy': '5857f60fd53582c18fee742f'
+    },
+    {
+      'firstName': 'Stephens',
+      'lastName': 'Turner',
+      'email': 'stephensturner@gluid.com',
+      'dob': '1997-08-02 06:32:49',
+      'password': 'Iowa14294',
+      'salt': '52ebdaf7-5f6a-4a65-bebd-eb933f467fec',
+      'resetPasswordToken': 'c5634498-73e8-4769-87d7-7fd46c6e64d9',
+      'resetPasswordExpires': '',
+      'phone': 1959340537,
+      'roles': [
+        'sysAdmin',
+        'Manager'
+      ],
+      'address': {
+        'address1': 'Buffalo Avenue',
+        'city': 'Sunriver',
+        'state': 'Mississippi',
+        'zipCode': 51310
+      },
+      'createdBy': '5857f60f1fea0a4cd4b91fd7'
+    },
+    {
+      'firstName': 'Clarice',
+      'lastName': 'Duncan',
+      'email': 'clariceduncan@gluid.com',
+      'dob': '1996-03-11 03:44:14',
+      'password': 'Northern Mariana Islands10269',
+      'salt': 'b43d548f-ae4b-4113-98e7-7a37ae884fc7',
+      'resetPasswordToken': '9b8b852b-58f6-4fa3-81b7-343cfa3e6ad0',
+      'resetPasswordExpires': '',
+      'phone': 1552999094,
+      'roles': [
+        'sysAdmin',
+        'Admin'
+      ],
+      'address': {
+        'address1': 'Batchelder Street',
+        'city': 'Levant',
+        'state': 'New Mexico',
+        'zipCode': 40838
+      },
+      'createdBy': '5857f60fb3130566ca3e6d4d'
+    },
+    {
+      'firstName': 'Ballard',
+      'lastName': 'Raymond',
+      'email': 'ballardraymond@gluid.com',
+      'dob': '2002-01-20 08:11:58',
+      'password': 'Oklahoma16413',
+      'salt': '427b91a0-9eff-4bb5-ac1d-f35fcf05d8f5',
+      'resetPasswordToken': 'ae4d0503-68c7-4d8c-b67d-6ddc8d453673',
+      'resetPasswordExpires': '',
+      'phone': 1420690272,
+      'roles': [
+        'Manager',
+        'sysAdmin'
+      ],
+      'address': {
+        'address1': 'Seigel Street',
+        'city': 'Fresno',
+        'state': 'Rhode Island',
+        'zipCode': 34783
+      },
+      'createdBy': '5857f60f69148207c0dc6e4b'
+    },
+    {
+      'firstName': 'Cardenas',
+      'lastName': 'Simmons',
+      'email': 'cardenassimmons@gluid.com',
+      'dob': '2000-08-23 03:43:58',
+      'password': 'Texas11429',
+      'salt': 'b4bb4633-b32d-4263-9aa0-57c879e80ef2',
+      'resetPasswordToken': 'ebbf4471-7c9d-40f8-89d7-d523d47c3a4e',
+      'resetPasswordExpires': '',
+      'phone': 1454875884,
+      'roles': [
+        'sysAdmin',
+        'User'
+      ],
+      'address': {
+        'address1': 'Cypress Court',
+        'city': 'Fredericktown',
+        'state': 'Virgin Islands',
+        'zipCode': 60823
+      },
+      'createdBy': '5857f60f878bbffd4788bd7a'
+    },
+    {
+      'firstName': 'Curry',
+      'lastName': 'Jacobs',
+      'email': 'curryjacobs@gluid.com',
+      'dob': '1998-06-02 09:36:31',
+      'password': 'Wyoming15460',
+      'salt': '59ba5e49-3c2c-47db-b84d-118d2567e632',
+      'resetPasswordToken': '5b50a587-42df-41a9-9fce-26b9736025e9',
+      'resetPasswordExpires': '',
+      'phone': 1703464867,
+      'roles': [
+        'sysAdmin'
+      ],
+      'address': {
+        'address1': 'Croton Loop',
+        'city': 'Manila',
+        'state': 'Louisiana',
+        'zipCode': 18930
+      },
+      'createdBy': '5857f60f71e52e03edefe15b'
+    },
+    {
+      'firstName': 'Dennis',
+      'lastName': 'Cohen',
+      'email': 'denniscohen@gluid.com',
+      'dob': '2003-10-04 06:00:53',
+      'password': 'Arizona12630',
+      'salt': '3ab53cc0-eb9e-4913-b1fd-88b02163405c',
+      'resetPasswordToken': '5f238fc8-89d9-48f3-b271-a57f25138bbd',
+      'resetPasswordExpires': '',
+      'phone': 1024113462,
+      'roles': [
+        'Employee'
+      ],
+      'address': {
+        'address1': 'Kathleen Court',
+        'city': 'Mapletown',
+        'state': 'Pennsylvania',
+        'zipCode': 41229
+      },
+      'createdBy': '5857f60f856c944e26b6e159'
+    },
+    {
+      'firstName': 'Debra',
+      'lastName': 'Terrell',
+      'email': 'debraterrell@gluid.com',
+      'dob': '2012-10-17 05:22:26',
+      'password': 'Wisconsin10650',
+      'salt': 'b4b6994b-9b32-4034-ae26-1949fc09cbbe',
+      'resetPasswordToken': '1b610fbd-b726-4cf8-857c-30e1e1175941',
+      'resetPasswordExpires': '',
+      'phone': 1317238489,
+      'roles': [
+        'sysAdmin',
+        'Manager'
+      ],
+      'address': {
+        'address1': 'Desmond Court',
+        'city': 'Stockdale',
+        'state': 'Ohio',
+        'zipCode': 80499
+      },
+      'createdBy': '5857f60fe023f4a5e35a5721'
+    },
+    {
+      'firstName': 'Tami',
+      'lastName': 'Fleming',
+      'email': 'tamifleming@gluid.com',
+      'dob': '2015-02-01 10:43:30',
+      'password': 'Kansas15938',
+      'salt': 'e24ee7aa-53ca-4174-ad92-d7a2e7d48d7c',
+      'resetPasswordToken': 'f0429715-c5c6-4f4c-a9ea-9d659e2596b8',
+      'resetPasswordExpires': '',
+      'phone': 1283760720,
+      'roles': [
+        'Manager',
+        'Employee'
+      ],
+      'address': {
+        'address1': 'Langham Street',
+        'city': 'Southview',
+        'state': 'Idaho',
+        'zipCode': 54535
+      },
+      'createdBy': '5857f60f6a927e25d3cf45a7'
+    },
+    {
+      'firstName': 'Haney',
+      'lastName': 'Merrill',
+      'email': 'haneymerrill@gluid.com',
+      'dob': '2002-04-17 10:30:06',
+      'password': 'Marshall Islands11956',
+      'salt': 'edd9c0dd-a515-4fc4-a64c-870588678d54',
+      'resetPasswordToken': 'bad7ca05-a048-4895-8f4d-62a97a98a47c',
+      'resetPasswordExpires': '',
+      'phone': 1110629228,
+      'roles': [
+        'Employee',
+        'User'
+      ],
+      'address': {
+        'address1': 'Tompkins Place',
+        'city': 'Edinburg',
+        'state': 'North Carolina',
+        'zipCode': 42914
+      },
+      'createdBy': '5857f60f4beaa682fee41b3b'
+    },
+    {
+      'firstName': 'Etta',
+      'lastName': 'Christensen',
+      'email': 'ettachristensen@gluid.com',
+      'dob': '1995-02-08 09:46:12',
+      'password': 'Georgia12904',
+      'salt': '79bad8c7-c736-41f4-865d-4f3bdc0449a6',
+      'resetPasswordToken': '1f5fb76c-18f0-488a-b107-0c5d365ae415',
+      'resetPasswordExpires': '',
+      'phone': 1418993599,
+      'roles': [
+        'Manager'
+      ],
+      'address': {
+        'address1': 'Chester Street',
+        'city': 'Boomer',
+        'state': 'Kentucky',
+        'zipCode': 27333
+      },
+      'createdBy': '5857f60f99ede612ed3205d4'
+    },
+    {
+      'firstName': 'Nichols',
+      'lastName': 'Hendricks',
+      'email': 'nicholshendricks@gluid.com',
+      'dob': '1992-08-19 10:29:50',
+      'password': 'Minnesota13780',
+      'salt': 'd13e2041-127f-4565-8bcd-e93d9c95e787',
+      'resetPasswordToken': '7e892de6-edeb-4e2b-aa87-0903a3141dca',
+      'resetPasswordExpires': '',
+      'phone': 1482516371,
+      'roles': [
+        'Admin'
+      ],
+      'address': {
+        'address1': 'Hoyts Lane',
+        'city': 'Waukeenah',
+        'state': 'Oregon',
+        'zipCode': 67748
+      },
+      'createdBy': '5857f60fa496255d0a7b998f'
+    },
+    {
+      'firstName': 'Marcie',
+      'lastName': 'Hardin',
+      'email': 'marciehardin@gluid.com',
+      'dob': '1990-04-27 07:38:18',
+      'password': 'Puerto Rico15299',
+      'salt': 'c9803b18-c4b9-44dd-a2c4-62dd07447374',
+      'resetPasswordToken': 'b6cacf72-779a-445b-9d45-cf1e93387109',
+      'resetPasswordExpires': '',
+      'phone': 1912498722,
+      'roles': [
+        'Employee',
+        'Manager'
+      ],
+      'address': {
+        'address1': 'Nassau Avenue',
+        'city': 'Castleton',
+        'state': 'Alaska',
+        'zipCode': 70060
+      },
+      'createdBy': '5857f60f87ea5d4aa7163469'
+    },
+    {
+      'firstName': 'Rice',
+      'lastName': 'Watson',
+      'email': 'ricewatson@gluid.com',
+      'dob': '2002-11-03 09:01:26',
+      'password': 'Virginia19503',
+      'salt': '6fb71209-d72e-44de-b2c0-2ce9db0e1f0e',
+      'resetPasswordToken': 'e1ca07fc-ccef-45f1-b21f-ee38fcc8061c',
+      'resetPasswordExpires': '',
+      'phone': 1105328096,
+      'roles': [
+        'Admin'
+      ],
+      'address': {
+        'address1': 'Revere Place',
+        'city': 'Dragoon',
+        'state': 'New Hampshire',
+        'zipCode': 13065
+      },
+      'createdBy': '5857f60f4e87ac8054131cc2'
+    },
+    {
+      'firstName': 'Randall',
+      'lastName': 'Le',
+      'email': 'randallle@gluid.com',
+      'dob': '1990-11-23 12:19:09',
+      'password': 'Tennessee10459',
+      'salt': '17880fe8-6fe0-447f-9652-56b231dacce1',
+      'resetPasswordToken': '00ec12a4-6a9b-463c-a0b2-2db3d26c4f6a',
+      'resetPasswordExpires': '',
+      'phone': 1552424004,
+      'roles': [
+        'Employee'
+      ],
+      'address': {
+        'address1': 'Hinsdale Street',
+        'city': 'Garfield',
+        'state': 'West Virginia',
+        'zipCode': 60374
+      },
+      'createdBy': '5857f60f0ac117e8fe143c85'
+    },
+    {
+      'firstName': 'Nixon',
+      'lastName': 'Miller',
+      'email': 'nixonmiller@gluid.com',
+      'dob': '2011-11-06 05:38:17',
+      'password': 'Indiana15715',
+      'salt': 'aa2464c4-c563-4056-96d7-0bdd9b340aff',
+      'resetPasswordToken': 'b7216090-4e82-463e-870d-35beec850b37',
+      'resetPasswordExpires': '',
+      'phone': 1383431667,
+      'roles': [
+        'Admin',
+        'sysAdmin'
+      ],
+      'address': {
+        'address1': 'Beaumont Street',
+        'city': 'Carlton',
+        'state': 'Alabama',
+        'zipCode': 14624
+      },
+      'createdBy': '5857f60f9d427d9159d57ed8'
+    },
+    {
+      'firstName': 'Barbra',
+      'lastName': 'Knox',
+      'email': 'barbraknox@gluid.com',
+      'dob': '1999-01-04 09:53:48',
+      'password': 'Connecticut11444',
+      'salt': 'f05b9deb-d46c-4305-ab21-b049f67dbe0c',
+      'resetPasswordToken': '91415c59-8014-4d47-8a6f-638ada855c41',
+      'resetPasswordExpires': '',
+      'phone': 1464031701,
+      'roles': [
+        'User'
+      ],
+      'address': {
+        'address1': 'Lincoln Terrace',
+        'city': 'Hampstead',
+        'state': 'Florida',
+        'zipCode': 61356
+      },
+      'createdBy': '5857f60fad8935b6db614aad'
+    },
+    {
+      'firstName': 'Morrow',
+      'lastName': 'Ewing',
+      'email': 'morrowewing@gluid.com',
+      'dob': '2014-03-05 02:51:53',
+      'password': 'Delaware11974',
+      'salt': '4dc7581b-ea92-49f2-82c2-ffc7a389c0dc',
+      'resetPasswordToken': '8865d58b-23c7-4ec7-b41a-3d8e548eaa69',
+      'resetPasswordExpires': '',
+      'phone': 1666790185,
+      'roles': [
+        'Admin',
+        'sysAdmin'
+      ],
+      'address': {
+        'address1': 'Brightwater Court',
+        'city': 'Welch',
+        'state': 'Maryland',
+        'zipCode': 85501
+      },
+      'createdBy': '5857f60f327074535a3ae45d'
+    },
+    {
+      'firstName': 'Barr',
+      'lastName': 'Hickman',
+      'email': 'barrhickman@gluid.com',
+      'dob': '2013-02-10 10:19:52',
+      'password': 'Missouri10456',
+      'salt': '1067958c-f467-493b-b7fb-0bda264e5a71',
+      'resetPasswordToken': 'd38ed997-82e0-4ba7-99af-edde696bd4c1',
+      'resetPasswordExpires': '',
+      'phone': 1567181913,
+      'roles': [
+        'Employee'
+      ],
+      'address': {
+        'address1': 'Montieth Street',
+        'city': 'Valmy',
+        'state': 'California',
+        'zipCode': 18979
+      },
+      'createdBy': '5857f60faa7c497b09799411'
+    },
+    {
+      'firstName': 'Glenn',
+      'lastName': 'Spencer',
+      'email': 'glennspencer@gluid.com',
+      'dob': '1996-08-04 09:46:23',
+      'password': 'Utah19231',
+      'salt': 'a497e5c6-2da6-48dd-8fb7-4f6764a74427',
+      'resetPasswordToken': '1c0603a4-5b8c-41ce-86dd-182ad2d5273a',
+      'resetPasswordExpires': '',
+      'phone': 1382988693,
+      'roles': [
+        'Admin'
+      ],
+      'address': {
+        'address1': 'Hart Street',
+        'city': 'Dupuyer',
+        'state': 'Hawaii',
+        'zipCode': 14911
+      },
+      'createdBy': '5857f60ff3115f0e34b65da9'
+    },
+    {
+      'firstName': 'Foreman',
+      'lastName': 'Graves',
+      'email': 'foremangraves@gluid.com',
+      'dob': '1991-05-09 01:45:32',
+      'password': 'Maine14237',
+      'salt': '96d7d023-8d96-42de-88e4-8b1694596b57',
+      'resetPasswordToken': '76fba111-6186-4e96-bead-af901bf64150',
+      'resetPasswordExpires': '',
+      'phone': 1231548715,
+      'roles': [
+        'Manager'
+      ],
+      'address': {
+        'address1': 'Wakeman Place',
+        'city': 'Siglerville',
+        'state': 'South Dakota',
+        'zipCode': 25451
+      },
+      'createdBy': '5857f60fbcae10e92e56a5f3'
+    },
+    {
+      'firstName': 'Mcdonald',
+      'lastName': 'Browning',
+      'email': 'mcdonaldbrowning@gluid.com',
+      'dob': '1994-02-13 11:00:35',
+      'password': 'Palau17000',
+      'salt': '36ef74ff-7e5a-433c-818e-2a58fef8b044',
+      'resetPasswordToken': '71ae65cb-b4bd-44e7-9006-8cbbd6a2eda3',
+      'resetPasswordExpires': '',
+      'phone': 1976677235,
+      'roles': [
+        'Manager',
+        'Manager'
+      ],
+      'address': {
+        'address1': 'Foster Avenue',
+        'city': 'Gracey',
+        'state': 'Montana',
+        'zipCode': 53357
+      },
+      'createdBy': '5857f60f48dee8c779f22efa'
+    },
+    {
+      'firstName': 'Ross',
+      'lastName': 'Baker',
+      'email': 'rossbaker@gluid.com',
+      'dob': '1997-05-21 03:48:41',
+      'password': 'Arkansas12908',
+      'salt': 'b335cda1-5f34-4079-8f78-3cc2e69cbca5',
+      'resetPasswordToken': 'b6b33821-3e87-47e0-ba75-cd23cd821954',
+      'resetPasswordExpires': '',
+      'phone': 1590647680,
+      'roles': [
+        'Employee',
+        'sysAdmin'
+      ],
+      'address': {
+        'address1': 'Miami Court',
+        'city': 'Lindisfarne',
+        'state': 'Vermont',
+        'zipCode': 52700
+      },
+      'createdBy': '5857f60f72bd8d20eff512e9'
+    },
+    {
+      'firstName': 'Jessica',
+      'lastName': 'Mays',
+      'email': 'jessicamays@gluid.com',
+      'dob': '2009-08-26 01:03:45',
+      'password': 'New Jersey16768',
+      'salt': 'f54731c4-4ae1-4a1b-8b65-d2095644c2ed',
+      'resetPasswordToken': '36ddb909-2ab1-48b9-a23a-fedc78ed82dd',
+      'resetPasswordExpires': '',
+      'phone': 1861828903,
+      'roles': [
+        'sysAdmin'
+      ],
+      'address': {
+        'address1': 'Hornell Loop',
+        'city': 'Monument',
+        'state': 'Federated States Of Micronesia',
+        'zipCode': 67570
+      },
+      'createdBy': '5857f60fe8facf5ab5f85d4e'
+    },
+    {
+      'firstName': 'Mayer',
+      'lastName': 'Hinton',
+      'email': 'mayerhinton@gluid.com',
+      'dob': '2014-01-18 08:28:29',
+      'password': 'North Dakota14524',
+      'salt': 'c406a59e-543f-454b-85b8-6d47fdfd7a35',
+      'resetPasswordToken': '81d8a7e2-7872-47f3-aeb5-59c528923f87',
+      'resetPasswordExpires': '',
+      'phone': 1075914344,
+      'roles': [
+        'sysAdmin',
+        'Employee'
+      ],
+      'address': {
+        'address1': 'Tennis Court',
+        'city': 'Yukon',
+        'state': 'New York',
+        'zipCode': 28127
+      },
+      'createdBy': '5857f60f555714453201e689'
+    },
+    {
+      'firstName': 'Adele',
+      'lastName': 'Burke',
+      'email': 'adeleburke@gluid.com',
+      'dob': '2011-04-15 12:06:38',
+      'password': 'Nebraska11812',
+      'salt': 'c8316aed-00f2-4d87-ab12-24903984b290',
+      'resetPasswordToken': 'b7f81c76-a2a8-4961-89ff-b46036e523d2',
+      'resetPasswordExpires': '',
+      'phone': 1182740423,
+      'roles': [
+        'Manager'
+      ],
+      'address': {
+        'address1': 'Corbin Place',
+        'city': 'Martell',
+        'state': 'District Of Columbia',
+        'zipCode': 88198
+      },
+      'createdBy': '5857f60ffd2b61530c29c707'
+    },
+    {
+      'firstName': 'Martinez',
+      'lastName': 'Zimmerman',
+      'email': 'martinezzimmerman@gluid.com',
+      'dob': '2015-10-10 06:00:06',
+      'password': 'Massachusetts18423',
+      'salt': '4303679e-97c0-462e-a24a-0170d1ec5fd6',
+      'resetPasswordToken': '33194c6d-9fe8-4559-9f85-ffebd2eeba76',
+      'resetPasswordExpires': '',
+      'phone': 1748698631,
+      'roles': [
+        'sysAdmin',
+        'Manager'
+      ],
+      'address': {
+        'address1': 'Himrod Street',
+        'city': 'Freeburn',
+        'state': 'Illinois',
+        'zipCode': 83252
+      },
+      'createdBy': '5857f60fdecedd8daa447abb'
+    },
+    {
+      'firstName': 'Eugenia',
+      'lastName': 'Moss',
+      'email': 'eugeniamoss@gluid.com',
+      'dob': '1994-11-05 05:22:13',
+      'password': 'Michigan19913',
+      'salt': 'c781ea45-d5f9-410f-beb1-856a5b297bc8',
+      'resetPasswordToken': 'efdd3a76-439f-4a4a-bb60-d9cdd66b29f0',
+      'resetPasswordExpires': '',
+      'phone': 1286411732,
+      'roles': [
+        'sysAdmin'
+      ],
+      'address': {
+        'address1': 'Quentin Road',
+        'city': 'Spokane',
+        'state': 'Washington',
+        'zipCode': 63264
+      },
+      'createdBy': '5857f60f22c421739c7ee2cf'
+    },
+    {
+      'firstName': 'Kirsten',
+      'lastName': 'Suarez',
+      'email': 'kirstensuarez@gluid.com',
+      'dob': '2010-11-21 12:56:04',
+      'password': 'American Samoa14280',
+      'salt': '67c4d8e9-a0e7-4f5e-8435-5bab7454185b',
+      'resetPasswordToken': '21fed9ab-9fd0-4e0a-95b7-78895ce85840',
+      'resetPasswordExpires': '',
+      'phone': 1076704906,
+      'roles': [
+        'Employee'
+      ],
+      'address': {
+        'address1': 'Troy Avenue',
+        'city': 'Defiance',
+        'state': 'Guam',
+        'zipCode': 54163
+      },
+      'createdBy': '5857f60f20931dc3a364fad0'
+    },
+    {
+      'firstName': 'Moran',
+      'lastName': 'Martinez',
+      'email': 'moranmartinez@gluid.com',
+      'dob': '2013-09-28 01:04:18',
+      'password': 'Colorado11825',
+      'salt': '7b0dd90c-f6ab-4f31-82b4-6e5878b5ea21',
+      'resetPasswordToken': 'fe0073af-6bae-4b60-8704-a1043b9eb638',
+      'resetPasswordExpires': '',
+      'phone': 1215048667,
+      'roles': [
+        'Employee'
+      ],
+      'address': {
+        'address1': 'Pulaski Street',
+        'city': 'Beyerville',
+        'state': 'Nevada',
+        'zipCode': 25796
+      },
+      'createdBy': '5857f60fa97a470e4444436c'
+    },
+    {
+      'firstName': 'Edith',
+      'lastName': 'Preston',
+      'email': 'edithpreston@gluid.com',
+      'dob': '1992-07-13 09:51:02',
+      'password': 'Iowa10210',
+      'salt': 'b3d9309d-5446-4f2c-88ce-d69825ba0f74',
+      'resetPasswordToken': 'f6ab22c2-aee4-44dd-9d48-cf14b7c7030b',
+      'resetPasswordExpires': '',
+      'phone': 1692103153,
+      'roles': [
+        'Admin',
+        'Employee'
+      ],
+      'address': {
+        'address1': 'Brighton Court',
+        'city': 'Macdona',
+        'state': 'Mississippi',
+        'zipCode': 43183
+      },
+      'createdBy': '5857f60fd59db2a98dcc4a6c'
+    },
+    {
+      'firstName': 'Kathleen',
+      'lastName': 'Crane',
+      'email': 'kathleencrane@gluid.com',
+      'dob': '1990-06-14 01:40:33',
+      'password': 'Northern Mariana Islands14550',
+      'salt': 'e4100d5a-eb86-4620-94d8-e884cda43fa6',
+      'resetPasswordToken': '4b0ae6f4-d450-49b9-a9ba-b14ebcc15464',
+      'resetPasswordExpires': '',
+      'phone': 1005253422,
+      'roles': [
+        'Admin',
+        'sysAdmin'
+      ],
+      'address': {
+        'address1': 'Kings Hwy',
+        'city': 'Succasunna',
+        'state': 'New Mexico',
+        'zipCode': 16561
+      },
+      'createdBy': '5857f60ff52ee5e5f0d2764e'
+    },
+    {
+      'firstName': 'Valerie',
+      'lastName': 'Cobb',
+      'email': 'valeriecobb@gluid.com',
+      'dob': '2000-05-26 07:07:21',
+      'password': 'Oklahoma18305',
+      'salt': 'c54164ef-7048-4d7c-b931-416bf1936321',
+      'resetPasswordToken': 'be1bc433-6cd5-4ee0-bb64-e4322cd14ffd',
+      'resetPasswordExpires': '',
+      'phone': 1214550530,
+      'roles': [
+        'Employee',
+        'sysAdmin'
+      ],
+      'address': {
+        'address1': 'Canarsie Road',
+        'city': 'Thatcher',
+        'state': 'Rhode Island',
+        'zipCode': 56179
+      },
+      'createdBy': '5857f60fbcb7b549e530f9a5'
+    },
+    {
+      'firstName': 'Jillian',
+      'lastName': 'Strong',
+      'email': 'jillianstrong@gluid.com',
+      'dob': '2005-05-26 01:50:23',
+      'password': 'Texas15814',
+      'salt': '0b9e755c-b8ba-487c-b0d7-ccd82719c855',
+      'resetPasswordToken': '9dd0752f-9654-4d1f-a664-0da0df14eeb8',
+      'resetPasswordExpires': '',
+      'phone': 1400860111,
+      'roles': [
+        'Manager',
+        'Employee'
+      ],
+      'address': {
+        'address1': 'Bowery Street',
+        'city': 'Delwood',
+        'state': 'Virgin Islands',
+        'zipCode': 26135
+      },
+      'createdBy': '5857f60fe6b90295f9f2f848'
+    },
+    {
+      'firstName': 'Barrett',
+      'lastName': 'Trevino',
+      'email': 'barretttrevino@gluid.com',
+      'dob': '1995-12-05 04:24:22',
+      'password': 'Wyoming17273',
+      'salt': '244c1d37-759a-4851-93cb-0fa626a86de1',
+      'resetPasswordToken': 'adca8b04-5bb6-419a-adbc-232519c93e81',
+      'resetPasswordExpires': '',
+      'phone': 1006134332,
+      'roles': [
+        'User',
+        'sysAdmin'
+      ],
+      'address': {
+        'address1': 'Underhill Avenue',
+        'city': 'Derwood',
+        'state': 'Louisiana',
+        'zipCode': 26827
+      },
+      'createdBy': '5857f60f909f4fa83449361e'
+    },
+    {
+      'firstName': 'Roy',
+      'lastName': 'Olson',
+      'email': 'royolson@gluid.com',
+      'dob': '2012-02-15 05:39:19',
+      'password': 'Arizona13564',
+      'salt': '8abfc0eb-9d35-4142-ac70-fc05a37d244a',
+      'resetPasswordToken': '79e11bf2-2586-49a6-821c-c5fb17634032',
+      'resetPasswordExpires': '',
+      'phone': 1376829797,
+      'roles': [
+        'sysAdmin',
+        'User'
+      ],
+      'address': {
+        'address1': 'Oxford Street',
+        'city': 'Salix',
+        'state': 'Pennsylvania',
+        'zipCode': 32247
+      },
+      'createdBy': '5857f60fc587184ca8fcffe4'
+    },
+    {
+      'firstName': 'Barber',
+      'lastName': 'Lott',
+      'email': 'barberlott@gluid.com',
+      'dob': '2003-05-09 02:20:31',
+      'password': 'Wisconsin16447',
+      'salt': '5214d706-026f-48ea-9703-79ed34a159cf',
+      'resetPasswordToken': 'c6cb3be0-6717-4b70-a9b9-75b91ecf64b4',
+      'resetPasswordExpires': '',
+      'phone': 1628999117,
+      'roles': [
+        'User',
+        'Manager'
+      ],
+      'address': {
+        'address1': 'Hopkins Street',
+        'city': 'Machias',
+        'state': 'Ohio',
+        'zipCode': 41400
+      },
+      'createdBy': '5857f60fc4ead2086f20a54f'
+    },
+    {
+      'firstName': 'William',
+      'lastName': 'Hancock',
+      'email': 'williamhancock@gluid.com',
+      'dob': '1996-02-17 10:17:35',
+      'password': 'Kansas14283',
+      'salt': '9138ce8e-14d1-4f7a-bf44-d8e4f00af697',
+      'resetPasswordToken': '898ce096-4595-46dd-839c-cd0e9b8e99cd',
+      'resetPasswordExpires': '',
+      'phone': 1673261150,
+      'roles': [
+        'sysAdmin'
+      ],
+      'address': {
+        'address1': 'Wyona Street',
+        'city': 'Johnsonburg',
+        'state': 'Idaho',
+        'zipCode': 34224
+      },
+      'createdBy': '5857f60f9786d3eee0000588'
+    },
+    {
+      'firstName': 'Irene',
+      'lastName': 'Lowe',
+      'email': 'irenelowe@gluid.com',
+      'dob': '1992-06-10 01:18:07',
+      'password': 'Marshall Islands14039',
+      'salt': '5d53af6c-4007-4cc8-8349-133226ce5987',
+      'resetPasswordToken': '18587957-18d1-4673-b797-e4e2128feb5f',
+      'resetPasswordExpires': '',
+      'phone': 1755786880,
+      'roles': [
+        'Employee'
+      ],
+      'address': {
+        'address1': 'Morton Street',
+        'city': 'Riviera',
+        'state': 'North Carolina',
+        'zipCode': 55408
+      },
+      'createdBy': '5857f60ff57ac55605414282'
+    },
+    {
+      'firstName': 'Dixie',
+      'lastName': 'Spence',
+      'email': 'dixiespence@gluid.com',
+      'dob': '2000-09-16 02:18:26',
+      'password': 'Georgia17348',
+      'salt': '0fc53842-83c5-44b3-a47a-0380131482df',
+      'resetPasswordToken': 'c47c1f73-404f-4238-a996-579679d21905',
+      'resetPasswordExpires': '',
+      'phone': 1457694637,
+      'roles': [
+        'Manager',
+        'Employee'
+      ],
+      'address': {
+        'address1': 'Highland Place',
+        'city': 'Cedarville',
+        'state': 'Kentucky',
+        'zipCode': 68393
+      },
+      'createdBy': '5857f60fd682f85ed8f2ce35'
+    },
+    {
+      'firstName': 'Brock',
+      'lastName': 'Bender',
+      'email': 'brockbender@gluid.com',
+      'dob': '1992-10-29 08:59:59',
+      'password': 'Minnesota11700',
+      'salt': '96c2aad4-f45b-438e-8fe1-06dd6411a612',
+      'resetPasswordToken': '14ad3c77-1868-4d21-aceb-bf2e5480a702',
+      'resetPasswordExpires': '',
+      'phone': 1112735869,
+      'roles': [
+        'sysAdmin'
+      ],
+      'address': {
+        'address1': 'Dahlgreen Place',
+        'city': 'Biddle',
+        'state': 'Oregon',
+        'zipCode': 71240
+      },
+      'createdBy': '5857f60fbb6d23b75cfc5d05'
+    },
+    {
+      'firstName': 'Georgette',
+      'lastName': 'Howell',
+      'email': 'georgettehowell@gluid.com',
+      'dob': '1997-04-20 04:45:08',
+      'password': 'Puerto Rico18374',
+      'salt': '074541d3-137d-4f9e-8b63-2787c64522ac',
+      'resetPasswordToken': '9d70b597-db85-454d-bbed-45121b5cd9c3',
+      'resetPasswordExpires': '',
+      'phone': 1483778407,
+      'roles': [
+        'sysAdmin'
+      ],
+      'address': {
+        'address1': 'Railroad Avenue',
+        'city': 'Geyserville',
+        'state': 'Alaska',
+        'zipCode': 21017
+      },
+      'createdBy': '5857f60fea9beabf2d0c356a'
+    },
+    {
+      'firstName': 'Crosby',
+      'lastName': 'Duffy',
+      'email': 'crosbyduffy@gluid.com',
+      'dob': '2009-06-10 04:53:51',
+      'password': 'Virginia16163',
+      'salt': '0e511b68-5624-448e-a494-2f5259a8a0c8',
+      'resetPasswordToken': '1cd5d70e-356e-4950-960e-72786d264d53',
+      'resetPasswordExpires': '',
+      'phone': 1881313924,
+      'roles': [
+        'User'
+      ],
+      'address': {
+        'address1': 'John Street',
+        'city': 'Callaghan',
+        'state': 'New Hampshire',
+        'zipCode': 81851
+      },
+      'createdBy': '5857f60ff04346f71cb8cae7'
+    },
+    {
+      'firstName': 'Alexis',
+      'lastName': 'Contreras',
+      'email': 'alexiscontreras@gluid.com',
+      'dob': '1992-12-16 05:48:47',
+      'password': 'Tennessee15241',
+      'salt': '3fa5b09f-ac28-41f5-a350-4f30289bf1b7',
+      'resetPasswordToken': '508f2132-a70a-4ce6-888d-0e916c58461b',
+      'resetPasswordExpires': '',
+      'phone': 1219135455,
+      'roles': [
+        'sysAdmin'
+      ],
+      'address': {
+        'address1': 'Calyer Street',
+        'city': 'Galesville',
+        'state': 'West Virginia',
+        'zipCode': 49146
+      },
+      'createdBy': '5857f60f3436212d8aab7181'
+    },
+    {
+      'firstName': 'Daniels',
+      'lastName': 'Head',
+      'email': 'danielshead@gluid.com',
+      'dob': '2014-05-16 07:57:36',
+      'password': 'Indiana14776',
+      'salt': 'bd448aa7-eb79-4182-95df-9966d247b7d5',
+      'resetPasswordToken': '54ec5ff9-bf7b-47bf-9be3-436e9196d982',
+      'resetPasswordExpires': '',
+      'phone': 1196528854,
+      'roles': [
+        'Employee'
+      ],
+      'address': {
+        'address1': 'Judge Street',
+        'city': 'Century',
+        'state': 'Alabama',
+        'zipCode': 82070
+      },
+      'createdBy': '5857f60f5aca3ac2dc91fe31'
+    },
+    {
+      'firstName': 'Rochelle',
+      'lastName': 'Ferguson',
+      'email': 'rochelleferguson@gluid.com',
+      'dob': '1997-08-04 08:30:19',
+      'password': 'Connecticut13832',
+      'salt': '42b200c7-706c-421c-b332-7b8feece6613',
+      'resetPasswordToken': 'd9c8b22f-0f6a-422b-9e6a-f6cc7dbd8366',
+      'resetPasswordExpires': '',
+      'phone': 1128647995,
+      'roles': [
+        'Admin'
+      ],
+      'address': {
+        'address1': 'Folsom Place',
+        'city': 'Chemung',
+        'state': 'Florida',
+        'zipCode': 45154
+      },
+      'createdBy': '5857f60f2b564c1b52a5c72c'
+    },
+    {
+      'firstName': 'Hope',
+      'lastName': 'Dalton',
+      'email': 'hopedalton@gluid.com',
+      'dob': '1993-06-13 03:05:56',
+      'password': 'Delaware18652',
+      'salt': '0db72325-00fe-4d7a-a09f-3fe8b5ce69c5',
+      'resetPasswordToken': '6b668ca7-7558-41c2-9b36-1e0f1161f6c2',
+      'resetPasswordExpires': '',
+      'phone': 1521973265,
+      'roles': [
+        'sysAdmin',
+        'User'
+      ],
+      'address': {
+        'address1': 'Highlawn Avenue',
+        'city': 'Aguila',
+        'state': 'Maryland',
+        'zipCode': 64708
+      },
+      'createdBy': '5857f60f6f5bb36b5f0a59a7'
+    },
+    {
+      'firstName': 'Rita',
+      'lastName': 'Jensen',
+      'email': 'ritajensen@gluid.com',
+      'dob': '1995-01-19 05:50:00',
+      'password': 'Missouri14219',
+      'salt': '0967cafb-4221-49ff-87a7-3add6e6a3e43',
+      'resetPasswordToken': '246a84dd-9d3a-45dd-9f90-fa71b57e8269',
+      'resetPasswordExpires': '',
+      'phone': 1793937128,
+      'roles': [
+        'Manager',
+        'User'
+      ],
+      'address': {
+        'address1': 'Centre Street',
+        'city': 'Stollings',
+        'state': 'California',
+        'zipCode': 28430
+      },
+      'createdBy': '5857f60f13dab904575bc7b7'
+    },
+    {
+      'firstName': 'Courtney',
+      'lastName': 'Bonner',
+      'email': 'courtneybonner@gluid.com',
+      'dob': '1993-05-14 11:35:41',
+      'password': 'Utah13219',
+      'salt': '1b0177b2-0539-4ec9-88de-932a24a35bc8',
+      'resetPasswordToken': '780c8453-77c6-458a-82f8-8324a7f7814d',
+      'resetPasswordExpires': '',
+      'phone': 1638024887,
+      'roles': [
+        'User',
+        'Employee'
+      ],
+      'address': {
+        'address1': 'Locust Street',
+        'city': 'Vallonia',
+        'state': 'Hawaii',
+        'zipCode': 32511
+      },
+      'createdBy': '5857f60f58765ad30e1e1932'
+    },
+    {
+      'firstName': 'Ruth',
+      'lastName': 'Lee',
+      'email': 'ruthlee@gluid.com',
+      'dob': '2006-09-18 11:24:02',
+      'password': 'Maine18557',
+      'salt': 'f9a737a9-4247-4630-96ff-dd826d1a5d5f',
+      'resetPasswordToken': '8b8723e0-fa69-4ab7-8bf2-7480832ec523',
+      'resetPasswordExpires': '',
+      'phone': 1320732438,
+      'roles': [
+        'sysAdmin',
+        'User'
+      ],
+      'address': {
+        'address1': 'Cove Lane',
+        'city': 'Cucumber',
+        'state': 'South Dakota',
+        'zipCode': 66365
+      },
+      'createdBy': '5857f60f92e7477163693150'
+    },
+    {
+      'firstName': 'Gregory',
+      'lastName': 'Adkins',
+      'email': 'gregoryadkins@gluid.com',
+      'dob': '1994-09-19 10:55:58',
+      'password': 'Palau11450',
+      'salt': '8ce509e6-dca3-4425-88bf-8119c2ceb062',
+      'resetPasswordToken': '12c1c3d6-45dc-4f71-80db-0235568317d4',
+      'resetPasswordExpires': '',
+      'phone': 1778979268,
+      'roles': [
+        'User',
+        'Admin'
+      ],
+      'address': {
+        'address1': 'McKibbin Street',
+        'city': 'Kiskimere',
+        'state': 'Montana',
+        'zipCode': 87233
+      },
+      'createdBy': '5857f60f9bf3e3ddccd726b1'
+    },
+    {
+      'firstName': 'Cote',
+      'lastName': 'Weiss',
+      'email': 'coteweiss@gluid.com',
+      'dob': '1991-03-21 06:40:07',
+      'password': 'Arkansas11997',
+      'salt': '2b5d6280-8fe3-4880-a93c-a7700c31bd71',
+      'resetPasswordToken': '30f27b17-8508-498b-b124-cba5f03fc9d1',
+      'resetPasswordExpires': '',
+      'phone': 1123541501,
+      'roles': [
+        'sysAdmin',
+        'Admin'
+      ],
+      'address': {
+        'address1': 'Apollo Street',
+        'city': 'Tioga',
+        'state': 'Vermont',
+        'zipCode': 87472
+      },
+      'createdBy': '5857f60f535170c90690ebaa'
+    },
+    {
+      'firstName': 'Mullins',
+      'lastName': 'Sweet',
+      'email': 'mullinssweet@gluid.com',
+      'dob': '2005-07-18 09:45:53',
+      'password': 'New Jersey16730',
+      'salt': '9e5e16f3-2264-4d62-81b4-c7c6d3206de3',
+      'resetPasswordToken': '7ca09f69-b9d7-433d-ad92-675667006091',
+      'resetPasswordExpires': '',
+      'phone': 1205664303,
+      'roles': [
+        'Admin',
+        'sysAdmin'
+      ],
+      'address': {
+        'address1': 'Orange Street',
+        'city': 'Catharine',
+        'state': 'Federated States Of Micronesia',
+        'zipCode': 80494
+      },
+      'createdBy': '5857f60fd6c9d290d9112e87'
+    },
+    {
+      'firstName': 'Latasha',
+      'lastName': 'Underwood',
+      'email': 'latashaunderwood@gluid.com',
+      'dob': '1992-03-19 11:04:52',
+      'password': 'North Dakota11509',
+      'salt': '9e972581-6405-471c-903e-dd3745c547b2',
+      'resetPasswordToken': '40e65e3b-4538-4b6c-a1a4-def387362ab2',
+      'resetPasswordExpires': '',
+      'phone': 1057669539,
+      'roles': [
+        'Employee',
+        'User'
+      ],
+      'address': {
+        'address1': 'Ferris Street',
+        'city': 'Craig',
+        'state': 'New York',
+        'zipCode': 36691
+      },
+      'createdBy': '5857f60f3a01bb1b61b28d3c'
+    },
+    {
+      'firstName': 'Ewing',
+      'lastName': 'Hurley',
+      'email': 'ewinghurley@gluid.com',
+      'dob': '1993-10-07 06:33:16',
+      'password': 'Nebraska15083',
+      'salt': '04d036cc-9bbc-4bdf-b085-99f2d595456f',
+      'resetPasswordToken': 'cca9087e-c0d1-4ad6-bbd2-44879cc65f50',
+      'resetPasswordExpires': '',
+      'phone': 1254980499,
+      'roles': [
+        'Employee'
+      ],
+      'address': {
+        'address1': 'Albany Avenue',
+        'city': 'Floriston',
+        'state': 'District Of Columbia',
+        'zipCode': 66759
+      },
+      'createdBy': '5857f60f6e47e253db9acb22'
+    },
+    {
+      'firstName': 'Bridget',
+      'lastName': 'Barrett',
+      'email': 'bridgetbarrett@gluid.com',
+      'dob': '2001-08-22 09:47:02',
+      'password': 'Massachusetts13024',
+      'salt': 'eead9851-a52c-4872-a433-78eee91f277a',
+      'resetPasswordToken': '8b038459-3a07-4667-805e-877675713a56',
+      'resetPasswordExpires': '',
+      'phone': 1254154600,
+      'roles': [
+        'User'
+      ],
+      'address': {
+        'address1': 'Woods Place',
+        'city': 'Turpin',
+        'state': 'Illinois',
+        'zipCode': 89340
+      },
+      'createdBy': '5857f60f9f40f0c346d0a637'
+    },
+    {
+      'firstName': 'Gloria',
+      'lastName': 'Norris',
+      'email': 'glorianorris@gluid.com',
+      'dob': '1991-07-07 08:46:40',
+      'password': 'Michigan14949',
+      'salt': '971b5ae8-3e22-4256-92ae-ce3f1569acb3',
+      'resetPasswordToken': 'd254aa2b-585c-4159-a6f5-d3be0a539452',
+      'resetPasswordExpires': '',
+      'phone': 1779074667,
+      'roles': [
+        'sysAdmin'
+      ],
+      'address': {
+        'address1': 'Montgomery Place',
+        'city': 'Longbranch',
+        'state': 'Washington',
+        'zipCode': 74305
+      },
+      'createdBy': '5857f60f938ff34d1fd5c2b7'
+    },
+    {
+      'firstName': 'Addie',
+      'lastName': 'Shepherd',
+      'email': 'addieshepherd@gluid.com',
+      'dob': '2007-08-30 10:16:58',
+      'password': 'American Samoa18129',
+      'salt': '298d124f-3ab1-4b8f-bc31-12326e1369b3',
+      'resetPasswordToken': '4e293c80-f803-4878-b1ae-4fde8f14de22',
+      'resetPasswordExpires': '',
+      'phone': 1301385747,
+      'roles': [
+        'Admin'
+      ],
+      'address': {
+        'address1': 'Schenectady Avenue',
+        'city': 'Websterville',
+        'state': 'Guam',
+        'zipCode': 75955
+      },
+      'createdBy': '5857f60f5c1dbb5d430290b8'
+    },
+    {
+      'firstName': 'Maura',
+      'lastName': 'Ayala',
+      'email': 'mauraayala@gluid.com',
+      'dob': '2004-07-17 02:52:22',
+      'password': 'Colorado12187',
+      'salt': 'b47aa84c-2126-4e54-9371-0c41b86a6802',
+      'resetPasswordToken': '8946ee52-fcea-4979-a8a4-4c4d21d05627',
+      'resetPasswordExpires': '',
+      'phone': 1215199003,
+      'roles': [
+        'User',
+        'Manager'
+      ],
+      'address': {
+        'address1': 'Rutherford Place',
+        'city': 'Henrietta',
+        'state': 'Nevada',
+        'zipCode': 14873
+      },
+      'createdBy': '5857f60f9d1d11f642c70d92'
+    },
+    {
+      'firstName': 'Sanford',
+      'lastName': 'Bryan',
+      'email': 'sanfordbryan@gluid.com',
+      'dob': '2011-03-14 12:26:09',
+      'password': 'Iowa15296',
+      'salt': 'e68af5e4-9e4d-4a4d-8133-0c586296fc84',
+      'resetPasswordToken': '550893eb-3306-4b3b-b533-81b97d3c188a',
+      'resetPasswordExpires': '',
+      'phone': 1773999118,
+      'roles': [
+        'Manager'
+      ],
+      'address': {
+        'address1': 'Tampa Court',
+        'city': 'Jessie',
+        'state': 'Mississippi',
+        'zipCode': 33021
+      },
+      'createdBy': '5857f60f78715e796b406581'
+    },
+    {
+      'firstName': 'Corrine',
+      'lastName': 'Stevenson',
+      'email': 'corrinestevenson@gluid.com',
+      'dob': '2005-12-07 04:41:54',
+      'password': 'Northern Mariana Islands19470',
+      'salt': '67e68f81-6bad-4ffd-9f62-95adb56693b4',
+      'resetPasswordToken': '8bf6eaf8-5d27-4c4a-a226-4a5f74073d51',
+      'resetPasswordExpires': '',
+      'phone': 1685522559,
+      'roles': [
+        'Employee',
+        'User'
+      ],
+      'address': {
+        'address1': 'Tehama Street',
+        'city': 'Toftrees',
+        'state': 'New Mexico',
+        'zipCode': 54033
+      },
+      'createdBy': '5857f60fc62497e457b07c0b'
+    },
+    {
+      'firstName': 'Franco',
+      'lastName': 'Oconnor',
+      'email': 'francooconnor@gluid.com',
+      'dob': '1994-09-18 03:15:05',
+      'password': 'Oklahoma16246',
+      'salt': '0b4458e0-4451-47e8-94f1-24126c506d85',
+      'resetPasswordToken': 'b5943d12-35f8-4644-b5bb-75da8d250ac1',
+      'resetPasswordExpires': '',
+      'phone': 1080511425,
+      'roles': [
+        'sysAdmin'
+      ],
+      'address': {
+        'address1': 'Kent Street',
+        'city': 'Nicut',
+        'state': 'Rhode Island',
+        'zipCode': 46447
+      },
+      'createdBy': '5857f60f0cc9a4ed959e656d'
+    }
+  ]
+}
 
 module.exports = data

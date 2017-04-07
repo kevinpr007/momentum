@@ -1,14 +1,25 @@
 # Intelli J
 .idea/
-.vscode/
 *.iml
 
+# Visual Studio
+.vscode/
+.vs/
+bin/
+!bin/*.js
+obj/
+*.sln
+*.njsproj
+
 # Enviroment Variables
-.env_*
+.env*
 
 # Logs
 *.log
 npm-debug.log*
+
+# Docs
+docs/
 
 # Runtime data
 pids

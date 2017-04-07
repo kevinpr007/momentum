@@ -10,7 +10,7 @@ const hbsHelpers = require('handlebars-form-helpers')
 const logger = require('./logger')
 const logService = require('../services/log.service')()
 const config = require('../../package.json')
-const compression = require('compression');
+const compression = require('compression')
 
 module.exports = () => {
   let app = express()

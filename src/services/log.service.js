@@ -2,7 +2,6 @@ const mongoose = require('mongoose')
 mongoose.Promise = require('bluebird')
 
 const Log = require('../models/logs.model')
-const _ = require('lodash')
 
 let logService = () => {
   let getAll = (page, pageSize) => {
@@ -45,20 +44,8 @@ let logService = () => {
     ])
   }
 
-  let logFactory = (log) => {
-    let newLog = new Log({
-      code: log.code,
-      status: log.status,
-      message: log.message,
-      stack: log.stack,
-      createdOn: log.createdOn
-    })
-    return newLog
-  }
-
   let saveLog = log => {
-    let logInst = logFactory(log)
-    return logInst.save()
+    return Object.assign(new Log(), log).save()
   }
 
   return {
