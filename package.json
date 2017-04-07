@@ -10,11 +10,10 @@
     "retire": " retire --node --verbose",
     "nodemon": "cross-env NODE_ENV=development nodemon ./bin/www --ignore public/ --ignore test/",
     "nsp": "nsp check",
-    "build": "npm run standard && npm run retire && npm run nsp",
-    "postinstall": "bower install",
     "benchmark": "node benchmark/homepage.js",
     "seed": "cross-env NODE_ENV=development node ./src/config/mongoose_seed/configuration",
-    "docs": "./node_modules/.bin/apidoc -i src/routes/ -o docs/"
+    "docs": "./node_modules/.bin/apidoc -i src/routes/ -o docs/",
+    "commit": "commit-wizard"
   },
   "repository": {
     "type": "git",
@@ -36,7 +35,8 @@
   "homepage": "https://github.com/Ivan-Marquez/momentum#readme",
   "standard": {
     "ignore": [
-      "public/"
+      "public/",
+      "test"
     ]
   },
   "apidoc": {
@@ -80,6 +80,7 @@
     "apidoc": "0.17.5",
     "chai": "3.5.0",
     "chai-as-promised": "6.0.0",
+    "compression": "1.6.2",
     "debug": "2.6.1",
     "istanbul": "0.4.5",
     "mocha": "3.2.0",
@@ -87,12 +88,34 @@
     "node-mocks-http": "1.6.1",
     "nodemon": "1.11.0",
     "nsp": "2.6.2",
+    "pre-git": "^3.14.0",
     "retire": "1.2.11",
     "siege": "0.2.0",
     "sinon": "1.17.7",
     "sinon-as-promised": "4.0.2",
     "sinon-mongoose": "1.3.0",
-    "standard": "8.6.0", 
-    "compression": "1.6.2"
+    "standard": "8.6.0"
+  },
+  "config": {
+    "pre-git": {
+      "enabled": true,
+      "commit-msg": "simple",
+      "pre-commit": [
+        "npm run standard"
+      ],
+      "pre-push": [
+        "npm t",
+        "npm run nsp"
+      ],
+      "post-commit": [
+        "git status"
+      ],
+      "post-checkout": [
+        "npm i"
+      ],
+      "post-merge": [
+        "npm i"
+      ]
+    }
   }
 }
