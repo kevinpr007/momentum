@@ -1,7 +1,5 @@
 const GET = 'GET'
 const POST = 'POST'
-const PUT = 'PUT'
-const DELETE = 'DELETE'
 
 let routeMap = new Map()
 
