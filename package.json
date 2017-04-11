@@ -13,7 +13,8 @@
     "benchmark": "node benchmark/homepage.js",
     "seed": "cross-env NODE_ENV=development node ./src/config/mongoose_seed/configuration",
     "docs": "./node_modules/.bin/apidoc -i src/routes/ -o docs/",
-    "commit": "commit-wizard"
+    "commit": "commit-wizard",
+    "temp": "cross-env NODE_ENV=development node ./design/appointment"
   },
   "repository": {
     "type": "git",
@@ -58,8 +59,7 @@
     "cross-env": "3.1.4",
     "dotenv": "4.0.0",
     "express": "4.14.1",
-    "express-cluster": "0.0.4",
-    "hbs": "4.0.1",
+    "express-cluster": "0.0.4",    
     "helmet": "3.4.0",
     "http-status-codes": "1.1.6",
     "jsonwebtoken": "7.3.0",
