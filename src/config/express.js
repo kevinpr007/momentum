@@ -1,16 +1,12 @@
 const express = require('express')
 const router = express.Router()
-const favicon = require('serve-favicon')
 const bodyParser = require('body-parser')
 const BunyanMiddleware = require('bunyan-middleware')
 const HttpStatus = require('http-status-codes')
 const helmet = require('helmet')
-const hbs = require('hbs')
-const hbsHelpers = require('handlebars-form-helpers')
 const logger = require('./logger')
 const logService = require('../services/log.service')()
 const config = require('../../package.json')
-const compression = require('compression')
 
 module.exports = () => {
   let app = express()
@@ -38,21 +34,6 @@ module.exports = () => {
     obscureHeaders: [],
     logger: logger
   }))
-
-  /**
-   * Static Resources / View Engine middleware
-   */
-  app.use(compression())
-  app.use(favicon('./public/img/favicon.ico'))
-  app.use(express.static('./public'))
-
-  hbs.registerHelper('section', function (name, options) {
-    this.sections = {}
-    this.sections[name] = options.fn(this)
-  })
-  hbsHelpers.register(hbs.handlebars)
-  app.set('views', './src/views')
-  app.set('view engine', 'hbs')
 
   /**
    * Routing middleware
