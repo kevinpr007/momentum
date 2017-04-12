@@ -5,7 +5,9 @@
     "Workshift": "Workshift",
     "Service": "Service",
     "Schedule": "Schedule",
-    "Log": "Log"
+    "Log": "Log",
+    "Application": "Application",
+    "ApplicationType": "ApplicationType"
   },
   "Collection": {
     "Location": "m_location",
@@ -13,6 +15,8 @@
     "Workshift": "m_workshift",
     "Service": "m_service",
     "Schedule": "m_schedule",
-    "Log": "m_log"
+    "Log": "m_log",
+    "Application": "m_application",
+    "ApplicationType": "m_applicationType"
   }
 }
