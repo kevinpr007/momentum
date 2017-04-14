@@ -43,7 +43,9 @@ let authService = () => {
 
   let authorize = roles => {
     return (req, res, next) => {
-      if (_.intersection(roles, req.user.roles).length === 0) {
+      if (_.intersectionWith(roles, req.user.roles, (role, userRole) => {
+        return role.id == userRole.roleId // eslint-disable-line eqeqeq
+      }).length === 0) {
         let err = new Error('Your user does not have the required role(s) to execute this action.')
         err.status = HttpStatus.UNAUTHORIZED
         throw err
