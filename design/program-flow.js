@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 const Promise = require('bluebird')
 mongoose.Promise = Promise
-const faker = require('Faker')
+const faker = require('faker')
 
 const User = require('../src/models/user.model')
 const Role = require('../src/models/role.model')
@@ -15,13 +15,13 @@ require('../src/config/mongoose')()
  */
 function createAppType () {
   return ApplicationType.create(new ApplicationType({
-    name: faker.Lorem.words(1)
+    name: faker.lorem.words(1)
   }))
 }
 
 function createApplication (appTypeId) {
   return Application.create(new Application({
-    name: faker.Company.companyName(),
+    name: faker.company.companyName(),
     appTypeId
   }))
 }
@@ -32,16 +32,16 @@ function createRole (name, appId) {
 
 function createUser (roleId) {
   return User.create(new User({
-    firstName: faker.Name.firstName(),
-    lastName: faker.Name.lastName(),
-    email: faker.Internet.email(),
+    firstName: faker.name.firstName(),
+    lastName: faker.name.lastName(),
+    email: faker.internet.email(),
     password: 'ABcd1234',
     roles: [{roleId}],
     address: {
-      address1: faker.Address.streetAddress(),
-      city: faker.Address.city(),
-      state: faker.Address.usState(),
-      zipCode: faker.Address.zipCode()
+      address1: faker.address.streetAddress(),
+      city: faker.address.city(),
+      state: faker.address.state(),
+      zipCode: faker.address.zipCode()
     }
   }))
 }
