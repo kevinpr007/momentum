@@ -29,7 +29,7 @@ describe('Environment variables test', () => {
         process.env.NODE_ENV = 'unknown'
 
         try {
-          let envVariable = require('../../src/config/config')()
+          require('../../src/config/config')()
         } catch (args) {
           expect(args).to.be.a('Error')
           expect(args.message).to.contain('Error setting the environment')
