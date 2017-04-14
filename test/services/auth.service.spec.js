@@ -1,6 +1,7 @@
 const moment = require('moment')
 
 describe('User authentication service test', () => {
+  let Role = require('../../src/models/role.model')
   let User = require('../../src/models/user.model')
   let authService = require('../../src/services/auth.service')()
 
@@ -15,14 +16,25 @@ describe('User authentication service test', () => {
 
     context('when requesting an action that requires an authorization role', () => {
       it('will be authorized to proceed with the request when user has proper role', sinon.test(function (done) {
-        let roles = ['Admin', 'sysAdmin']
+        let roles = [
+          new Role({
+            name: 'Admin',
+            appId: '123'
+          }),
+          new Role({
+            name: 'sysAdmin',
+            appId: '456'
+          })
+        ]
         let req = {
           user: new User({
-            roles: 'Admin'
+            roles: [{
+              roleId: roles[0].id
+            }]
           })
         }
-        let spy = this.spy(next)
 
+        let spy = this.spy(next)
         authService.authorize(roles)(req, null, spy)
 
         function next () {
@@ -32,10 +44,17 @@ describe('User authentication service test', () => {
       }))
 
       it('will generate an Unauthorized (401) error when user has an invalid role', sinon.test(function (done) {
-        let roles = ['sysAdmin']
+        let roles = [
+          new Role({
+            name: 'sysAdmin',
+            appId: '456'
+          })
+        ]
         let req = {
           user: new User({
-            roles: 'Admin'
+            roles: [{
+              roleId: '123'
+            }]
           })
         }
 

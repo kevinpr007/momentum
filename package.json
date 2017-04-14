@@ -14,7 +14,7 @@
     "seed": "cross-env NODE_ENV=development node ./src/config/mongoose_seed/configuration",
     "docs": "./node_modules/.bin/apidoc -i src/routes/ -o docs/",
     "commit": "commit-wizard",
-    "temp": "cross-env NODE_ENV=development node ./design/appointment"
+    "temp": "cross-env NODE_ENV=development node ./design/program-flow"
   },
   "repository": {
     "type": "git",
@@ -35,9 +35,14 @@
   },
   "homepage": "https://github.com/Ivan-Marquez/momentum#readme",
   "standard": {
-    "ignore": [
-      "public/",
-      "test"
+    "globals": [
+      "sinon",
+      "expect",
+      "describe",
+      "context",
+      "it",
+      "beforeEach",
+      "assert"
     ]
   },
   "apidoc": {
@@ -59,7 +64,7 @@
     "cross-env": "3.1.4",
     "dotenv": "4.0.0",
     "express": "4.14.1",
-    "express-cluster": "0.0.4",    
+    "express-cluster": "0.0.4",
     "helmet": "3.4.0",
     "http-status-codes": "1.1.6",
     "jsonwebtoken": "7.3.0",
@@ -75,6 +80,7 @@
     "slugify": "1.1.0"
   },
   "devDependencies": {
+    "Faker": "^0.7.2",
     "apidoc": "0.17.5",
     "chai": "3.5.0",
     "chai-as-promised": "6.0.0",
@@ -97,6 +103,7 @@
   "config": {
     "pre-git": {
       "enabled": true,
+      "allow-untracked-files": true,
       "commit-msg": "simple",
       "pre-commit": [
         "npm run standard"

@@ -15,7 +15,7 @@ describe('Index requests', () => {
   describe('Given a request to StylePoint API', () => {
     context('when requesting root url', () => {
       it('returns the home page', done => {
-        templateModel = {}
+        let templateModel = {}
         req.method = 'GET'
         req.url = '/'
 

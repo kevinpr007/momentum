@@ -85,7 +85,7 @@ describe('User authentication requests', () => {
         req.body = {
           email: user.email
         }
-        next = args => done(args)
+        let next = args => done(args)
 
         userService = this.stub(userService())
         userService.getByEmail.resolves(null)
@@ -218,7 +218,7 @@ describe('User authentication requests', () => {
         req.body = {
           email: user.email
         }
-        next = args => done(args)
+        let next = args => done(args)
 
         this.stub(user, 'isValidPassword').resolves(true)
 
@@ -280,7 +280,7 @@ describe('User authentication requests', () => {
         req.body = {
           email: user.email
         }
-        next = args => done(args)
+        let next = args => done(args)
 
         userService = this.stub(userService())
         userService.getByEmail.resolves(user)
