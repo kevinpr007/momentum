@@ -305,8 +305,8 @@ describe('User schema validation tests', () => {
 
     context('when passing an invalid password confirmation', () => {
       it('will return a fulfilled promise with value = false', done => {
-        password = 'qwerty12345'
-        confirmPassword = 'changed'
+        let password = 'qwerty12345'
+        let confirmPassword = 'changed'
         let user = new User()
 
         user.confirmPasswordValid(password, confirmPassword).then(result => {
