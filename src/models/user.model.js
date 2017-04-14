@@ -81,6 +81,10 @@ const userSchema = new Schema({
       required: true
     }
   },
+  appId: {
+    type: Schema.ObjectId,
+    ref: mongoDB.Model.Application
+  },
   createdBy: {
     type: Schema.ObjectId,
     ref: mongoDB.Model.User

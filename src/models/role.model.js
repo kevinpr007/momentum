@@ -9,13 +9,13 @@ const roleSchema = new Schema({
     enum: roles,
     required: true
   },
-  appTypeId: {
+  appId: {
     type: Schema.ObjectId,
-    ref: mongoDB.Model.Role,
+    ref: mongoDB.Model.Application,
     required: true
   }
 }, {
   collection: mongoDB.Collection.Role
 })
 
-module.exports = mongoose.model(mongoDB.Model.Application, roleSchema)
+module.exports = mongoose.model(mongoDB.Model.Role, roleSchema)
