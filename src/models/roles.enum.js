@@ -6,6 +6,4 @@
                 day schedule in the store.
  User:          They will be the clients in the system. User role will be the role with the least privileges in the system.
  */
-module.exports = () => {
-  return ['sysAdmin', 'Admin', 'Manager', 'Employee', 'User']
-}
+module.exports = ['sysAdmin', 'Admin', 'Manager', 'Employee', 'User']
