@@ -1,8 +1,12 @@
 const userService = require('../services/user.service')()
-const userController = require('../controllers/user.controller')(userService)
 const authenticate = require('passport').authenticate('jwt', {session: false})
 const authorize = require('../middlewares/authorize')
 const routes = require('./routes.config')
+
+const {
+  getAllUsers,
+  getByUserEmail
+} = require('../controllers/user.controller')(userService)
 
 module.exports = router => {
   /**
@@ -97,7 +101,7 @@ module.exports = router => {
   router.get(routes.get('getUsers').path, authenticate,
     authorize([{
       name: 'Admin'
-    }]), userController.getAllUsers)
+    }]), getAllUsers)
 
   /**
   * @api {get} /users/:email Get user by email
@@ -186,5 +190,5 @@ module.exports = router => {
   router.get(routes.get('getByUserEmail').path, authenticate,
     authorize([{
       name: 'Admin'
-    }]), userController.getByUserEmail)
+    }]), getByUserEmail)
 }

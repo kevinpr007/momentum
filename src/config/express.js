@@ -41,7 +41,6 @@ module.exports = () => {
   // TODO: Apply a General Security Routing to all paths
   // TODO: Add the role features to all required paths
   app.use('/', router)
-  require('../routes/index.routes')(router)
   require('../routes/auth.routes')(router)
   require('../routes/user.routes')(router)
   require('../routes/log.routes')(router)

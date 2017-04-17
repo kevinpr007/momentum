@@ -1,3 +1,1 @@
-module.exports = () => {
-  return ['General', 'Exception']
-}
+module.exports = ['General', 'Exception']

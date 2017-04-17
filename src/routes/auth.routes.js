@@ -3,11 +3,16 @@ const userService = require('../services/user.service')()
 const emailService = require('../services/email.service')
 const routes = require('./routes.config')
 
-module.exports = (router) => {
-  const authController = require('../controllers/auth.controller')(authService, userService,
-    emailService, router.templateModel)
+const {
+  auth,
+  register,
+  newPassword,
+  confirmResetPassword,
+  resetPassword
+  } = require('../controllers/auth.controller')(authService, userService, emailService)
 
-  router.post(routes.get('auth').path, authController.auth)
+module.exports = (router) => {
+  router.post(routes.get('auth').path, auth)
 
   /**
   * @api {get} api/docs Register as a user
@@ -64,7 +69,7 @@ module.exports = (router) => {
   *       }
   *     }
   **/
-  router.post(routes.get('register').path, authController.register)
+  router.post(routes.get('register').path, register)
 
 /**
 * @api {post} api/complete-reset-password Complete Reset Password
@@ -131,7 +136,7 @@ module.exports = (router) => {
 *     }
 *
 **/
-  router.post(routes.get('newPassword').path, authController.newPassword)
+  router.post(routes.get('newPassword').path, newPassword)
 
   /**
   * @api {GET} api/confirm-reset-password/:token Confirmation New Password
@@ -156,7 +161,7 @@ module.exports = (router) => {
   *       }
   *     }
   **/
-  router.get(routes.get('confirmResetPassword').path, authController.confirmResetPassword)
+  router.get(routes.get('confirmResetPassword').path, confirmResetPassword)
 
   /**
   * @api {post} /api/reset-password Reset Password
@@ -198,5 +203,5 @@ module.exports = (router) => {
   *    }
   *
   **/
-  router.post(routes.get('resetPassword').path, authController.resetPassword)
+  router.post(routes.get('resetPassword').path, resetPassword)
 }

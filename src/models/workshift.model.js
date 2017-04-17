@@ -1,4 +1,4 @@
-const days = require('./days.enum')()
+const days = require('./days.enum')
 const mongoDB = require('../config/mongoose.collections.json')
 
 const mongoose = require('mongoose')

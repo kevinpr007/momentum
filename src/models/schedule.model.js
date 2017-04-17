@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 const mongoDB = require('../config/mongoose.collections.json')
-const types = require('./schedule-types.enum')()
+const types = require('./schedule-types.enum')
 
 const scheduleSchema = new Schema({
   startDate: {
