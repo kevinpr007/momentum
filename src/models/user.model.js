@@ -3,6 +3,7 @@ const Schema = mongoose.Schema
 const bcrypt = require('bcrypt-nodejs')
 const mongoDB = require('../config/mongoose.collections.json')
 const config = require('../config/config')()
+const roles = require('./roles.enum')
 const Promise = require('bluebird')
 
 const userSchema = new Schema({
@@ -55,9 +56,15 @@ const userSchema = new Schema({
   },
   phone: Number,
   roles: [{
-    roleId: {
+    name: {
+      type: String,
+      enum: roles,
+      required: true
+    },
+    appId: {
       type: Schema.ObjectId,
-      ref: mongoDB.Model.Role
+      ref: mongoDB.Model.Application,
+      required: true
     }
   }],
   address: {
@@ -80,10 +87,6 @@ const userSchema = new Schema({
       type: String,
       required: true
     }
-  },
-  appId: {
-    type: Schema.ObjectId,
-    ref: mongoDB.Model.Application
   },
   createdBy: {
     type: Schema.ObjectId,
