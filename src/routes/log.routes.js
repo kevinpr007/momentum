@@ -1,7 +1,7 @@
 const logService = require('../services/log.service')()
 const logController = require('../controllers/log.controller')(logService)
 const authenticate = require('passport').authenticate('jwt', {session: false})
-const authorize = require('../services/auth.service')().authorize
+const authorize = require('../middlewares/authorize')
 const routes = require('./routes.config')
 
 module.exports = router => {
@@ -94,7 +94,9 @@ module.exports = router => {
   *     }
   **/
   router.get(routes.get('getLogs').path, authenticate,
-    authorize(['sysAdmin']), logController.getAllLogs)
+    authorize([{
+      name: 'sysAdmin'
+    }]), logController.getAllLogs)
 
   /**
   * @api {get} api/logs/:code Get logs by code
