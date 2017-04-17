@@ -4,14 +4,6 @@ const POST = 'POST'
 let routeMap = new Map()
 
 /**
- * @Index routes
- */
-routeMap.set('index', {
-  path: '/',
-  method: GET
-})
-
-/**
  * @Authentication routes
  */
 routeMap.set('auth', {

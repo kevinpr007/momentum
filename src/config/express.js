@@ -6,7 +6,6 @@ const HttpStatus = require('http-status-codes')
 const helmet = require('helmet')
 const logger = require('./logger')
 const logService = require('../services/log.service')()
-const config = require('../../package.json')
 
 module.exports = () => {
   let app = express()
@@ -38,11 +37,6 @@ module.exports = () => {
   /**
    * Routing middleware
    */
-  router.templateModel = {
-    year: new Date().getFullYear(),
-    gitUrl: config.homepage,
-    version: config.version
-  }
 
   // TODO: Apply a General Security Routing to all paths
   // TODO: Add the role features to all required paths
