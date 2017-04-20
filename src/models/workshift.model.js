@@ -1,4 +1,3 @@
-const days = require('./days.enum')
 const mongoDB = require('../config/mongoose.collections.json')
 
 const mongoose = require('mongoose')
@@ -12,12 +11,6 @@ const workshiftSchema = new Schema({
   },
   endDate: {
     type: Date,
-    required: true,
-    index: true
-  },
-  day: {
-    type: String,
-    enum: days,
     required: true,
     index: true
   },
@@ -41,7 +34,7 @@ const workshiftSchema = new Schema({
 })
 
 workshiftSchema.virtual('show').get(function () {
-  return `${this.day}: ${this.startDate} - ${this.endDate}`
+  return `${this.startDate} - ${this.endDate}`
 })
 
 workshiftSchema.set('toJSON', {
