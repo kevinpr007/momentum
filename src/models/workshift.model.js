@@ -21,7 +21,7 @@ const workshiftSchema = new Schema({
     required: true,
     index: true
   },
-  user: {
+  userId: {
     type: Schema.ObjectId,
     ref: mongoDB.Model.User,
     required: true,
