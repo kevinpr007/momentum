@@ -4,7 +4,6 @@ const moment = require('moment')
 mongoose.Promise = Promise
 const faker = require('faker')
 
-const days = require('../src/models/days.enum')
 const User = require('../src/models/user.model')
 const ApplicationType = require('../src/models/application-type.model')
 const Application = require('../src/models/application.model')
@@ -63,7 +62,6 @@ function createWorkshift (userId) {
   return Workshift.create(new Workshift({
     startDate: moment(),
     endDate: moment().add(1, 'h'),
-    day: days[Math.floor(Math.random() * days.length)], // randomly select item from array
     createdBy: userId,
     userId
   }))
