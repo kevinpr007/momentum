@@ -1,11 +1,15 @@
 const mongoose = require('mongoose')
 const Promise = require('bluebird')
+const moment = require('moment')
 mongoose.Promise = Promise
 const faker = require('faker')
 
+const days = require('../src/models/days.enum')
 const User = require('../src/models/user.model')
 const ApplicationType = require('../src/models/application-type.model')
 const Application = require('../src/models/application.model')
+const Location = require('../src/models/location.model')
+const Workshift = require('../src/models/workshift.model')
 
 require('../src/config/mongoose')()
 
@@ -21,7 +25,8 @@ function createAppType () {
 function createApplication (appTypeId) {
   return Application.create(new Application({
     name: faker.company.companyName(),
-    appTypeId}))
+    appTypeId
+  }))
 }
 
 function createUser (roles = []) {
@@ -37,6 +42,30 @@ function createUser (roles = []) {
       state: faker.address.state(),
       zipCode: faker.address.zipCode()
     }
+  }))
+}
+
+function createLocation (createdBy, appId) {
+  return Location.create(new Location({
+    name: faker.company.companyName(),
+    address: {
+      address1: faker.address.streetAddress(),
+      city: faker.address.city(),
+      state: faker.address.state(),
+      zipCode: faker.address.zipCode()
+    },
+    appId,
+    createdBy
+  }))
+}
+
+function createWorkshift (userId) {
+  return Workshift.create(new Workshift({
+    startDate: moment(),
+    endDate: moment().add(1, 'h'),
+    day: days[Math.floor(Math.random() * days.length)], // randomly select item from array
+    createdBy: userId,
+    userId
   }))
 }
 
@@ -58,6 +87,13 @@ createAppType()
       appId: app.id
     }])
   ]))
+  .then(data => {
+    let admin = data[0]
+    return Promise.all([
+      createLocation(admin.id, admin.roles[0].appId),
+      createWorkshift(admin.id)
+    ])
+  })
   .then(data => {
     console.log(data)
     process.exit()
