@@ -4,7 +4,7 @@ const moment = require('moment')
 mongoose.Promise = Promise
 const faker = require('faker')
 
-const scheduleType = require('../src/models/schedule-types.enum') 
+const scheduleType = require('../src/models/schedule-types.enum')
 const User = require('../src/models/user.model')
 const ApplicationType = require('../src/models/application-type.model')
 const Application = require('../src/models/application.model')
@@ -81,17 +81,17 @@ function createService (userId) {
   }))
 }
 
-  function createSchedule (userId, serviceId, workshiftId, locationId) {
+function createSchedule (userId, serviceId, workshiftId, locationId) {
   return Schedule.create(new Schedule({
     startDate: moment(),
-  endDate: moment().add(1, 'h'),
-  other: 'Other Info',
-  userId: userId,
-  scheduleType: scheduleType[Math.floor(Math.random() * scheduleType.length)], // randomly select item from array ,
-  serviceId: serviceId,
-  workshiftId: workshiftId,
-  locationId: locationId,
-  createdBy: userId
+    endDate: moment().add(1, 'h'),
+    other: 'Other Info',
+    userId: userId,
+    scheduleType: scheduleType[Math.floor(Math.random() * scheduleType.length)], // randomly select item from array ,
+    serviceId: serviceId,
+    workshiftId: workshiftId,
+    locationId: locationId,
+    createdBy: userId
   }))
 }
 
