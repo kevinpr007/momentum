@@ -9,6 +9,7 @@ const ApplicationType = require('../src/models/application-type.model')
 const Application = require('../src/models/application.model')
 const Location = require('../src/models/location.model')
 const Workshift = require('../src/models/workshift.model')
+const Service = require('../src/models/service.model')
 
 require('../src/config/mongoose')()
 
@@ -67,9 +68,28 @@ function createWorkshift (userId) {
   }))
 }
 
+function createService (userId) {
+  return Service.create(new Service({
+    name: faker.name.firstName(),
+    description: faker.name.description,
+    price: faker.random.number(),
+    time: 30,
+    user: userId,
+    createdBy: userId,
+    userId
+  }))
+}
+
 /**
  * Program flow
  */
+
+let user,
+  admin,
+  location,
+  workshift,
+  service
+
 createAppType()
   .then(appType => createApplication(appType.id))
   .then(app => Promise.all([
@@ -86,14 +106,29 @@ createAppType()
     }])
   ]))
   .then(data => {
-    let admin = data[0]
+    admin = data[0]
+    user = data[1]
+
     return Promise.all([
       createLocation(admin.id, admin.roles[0].appId),
       createWorkshift(admin.id)
     ])
   })
   .then(data => {
-    console.log(data)
+    location = data[0]
+    workshift = data[1]
+
+    return createService(admin.id)
+  })
+  .then(data => {
+    service = data[0]
+
+    console.log(user)
+    console.log(admin)
+    console.log(location)
+    console.log(workshift)
+    console.log(service)
+
     process.exit()
   })
   .catch(err => {
