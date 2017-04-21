@@ -4,12 +4,14 @@ const moment = require('moment')
 mongoose.Promise = Promise
 const faker = require('faker')
 
+const scheduleType = require('../src/models/schedule-types.enum') 
 const User = require('../src/models/user.model')
 const ApplicationType = require('../src/models/application-type.model')
 const Application = require('../src/models/application.model')
 const Location = require('../src/models/location.model')
 const Workshift = require('../src/models/workshift.model')
 const Service = require('../src/models/service.model')
+const Schedule = require('../src/models/schedule.model')
 
 require('../src/config/mongoose')()
 
@@ -74,9 +76,22 @@ function createService (userId) {
     description: faker.name.description,
     price: faker.random.number(),
     time: 30,
-    user: userId,
-    createdBy: userId,
-    userId
+    userId: userId,
+    createdBy: userId
+  }))
+}
+
+  function createSchedule (userId, serviceId, workshiftId, locationId) {
+  return Schedule.create(new Schedule({
+    startDate: moment(),
+  endDate: moment().add(1, 'h'),
+  other: 'Other Info',
+  userId: userId,
+  scheduleType: scheduleType[Math.floor(Math.random() * scheduleType.length)], // randomly select item from array ,
+  serviceId: serviceId,
+  workshiftId: workshiftId,
+  locationId: locationId,
+  createdBy: userId
   }))
 }
 
@@ -88,7 +103,8 @@ let user,
   admin,
   location,
   workshift,
-  service
+  service,
+  schedule
 
 createAppType()
   .then(appType => createApplication(appType.id))
@@ -121,13 +137,18 @@ createAppType()
     return createService(admin.id)
   })
   .then(data => {
-    service = data[0]
+    service = data
+    return createSchedule(user.id, service.id, workshift.id, location.id)
+  })
+  .then(data => {
+    schedule = data
 
     console.log(user)
     console.log(admin)
     console.log(location)
     console.log(workshift)
     console.log(service)
+    console.log(schedule)
 
     process.exit()
   })
