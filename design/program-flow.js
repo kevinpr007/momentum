@@ -98,13 +98,10 @@ function createSchedule (userId, serviceId, workshiftId, locationId) {
 /**
  * Program flow
  */
-
 let user,
   admin,
   location,
-  workshift,
-  service,
-  schedule
+  workshift
 
 createAppType()
   .then(appType => createApplication(appType.id))
@@ -136,23 +133,21 @@ createAppType()
 
     return createService(admin.id)
   })
-  .then(data => {
-    service = data
-    return createSchedule(user.id, service.id, workshift.id, location.id)
-  })
-  .then(data => {
-    schedule = data
-
-    console.log(user)
-    console.log(admin)
-    console.log(location)
-    console.log(workshift)
-    console.log(service)
-    console.log(schedule)
-
-    process.exit()
-  })
+  .then(data => createSchedule(user.id, data.id, workshift.id, location.id))
+  .then(runQueries)
   .catch(err => {
     console.error(err)
     process.exit(1)
   })
+
+/**
+ * Queries
+ */
+function runQueries () {
+  // Users with Admin role
+  User.find({'roles.name': 'Admin'}).exec()
+    .then(users => {
+      console.log(`Admin users: ${users}`)
+      process.exit()
+    })
+}
