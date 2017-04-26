@@ -20,12 +20,12 @@ require('../src/config/mongoose')()
  */
 function createAppType (name) {
   return ApplicationType
-    .create(new ApplicationType({ name}))
+    .create(new ApplicationType({ name }))
 }
 
 function createApplication (appTypeId, name) {
   return Application
-    .create(new Application({ name, appTypeId}))
+    .create(new Application({ name, appTypeId }))
 }
 
 function createUser (roles = []) {
@@ -95,16 +95,16 @@ function createSchedule (userId, serviceId, workshiftId, locationId) {
 /**
  * Program flow
  */
-let appTypeSalon,
-  appTypeLandscaping,
-  applicationSalon,
-  applicationLandScaping,
-  salonUser,
-  salonAdmin,
-  landScapingUser,
-  landScapingAdmin,
-  location,
-  workshift
+var appTypeSalon
+var appTypeLandscaping
+var applicationSalon
+var applicationLandScaping
+var salonUser
+var salonAdmin
+var landScapingUser
+var landScapingAdmin
+var location
+var workshift
 
 function setupEnv () {
   return Promise.all([
