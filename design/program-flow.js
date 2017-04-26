@@ -18,15 +18,15 @@ require('../src/config/mongoose')()
 /**
  * Data-generating functions
  */
-function createAppType () {
+function createAppType (name) {
   return ApplicationType.create(new ApplicationType({
-    name: faker.lorem.words(1)
+    name: name
   }))
 }
 
-function createApplication (appTypeId) {
+function createApplication (appTypeId, name) {
   return Application.create(new Application({
-    name: faker.company.companyName(),
+    name: name,
     appTypeId
   }))
 }
@@ -98,80 +98,143 @@ function createSchedule (userId, serviceId, workshiftId, locationId) {
 /**
  * Program flow
  */
-let user,
-  admin,
+let appTypeSalon,
+  appTypeLandscaping,
+  applicationSalon,
+  applicationLandScaping,
+  salonUser,
+  salonAdmin,
+  landScapingUser,
+  landScapingAdmin,
   location,
   workshift
 
-createAppType()
-  .then(appType => createApplication(appType.id))
-  .then(app => Promise.all([
+createAppType('Salon').then(data => {
+  appTypeSalon = data
+  return createAppType('Landscaping')
+}).then((data) => {
+  appTypeLandscaping = data
+  return createApplication(appTypeSalon.id, 'Beauty Salon')
+}).then((data) => {
+  applicationSalon = data
+  return createApplication(appTypeLandscaping.id, 'The Show Land Scaping')
+}).then((data) => {
+  applicationLandscaping = data
+}).then(() => {
+  return Promise.all([
     createUser([{
       name: 'Employee',
-      appId: app.id
+      appId: applicationSalon.id
     }, {
       name: 'Admin',
-      appId: app.id
+      appId: applicationSalon.id
     }]),
     createUser([{
       name: 'User',
-      appId: app.id
+      appId: applicationSalon.id
+    }]),
+
+    createUser([{
+      name: 'Employee',
+      appId: applicationLandscaping.id
+    }, {
+      name: 'Admin',
+      appId: applicationLandscaping.id
+    }]),
+    createUser([{
+      name: 'User',
+      appId: applicationLandscaping.id
     }])
-  ]))
-  .then(data => {
-    admin = data[0]
-    user = data[1]
+  ])
+}).then((data) => {
+  salonAdmin = data[0]
+  salonUser = data[1]
 
-    return Promise.all([
-      createLocation(admin.id, admin.roles[0].appId),
-      createWorkshift(admin.id)
-    ])
-  })
-  .then(data => {
-    location = data[0]
-    workshift = data[1]
+  landScapingAdmin = data[3]
+  landScapingUser = data[4]
+}).then(() => {
+  // Print
+  console.log(appTypeSalon)
+  console.log(appTypeLandscaping)
+  console.log(applicationSalon)
+  console.log(applicationLandScaping)
+  console.log(salonUser)
+  console.log(salonAdmin)
+  console.log(landScapingUser)
+  console.log(landScapingAdmin)
+  console.log(location)
+  console.log(workshift)
+})
 
-    return createService(admin.id)
-  })
-  .then(data => createSchedule(user.id, data.id, workshift.id, location.id))
-  .then(runQueries)
-  .catch(err => {
-    console.error(err)
-    process.exit(1)
-  })
+// createAppType()
+//   .then(appType => createApplication(appType.id))
+//   .then(app => Promise.all([
+//     createUser([{
+//       name: 'Employee',
+//       appId: app.id
+//     }, {
+//       name: 'Admin',
+//       appId: app.id
+//     }]),
+//     createUser([{
+//       name: 'User',
+//       appId: app.id
+//     }])
+//   ]))
+//   .then(data => {
+//     admin = data[0]
+//     user = data[1]
+
+//     return Promise.all([
+//       createLocation(admin.id, admin.roles[0].appId),
+//       createWorkshift(admin.id)
+//     ])
+//   })
+//   .then(data => {
+//     location = data[0]
+//     workshift = data[1]
+
+//     return createService(admin.id)
+//   })
+//   .then(data => createSchedule(user.id, data.id, workshift.id, location.id))
+//   .then(runQueries)
+//   .catch(err => {
+//     console.error(err)
+//     process.exit(1)
+//   })
 
 /**
  * Queries
  */
 function runQueries () {
   // Users with Admin role
-  User.find({'roles.name': 'Admin'}).exec()
+  User.find({ 'roles.name': 'Admin' }).exec()
     .then(users => {
       console.log(`Admin users: ${users}`)
       process.exit()
     })
-
-// Give me all Applications with their ApplicationType related ordered by application name ascending
-
-// Give me all ApplicationTypes related to the Applications ordered by applicationType ascending
-
-// Give me all logs related to an specific application ordered by createdDate descending
-
-// Give me all users in the system ordered by name
-
-// Give me all users in the system related to an specific application ordered by name
-
-// Give me all user with the Admin role for a specific application ordered by the name of the user
-
-// Give me all workshift related to all users for an specific application ordered by application name and the name of the user and the schedule time ascending
-
-// Give me all workshift related to an specific user for a specific application ordered by schedule time ascending
-
-// Give me all services by all users for an specific application ordered by the name of the user and service name
-
-// Give me all services by an user for an specific application ordered by the name of the user and service name
-
-// Give me all schedule by all users for an specific application ordered by schedule time ascending
-
-// Give me all schedule by an user for an specific application ordered by schedule time ascending
 }
+
+  // Give me all Applications with their ApplicationType related ordered by application name ascending
+
+  // Give me all ApplicationTypes related to the Applications ordered by applicationType ascending
+
+  // Give me all logs related to an specific application ordered by createdDate descending
+
+  // Give me all users in the system ordered by name
+
+  // Give me all users in the system related to an specific application ordered by name
+
+  // Give me all user with the Admin role for a specific application ordered by the name of the user
+
+  // Give me all workshift related to all users for an specific application ordered by application name and the name of the user and the schedule time ascending
+
+  // Give me all workshift related to an specific user for a specific application ordered by schedule time ascending
+
+  // Give me all services by all users for an specific application ordered by the name of the user and service name
+
+  // Give me all services by an user for an specific application ordered by the name of the user and service name
+
+  // Give me all schedule by all users for an specific application ordered by schedule time ascending
+
+  // Give me all schedule by an user for an specific application ordered by schedule time ascending
