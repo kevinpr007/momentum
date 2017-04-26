@@ -105,9 +105,7 @@
       "enabled": true,
       "allow-untracked-files": true,
       "commit-msg": "simple",
-      "pre-commit": [
-        
-      ],
+      "pre-commit": [],
       "pre-push": [
         "npm t",
         "npm run nsp"

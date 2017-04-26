@@ -19,16 +19,13 @@ require('../src/config/mongoose')()
  * Data-generating functions
  */
 function createAppType (name) {
-  return ApplicationType.create(new ApplicationType({
-    name: name
-  }))
+  return ApplicationType
+    .create(new ApplicationType({ name}))
 }
 
 function createApplication (appTypeId, name) {
-  return Application.create(new Application({
-    name: name,
-    appTypeId
-  }))
+  return Application
+    .create(new Application({ name, appTypeId}))
 }
 
 function createUser (roles = []) {
@@ -76,8 +73,8 @@ function createService (userId) {
     description: faker.name.description,
     price: faker.random.number(),
     time: 30,
-    userId: userId,
-    createdBy: userId
+    createdBy: userId,
+    userId
   }))
 }
 
@@ -109,132 +106,104 @@ let appTypeSalon,
   location,
   workshift
 
-createAppType('Salon').then(data => {
-  appTypeSalon = data
-  return createAppType('Landscaping')
-}).then((data) => {
-  appTypeLandscaping = data
-  return createApplication(appTypeSalon.id, 'Beauty Salon')
-}).then((data) => {
-  applicationSalon = data
-  return createApplication(appTypeLandscaping.id, 'The Show Land Scaping')
-}).then((data) => {
-  applicationLandscaping = data
-}).then(() => {
+function setupEnv () {
   return Promise.all([
-    createUser([{
-      name: 'Employee',
-      appId: applicationSalon.id
-    }, {
-      name: 'Admin',
-      appId: applicationSalon.id
-    }]),
-    createUser([{
-      name: 'User',
-      appId: applicationSalon.id
-    }]),
-
-    createUser([{
-      name: 'Employee',
-      appId: applicationLandscaping.id
-    }, {
-      name: 'Admin',
-      appId: applicationLandscaping.id
-    }]),
-    createUser([{
-      name: 'User',
-      appId: applicationLandscaping.id
-    }])
+    ApplicationType.remove({}),
+    Application.remove({}),
+    User.remove({}),
+    Location.remove({}),
+    Workshift.remove({}),
+    Service.remove({}),
+    Schedule.remove({})
   ])
-}).then((data) => {
-  salonAdmin = data[0]
-  salonUser = data[1]
-
-  landScapingAdmin = data[3]
-  landScapingUser = data[4]
-}).then(() => {
-  // Print
-  console.log(appTypeSalon)
-  console.log(appTypeLandscaping)
-  console.log(applicationSalon)
-  console.log(applicationLandScaping)
-  console.log(salonUser)
-  console.log(salonAdmin)
-  console.log(landScapingUser)
-  console.log(landScapingAdmin)
-  console.log(location)
-  console.log(workshift)
-})
-
-// createAppType()
-//   .then(appType => createApplication(appType.id))
-//   .then(app => Promise.all([
-//     createUser([{
-//       name: 'Employee',
-//       appId: app.id
-//     }, {
-//       name: 'Admin',
-//       appId: app.id
-//     }]),
-//     createUser([{
-//       name: 'User',
-//       appId: app.id
-//     }])
-//   ]))
-//   .then(data => {
-//     admin = data[0]
-//     user = data[1]
-
-//     return Promise.all([
-//       createLocation(admin.id, admin.roles[0].appId),
-//       createWorkshift(admin.id)
-//     ])
-//   })
-//   .then(data => {
-//     location = data[0]
-//     workshift = data[1]
-
-//     return createService(admin.id)
-//   })
-//   .then(data => createSchedule(user.id, data.id, workshift.id, location.id))
-//   .then(runQueries)
-//   .catch(err => {
-//     console.error(err)
-//     process.exit(1)
-//   })
-
-/**
- * Queries
- */
-function runQueries () {
-  // Users with Admin role
-  User.find({ 'roles.name': 'Admin' }).exec()
-    .then(users => {
-      console.log(`Admin users: ${users}`)
-      process.exit()
-    })
 }
 
-  // Give me all Applications with their ApplicationType related ordered by application name ascending
+function seed () {
+  return createAppType('Salon').then(data => {
+    appTypeSalon = data
+    return createAppType('Landscaping')
+  }).then((data) => {
+    appTypeLandscaping = data
+    return createApplication(appTypeSalon.id, 'Beauty Salon')
+  }).then((data) => {
+    applicationSalon = data
+    return createApplication(appTypeLandscaping.id, 'The Show Land Scaping')
+  }).then((data) => {
+    applicationLandscaping = data
+  }).then(() => {
+    return Promise.all([
+      createUser([{
+        name: 'Employee',
+        appId: applicationSalon.id
+      }, {
+        name: 'Admin',
+        appId: applicationSalon.id
+      }]),
+      createUser([{
+        name: 'User',
+        appId: applicationSalon.id
+      }]),
+      createUser([{
+        name: 'Employee',
+        appId: applicationLandscaping.id
+      }, {
+        name: 'Admin',
+        appId: applicationLandscaping.id
+      }]),
+      createUser([{
+        name: 'User',
+        appId: applicationLandscaping.id
+      }])
+    ])
+  }).then((data) => {
+    salonAdmin = data[0]
+    salonUser = data[1]
 
-  // Give me all ApplicationTypes related to the Applications ordered by applicationType ascending
+    landScapingAdmin = data[3]
+    landScapingUser = data[4]
+  })
+}
 
-  // Give me all logs related to an specific application ordered by createdDate descending
+function runQueries () {
+  // Retrieve all users with Admin role
+  return User.find({ 'roles.name': 'Admin' }).exec()
+    .then(users => {
+      console.log(`Admin users: ${users}`)
+    })
 
-  // Give me all users in the system ordered by name
+  // Retrieve all Applications with their ApplicationType related ordered by application name ascending
 
-  // Give me all users in the system related to an specific application ordered by name
+  // Retrieve all ApplicationTypes related to the Applications ordered by applicationType ascending
 
-  // Give me all user with the Admin role for a specific application ordered by the name of the user
+  // Retrieve all logs related to an specific application ordered by createdDate descending
 
-  // Give me all workshift related to all users for an specific application ordered by application name and the name of the user and the schedule time ascending
+  // Retrieve all users in the system ordered by name
 
-  // Give me all workshift related to an specific user for a specific application ordered by schedule time ascending
+  // Retrieve all users in the system related to an specific application ordered by name
 
-  // Give me all services by all users for an specific application ordered by the name of the user and service name
+  // Retrieve all user with the Admin role for a specific application ordered by the name of the user
 
-  // Give me all services by an user for an specific application ordered by the name of the user and service name
+  // Retrieve all workshift related to all users for an specific application ordered by application name and the name of the user and the schedule time ascending
 
-  // Give me all schedule by all users for an specific application ordered by schedule time ascending
+  // Retrieve all workshift related to an specific user for a specific application ordered by schedule time ascending
 
-  // Give me all schedule by an user for an specific application ordered by schedule time ascending
+  // Retrieve all services by all users for an specific application ordered by the name of the user and service name
+
+  // Retrieve all services by an user for an specific application ordered by the name of the user and service name
+
+  // Retrieve all schedule by all users for an specific application ordered by schedule time ascending
+
+  // Retrieve all schedule by an user for an specific application ordered by schedule time ascending
+}
+
+setupEnv().then(() => {
+  console.log('All collections removed.')
+  return seed()
+}).then(() => {
+  console.log('All collections set.')
+  return runQueries()
+}).then(process.exit)
+  .catch(err => {
+    console.error(err)
+    process.exit(1)
+  })
