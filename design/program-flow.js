@@ -151,32 +151,27 @@ function runQueries () {
       process.exit()
     })
 
+// Give me all Applications with their ApplicationType related ordered by application name ascending
 
+// Give me all ApplicationTypes related to the Applications ordered by applicationType ascending
 
+// Give me all logs related to an specific application ordered by createdDate descending
 
-//Give me all Applications with their ApplicationType related ordered by application name ascending
+// Give me all users in the system ordered by name
 
-//Give me all ApplicationTypes related to the Applications ordered by applicationType ascending
+// Give me all users in the system related to an specific application ordered by name
 
-//Give me all logs related to an specific application ordered by createdDate descending
+// Give me all user with the Admin role for a specific application ordered by the name of the user
 
-//Give me all users in the system ordered by name
+// Give me all workshift related to all users for an specific application ordered by application name and the name of the user and the schedule time ascending
 
-//Give me all users in the system related to an specific application ordered by name
+// Give me all workshift related to an specific user for a specific application ordered by schedule time ascending
 
-//Give me all user with the Admin role for a specific application ordered by the name of the user
+// Give me all services by all users for an specific application ordered by the name of the user and service name
 
-//Give me all workshift related to all users for an specific application ordered by application name and the name of the user and the schedule time ascending 
+// Give me all services by an user for an specific application ordered by the name of the user and service name
 
-//Give me all workshift related to an specific user for a specific application ordered by schedule time ascending 
+// Give me all schedule by all users for an specific application ordered by schedule time ascending
 
-//Give me all services by all users for an specific application ordered by the name of the user and service name
-
-//Give me all services by an user for an specific application ordered by the name of the user and service name
-
-//Give me all schedule by all users for an specific application ordered by schedule time ascending
-
-//Give me all schedule by an user for an specific application ordered by schedule time ascending 
-
-
+// Give me all schedule by an user for an specific application ordered by schedule time ascending
 }
