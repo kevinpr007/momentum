@@ -18,17 +18,20 @@ require('../src/config/mongoose')()
 /**
  * Data-generating functions
  */
-function createAppType (name) {
+function createAppType(name) {
   return ApplicationType
     .create(new ApplicationType({ name }))
 }
 
-function createApplication (appTypeId, name) {
+function createApplication(appTypeId, name) {
   return Application
-    .create(new Application({ name, appTypeId }))
+    .create(new Application({
+      name,
+      appTypeId
+    }))
 }
 
-function createUser (roles = []) {
+function createUser(roles = []) {
   return User.create(new User({
     firstName: faker.name.firstName(),
     lastName: faker.name.lastName(),
@@ -44,7 +47,7 @@ function createUser (roles = []) {
   }))
 }
 
-function createLocation (createdBy, appId) {
+function createLocation(createdBy, appId) {
   return Location.create(new Location({
     name: faker.company.companyName(),
     address: {
@@ -58,16 +61,16 @@ function createLocation (createdBy, appId) {
   }))
 }
 
-function createWorkshift (userId) {
+function createWorkshift(userId, from, to) {
   return Workshift.create(new Workshift({
-    startDate: moment(),
-    endDate: moment().add(1, 'h'),
+    startDate: from,
+    endDate: to,
     createdBy: userId,
     userId
   }))
 }
 
-function createService (userId) {
+function createService(userId) {
   return Service.create(new Service({
     name: faker.name.firstName(),
     description: faker.name.description,
@@ -78,10 +81,10 @@ function createService (userId) {
   }))
 }
 
-function createSchedule (userId, serviceId, workshiftId, locationId) {
+function createSchedule(userId, serviceId, workshiftId, locationId, from, to) {
   return Schedule.create(new Schedule({
-    startDate: moment(),
-    endDate: moment().add(1, 'h'),
+    startDate: from,
+    endDate: to,
     other: 'Other Info',
     userId: userId,
     scheduleType: scheduleType[Math.floor(Math.random() * scheduleType.length)], // randomly select item from array ,
@@ -103,10 +106,17 @@ var salonUser
 var salonAdmin
 var landScapingUser
 var landScapingAdmin
-var location
-var workshift
+var salonService1
+var salonService2
+var landScapingService1
+var landScapingService2
+var salonLocation
+var landScapingLocation
+var salonWorkshift
+var landScapingWorkshift
 
-function setupEnv () {
+
+function setupEnv() {
   return Promise.all([
     ApplicationType.remove({}),
     Application.remove({}),
@@ -118,52 +128,91 @@ function setupEnv () {
   ])
 }
 
-function seed () {
-  return createAppType('Salon').then(data => {
-    appTypeSalon = data
-    return createAppType('Landscaping')
-  }).then((data) => {
-    appTypeLandscaping = data
-    return createApplication(appTypeSalon.id, 'Beauty Salon')
-  }).then((data) => {
-    applicationSalon = data
-    return createApplication(appTypeLandscaping.id, 'The Show Land Scaping')
-  }).then((data) => {
-    applicationLandscaping = data
-  }).then(() => {
-    return Promise.all([
-      createUser([{
-        name: 'Employee',
-        appId: applicationSalon.id
-      }, {
-        name: 'Admin',
-        appId: applicationSalon.id
-      }]),
-      createUser([{
-        name: 'User',
-        appId: applicationSalon.id
-      }]),
-      createUser([{
-        name: 'Employee',
-        appId: applicationLandscaping.id
-      }, {
-        name: 'Admin',
-        appId: applicationLandscaping.id
-      }]),
-      createUser([{
-        name: 'User',
-        appId: applicationLandscaping.id
-      }])
-    ])
-  }).then((data) => {
-    salonAdmin = data[0]
-    salonUser = data[1]
-    landScapingAdmin = data[3]
-    landScapingUser = data[4]
-  })
+function seed() {
+  return createAppType('Salon')
+    .then(data => {
+      appTypeSalon = data
+      return createAppType('Landscaping')
+    }).then((data) => {
+      appTypeLandscaping = data
+      return createApplication(appTypeSalon.id, 'Beauty Salon')
+    }).then((data) => {
+      applicationSalon = data
+      return createApplication(appTypeLandscaping.id, 'The Show Land Scaping')
+    }).then((data) => {
+      applicationLandscaping = data
+      return
+    })
+    .then(() => {
+      return Promise.all([
+        createUser([{
+          name: 'Employee',
+          appId: applicationSalon.id
+        }, {
+          name: 'Admin',
+          appId: applicationSalon.id
+        }]),
+        createUser([{
+          name: 'User',
+          appId: applicationSalon.id
+        }]),
+        createUser([{
+          name: 'Employee',
+          appId: applicationLandscaping.id
+        }, {
+          name: 'Admin',
+          appId: applicationLandscaping.id
+        }]),
+        createUser([{
+          name: 'User',
+          appId: applicationLandscaping.id
+        }])
+      ])
+    })
+    .then((data) => {
+      salonAdmin = data[0]
+      salonUser = data[1]
+
+      landScapingAdmin = data[2]
+      landScapingUser = data[3]
+    }).then(() => {
+      return Promise.all([
+        createLocation(salonAdmin.id, applicationSalon.id),
+        //createLocation(landScapingAdmin.id, applicationLandScaping.id),
+
+        createWorkshift(salonAdmin.id, moment(), moment().add(1, 'h')),
+        createWorkshift(landScapingAdmin.id, moment(), moment().add(1, 'h'))
+      ])
+    }).then((data) => {
+      salonLocation = data[0]
+       landScapingLocation = data[1]
+      salonWorkshift = data[2]
+      landScapingWorkshift = data[3]
+
+      return Promise.all([
+        createService(salonAdmin.id),
+        createService(salonAdmin.id),
+        createService(landScapingAdmin.id),
+        createService(landScapingAdmin.id)
+      ])
+    }).then((data) => {
+      salonService1 = data[0]
+      salonService2 = data[1]
+      landScapingService1 = data[2]
+      landScapingService2 = data[3]
+
+      return Promise.all([
+        createSchedule(salonAdmin.id, salonService1.id, salonWorkshift.id, salonLocation.id, moment(), moment().add(1, 'h')),
+        createSchedule(salonAdmin.id, salonService2.id, salonWorkshift.id, salonLocation.id, moment(), moment().add(1, 'h')),
+        // createSchedule(landScapingAdmin.id, landScapingService1.id, landScapingWorkshift.id, landScapingLocation.id, moment(), moment().add(1, 'h')),
+        // createSchedule(landScapingAdmin.id, landScapingService2.id, landScapingWorkshift.id, landScapingLocation.id, moment(), moment().add(1, 'h'))
+      ])
+    }).then((data) => {
+
+    })
 }
 
-function runQueries () {
+function runQueries() {
   // Retrieve all users with Admin role
   return Promise.all([
     User.find({ 'roles.name': 'Admin' }).exec()
