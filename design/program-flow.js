@@ -1,8 +1,8 @@
 const mongoose = require('mongoose')
 const Promise = require('bluebird')
 const moment = require('moment')
-mongoose.Promise = Promise
 const faker = require('faker')
+mongoose.Promise = Promise
 
 const scheduleType = require('../src/models/schedule-types.enum')
 const User = require('../src/models/user.model')
@@ -18,20 +18,17 @@ require('../src/config/mongoose')()
 /**
  * Data-generating functions
  */
-function createAppType(name) {
+function createAppType (name) {
   return ApplicationType
     .create(new ApplicationType({ name }))
 }
 
-function createApplication(appTypeId, name) {
+function createApplication (appTypeId, name) {
   return Application
-    .create(new Application({
-      name,
-      appTypeId
-    }))
+    .create(new Application({ name, appTypeId }))
 }
 
-function createUser(roles = []) {
+function createUser (roles = []) {
   return User.create(new User({
     firstName: faker.name.firstName(),
     lastName: faker.name.lastName(),
@@ -47,7 +44,7 @@ function createUser(roles = []) {
   }))
 }
 
-function createLocation(createdBy, appId) {
+function createLocation (createdBy, appId) {
   return Location.create(new Location({
     name: faker.company.companyName(),
     address: {
@@ -61,16 +58,16 @@ function createLocation(createdBy, appId) {
   }))
 }
 
-function createWorkshift(userId, from, to) {
+function createWorkshift (userId) {
   return Workshift.create(new Workshift({
-    startDate: from,
-    endDate: to,
+    startDate: moment(),
+    endDate: moment().add(1, 'h'),
     createdBy: userId,
     userId
   }))
 }
 
-function createService(userId) {
+function createService (userId) {
   return Service.create(new Service({
     name: faker.name.firstName(),
     description: faker.name.description,
@@ -81,10 +78,10 @@ function createService(userId) {
   }))
 }
 
-function createSchedule(userId, serviceId, workshiftId, locationId, from, to) {
+function createSchedule (userId, serviceId, workshiftId, locationId) {
   return Schedule.create(new Schedule({
-    startDate: from,
-    endDate: to,
+    startDate: moment(),
+    endDate: moment().add(1, 'h'),
     other: 'Other Info',
     userId: userId,
     scheduleType: scheduleType[Math.floor(Math.random() * scheduleType.length)], // randomly select item from array ,
@@ -95,28 +92,7 @@ function createSchedule(userId, serviceId, workshiftId, locationId, from, to) {
   }))
 }
 
-/**
- * Program flow
- */
-var appTypeSalon
-var appTypeLandscaping
-var applicationSalon
-var applicationLandScaping
-var salonUser
-var salonAdmin
-var landScapingUser
-var landScapingAdmin
-var salonService1
-var salonService2
-var landScapingService1
-var landScapingService2
-var salonLocation
-var landScapingLocation
-var salonWorkshift
-var landScapingWorkshift
-
-
-function setupEnv() {
+function setupEnv () {
   return Promise.all([
     ApplicationType.remove({}),
     Application.remove({}),
@@ -128,99 +104,21 @@ function setupEnv() {
   ])
 }
 
-function seed() {
-  return createAppType('Salon')
-    .then(data => {
-      appTypeSalon = data
-      return createAppType('Landscaping')
-    }).then((data) => {
-      appTypeLandscaping = data
-      return createApplication(appTypeSalon.id, 'Beauty Salon')
-    }).then((data) => {
-      applicationSalon = data
-      return createApplication(appTypeLandscaping.id, 'The Show Land Scaping')
-    }).then((data) => {
-      applicationLandscaping = data
-      return
-    })
-    .then(() => {
-      return Promise.all([
-        createUser([{
-          name: 'Employee',
-          appId: applicationSalon.id
-        }, {
-          name: 'Admin',
-          appId: applicationSalon.id
-        }]),
-        createUser([{
-          name: 'User',
-          appId: applicationSalon.id
-        }]),
-        createUser([{
-          name: 'Employee',
-          appId: applicationLandscaping.id
-        }, {
-          name: 'Admin',
-          appId: applicationLandscaping.id
-        }]),
-        createUser([{
-          name: 'User',
-          appId: applicationLandscaping.id
-        }])
-      ])
-    })
-    .then((data) => {
-      salonAdmin = data[0]
-      salonUser = data[1]
+/**
+ * Helpers to pipe functions
+ */
+const _pipe = (fn1, fn2) => (...args) => fn2(fn1(...args))
+const pipe = (...fns) => fns.reduce(_pipe)
 
-      landScapingAdmin = data[2]
-      landScapingUser = data[3]
-    }).then(() => {
-      return Promise.all([
-        createLocation(salonAdmin.id, applicationSalon.id),
-        //createLocation(landScapingAdmin.id, applicationLandScaping.id),
-
-        createWorkshift(salonAdmin.id, moment(), moment().add(1, 'h')),
-        createWorkshift(landScapingAdmin.id, moment(), moment().add(1, 'h'))
-      ])
-    }).then((data) => {
-      salonLocation = data[0]
-       landScapingLocation = data[1]
-      salonWorkshift = data[2]
-      landScapingWorkshift = data[3]
-
-      return Promise.all([
-        createService(salonAdmin.id),
-        createService(salonAdmin.id),
-        createService(landScapingAdmin.id),
-        createService(landScapingAdmin.id)
-      ])
-    }).then((data) => {
-      salonService1 = data[0]
-      salonService2 = data[1]
-      landScapingService1 = data[2]
-      landScapingService2 = data[3]
-
-      return Promise.all([
-        createSchedule(salonAdmin.id, salonService1.id, salonWorkshift.id, salonLocation.id, moment(), moment().add(1, 'h')),
-        createSchedule(salonAdmin.id, salonService2.id, salonWorkshift.id, salonLocation.id, moment(), moment().add(1, 'h')),
-        // createSchedule(landScapingAdmin.id, landScapingService1.id, landScapingWorkshift.id, landScapingLocation.id, moment(), moment().add(1, 'h')),
-        // createSchedule(landScapingAdmin.id, landScapingService2.id, landScapingWorkshift.id, landScapingLocation.id, moment(), moment().add(1, 'h'))
-      ])
-    }).then((data) => {
-
-    })
-}
-
-function runQueries() {
-  // Retrieve all users with Admin role
+/**
+ * Queries
+ */
+function runQueries () {
   return Promise.all([
-    User.find({ 'roles.name': 'Admin' }).exec()
+    User.find({ 'roles.name': 'Admin' }).exec(),
+    Application.find({}).sort('name').populate('appTypeId').exec(),
+    ApplicationType.find({}).sort('name').exec() //Incomplete!
   ])
-
-  // Retrieve all Applications with their ApplicationType related ordered by application name ascending
-
-  // Retrieve all ApplicationTypes related to the Applications ordered by applicationType ascending
 
   // Retrieve all logs related to an specific application ordered by createdDate descending
 
@@ -244,19 +142,51 @@ function runQueries() {
 
   // Retrieve a schedule given a specific time
 
-// Retrieve available time on a date given a specific Employee
+  // Retrieve available time on a date for a specific Employee
 }
 
-setupEnv().then(() => {
-  console.log('All collections removed.')
-  return seed()
-}).then(() => {
-  console.log('All collections set.')
-  return runQueries()
-}).then(data => {
-  console.log(data)
-  process.exit()
-}).catch(err => {
-  console.error(err)
-  process.exit(1)
-})
+function createApp (type, appName) {
+  return createAppType(type)
+  .then(appType => createApplication(appType.id, appName))
+  .then(app => Promise.all([
+    createUser([{
+      name: 'Employee',
+      appId: app.id
+    }, {
+      name: 'Admin',
+      appId: app.id
+    }]),
+    createUser([{
+      name: 'User',
+      appId: app.id
+    }])
+  ]).then(([admin, user]) => Promise.all([
+    createLocation(admin.id, app.id),
+    createWorkshift(admin.id),
+    createService(admin.id),
+    createService(admin.id)
+  ]).then(([location, workshift, service]) =>
+    Promise.all([
+      createSchedule(admin.id, service.id, workshift.id, location.id),
+      createSchedule(admin.id, service.id, workshift.id, location.id)
+    ]))))
+}
+
+/**
+ * Program flow
+ */
+setupEnv().then(() =>
+  Promise.all([
+    createApp('Salon', 'Beauty Salon'),
+    createApp('Landscaping', 'The Show Land Scaping')
+  ])
+  ).then(() => runQueries())
+   .then(([users, apps, appTypes]) => {
+     console.log('Retrieve all users with Admin role: \n')
+     console.log(`${users}\n`)
+     console.log('Retrieve all Applications with their related ApplicationType ordered by application name ascending: \n')
+     console.log(`${apps}\n`)
+     console.log('Retrieve all ApplicationTypes with related Applications ordered by applicationType ascending: \n')
+     console.log(`${appTypes}\n`) //@TODO: Check if this query is really necessary.
+     process.exit()
+   })
