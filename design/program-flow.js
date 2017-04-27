@@ -158,7 +158,6 @@ function seed () {
   }).then((data) => {
     salonAdmin = data[0]
     salonUser = data[1]
-
     landScapingAdmin = data[3]
     landScapingUser = data[4]
   })
@@ -166,10 +165,9 @@ function seed () {
 
 function runQueries () {
   // Retrieve all users with Admin role
-  return User.find({ 'roles.name': 'Admin' }).exec()
-    .then(users => {
-      console.log(`Admin users: ${users}`)
-    })
+  return Promise.all([
+    User.find({ 'roles.name': 'Admin' }).exec()
+  ])
 
   // Retrieve all Applications with their ApplicationType related ordered by application name ascending
 
@@ -194,6 +192,10 @@ function runQueries () {
   // Retrieve all schedule by all users for an specific application ordered by schedule time ascending
 
   // Retrieve all schedule by an user for an specific application ordered by schedule time ascending
+
+  // Retrieve a schedule given a specific time
+
+// Retrieve available time on a date given a specific Employee
 }
 
 setupEnv().then(() => {
@@ -202,8 +204,10 @@ setupEnv().then(() => {
 }).then(() => {
   console.log('All collections set.')
   return runQueries()
-}).then(process.exit)
-  .catch(err => {
-    console.error(err)
-    process.exit(1)
-  })
+}).then(data => {
+  console.log(data)
+  process.exit()
+}).catch(err => {
+  console.error(err)
+  process.exit(1)
+})
