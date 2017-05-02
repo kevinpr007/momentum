@@ -117,16 +117,15 @@ function runQueries () {
   return Promise.all([
     User.find({ 'roles.name': 'Admin' }).exec(),
     Application.find({}).sort('name').populate('appTypeId').exec(),
-    ApplicationType.find({}).sort('name').exec() //Incomplete!
+    ApplicationType.find({}).sort('name').exec(), // Incomplete
+    User.find({}).sort('lastName').exec()
   ])
 
   // Retrieve all logs related to an specific application ordered by createdDate descending
 
-  // Retrieve all users in the system ordered by name
-
   // Retrieve all users in the system related to an specific application ordered by name
 
-  // Retrieve all user with the Admin role for a specific application ordered by the name of the user
+  // Retrieve all users with the Admin role for a specific application ordered by the user name
 
   // Retrieve all workshift related to all users for an specific application ordered by application name and the name of the user and the schedule time ascending
 
@@ -181,12 +180,14 @@ setupEnv().then(() =>
     createApp('Landscaping', 'The Show Land Scaping')
   ])
   ).then(() => runQueries())
-   .then(([users, apps, appTypes]) => {
-     console.log('Retrieve all users with Admin role: \n')
+   .then(([users, apps, appTypes, sortedUsers]) => {
+     console.log('Retrieve all users with Admin role:\n')
      console.log(`${users}\n`)
-     console.log('Retrieve all Applications with their related ApplicationType ordered by application name ascending: \n')
+     console.log('Retrieve all Applications with their related ApplicationType ordered by application name ascending:\n')
      console.log(`${apps}\n`)
-     console.log('Retrieve all ApplicationTypes with related Applications ordered by applicationType ascending: \n')
-     console.log(`${appTypes}\n`) //@TODO: Check if this query is really necessary.
+     console.log('Retrieve all ApplicationTypes with related Applications ordered by applicationType ascending:\n')
+     console.log(`${appTypes}\n`) // Incomplete
+     console.log('Retrieve all users in the system ordered by last name:\n')
+     console.log(`${sortedUsers}\n`)
      process.exit()
    })
