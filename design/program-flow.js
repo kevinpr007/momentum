@@ -138,7 +138,7 @@ function runQueries () {
         }
       }
     ]),
-    // Retrieve all users related to a specific application ordered by name
+    // Retrieve all users related to a specific application ordered by app name
     Application.aggregate([
       { $limit: 1 },
       { $project: { name: 1 } },
@@ -150,13 +150,36 @@ function runQueries () {
           as: 'users'
         }
       },
-      { $sort: { 'users.lastName': 1 } }
-    ])
+      { $sort: { 'name': 1 } }
+    ]),
+    // Retrieve all users with Admin role for a specific application ordered by user name
+    Application.aggregate([
+      { $limit: 1 },
+      {
+        $lookup: {
+          from: 'm_user',
+          localField: '_id',
+          foreignField: 'roles.appId',
+          as: 'users'
+        }
+      },
+      //{ $sort: { 'users.lastName': 1 } },
+      {
+        $project: {
+          name: 1,
+          users: {
+            $filter: {
+              'input': '$users',
+              'as': 'user',
+              'cond': { '$eq': ['$$user.roles.name', 'Admin'] }
+            }
+          }
+        }
+      }
+    ]) // Incomplete
   ])
 
   // Retrieve all logs related to an specific application ordered by createdDate descending
-
-  // Retrieve all users with the Admin role for a specific application ordered by the user name
 
   // Retrieve all workshift related to all users for an specific application ordered by application name and the name of the user and the schedule time ascending
 
@@ -210,7 +233,7 @@ setupEnv().then(() =>
     createApp('Salon', 'Beauty Salon'),
     createApp('Landscaping', 'The Show Land Scaping')
   ])).then(() => runQueries())
-  .then(([users, apps, sortedUsers, appTypes, usersByApp]) => {
+  .then(([users, apps, sortedUsers, appTypes, usersByApp, adminsByApp]) => {
     console.log('Retrieve all users with Admin role:\n')
     console.log(`${users}\n`)
     console.log('Retrieve all Applications with their related ApplicationType ordered by application name ascending:\n')
@@ -222,8 +245,13 @@ setupEnv().then(() =>
       showHidden: false,
       depth: null
     }))
-    console.log('Retrieve all users related to a specific application ordered by name:\n')
+    console.log('Retrieve all users related to a specific application ordered by app name:\n')
     console.log(util.inspect(usersByApp, {
+      showHidden: false,
+      depth: null
+    }))
+    console.log('Retrieve all users with Admin role for a specific application ordered by user name:\n')
+    console.log(util.inspect(adminsByApp, {
       showHidden: false,
       depth: null
     }))
