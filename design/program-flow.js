@@ -2,6 +2,7 @@ const mongoose = require('mongoose')
 const Promise = require('bluebird')
 const moment = require('moment')
 const faker = require('faker')
+const util = require('util')
 mongoose.Promise = Promise
 
 const scheduleType = require('../src/models/schedule-types.enum')
@@ -115,10 +116,28 @@ const pipe = (...fns) => fns.reduce(_pipe)
  */
 function runQueries () {
   return Promise.all([
+    // Retrieve all users with Admin role
     User.find({ 'roles.name': 'Admin' }).exec(),
+    // Retrieve all Applications with their related ApplicationType ordered by application name ascending
     Application.find({}).sort('name').populate('appTypeId').exec(),
-    ApplicationType.find({}).sort('name').exec(), // Incomplete
-    User.find({}).sort('lastName').exec()
+    // Retrieve all users in the system ordered by last name
+    User.find({}).sort('lastName').exec(),
+    // Retrieve all ApplicationTypes with related Applications ordered by applicationType ascending
+    ApplicationType.aggregate([
+      {
+        $sort: {
+          name: 1
+        }
+      },
+      {
+        $lookup: {
+          from: 'm_application',
+          localField: '_id',
+          foreignField: 'appTypeId',
+          as: 'applications'
+        }
+      }
+    ])
   ])
 
   // Retrieve all logs related to an specific application ordered by createdDate descending
@@ -180,14 +199,17 @@ setupEnv().then(() =>
     createApp('Landscaping', 'The Show Land Scaping')
   ])
   ).then(() => runQueries())
-   .then(([users, apps, appTypes, sortedUsers]) => {
+   .then(([users, apps, sortedUsers, appTypes]) => {
      console.log('Retrieve all users with Admin role:\n')
      console.log(`${users}\n`)
      console.log('Retrieve all Applications with their related ApplicationType ordered by application name ascending:\n')
      console.log(`${apps}\n`)
-     console.log('Retrieve all ApplicationTypes with related Applications ordered by applicationType ascending:\n')
-     console.log(`${appTypes}\n`) // Incomplete
      console.log('Retrieve all users in the system ordered by last name:\n')
      console.log(`${sortedUsers}\n`)
+     console.log('Retrieve all ApplicationTypes with related Applications ordered by applicationType ascending:\n')
+     console.log(util.inspect(appTypes, {
+       showHidden: false,
+       depth: null
+     }))
      process.exit()
    })
