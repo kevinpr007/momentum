@@ -120,7 +120,7 @@ function runQueries () {
     User.find({ 'roles.name': 'Admin' }).exec(),
     // Retrieve all Applications with their related ApplicationType ordered by application name ascending
     Application.find({}).sort('name').populate('appTypeId').exec(),
-    // Retrieve all users in the system ordered by last name
+    // Retrieve all users ordered by last name
     User.find({}).sort('lastName').exec(),
     // Retrieve all ApplicationTypes with related Applications ordered by applicationType ascending
     ApplicationType.aggregate([
@@ -137,12 +137,24 @@ function runQueries () {
           as: 'applications'
         }
       }
+    ]),
+    // Retrieve all users related to a specific application ordered by name
+    Application.aggregate([
+      { $limit: 1 },
+      { $project: { name: 1 } },
+      {
+        $lookup: {
+          from: 'm_user',
+          localField: '_id',
+          foreignField: 'roles.appId',
+          as: 'users'
+        }
+      },
+      { $sort: { 'users.lastName': 1 } }
     ])
   ])
 
   // Retrieve all logs related to an specific application ordered by createdDate descending
-
-  // Retrieve all users in the system related to an specific application ordered by name
 
   // Retrieve all users with the Admin role for a specific application ordered by the user name
 
@@ -197,19 +209,23 @@ setupEnv().then(() =>
   Promise.all([
     createApp('Salon', 'Beauty Salon'),
     createApp('Landscaping', 'The Show Land Scaping')
-  ])
-  ).then(() => runQueries())
-   .then(([users, apps, sortedUsers, appTypes]) => {
-     console.log('Retrieve all users with Admin role:\n')
-     console.log(`${users}\n`)
-     console.log('Retrieve all Applications with their related ApplicationType ordered by application name ascending:\n')
-     console.log(`${apps}\n`)
-     console.log('Retrieve all users in the system ordered by last name:\n')
-     console.log(`${sortedUsers}\n`)
-     console.log('Retrieve all ApplicationTypes with related Applications ordered by applicationType ascending:\n')
-     console.log(util.inspect(appTypes, {
-       showHidden: false,
-       depth: null
-     }))
-     process.exit()
-   })
+  ])).then(() => runQueries())
+  .then(([users, apps, sortedUsers, appTypes, usersByApp]) => {
+    console.log('Retrieve all users with Admin role:\n')
+    console.log(`${users}\n`)
+    console.log('Retrieve all Applications with their related ApplicationType ordered by application name ascending:\n')
+    console.log(`${apps}\n`)
+    console.log('Retrieve all users ordered by last name:\n')
+    console.log(`${sortedUsers}\n`)
+    console.log('Retrieve all ApplicationTypes with related Applications ordered by applicationType ascending:\n')
+    console.log(util.inspect(appTypes, {
+      showHidden: false,
+      depth: null
+    }))
+    console.log('Retrieve all users related to a specific application ordered by name:\n')
+    console.log(util.inspect(usersByApp, {
+      showHidden: false,
+      depth: null
+    }))
+    process.exit()
+  })
