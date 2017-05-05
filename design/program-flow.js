@@ -141,7 +141,6 @@ function runQueries () {
     // Retrieve all users related to a specific application ordered by app name
     Application.aggregate([
       { $limit: 1 },
-      { $project: { name: 1 } },
       {
         $lookup: {
           from: 'm_user',
@@ -152,7 +151,18 @@ function runQueries () {
       },
       { $sort: { 'name': 1 } }
     ]),
-    // Retrieve all users with Admin role for a specific application ordered by user name
+    /**
+     * Retrieve all users with Admin role for a specific application ordered by user name:
+     *
+     * The $lookup aggregation pipeline stage will not work directly with an array. The main intent of
+     * the design is for a "left join" as a "one to many" type of join ( or really a "lookup" ) on the
+     * possible related data. But the value is intended to be singular and not an array. Therefore you
+     * must "de-normalise" the content first prior to performing the $lookup operation in order for this
+     * to work. And that means using $unwind.
+     *
+     * We need to $unwind the `users` array before applying the $match so that you can filter individual elements
+     * and then use $group to put it back together.
+     */
     Application.aggregate([
       { $limit: 1 },
       {
@@ -163,20 +173,24 @@ function runQueries () {
           as: 'users'
         }
       },
-      //{ $sort: { 'users.lastName': 1 } },
+      { $unwind: '$users' },
       {
-        $project: {
-          name: 1,
-          users: {
-            $filter: {
-              'input': '$users',
-              'as': 'user',
-              'cond': { '$eq': ['$$user.roles.name', 'Admin'] }
-            }
-          }
+        $match: {
+          'users.roles.name': 'Admin'
+        }
+      },
+      {
+        $group: {
+          '_id': '$_id',
+          'users': { $push: '$users' }
+        }
+      },
+      {
+        $sort: {
+          'users.lastName': 1
         }
       }
-    ]) // Incomplete
+    ])
   ])
 
   // Retrieve all logs related to an specific application ordered by createdDate descending
