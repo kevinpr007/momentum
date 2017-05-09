@@ -190,14 +190,29 @@ function runQueries () {
           'users.lastName': 1
         }
       }
+    ]),
+    // Retrieve all workshift related to a specific user for a specific application ordered by schedule time ascending
+    User.aggregate([
+      {
+        $match: {
+          'roles.name': 'Admin'
+        }
+      },
+      { $limit: 1 },
+      {
+        $lookup: {
+          from: 'm_workshift',
+          localField: '_id',
+          foreignField: 'userId',
+          as: 'workshifts'
+        }
+      }
     ])
   ])
 
   // Retrieve all logs related to an specific application ordered by createdDate descending
 
   // Retrieve all workshift related to all users for an specific application ordered by application name and the name of the user and the schedule time ascending
-
-  // Retrieve all workshift related to an specific user for a specific application ordered by schedule time ascending
 
   // Retrieve all services by all users for an specific application ordered by the name of the user and service name
 
@@ -247,7 +262,7 @@ setupEnv().then(() =>
     createApp('Salon', 'Beauty Salon'),
     createApp('Landscaping', 'The Show Land Scaping')
   ])).then(() => runQueries())
-  .then(([users, apps, sortedUsers, appTypes, usersByApp, adminsByApp]) => {
+  .then(([users, apps, sortedUsers, appTypes, usersByApp, adminsByApp, workshiftsByUser]) => {
     console.log('Retrieve all users with Admin role:\n')
     console.log(`${users}\n`)
     console.log('Retrieve all Applications with their related ApplicationType ordered by application name ascending:\n')
@@ -266,6 +281,11 @@ setupEnv().then(() =>
     }))
     console.log('Retrieve all users with Admin role for a specific application ordered by user name:\n')
     console.log(util.inspect(adminsByApp, {
+      showHidden: false,
+      depth: null
+    }))
+    console.log('Retrieve all workshift related to a specific user for a specific application ordered by schedule time ascending:\n')
+    console.log(util.inspect(workshiftsByUser, {
       showHidden: false,
       depth: null
     }))
