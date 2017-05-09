@@ -191,7 +191,7 @@ function runQueries () {
         }
       }
     ]),
-    // Retrieve all workshift related to a specific user for a specific application ordered by schedule time ascending
+    // Retrieve all workshifts related to a specific user ordered by schedule time ascending
     User.aggregate([
       {
         $match: {
@@ -205,6 +205,12 @@ function runQueries () {
           localField: '_id',
           foreignField: 'userId',
           as: 'workshifts'
+        }
+      },
+      {
+        $sort: {
+          'workshifts.startDate': 1,
+          'workshifts.endDate': 1
         }
       }
     ])
@@ -284,7 +290,7 @@ setupEnv().then(() =>
       showHidden: false,
       depth: null
     }))
-    console.log('Retrieve all workshift related to a specific user for a specific application ordered by schedule time ascending:\n')
+    console.log('Retrieve all workshifts related to a specific user ordered by schedule time ascending:\n')
     console.log(util.inspect(workshiftsByUser, {
       showHidden: false,
       depth: null
