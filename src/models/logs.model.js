@@ -23,7 +23,12 @@ const logSchema = new Schema({
   createdOn: {
     type: Date,
     default: Date.now
-  }
+  },
+  appId: {
+      type: Schema.ObjectId,
+      ref: mongoDB.Model.Application,
+      required: true
+    }
 }, {
   collection: mongoDB.Collection.Log,
   capped: {
