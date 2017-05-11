@@ -246,11 +246,24 @@ function runQueries () {
           'logs': { $push: '$logs' }
         }
       }
-    ])
+    ]),
+
+    // Retrieve all workshift related to all users for an specific application ordered by application name and the name of the user and the schedule time ascending
+    // db.getCollection('m_application').aggregate([
+      
+    //   { $limit: 1 },
+    //   {
+    //     $lookup: {
+    //       from: 'm_user',
+    //       localField: '_id',
+    //       foreignField: 'roles.appId',
+    //       as: 'users'
+    //     }
+    //   },
+      
+    //   ])
 
   ])
-
-  // Retrieve all workshift related to all users for an specific application ordered by application name and the name of the user and the schedule time ascending
 
   // Retrieve all services by all users for an specific application ordered by the name of the user and service name
 
@@ -301,7 +314,7 @@ setupEnv().then(() =>
     createApp('Salon', 'Beauty Salon'),
     createApp('Landscaping', 'The Show Land Scaping')
   ])).then(() => runQueries())
-  .then(([users, apps, sortedUsers, appTypes, usersByApp, adminsByApp, workshiftsByUser, logsByApp]) => {
+  .then(([users, apps, sortedUsers, appTypes, usersByApp, adminsByApp, workshiftsByUser, logsByApp, workshiftsByApp]) => {
     console.log('Retrieve all users with Admin role:\n')
     console.log(`${users}\n`)
     console.log('Retrieve all Applications with their related ApplicationType ordered by application name ascending:\n')
@@ -330,6 +343,11 @@ setupEnv().then(() =>
     }))
     console.log('Retrieve all logs related to an specific application ordered by createdDate descending:\n')
     console.log(util.inspect(logsByApp, {
+      showHidden: false,
+      depth: null
+    }))
+    console.log('Retrieve all workshift related to all users for an specific application ordered by application name and the name of the user and the schedule time ascending:\n')
+    console.log(util.inspect(workshiftsByApp, {
       showHidden: false,
       depth: null
     }))
