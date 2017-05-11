@@ -25,10 +25,10 @@ const logSchema = new Schema({
     default: Date.now
   },
   appId: {
-      type: Schema.ObjectId,
-      ref: mongoDB.Model.Application,
-      required: true
-    }
+    type: Schema.ObjectId,
+    ref: mongoDB.Model.Application,
+    required: true
+  }
 }, {
   collection: mongoDB.Collection.Log,
   capped: {
