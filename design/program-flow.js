@@ -215,12 +215,12 @@ function runQueries () {
           as: 'workshifts'
         }
       },
-      {
-        $sort: {
-          'workshifts.startDate': 1,
-          'workshifts.endDate': 1
-        }
-      }
+      // {
+      //   $sort: {
+      //     'workshifts.startDate': 1,
+      //     'workshifts.endDate': 1
+      //   }
+      // }
     ]),
 
     // Retrieve all logs related to an specific application ordered by createdDate descending
@@ -294,7 +294,7 @@ function createApp (type, appName) {
         name: 'User',
         appId: app.id
       }])
-    ]).then(([admin, user]) => Promise.all([
+    ]).then(([logs, admin, user]) => Promise.all([
       createLocation(admin.id, app.id),
       createWorkshift(admin.id),
       createService(admin.id),
