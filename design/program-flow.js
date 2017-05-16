@@ -248,20 +248,48 @@ function runQueries () {
       }
     ]),
 
-    // Retrieve all workshift related to all users for an specific application ordered by application name and the name of the user and the schedule time ascending
-    // db.getCollection('m_application').aggregate([
+    // Retrieve all workshift related to all users for an specific application ordered by the name of the user and the schedule time ascending
+    db.getCollection('m_application').aggregate([
       
-    //   { $limit: 1 },
-    //   {
-    //     $lookup: {
-    //       from: 'm_user',
-    //       localField: '_id',
-    //       foreignField: 'roles.appId',
-    //       as: 'users'
-    //     }
-    //   },
+      { $limit: 1 },
+      {
+        $lookup: {
+          from: 'm_user',
+          localField: '_id',
+          foreignField: 'roles.appId',
+          as: 'users'
+        }
+      },
       
-    //   ])
+      { $unwind: '$users' },
+      
+      {
+        $lookup: {
+          from: 'm_workshift',
+          localField: 'userId',
+          foreignField: 'users._id',
+          as: 'workshifts'
+        }
+      },
+      
+      { $unwind: '$workshifts' },
+      
+      {
+        $sort: {
+          'users.firstName': 1,
+          'users.lastName': 1,
+            'workshifts.startDate': -1
+        }
+      },
+      
+//       {
+//         $group: {
+//           'workshifts.userId': '$users._id',
+//           'workshifts': { $push: '$workshifts' }
+//         }
+//       }
+      
+      ])
 
   ])
 
@@ -346,7 +374,7 @@ setupEnv().then(() =>
       showHidden: false,
       depth: null
     }))
-    console.log('Retrieve all workshift related to all users for an specific application ordered by application name and the name of the user and the schedule time ascending:\n')
+    console.log('Retrieve all workshift related to all users for an specific application ordered by the name of the user and the schedule time ascending:\n')
     console.log(util.inspect(workshiftsByApp, {
       showHidden: false,
       depth: null
