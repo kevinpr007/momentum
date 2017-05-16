@@ -249,7 +249,7 @@ function runQueries () {
     ]),
 
     // Retrieve all workshift related to all users for an specific application ordered by the name of the user and the schedule time ascending
-    db.getCollection('m_application').aggregate([
+    Application.aggregate([
       
       { $limit: 1 },
       {
