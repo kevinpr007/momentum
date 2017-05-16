@@ -214,7 +214,7 @@ function runQueries () {
           foreignField: 'userId',
           as: 'workshifts'
         }
-      },
+      }
       // {
       //   $sort: {
       //     'workshifts.startDate': 1,
@@ -250,7 +250,7 @@ function runQueries () {
 
     // Retrieve all workshift related to all users for an specific application ordered by the name of the user and the schedule time ascending
     Application.aggregate([
-      
+
       { $limit: 1 },
       {
         $lookup: {
@@ -260,9 +260,9 @@ function runQueries () {
           as: 'users'
         }
       },
-      
+
       { $unwind: '$users' },
-      
+
       {
         $lookup: {
           from: 'm_workshift',
@@ -271,29 +271,72 @@ function runQueries () {
           as: 'workshifts'
         }
       },
-      
+
       { $unwind: '$workshifts' },
-      
+
       {
         $sort: {
           'users.firstName': 1,
           'users.lastName': 1,
-            'workshifts.startDate': -1
+          'workshifts.startDate': 1
         }
-      },
-      
+      }
+
 //       {
 //         $group: {
 //           'workshifts.userId': '$users._id',
 //           'workshifts': { $push: '$workshifts' }
 //         }
 //       }
-      
-      ])
+    ]),
+
+      // Retrieve all services by all users for an specific application ordered by the name of the user and service name
+    Application.aggregate([
+
+      { $limit: 1 },
+      {
+        $lookup: {
+          from: 'm_user',
+          localField: '_id',
+          foreignField: 'roles.appId',
+          as: 'users'
+        }
+      },
+      { $unwind: '$users' },
+      {
+        $lookup: {
+          from: 'm_service',
+          localField: 'users._id',
+          foreignField: 'userId',
+          as: 'services'
+        }
+      },
+      { $unwind: '$services' },
+
+      {
+        $sort: {
+          'users.firstName': 1,
+          'users.lastName': 1,
+          'services.name': 1
+        }
+      },
+
+      {
+        $match: {
+          'users.roles.name': 'Admin'
+        }
+      }
+
+//              {
+//         $group: {
+//           '??': '$?????',
+//           'services': { $push: '$services' }
+//         }
+//       }
+
+    ])
 
   ])
-
-  // Retrieve all services by all users for an specific application ordered by the name of the user and service name
 
   // Retrieve all services by an user for an specific application ordered by the name of the user and service name
 
@@ -342,7 +385,7 @@ setupEnv().then(() =>
     createApp('Salon', 'Beauty Salon'),
     createApp('Landscaping', 'The Show Land Scaping')
   ])).then(() => runQueries())
-  .then(([users, apps, sortedUsers, appTypes, usersByApp, adminsByApp, workshiftsByUser, logsByApp, workshiftsByApp]) => {
+  .then(([users, apps, sortedUsers, appTypes, usersByApp, adminsByApp, workshiftsByUser, logsByApp, workshiftsByApp, servicesByAllUsers]) => {
     console.log('Retrieve all users with Admin role:\n')
     console.log(`${users}\n`)
     console.log('Retrieve all Applications with their related ApplicationType ordered by application name ascending:\n')
@@ -376,6 +419,11 @@ setupEnv().then(() =>
     }))
     console.log('Retrieve all workshift related to all users for an specific application ordered by the name of the user and the schedule time ascending:\n')
     console.log(util.inspect(workshiftsByApp, {
+      showHidden: false,
+      depth: null
+    }))
+    console.log('Retrieve all services by all users for an specific application ordered by the name of the user and service name:\n')
+    console.log(util.inspect(servicesByAllUsers, {
       showHidden: false,
       depth: null
     }))
