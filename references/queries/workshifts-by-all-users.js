@@ -10,7 +10,7 @@
  */
 
 db.getCollection('m_application').aggregate([
-    { $limit: 1 },
+  { $limit: 1 },
   {
     $lookup: {
       from: 'm_user',
@@ -19,7 +19,7 @@ db.getCollection('m_application').aggregate([
       as: 'users'
     }
   },
-    { $unwind: '$users' },
+  { $unwind: '$users' },
   {
     $lookup: {
       from: 'm_workshift',

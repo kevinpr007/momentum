@@ -4,7 +4,7 @@
  */
 
 db.getCollection('m_application').aggregate([
-    { $limit: 1 },
+  { $limit: 1 },
   {
     $lookup: {
       from: 'm_user',
@@ -13,13 +13,13 @@ db.getCollection('m_application').aggregate([
       as: 'users'
     }
   },
-   { $unwind: '$users' },
+  { $unwind: '$users' },
   {
     $match: {
       'users.roles.name': 'Admin'
     }
   },
-    { $limit: 1 },
+  { $limit: 1 },
   {
     $lookup: {
       from: 'm_service',
@@ -49,7 +49,7 @@ db.getCollection('m_application').aggregate([
       }
     }
   },
-    { $unwind: '$users.services' },
+  { $unwind: '$users.services' },
   {
     $sort: {
       'users.services.name': 1
