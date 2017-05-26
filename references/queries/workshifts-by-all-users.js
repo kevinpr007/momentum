@@ -1,5 +1,5 @@
 /**
- * Retrieve all workshift related to all users for a specific application ordered by user's name and
+ * Retrieve all workshifts related to all users for a specific application ordered by user's name and
  * schedule time ascending.
  *
  * References:
