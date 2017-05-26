@@ -1,5 +1,5 @@
 /**
- * Retrieve all workshift related to all users for an specific application ordered by user's name and
+ * Retrieve all workshift related to all users for a specific application ordered by user's name and
  * schedule time ascending.
  *
  * References:
@@ -73,6 +73,7 @@ db.getCollection('m_application').aggregate([
   {
     $group: {
       _id: '$_id.users._id',
+      name: { $first: '$_id.name' },
       appId: { $first: '$_id.appId' },
       appTypeId: { $first: '$_id.appTypeId' },
       userId: { $first: '$_id.users._id' },
@@ -83,17 +84,21 @@ db.getCollection('m_application').aggregate([
       workshifts: { $push: '$_id.users.workshifts' }
     }
   },
-  { // $project to remove additional _id property
-    $project: {
-      _id: 0,
-      appId: 1,
-      appTypeId: 1,
-      userId: 1,
-      firstName: 1,
-      lastName: 1,
-      email: 1,
-      roles: 1,
-      workshifts: 1
+  {
+    $group: {
+      _id: '$appId',
+      name: { $first: '$name' },
+      appTypeId: { $first: '$appTypeId' },
+      users: {
+        $addToSet: {
+          _id: '$userId',
+          firstName: '$firstName',
+          lastName: '$lastName',
+          email: '$email',
+          roles: '$roles',
+          workshifts: '$workshifts'
+        }
+      }
     }
   }
 ])

@@ -72,7 +72,8 @@ function createWorkshift (userId) {
     startDate: moment(),
     endDate: moment().add(1, 'h'),
     createdBy: userId,
-  userId}))
+    userId
+  }))
 }
 
 function createService (userId) {
@@ -247,60 +248,7 @@ function runQueries () {
     ]),
     // Retrieve all workshift related to all users for an specific application ordered by the name of the user and the schedule time ascending
     Application.aggregate([
-      { $limit: 1 },
-      {
-        $lookup: {
-          from: 'm_user',
-          localField: '_id',
-          foreignField: 'roles.appId',
-          as: 'users'
-        }
-      },
-      { $unwind: '$users' },
-      {
-        $lookup: {
-          from: 'm_workshift',
-          localField: 'users._id',
-          foreignField: 'userId',
-          as: 'workshifts'
-        }
-      },
-      {
-        $sort: {
-          'users.firstName': 1,
-          'users.lastName': 1,
-          'workshifts.startDate': -1
-        }
-      },
-      {
-        $project: {
-          _id: 1,
-          name: 1,
-          appTypeId: 1,
-          users: {
-            _id: 1,
-            firstName: 1,
-            lastName: 1,
-            email: 1,
-            roles: 1,
-            workshifts: {
-              $filter: {
-                input: '$workshifts',
-                as: 'wf',
-                cond: { $eq: [ '$$wf.userId', '$users._id' ] }
-              }
-            }
-          }
-        }
-      },
-      {
-        $group: {
-          _id: '$_id',
-          name: { $first: '$name' },
-          apptypeId: { $first: '$appTypeId' },
-          users: { $push: '$users' }
-        }
-      }
+
     ]),
     // Retrieve all services by all users for an specific application ordered by the name of the user and service name
     Application.aggregate([
