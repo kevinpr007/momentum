@@ -20,17 +20,17 @@ require('../src/config/mongoose')()
 /**
  * Data-generating functions
  */
-function createAppType (name) {
+function createAppType(name) {
   return ApplicationType
     .create(new ApplicationType({ name }))
 }
 
-function createApplication (appTypeId, name) {
+function createApplication(appTypeId, name) {
   return Application
     .create(new Application({ name, appTypeId }))
 }
 
-function createUser (roles = []) {
+function createUser(roles = []) {
   return User.create(new User({
     firstName: faker.name.firstName(),
     lastName: faker.name.lastName(),
@@ -46,14 +46,14 @@ function createUser (roles = []) {
   }))
 }
 
-function createLog (appId) {
+function createLog(appId) {
   return Log.create(new Log({
     code: faker.random.number(),
     appId: appId
   }))
 }
 
-function createLocation (createdBy, appId) {
+function createLocation(createdBy, appId) {
   return Location.create(new Location({
     name: faker.company.companyName(),
     address: {
@@ -67,7 +67,7 @@ function createLocation (createdBy, appId) {
   }))
 }
 
-function createWorkshift (userId) {
+function createWorkshift(userId) {
   return Workshift.create(new Workshift({
     startDate: moment(),
     endDate: moment().add(1, 'h'),
@@ -76,7 +76,7 @@ function createWorkshift (userId) {
   }))
 }
 
-function createService (userId) {
+function createService(userId) {
   return Service.create(new Service({
     name: faker.name.firstName(),
     description: faker.name.description,
@@ -87,7 +87,7 @@ function createService (userId) {
   }))
 }
 
-function createSchedule (userId, serviceId, workshiftId, locationId) {
+function createSchedule(userId, serviceId, workshiftId, locationId) {
   return Schedule.create(new Schedule({
     startDate: moment(),
     endDate: moment().add(1, 'h'),
@@ -101,7 +101,7 @@ function createSchedule (userId, serviceId, workshiftId, locationId) {
   }))
 }
 
-function setupEnv () {
+function setupEnv() {
   return Promise.all([
     ApplicationType.remove({}),
     Application.remove({}),
@@ -122,7 +122,7 @@ const pipe = (...fns) => fns.reduce(_pipe)
 /**
  * Queries
  */
-function runQueries () {
+function runQueries() {
   return Promise.all([
     // Retrieve all users with Admin role
     User.find({ 'roles.name': 'Admin' }).exec(),
@@ -282,15 +282,15 @@ function runQueries () {
         }
       }
 
-//       {
-//         $group: {
-//           'workshifts.userId': '$users._id',
-//           'workshifts': { $push: '$workshifts' }
-//         }
-//       }
+      //       {
+      //         $group: {
+      //           'workshifts.userId': '$users._id',
+      //           'workshifts': { $push: '$workshifts' }
+      //         }
+      //       }
     ]),
 
-      // Retrieve all services by all users for an specific application ordered by the name of the user and service name
+    // Retrieve all services by all users for an specific application ordered by the name of the user and service name
     Application.aggregate([
 
       { $limit: 1 },
@@ -327,13 +327,100 @@ function runQueries () {
         }
       }
 
-//              {
-//         $group: {
-//           '??': '$?????',
-//           'services': { $push: '$services' }
-//         }
-//       }
+      //              {
+      //         $group: {
+      //           '??': '$?????',
+      //           'services': { $push: '$services' }
+      //         }
+      //       }
 
+    ]),
+
+    //Retrieve all services by an user for an specific application ordered by service name
+    Application.aggregate([
+      { $limit: 1 },
+      {
+        $lookup: {
+          from: 'm_user',
+          localField: '_id',
+          foreignField: 'roles.appId',
+          as: 'users'
+        }
+      },
+      { $unwind: '$users' },
+      {
+        $match: {
+          'users.roles.name': 'Admin'
+        }
+      },
+      { $limit: 1 },
+      {
+        $lookup: {
+          from: 'm_service',
+          localField: 'users._id',
+          foreignField: 'userId',
+          as: 'services'
+        }
+      },
+      {
+        $project: {
+          _id: 1,
+          name: 1,
+          appTypeId: 1,
+          users: {
+            _id: 1,
+            firstName: 1,
+            lastName: 1,
+            email: 1,
+            roles: 1,
+            services: {
+              $filter: {
+                input: '$services',
+                as: 'ser',
+                cond: { $eq: ["$$ser.userId", '$users._id'] }
+              }
+            }
+          }
+        }
+      },
+      { $unwind: '$users.services' },
+      {
+        $sort: {
+          'users.services.name': 1
+        }
+      },
+      {
+        $group: {
+          _id: '$_id',
+          name: { $first: '$name' },
+          appTypeId: { $first: '$appTypeId' },
+          users: {
+            $addToSet: {
+              _id: "$users._id",
+              firstName: "$users.firstName",
+              lastName: "$users.lastName",
+              email: "$users.email",
+              roles: "$users.roles"
+            }
+          },
+          services: { $push: '$users.services' }
+        }
+      },
+      {
+        $project: {
+          _id: 1,
+          name: 1,
+          appTypeId: 1,
+          users: {
+            _id: 1,
+            firstName: 1,
+            lastName: 1,
+            email: 1,
+            roles: 1,
+            services: '$services'
+          }
+        }
+      }
     ])
 
   ])
@@ -349,7 +436,7 @@ function runQueries () {
   // Retrieve available time on a date for a specific Employee
 }
 
-function createApp (type, appName) {
+function createApp(type, appName) {
   return createAppType(type)
     .then(appType => createApplication(appType.id, appName))
     .then(app => Promise.all([
@@ -385,7 +472,7 @@ setupEnv().then(() =>
     createApp('Salon', 'Beauty Salon'),
     createApp('Landscaping', 'The Show Land Scaping')
   ])).then(() => runQueries())
-  .then(([users, apps, sortedUsers, appTypes, usersByApp, adminsByApp, workshiftsByUser, logsByApp, workshiftsByApp, servicesByAllUsers]) => {
+  .then(([users, apps, sortedUsers, appTypes, usersByApp, adminsByApp, workshiftsByUser, logsByApp, workshiftsByApp, servicesByAllUsers, servicesByAnUser]) => {
     console.log('Retrieve all users with Admin role:\n')
     console.log(`${users}\n`)
     console.log('Retrieve all Applications with their related ApplicationType ordered by application name ascending:\n')
@@ -424,6 +511,11 @@ setupEnv().then(() =>
     }))
     console.log('Retrieve all services by all users for an specific application ordered by the name of the user and service name:\n')
     console.log(util.inspect(servicesByAllUsers, {
+      showHidden: false,
+      depth: null
+    }))
+    console.log('Retrieve all services by an user for an specific application ordered by service name:\n')
+    console.log(util.inspect(servicesByAnUser, {
       showHidden: false,
       depth: null
     }))
