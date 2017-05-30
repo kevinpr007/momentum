@@ -524,8 +524,6 @@ function runQueries() {
     ])
   ])
 
-  // Retrieve all services by an user for an specific application ordered by the name of the user and service name
-
   // Retrieve all schedule by all users for an specific application ordered by schedule time ascending
 
   // Retrieve all schedule by an user for an specific application ordered by schedule time ascending
