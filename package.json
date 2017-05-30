@@ -43,6 +43,10 @@
       "it",
       "beforeEach",
       "assert"
+    ],
+    "ignore": [
+      "references/",
+      "design/"
     ]
   },
   "apidoc": {
