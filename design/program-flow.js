@@ -22,12 +22,12 @@ require('../src/config/mongoose')()
  */
 function createAppType(name) {
   return ApplicationType
-    .create(new ApplicationType({ name }))
+    .create(new ApplicationType({ name}))
 }
 
 function createApplication(appTypeId, name) {
   return Application
-    .create(new Application({ name, appTypeId }))
+    .create(new Application({ name, appTypeId}))
 }
 
 function createUser(roles = []) {
@@ -215,14 +215,13 @@ function runQueries() {
           as: 'workshifts'
         }
       }
-      // {
-      //   $sort: {
-      //     'workshifts.startDate': 1,
-      //     'workshifts.endDate': 1
-      //   }
-      // }
+    // {
+    //   $sort: {
+    //     'workshifts.startDate': 1,
+    //     'workshifts.endDate': 1
+    //   }
+    // }
     ]),
-
     // Retrieve all logs related to an specific application ordered by createdDate descending
     Application.aggregate([
       { $limit: 1 },
@@ -247,10 +246,8 @@ function runQueries() {
         }
       }
     ]),
-
-    // Retrieve all workshift related to all users for an specific application ordered by the name of the user and the schedule time ascending
+    // Retrieve all workshifts related to all users for a specific application ordered by the name of the user and the schedule time ascending
     Application.aggregate([
-
       { $limit: 1 },
       {
         $lookup: {
@@ -260,39 +257,92 @@ function runQueries() {
           as: 'users'
         }
       },
-
       { $unwind: '$users' },
-
       {
         $lookup: {
           from: 'm_workshift',
-          localField: 'userId',
-          foreignField: 'users._id',
+          localField: 'users._id',
+          foreignField: 'userId',
           as: 'workshifts'
         }
       },
-
       { $unwind: '$workshifts' },
-
       {
         $sort: {
           'users.firstName': 1,
           'users.lastName': 1,
           'workshifts.startDate': 1
         }
+      },
+      {
+        $project: {
+          _id: 1,
+          name: 1,
+          appTypeId: 1,
+          users: {
+            _id: 1,
+            firstName: 1,
+            lastName: 1,
+            email: 1,
+            roles: 1,
+            workshifts: {
+              $cond: {
+                if: {
+                  $eq: ['$workshifts.userId', '$users._id']
+                },
+                then: '$workshifts',
+                else: null
+              }
+            }
+          }
+        }
+      },
+      {
+        $group: {
+          _id: {
+            userId: '$users.workshifts.userId',
+            name: '$name',
+            appId: '$_id',
+            appTypeId: '$appTypeId',
+            users: '$users'
+          }
+        }
+      },
+      {
+        $group: {
+          _id: '$_id.users._id',
+          name: { $first: '$_id.name' },
+          appId: { $first: '$_id.appId' },
+          appTypeId: { $first: '$_id.appTypeId' },
+          userId: { $first: '$_id.users._id' },
+          firstName: { $first: '$_id.users.firstName' },
+          lastName: { $first: '$_id.users.lastName' },
+          email: { $first: '$_id.users.email' },
+          roles: { $first: '$_id.users.roles' },
+          workshifts: { $push: '$_id.users.workshifts' }
+        }
+      },
+      {
+        $group: {
+          _id: '$appId',
+          name: { $first: '$name' },
+          appTypeId: { $first: '$appTypeId' },
+          users: {
+            $addToSet: {
+              _id: '$userId',
+              firstName: '$firstName',
+              lastName: '$lastName',
+              email: '$email',
+              roles: '$roles',
+              workshifts: '$workshifts'
+            }
+          }
+        }
       }
-
-      //       {
-      //         $group: {
-      //           'workshifts.userId': '$users._id',
-      //           'workshifts': { $push: '$workshifts' }
-      //         }
-      //       }
     ]),
 
     // Retrieve all services by all users for an specific application ordered by the name of the user and service name
     Application.aggregate([
-
       { $limit: 1 },
       {
         $lookup: {
@@ -312,7 +362,6 @@ function runQueries() {
         }
       },
       { $unwind: '$services' },
-
       {
         $sort: {
           'users.firstName': 1,
@@ -320,20 +369,71 @@ function runQueries() {
           'services.name': 1
         }
       },
-
       {
-        $match: {
-          'users.roles.name': 'Admin'
+        $project: {
+          _id: 1,
+          name: 1,
+          appTypeId: 1,
+          users: {
+            _id: 1,
+            firstName: 1,
+            lastName: 1,
+            email: 1,
+            roles: 1,
+            services: {
+              $cond: {
+                if: {
+                  $eq: ['$services.userId', '$users._id']
+                },
+                then: '$services',
+                else: null
+              }
+            }
+          }
+        }
+      },
+      {
+        $group: {
+          _id: {
+            userId: '$users.services.userId',
+            name: '$name',
+            appId: '$_id',
+            appTypeId: '$appTypeId',
+            users: '$users'
+          }
+        }
+      },
+      {
+        $group: {
+          _id: '$_id.users._id',
+          name: { $first: '$_id.name' },
+          appId: { $first: '$_id.appId' },
+          appTypeId: { $first: '$_id.appTypeId' },
+          userId: { $first: '$_id.users._id' },
+          firstName: { $first: '$_id.users.firstName' },
+          lastName: { $first: '$_id.users.lastName' },
+          email: { $first: '$_id.users.email' },
+          roles: { $first: '$_id.users.roles' },
+          services: { $push: '$_id.users.services' }
+        }
+      },
+      {
+        $group: {
+          _id: '$appId',
+          name: { $first: '$name' },
+          appTypeId: { $first: '$appTypeId' },
+          users: {
+            $addToSet: {
+              _id: '$userId',
+              firstName: '$firstName',
+              lastName: '$lastName',
+              email: '$email',
+              roles: '$roles',
+              services: '$services'
+            }
+          }
         }
       }
-
-      //              {
-      //         $group: {
-      //           '??': '$?????',
-      //           'services': { $push: '$services' }
-      //         }
-      //       }
-
     ]),
 
     //Retrieve all services by an user for an specific application ordered by service name
@@ -422,7 +522,6 @@ function runQueries() {
         }
       }
     ])
-
   ])
 
   // Retrieve all services by an user for an specific application ordered by the name of the user and service name
@@ -457,11 +556,10 @@ function createApp(type, appName) {
       createWorkshift(admin.id),
       createService(admin.id),
       createService(admin.id)
-    ]).then(([location, workshift, service]) =>
-      Promise.all([
-        createSchedule(admin.id, service.id, workshift.id, location.id),
-        createSchedule(admin.id, service.id, workshift.id, location.id)
-      ]))))
+    ]).then(([location, workshift, service]) => Promise.all([
+      createSchedule(admin.id, service.id, workshift.id, location.id),
+      createSchedule(admin.id, service.id, workshift.id, location.id)
+    ]))))
 }
 
 /**
@@ -472,7 +570,7 @@ setupEnv().then(() =>
     createApp('Salon', 'Beauty Salon'),
     createApp('Landscaping', 'The Show Land Scaping')
   ])).then(() => runQueries())
-  .then(([users, apps, sortedUsers, appTypes, usersByApp, adminsByApp, workshiftsByUser, logsByApp, workshiftsByApp, servicesByAllUsers, servicesByAnUser]) => {
+  .then(([users, apps, sortedUsers, appTypes, usersByApp, adminsByApp, workshiftsByUser, logsByApp, workshiftsByApp, servicesByAllUsers, servicesByAnUser]) => {  
     console.log('Retrieve all users with Admin role:\n')
     console.log(`${users}\n`)
     console.log('Retrieve all Applications with their related ApplicationType ordered by application name ascending:\n')
