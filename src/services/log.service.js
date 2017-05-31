@@ -3,7 +3,7 @@ mongoose.Promise = require('bluebird')
 
 const Log = require('../models/logs.model')
 
-let logService = () => {
+module.exports = () => {
   let getAll = (page, pageSize) => {
     page = Math.max(0, page)
     return Promise.all([
@@ -55,5 +55,3 @@ let logService = () => {
     saveLog
   }
 }
-
-module.exports = logService

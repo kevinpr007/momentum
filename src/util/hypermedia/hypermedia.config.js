@@ -2,7 +2,7 @@ const mongoDB = require('../../config/mongoose.collections.json')
 const HttpStatus = require('http-status-codes')
 const _ = require('lodash')
 
-class Hypermedia {
+module.exports = class {
   constructor (req) {
     this.baseUrl = `${req.protocol}://${req.headers.host}`
   }
@@ -39,5 +39,3 @@ class Hypermedia {
     }
   }
 }
-
-module.exports = Hypermedia

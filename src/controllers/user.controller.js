@@ -4,7 +4,7 @@ const pagedResult = require('../util/pagination/paged-result')
 const getPageValidations = require('../util/pagination/page-validations')
 const config = require('../config/config')()
 
-let userController = userService => {
+module.exports = userService => {
   let getAllUsers = (req, res, next) => {
     let page = parseInt(req.query.page || 0)
     let pageSize = parseInt(req.query.pageSize || config.PAGE_SIZE)
@@ -33,5 +33,3 @@ let userController = userService => {
     getByUserEmail
   }
 }
-
-module.exports = userController

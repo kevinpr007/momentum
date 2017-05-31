@@ -4,7 +4,7 @@ mongoose.Promise = require('bluebird')
 const User = require('../models/user.model')
 const _ = require('lodash')
 
-let userService = () => {
+module.exports = () => {
   let getAll = (page, pageSize) => {
     page = Math.max(0, page)
     return Promise.all([
@@ -42,5 +42,3 @@ let userService = () => {
     upsertUser
   }
 }
-
-module.exports = userService

@@ -2,7 +2,7 @@ const Hypermedia = require('../util/hypermedia/hypermedia.config')
 const HttpStatus = require('http-status-codes')
 const emailFactory = require('../util/email.factory')
 
-let authController = (authService, userService, emailService, templateModel) => {
+module.exports = (authService, userService, emailService, templateModel) => {
   let auth = (req, res, next) => {
     let user = null
     userService.getByEmail(req.body.email).then(usr => {
@@ -123,5 +123,3 @@ let authController = (authService, userService, emailService, templateModel) => 
     confirmResetPassword
   }
 }
-
-module.exports = authController

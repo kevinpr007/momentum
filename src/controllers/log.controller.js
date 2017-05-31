@@ -4,7 +4,7 @@ const pagedResult = require('../util/pagination/paged-result')
 const config = require('../config/config')()
 const getPageValidations = require('../util/pagination/page-validations')
 
-let logController = (logService) => {
+module.exports = (logService) => {
   let getAllLogs = (req, res, next) => {
     let page = parseInt(req.query.page || 0)
     let pageSize = parseInt(req.query.pageSize || config.PAGE_SIZE)
@@ -53,5 +53,3 @@ let logController = (logService) => {
     getByStatus
   }
 }
-
-module.exports = logController

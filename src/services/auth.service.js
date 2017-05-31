@@ -10,7 +10,7 @@ const _ = require('lodash')
 
 let randomBytes = Promise.promisify(require('crypto').randomBytes)
 
-let authService = () => {
+module.exports = () => {
   let generateToken = user => {
     return jwt.sign(user, config.SECRET, {
       expiresIn: parseInt(tokenLife)
@@ -46,5 +46,3 @@ let authService = () => {
     findByPasswordToken
   }
 }
-
-module.exports = authService
