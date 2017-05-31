@@ -27,31 +27,10 @@ db.getCollection('m_application').aggregate([
       as: 'schedules'
     }
   },
-  {
-    $project: {
-      _id: 1,
-      name: 1,
-      appTypeId: 1,
-      users: {
-        _id: 1,
-        firstName: 1,
-        lastName: 1,
-        email: 1,
-        roles: 1,
-        schedules: {
-          $filter: {
-            input: '$schedules',
-            as: 'sch',
-            cond: { $eq: ['$$sch.userId', '$users._id'] }
-          }
-        }
-      }
-    }
-  },
-  { $unwind: '$users.schedules' },
+  { $unwind: '$schedules' },
   {
     $sort: {
-      'users.schedules.startDate': 1
+      'schedules.startDate': 1
     }
   },
   {
@@ -59,29 +38,22 @@ db.getCollection('m_application').aggregate([
       _id: '$_id',
       name: { $first: '$name' },
       appTypeId: { $first: '$appTypeId' },
-      users: {
-        $addToSet: {
-          _id: '$users._id',
-          firstName: '$users.firstName',
-          lastName: '$users.lastName',
-          email: '$users.email',
-          roles: '$users.roles'
-        }
-      },
-      schedules: { $push: '$users.schedules' }
+      users: { $first: '$users' },
+      schedules: { $push: '$schedules' }
     }
   },
   {
     $project: {
-      _id: 1,
+      _id: 0,
+      appId: '$_id',
       name: 1,
       appTypeId: 1,
-      users: {
-        _id: 1,
-        firstName: 1,
-        lastName: 1,
-        email: 1,
-        roles: 1,
+      user: {
+        _id: '$users._id',
+        firstName: '$users.firstName',
+        lastName: '$users.lastName',
+        email: '$users.email',
+        roles: '$users.roles',
         schedules: '$schedules'
       }
     }
