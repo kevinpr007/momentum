@@ -655,8 +655,78 @@ function runQueries () {
           }
         }
       }
+    ]),
+    
+    // Retrieve a schedule given a specific time, user and application.
+    Application.aggregate([
+      { $limit: 1 },
+      {
+        $lookup: {
+          from: 'm_user',
+          localField: '_id',
+          foreignField: 'roles.appId',
+          as: 'users'
+        }
+      },
+      { $unwind: '$users' },
+      {
+        $match: {
+          'users.roles.name': 'Admin'
+          // 'users.email': 'kevin.rivera@yahoo.com'
+        }
+      },
+      { $limit: 1 },
+      {
+        $lookup: {
+          from: 'm_schedule',
+          localField: 'users._id',
+          foreignField: 'userId',
+          as: 'schedules'
+        }
+      },
+      { $unwind: '$schedules' },
+      {
+        $match: {
+          $and: [
+            {
+              'schedules.startDate': {
+                $gte: ISODate('2017-01-01T23:00:00.000Z')
+              }
+            },
+            {
+              'schedules.endDate': {
+                $lte: ISODate('2017-12-31T23:44:00.000Z')
+              }
+            }
+          ]
+        }
+      },
+      {
+        $group: {
+          _id: {
+            _id: '$_id',
+            name: '$name',
+            users: '$users',
+            appTypeId: '$appTypeId'
+          },
+          schedules: {$push: '$schedules'}
+        }
+      },
+      {
+        $project: {
+          _id: '$_id._id',
+          name: '$_id.name',
+          user: {
+            _id: '$_id.users._id',
+            firstName: '$_id.users.firstName',
+            lastName: '$_id.users.lastName',
+            email: '$_id.users.email',
+            roles: '$_id.users.roles',
+            schedules: '$schedules'
+          }
+        }
+      }
     ])
-    // Retrieve a schedule given a specific time
 
     // Retrieve available time on a date for a specific Employee
 
@@ -675,7 +745,7 @@ function createApp (type, appName) {
         name: 'Admin',
         appId: app.id
       }]),
-      createUser([{
+      createUser([{ 
         name: 'User',
         appId: app.id
       }])
@@ -697,7 +767,7 @@ setupEnv().then(() => Promise.all([
   createApp('Salon', 'Beauty Salon'),
   createApp('Landscaping', 'The Show Land Scaping')
 ])).then(() => runQueries())
-  .then(([users, apps, sortedUsers, appTypes, usersByApp, adminsByApp, workshiftsByUser, logsByApp, workshiftsByApp, servicesByAllUsers, servicesByAnUser, schedulesByAllUsers, schedulesByAnUser]) => {
+  .then(([users, apps, sortedUsers, appTypes, usersByApp, adminsByApp, workshiftsByUser, logsByApp, workshiftsByApp, servicesByAllUsers, servicesByAnUser, schedulesByAllUsers, schedulesByAnUser, scheduleSpecificUser]) => {
     console.log('Retrieve all users with Admin role:\n')
     console.log(`${users}\n`)
     console.log('Retrieve all Applications with their related ApplicationType ordered by application name ascending:\n')
@@ -751,6 +821,11 @@ setupEnv().then(() => Promise.all([
     }))
     console.log('Retrieve all schedule by an user for an specific application ordered by schedule time ascending:\n')
     console.log(util.inspect(schedulesByAnUser, {
+      showHidden: false,
+      depth: null
+    }))
+    console.log('Retrieve a schedule given a specific time, user and application:\n')
+    console.log(util.inspect(scheduleSpecificUser, {
       showHidden: false,
       depth: null
     }))
