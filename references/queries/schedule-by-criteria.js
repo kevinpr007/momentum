@@ -1,5 +1,5 @@
 /**
- * Retrieve a schedule given a specific time, user and application
+ * Retrieve a schedule given a specific time, user and application.
  */
 db.getCollection('m_application').aggregate([
   { $limit: 1 },
@@ -29,47 +29,41 @@ db.getCollection('m_application').aggregate([
   { $unwind: '$schedules' },
   {
     $match: {
-      'schedules.startDate': { $gte: ISODate('2017-05-12T11:00:00.000Z') } // TODO: verify if endDate will be given.
+      $and: [
+        {
+          'schedules.startDate': {
+            $gte: ISODate('2017-05-31T23:00:00.000Z')
+          }
+        },
+        {
+          'schedules.endDate': {
+            $lte: ISODate('2017-05-31T23:44:00.000Z')
+          }
+        }
+      ]
     }
   },
   {
     $group: {
       _id: {
-        userId: '$users.schedules.userId',
+        _id: '$_id',
         name: '$name',
-        appId: '$_id',
-        appTypeId: '$appTypeId',
         users: '$users',
-        schedules: '$schedules'
-      }
-    }
-  },
-  {
-    $group: {
-      _id: '$_id.users._id',
-      name: { $first: '$_id.name' },
-      appId: { $first: '$_id.appId' },
-      appTypeId: { $first: '$_id.appTypeId' },
-      userId: { $first: '$_id.users._id' },
-      firstName: { $first: '$_id.users.firstName' },
-      lastName: { $first: '$_id.users.lastName' },
-      email: { $first: '$_id.users.email' },
-      roles: { $first: '$_id.users.roles' },
-      schedules: { $push: '$_id.schedules' }
+        appTypeId: '$appTypeId'
+      },
+      schedules: {$push: '$schedules'}
     }
   },
   {
     $project: {
-      _id: 0,
-      name: 1,
-      appId: 1,
-      appTypeId: 1,
+      _id: '$_id._id',
+      name: '$_id.name',
       user: {
-        _id: '$userId',
-        firstName: '$firstName',
-        lastName: '$lastName',
-        email: '$email',
-        roles: '$roles',
+        _id: '$_id.users._id',
+        firstName: '$_id.users.firstName',
+        lastName: '$_id.users.lastName',
+        email: '$_id.users.email',
+        roles: '$_id.users.roles',
         schedules: '$schedules'
       }
     }
