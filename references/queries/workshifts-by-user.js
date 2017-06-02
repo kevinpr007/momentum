@@ -25,12 +25,27 @@ db.getCollection('m_user').aggregate([
   },
   {
     $group: {
-      _id: '$_id',
-      firstName: { $first: '$firstName' },
-      lastName: { $first: '$lastName' },
-      email: { $first: '$email' },
-      roles: { $first: '$roles' },
-      workshifts: { $push: '$workshifts' }
+      _id: {
+        _id: '$_id',
+        firstName: '$firstName',
+        lastName: '$lastName',
+        email: '$email',
+        roles: '$roles'
+      },
+      workshifts: {$push: '$workshifts'}
+    }
+  },
+  {
+    $project: {
+      _id: 0,
+      user: {
+        _id: '$_id._id',
+        firstName: '$_id.firstName',
+        lastName: '$_id.lastName',
+        email: '$_id.email',
+        roles: '$_id.roles',
+        workshifts: '$workshifts'
+      }
     }
   }
 ])
