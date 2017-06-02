@@ -6,6 +6,7 @@ db.getCollection('m_user').aggregate([
   {
     $match: {
       'roles.name': 'Admin'
+      //'roles.appId': ObjectId("592db70fa9f02e3e3c788c3f") //Appid is given.
     }
   },
   { $unwind: '$roles' },
@@ -18,13 +19,6 @@ db.getCollection('m_user').aggregate([
     }
   },
   { $unwind: '$schedules' },
-  {
-    $sort: {
-      'firstName': 1,
-      'lastName': 1,
-      'schedules.startDate': 1
-    }
-  },
   {
     $group: {
       _id: {
@@ -50,9 +44,16 @@ db.getCollection('m_user').aggregate([
                 email: '$_id.email',
                 address: '$_id.address',
                 roles: '$roles',
-                schedules: '$schedules',
+                schedules: '$schedules'
             }
         }
+    }
+  },
+  {
+    $sort: {
+      'users.firstName': 1,
+      'users.lastName': 1,
+      'users.schedules.startDate': 1
     }
   }
 ])
