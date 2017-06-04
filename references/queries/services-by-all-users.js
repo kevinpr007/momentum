@@ -2,96 +2,60 @@
  * Retrieve all services by all users for a specific application ordered by
  * user name and service name.
  */
-db.getCollection('m_application').aggregate([
-  { $limit: 1 },
+db.getCollection('m_user').aggregate([
   {
-    $lookup: {
-      from: 'm_user',
-      localField: '_id',
-      foreignField: 'roles.appId',
-      as: 'users'
+    $match: {
+      'roles.name': 'Admin',
+      //'roles.appId': ObjectId("5915ac0d92eec1ac74d9510d") //Appid is given.
     }
   },
-  { $unwind: '$users' },
+  { $unwind: '$roles' },
   {
     $lookup: {
       from: 'm_service',
-      localField: 'users._id',
+      localField: '_id',
       foreignField: 'userId',
       as: 'services'
     }
   },
   { $unwind: '$services' },
   {
-    $sort: {
-      'users.firstName': 1,
-      'users.lastName': 1,
-      'services.name': 1
-    }
-  },
-  {
-    $project: {
-      _id: 1,
-      name: 1,
-      appTypeId: 1,
-      users: {
-        _id: 1,
-        firstName: 1,
-        lastName: 1,
-        email: 1,
-        roles: 1,
-        services: {
-          $cond: {
-            if: {
-              $eq: ['$services.userId', '$users._id']
-            },
-            then: '$services',
-            else: null
-          }
-        }
-      }
-    }
-  },
-  {
     $group: {
       _id: {
-        userId: '$users.services.userId',
-        name: '$name',
-        appId: '$_id',
-        appTypeId: '$appTypeId',
-        users: '$users'
-      }
+        appId: '$roles.appId',
+        userId: '$_id',
+        firstName: '$firstName',
+        lastName: '$lastName',
+        email: '$email',
+        address: '$address'
+      },
+      roles: { $addToSet: '$roles' },
+      services: { $addToSet: '$services' }
     }
   },
   {
     $group: {
-      _id: '$_id.users._id',
-      name: { $first: '$_id.name' },
-      appId: { $first: '$_id.appId' },
-      appTypeId: { $first: '$_id.appTypeId' },
-      userId: { $first: '$_id.users._id' },
-      firstName: { $first: '$_id.users.firstName' },
-      lastName: { $first: '$_id.users.lastName' },
-      email: { $first: '$_id.users.email' },
-      roles: { $first: '$_id.users.roles' },
-      services: { $push: '$_id.users.services' }
-    }
-  },
-  {
-    $group: {
-      _id: '$appId',
-      name: { $first: '$name' },
-      appTypeId: { $first: '$appTypeId' },
+      _id: '$_id.appId',
       users: {
         $addToSet: {
-          _id: '$userId',
-          firstName: '$firstName',
-          lastName: '$lastName',
-          email: '$email',
+          userId: '$_id.userId',
+          firstName: '$_id.firstName',
+          lastName: '$_id.lastName',
+          email: '$_id.email',
+          address: '$_id.address',
           roles: '$roles',
           services: '$services'
         }
       }
     }
-  }
+  },
+  { $unwind: '$users' },
+  {
+    $sort: {
+      'users.firstName': 1,
+      'users.lastName': 1,
+      'users.services.name': 1
+    }
+  },
+  { $group: { _id: '$_id', users: { $push: '$users' } } }
 ])
