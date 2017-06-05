@@ -5,10 +5,9 @@
 db.getCollection('m_user').aggregate([
   {
     $match: {
-      'roles.name': 'Admin'
+      _id: ObjectId('592db70fa9f02e3e3c788c42')
     }
   },
-  { $limit: 1 },
   {
     $lookup: {
       from: 'm_workshift',
@@ -25,27 +24,14 @@ db.getCollection('m_user').aggregate([
   },
   {
     $group: {
-      _id: {
-        _id: '$_id',
-        firstName: '$firstName',
-        lastName: '$lastName',
-        email: '$email',
-        roles: '$roles'
-      },
+      _id: '$_id',
       workshifts: {$push: '$workshifts'}
     }
   },
   {
     $project: {
       _id: 0,
-      user: {
-        _id: '$_id._id',
-        firstName: '$_id.firstName',
-        lastName: '$_id.lastName',
-        email: '$_id.email',
-        roles: '$_id.roles',
-        workshifts: '$workshifts'
-      }
+      workshifts: '$workshifts'
     }
   }
 ])

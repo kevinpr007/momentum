@@ -1,14 +1,13 @@
 /**
  * Retrieve all services by a single user for a specific application
- * ordered by service name
+ * ordered by service name.
  */
 db.getCollection('m_user').aggregate([
   {
     $match: {
-      'roles.name': 'Admin'
+      _id: ObjectId('592db70fa9f02e3e3c788c48')
     }
   },
-  { $limit: 1 },
   {
     $lookup: {
       from: 'm_service',
@@ -25,27 +24,14 @@ db.getCollection('m_user').aggregate([
   },
   {
     $group: {
-      _id: {
-        _id: '$_id',
-        firstName: '$firstName',
-        lastName: '$lastName',
-        email: '$email',
-        roles: '$roles'
-      },
+      _id: '$_id',
       services: {$push: '$services'}
     }
   },
   {
     $project: {
       _id: 0,
-      user: {
-        _id: '$_id._id',
-        firstName: '$_id.firstName',
-        lastName: '$_id.lastName',
-        email: '$_id.email',
-        roles: '$_id.roles',
-        services: '$services'
-      }
+      services: '$services'
     }
   }
 ])
