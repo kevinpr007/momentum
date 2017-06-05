@@ -1,5 +1,5 @@
 /**
- * Retrieve all services by all users for a specific application ordered by service name.
+ * Retrieve all services by all users for a specific application ordered by service name ascending.
  */
 db.getCollection('m_user').aggregate([
   {

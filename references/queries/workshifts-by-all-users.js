@@ -1,5 +1,5 @@
 /**
- * Retrieve all workshifts related to all users for a specific application ordered schedule time ascending.
+ * Retrieve all workshifts related to all users for a specific application ordered by schedule time ascending.
  */
 db.getCollection('m_user').aggregate([
   {

@@ -1,5 +1,5 @@
 /**
- * Retrieve all schedules by all users for a specific application ordered by schedule time ascending
+ * Retrieve all schedules by all users for a specific application ordered by schedule time ascending.
  */
 db.getCollection('m_user').aggregate([
   {
