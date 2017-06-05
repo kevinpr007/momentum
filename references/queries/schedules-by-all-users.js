@@ -5,7 +5,7 @@ db.getCollection('m_user').aggregate([
   {
     $match: {
       'roles.name': 'Admin'
-      //'roles.appId': ObjectId("5934a3ca5d7ec40549bf7544") //Appid is given.
+    // 'roles.appId': ObjectId("5934a3ca5d7ec40549bf7544") //Appid is given.
     }
   },
   { $unwind: '$roles' },
@@ -30,8 +30,29 @@ db.getCollection('m_user').aggregate([
   { $sort: { 'schedules.startDate': 1 } },
   {
     $group: {
-      _id: '$_id.appId',
-      schedules: { $push: '$schedules' }
+      _id: null,
+      schedules: {
+        $push: {
+          _id: '$schedules._id',
+          appId: '$_id.appId',
+          startDate: '$schedules.startDate',
+          endDate: '$schedules.endDate',
+          other: '$schedules.other',
+          userId: '$schedules.userId',
+          scheduleType: '$schedules.scheduleType',
+          serviceId: '$schedules.serviceId',
+          workshiftId: '$schedules.workshiftId',
+          locationId: '$schedules.locationId',
+          createdBy: '$schedules.createdBy',
+          createdOn: '$schedules.createdOn'
+        }
+      }
+    }
+  },
+  {
+    $project: {
+      _id: 0,
+      schedules: 1
     }
   }
 ])
