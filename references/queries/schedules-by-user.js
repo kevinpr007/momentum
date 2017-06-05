@@ -25,12 +25,14 @@ db.getCollection('m_user').aggregate([
   {
     $group: {
       _id: '$_id',
-      schedules: {$push: '$schedules'}
+      email: { $first: '$email' },
+      schedules: { $push: '$schedules' }
     }
   },
   {
     $project: {
       _id: 0,
+      email: 1,
       schedules: '$schedules'
     }
   }

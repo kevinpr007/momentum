@@ -4,8 +4,7 @@
 db.getCollection('m_user').aggregate([
   {
     $match: {
-      'roles.name': 'Admin'
-    // 'roles.appId': ObjectId("592db70fa9f02e3e3c788c40") //Appid is given.
+      'roles.appId': ObjectId('592db70fa9f02e3e3c788c40') // Appid is given.
     }
   },
   { $unwind: '$roles' },
@@ -21,7 +20,8 @@ db.getCollection('m_user').aggregate([
   {
     $group: {
       _id: {
-        appId: '$roles.appId'
+        appId: '$roles.appId',
+        email: '$email'
       },
       services: { $addToSet: '$services' }
     }
@@ -40,6 +40,7 @@ db.getCollection('m_user').aggregate([
           time: '$services.time',
           createdBy: '$services.createdBy',
           userId: '$services.userId',
+          email: '$_id.email',
           createdOn: '$services.createdOn'
         }
       }
