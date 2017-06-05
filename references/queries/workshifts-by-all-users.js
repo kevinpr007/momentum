@@ -1,104 +1,37 @@
 /**
- * Retrieve all workshifts related to all users for a specific application ordered by user's name and
- * schedule time ascending.
- *
- * References:
- * https://docs.mongodb.com/manual/reference/operator/aggregation/group/#group-aggregation
- * https://docs.mongodb.com/manual/reference/operator/aggregation/first/#first-aggregation
- * https://docs.mongodb.com/manual/reference/operator/aggregation/project/#project-aggregation
- * https://docs.mongodb.com/manual/reference/operator/aggregation/filter/#filter-aggregation
- * https://docs.mongodb.com/manual/reference/operator/aggregation/cond/#cond-aggregation
+ * Retrieve all workshifts related to all users for a specific application ordered schedule time ascending.
  */
-db.getCollection('m_application').aggregate([
-  { $limit: 1 },
+db.getCollection('m_user').aggregate([
   {
-    $lookup: {
-      from: 'm_user',
-      localField: '_id',
-      foreignField: 'roles.appId',
-      as: 'users'
+    $match: {
+      'roles.name': 'Admin'
+      //'roles.appId': ObjectId("5934a3ca5d7ec40549bf7544") //Appid is given.
     }
   },
-  { $unwind: '$users' },
+  { $unwind: '$roles' },
   {
     $lookup: {
       from: 'm_workshift',
-      localField: 'users._id',
+      localField: '_id',
       foreignField: 'userId',
       as: 'workshifts'
     }
   },
   { $unwind: '$workshifts' },
   {
-    $sort: {
-      'users.firstName': 1,
-      'users.lastName': 1,
-      'workshifts.startDate': 1
-    }
-  },
-  {
-    $project: {
-      _id: 1,
-      name: 1,
-      appTypeId: 1,
-      users: {
-        _id: 1,
-        firstName: 1,
-        lastName: 1,
-        email: 1,
-        roles: 1,
-        workshifts: {
-          $cond: {
-            if: {
-              $eq: ['$workshifts.userId', '$users._id']
-            },
-            then: '$workshifts',
-            else: null
-          }
-        }
-      }
-    }
-  },
-  {
     $group: {
       _id: {
-        userId: '$users.workshifts.userId',
-        name: '$name',
-        appId: '$_id',
-        appTypeId: '$appTypeId',
-        users: '$users'
-      }
+        appId: '$roles.appId'
+      },
+      workshifts: { $addToSet: '$workshifts' }
     }
   },
+  { $unwind: '$workshifts' },
+  { $sort: { 'workshifts.startDate': 1 } },
   {
     $group: {
-      _id: '$_id.users._id',
-      name: { $first: '$_id.name' },
-      appId: { $first: '$_id.appId' },
-      appTypeId: { $first: '$_id.appTypeId' },
-      userId: { $first: '$_id.users._id' },
-      firstName: { $first: '$_id.users.firstName' },
-      lastName: { $first: '$_id.users.lastName' },
-      email: { $first: '$_id.users.email' },
-      roles: { $first: '$_id.users.roles' },
-      workshifts: { $push: '$_id.users.workshifts' }
-    }
-  },
-  {
-    $group: {
-      _id: '$appId',
-      name: { $first: '$name' },
-      appTypeId: { $first: '$appTypeId' },
-      users: {
-        $addToSet: {
-          _id: '$userId',
-          firstName: '$firstName',
-          lastName: '$lastName',
-          email: '$email',
-          roles: '$roles',
-          workshifts: '$workshifts'
-        }
-      }
+      _id: '$_id.appId',
+      workshifts: { $push: '$workshifts' }
     }
   }
 ])
