@@ -22,12 +22,12 @@ require('../src/config/mongoose')()
  */
 function createAppType (name) {
   return ApplicationType
-    .create(new ApplicationType({ name}))
+    .create(new ApplicationType({ name }))
 }
 
 function createApplication (appTypeId, name) {
   return Application
-    .create(new Application({ name, appTypeId}))
+    .create(new Application({ name, appTypeId }))
 }
 
 function createUser (roles = []) {
@@ -63,7 +63,8 @@ function createLocation (createdBy, appId) {
       zipCode: faker.address.zipCode()
     },
     appId,
-  createdBy}))
+    createdBy
+  }))
 }
 
 function createWorkshift (userId) {
@@ -71,7 +72,8 @@ function createWorkshift (userId) {
     startDate: moment(),
     endDate: moment().add(1, 'h'),
     createdBy: userId,
-  userId}))
+    userId
+  }))
 }
 
 function createService (userId) {
@@ -81,7 +83,8 @@ function createService (userId) {
     price: faker.random.number(),
     time: 30,
     createdBy: userId,
-  userId}))
+    userId
+  }))
 }
 
 function createSchedule (userId, serviceId, workshiftId, locationId) {
@@ -656,7 +659,7 @@ function runQueries () {
         }
       }
     ]),
-    
+
     // Retrieve a schedule given a specific time, user and application.
     Application.aggregate([
       { $limit: 1 },
@@ -709,7 +712,7 @@ function runQueries () {
             users: '$users',
             appTypeId: '$appTypeId'
           },
-          schedules: {$push: '$schedules'}
+          schedules: { $push: '$schedules' }
         }
       },
       {
@@ -745,7 +748,7 @@ function createApp (type, appName) {
         name: 'Admin',
         appId: app.id
       }]),
-      createUser([{ 
+      createUser([{
         name: 'User',
         appId: app.id
       }])
