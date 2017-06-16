@@ -33,8 +33,14 @@
   },
   "homepage": "https://github.com/Ivan-Marquez/momentum#readme",
   "standard": {
-    "ignore": [
-      "public/"
+    "globals": [
+      "sinon",
+      "expect",
+      "describe",
+      "context",
+      "it",
+      "beforeEach",
+      "assert"
     ]
   },
   "apidoc": {
