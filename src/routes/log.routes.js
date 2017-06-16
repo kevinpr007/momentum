@@ -1,7 +1,7 @@
 const logService = require('../services/log.service')()
 const logController = require('../controllers/log.controller')(logService)
 const authenticate = require('passport').authenticate('jwt', {session: false})
-const authorize = require('../services/auth.service')().authorize
+const authorize = require('../middlewares/authorize')
 const routes = require('./routes.config')
 
 module.exports = router => {
