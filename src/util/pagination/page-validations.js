@@ -1,6 +1,6 @@
 const HttpStatus = require('http-status-codes')
 /**
- * TODO: 
+ * TODO:
  * change to middleware
  */
 module.exports = (page, pageSize) => {

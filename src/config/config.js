@@ -1,7 +1,7 @@
 const dotenv = require('dotenv')
 
 /**
- * TODO: 
+ * TODO:
  * module doesn't have any dependencies. Export as object.
  */
 module.exports = () => {

@@ -5,7 +5,7 @@ const User = require('../models/user.model')
 const _ = require('lodash')
 
 /**
- * TODO: 
+ * TODO:
  * module doesn't have any dependencies. Export as object.
  */
 let userService = () => {

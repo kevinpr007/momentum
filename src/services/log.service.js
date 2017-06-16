@@ -4,7 +4,7 @@ mongoose.Promise = require('bluebird')
 const Log = require('../models/logs.model')
 
 /**
- * TODO: 
+ * TODO:
  * module doesn't have any dependencies. Export as object.
  */
 let logService = () => {

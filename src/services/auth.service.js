@@ -11,7 +11,7 @@ const _ = require('lodash')
 let randomBytes = Promise.promisify(require('crypto').randomBytes)
 
 /**
- * TODO: 
+ * TODO:
  * module doesn't have any dependencies. Export as object.
  */
 let authService = () => {
