@@ -4,6 +4,10 @@ mongoose.Promise = require('bluebird')
 const User = require('../models/user.model')
 const _ = require('lodash')
 
+/**
+ * TODO: 
+ * module doesn't have any dependencies. Export as object.
+ */ß
 let userService = () => {
   let getAll = (page, pageSize) => {
     page = Math.max(0, page)

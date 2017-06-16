@@ -11,6 +11,10 @@ const _ = require('lodash')
 
 let randomBytes = Promise.promisify(require('crypto').randomBytes)
 
+/**
+ * TODO: 
+ * module doesn't have any dependencies. Export as object.
+ */
 let authService = () => {
   let generateToken = user => {
     return jwt.sign(user, config.SECRET, {

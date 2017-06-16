@@ -3,6 +3,10 @@ mongoose.Promise = require('bluebird')
 
 const Log = require('../models/logs.model')
 
+/**
+ * TODO: 
+ * module doesn't have any dependencies. Export as object.
+ */
 let logService = () => {
   let getAll = (page, pageSize) => {
     page = Math.max(0, page)
