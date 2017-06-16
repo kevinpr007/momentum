@@ -2,6 +2,11 @@ const Hypermedia = require('../util/hypermedia/hypermedia.config')
 const HttpStatus = require('http-status-codes')
 const emailFactory = require('../util/email.factory')
 
+/**
+ * TODO: 
+ * use promise chaining instead of higher-scope variables.
+ * use compoaing promises.
+ */ 
 let authController = (authService, userService, emailService, templateModel) => {
   let auth = (req, res, next) => {
     let user = null
@@ -24,7 +29,12 @@ let authController = (authService, userService, emailService, templateModel) => 
       }
     }).catch(next)
   }
-
+  
+  /**
+   * TODO: 
+   * use promise chaining instead of higher-scope variables.
+   * use composing promises.
+   */ 
   let register = (req, res, next) => {
     let user = null
     userService.getByEmail(req.body.email).then(existingUser => {
@@ -77,6 +87,11 @@ let authController = (authService, userService, emailService, templateModel) => 
     }).catch(next)
   }
 
+  /**
+   * TODO: 
+   * use promise chaining instead of higher-scope variables.
+   * use composing promises.
+   */ 
   let newPassword = (req, res, next) => {
     let user = null
     authService.findByPasswordToken(req.body.token).then(usr => {
