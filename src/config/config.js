@@ -1,5 +1,9 @@
 const dotenv = require('dotenv')
 
+/**
+ * TODO: 
+ * module doesn't have any dependencies. Export as object.
+ */
 module.exports = () => {
   switch (process.env.NODE_ENV) {
     case 'development':
