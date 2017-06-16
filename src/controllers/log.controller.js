@@ -1,7 +1,7 @@
 const Hypermedia = require('../util/hypermedia/hypermedia.config')
 const HttpStatus = require('http-status-codes')
 const pagedResult = require('../util/pagination/paged-result')
-const config = require('../config/config')()
+const config = require('../config/config')
 const getPageValidations = require('../util/pagination/page-validations')
 
 let logController = (logService) => {

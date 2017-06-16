@@ -2,7 +2,7 @@ const Hypermedia = require('../util/hypermedia/hypermedia.config')
 const HttpStatus = require('http-status-codes')
 const pagedResult = require('../util/pagination/paged-result')
 const getPageValidations = require('../util/pagination/page-validations')
-const config = require('../config/config')()
+const config = require('../config/config')
 
 let userController = userService => {
   let getAllUsers = (req, res, next) => {

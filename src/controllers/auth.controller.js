@@ -5,7 +5,7 @@ const emailFactory = require('../util/email.factory')
 /**
  * TODO:
  * use promise chaining instead of higher-scope variables.
- * use compoaing promises.
+ * use composing promises.
  */
 let authController = (authService, userService, emailService, templateModel) => {
   let auth = (req, res, next) => {

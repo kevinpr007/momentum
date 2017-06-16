@@ -2,7 +2,7 @@ const cluster = require('express-cluster')
 
 cluster(function (worker) {
   const express = require('../src/config/express')
-  const config = require('../src/config/config')()
+  const config = require('../src/config/config')
 
   const http = require('http')
   const port = config.PORT
