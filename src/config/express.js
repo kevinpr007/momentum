@@ -41,6 +41,10 @@ module.exports = () => {
 
   /**
    * Static Resources / View Engine middleware
+   * TODO:
+   * remove compression dependency.
+   * remove favicon dependency.
+   * remove hbs dependency.
    */
   app.use(compression())
   app.use(favicon('./public/img/favicon.ico'))
@@ -57,14 +61,6 @@ module.exports = () => {
   /**
    * Routing middleware
    */
-  router.templateModel = {
-    year: new Date().getFullYear(),
-    gitUrl: config.homepage,
-    version: config.version
-  }
-
-  // TODO: Apply a General Security Routing to all paths
-  // TODO: Add the role features to all required paths
   app.use('/', router)
   require('../routes/index.routes')(router)
   require('../routes/auth.routes')(router)
