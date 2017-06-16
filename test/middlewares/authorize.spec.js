@@ -1,5 +1,4 @@
 describe('authorize middleware tests', () => {
-  let User = require('../../src/models/user.model')
   let authorize = require('../../src/middlewares/authorize')
 
   describe('Given an authentication request', () => {
@@ -7,9 +6,9 @@ describe('authorize middleware tests', () => {
       it('will be authorized to proceed with the request when user has proper role', sinon.test(function (done) {
         let roles = [{ name: 'Admin' }, { name: 'sysAdmin' }]
         let req = {
-          user: new User({
+          user: {
             roles: [{ name: 'Admin' }]
-          })
+          }
         }
 
         let spy = this.spy(next)
@@ -24,9 +23,9 @@ describe('authorize middleware tests', () => {
       it('will generate an Unauthorized (401) error when user has an invalid role', sinon.test(function (done) {
         let roles = [{ name: 'sysAdmin' }]
         let req = {
-          user: new User({
+          user: {
             roles: [{ name: 'Admin' }]
-          })
+          }
         }
 
         try {
