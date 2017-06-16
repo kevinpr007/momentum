@@ -40,7 +40,8 @@
       "context",
       "it",
       "beforeEach",
-      "assert"
+      "assert",
+      "clearModule"
     ]
   },
   "apidoc": {
@@ -78,6 +79,7 @@
     "apidoc": "0.17.5",
     "chai": "3.5.0",
     "chai-as-promised": "6.0.0",
+    "clear-module": "^2.1.0",
     "debug": "2.6.1",
     "istanbul": "0.4.5",
     "mocha": "3.2.0",

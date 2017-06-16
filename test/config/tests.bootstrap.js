@@ -10,3 +10,4 @@ require('sinon-mongoose')
 require('sinon-as-promised')
 
 global.config = require('../../src/config/config')
+global.clearModule = require('clear-module')
