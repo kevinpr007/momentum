@@ -12,10 +12,10 @@ module.exports = (start, tag) => {
  * The purpose of this module is to monitor the processing time of our functions.
  * For more info on `process.hrtime()`:
  * https://nodejs.org/api/process.html#process_process_hrtime_time
- * 
+ *
  * Ex:
  * const monitor = require(./monitor)
- * 
+ *
  * function bar () {
  *   var start = monitor()
  *   foreach () {
