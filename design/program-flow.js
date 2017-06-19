@@ -67,10 +67,10 @@ function createLocation (createdBy, appId) {
   }))
 }
 
-function createWorkshift (userId) {
+function createWorkshift (userId, startDate, endDate) {
   return Workshift.create(new Workshift({
-    startDate: moment(),
-    endDate: moment().add(1, 'h'),
+    startDate, 
+    endDate,
     createdBy: userId,
     userId
   }))
@@ -87,10 +87,11 @@ function createService (userId) {
   }))
 }
 
-function createSchedule (userId, serviceId, workshiftId, locationId) {
+function createSchedule (userId, serviceId, workshiftId, locationId, startDate, endDate) {
+
   return Schedule.create(new Schedule({
-    startDate: moment(),
-    endDate: moment().add(1, 'h'),
+    startDate,
+    endDate,
     other: 'Other Info',
     userId: userId,
     scheduleType: scheduleType[Math.floor(Math.random() * scheduleType.length)], // randomly select item from array ,
@@ -693,12 +694,12 @@ function runQueries () {
           $and: [
             {
               'schedules.startDate': {
-                $gte: ISODate('2017-01-01T23:00:00.000Z')
+                $gte: new Date('2017-01-01T23:00:00.000Z')
               }
             },
             {
               'schedules.endDate': {
-                $lte: ISODate('2017-12-31T23:44:00.000Z')
+                $lte: new Date('2017-12-31T23:44:00.000Z')
               }
             }
           ]
@@ -737,6 +738,11 @@ function runQueries () {
 }
 
 function createApp (type, appName) {
+  var startDate = moment().hours(4).minutes(0) // 4:00am => 8:00am local
+  var endDate = moment().hours(13).minutes(0) // 1:00pm => 5:00pm local
+  var startAppointment = moment().hours(6).minutes(0) // 6:00am => 10:00am local
+  var endAppointment = moment().hours(7).minutes(0) // 7:00am => 11:00am local
+
   return createAppType(type)
     .then(appType => createApplication(appType.id, appName))
     .then(app => Promise.all([
@@ -754,12 +760,18 @@ function createApp (type, appName) {
       }])
     ]).then(([logs, admin, user]) => Promise.all([
       createLocation(admin.id, app.id),
-      createWorkshift(admin.id),
+      createWorkshift(admin.id, startDate, endDate),
       createService(admin.id),
       createService(admin.id)
     ]).then(([location, workshift, service]) => Promise.all([
-      createSchedule(admin.id, service.id, workshift.id, location.id),
-      createSchedule(admin.id, service.id, workshift.id, location.id)
+      createSchedule(admin.id, service.id, workshift.id, location.id, 
+        startAppointment, endAppointment),
+      (function () { 
+        startAppointment = moment().hours(7).minutes(0)
+        endAppointment = moment().hours(8).minutes(0)
+        createSchedule(admin.id, service.id, workshift.id, location.id, 
+          startAppointment, endAppointment)
+      } ())
     ]))))
 }
 
