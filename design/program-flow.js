@@ -478,7 +478,6 @@ function runQueries () {
         }
       }
     ]),
-
     // Retrieve all schedule by all users for an specific application ordered by the name of the user and schedule time ascending
     Application.aggregate([
       { $limit: 1 },
@@ -573,7 +572,6 @@ function runQueries () {
         }
       }
     ]),
-
     // Retrieve all schedule by an user for an specific application ordered by schedule time ascending
     Application.aggregate([
       { $limit: 1 },
@@ -660,7 +658,6 @@ function runQueries () {
         }
       }
     ]),
-
     // Retrieve a schedule given a specific time, user and application.
     Application.aggregate([
       { $limit: 1 },
@@ -730,18 +727,25 @@ function runQueries () {
           }
         }
       }
-    ])
-
+    ]),
     // Retrieve available time on a date for a specific Employee
+    (function () {
+      const availability = require('../references/queries/employee-availability-by-date')(User)
 
+      const startDate = new Date('2017-06-19T10:00:00.000Z')
+      const endDate = new Date('2017-06-19T11:00:00.000Z')
+      
+      return User.findOne({'roles.name': 'Admin'}).exec().then(user => 
+        availability.getWorkAvailability(startDate, endDate, user.id, user.roles.appId))
+    }())
   ])
 }
 
 function createApp (type, appName) {
-  var startDate = moment().hours(4).minutes(0) // 4:00am => 8:00am local
-  var endDate = moment().hours(13).minutes(0) // 1:00pm => 5:00pm local
-  var startAppointment = moment().hours(6).minutes(0) // 6:00am => 10:00am local
-  var endAppointment = moment().hours(7).minutes(0) // 7:00am => 11:00am local
+  var startDate = moment().hours(4).minutes(0).seconds(0).milliseconds(0) // 4:00am => 8:00am local
+  var endDate = moment().hours(13).minutes(0).seconds(0).milliseconds(0) // 1:00pm => 5:00pm local
+  var startAppointment = moment().hours(6).minutes(0).seconds(0).milliseconds(0) // 6:00am => 10:00am local
+  var endAppointment = moment().hours(7).minutes(0).seconds(0).milliseconds(0) // 7:00am => 11:00am local
 
   return createAppType(type)
     .then(appType => createApplication(appType.id, appName))
@@ -782,67 +786,62 @@ setupEnv().then(() => Promise.all([
   createApp('Salon', 'Beauty Salon'),
   createApp('Landscaping', 'The Show Land Scaping')
 ])).then(() => runQueries())
-  .then(([users, apps, sortedUsers, appTypes, usersByApp, adminsByApp, workshiftsByUser, logsByApp, workshiftsByApp, servicesByAllUsers, servicesByAnUser, schedulesByAllUsers, schedulesByAnUser, scheduleSpecificUser]) => {
+  .then(([
+    users, 
+    apps, 
+    sortedUsers, 
+    appTypes, 
+    usersByApp, 
+    adminsByApp, 
+    workshiftsByUser, 
+    logsByApp, 
+    workshiftsByApp, 
+    servicesByAllUsers, 
+    servicesByAnUser, 
+    schedulesByAllUsers, 
+    schedulesByAnUser, 
+    scheduleSpecificUser
+    ]) => {
     console.log('Retrieve all users with Admin role:\n')
     console.log(`${users}\n`)
+
     console.log('Retrieve all Applications with their related ApplicationType ordered by application name ascending:\n')
     console.log(`${apps}\n`)
+
     console.log('Retrieve all users ordered by last name:\n')
     console.log(`${sortedUsers}\n`)
+
     console.log('Retrieve all ApplicationTypes with related Applications ordered by applicationType ascending:\n')
-    console.log(util.inspect(appTypes, {
-      showHidden: false,
-      depth: null
-    }))
+    console.log(util.inspect(appTypes, false, null))
+
     console.log('Retrieve all users related to a specific application ordered by app name:\n')
-    console.log(util.inspect(usersByApp, {
-      showHidden: false,
-      depth: null
-    }))
+    console.log(util.inspect(usersByApp, false, null))
+
     console.log('Retrieve all users with Admin role for a specific application ordered by user name:\n')
-    console.log(util.inspect(adminsByApp, {
-      showHidden: false,
-      depth: null
-    }))
+    console.log(util.inspect(adminsByApp, false, null))
+
     console.log('Retrieve all workshifts related to a specific user ordered by schedule time ascending:\n')
-    console.log(util.inspect(workshiftsByUser, {
-      showHidden: false,
-      depth: null
-    }))
+    console.log(util.inspect(workshiftsByUser, false, null))
+
     console.log('Retrieve all logs related to an specific application ordered by createdDate descending:\n')
-    console.log(util.inspect(logsByApp, {
-      showHidden: false,
-      depth: null
-    }))
+    console.log(util.inspect(logsByApp, false, null))
+
     console.log('Retrieve all workshift related to all users for an specific application ordered by the name of the user and the schedule time ascending:\n')
-    console.log(util.inspect(workshiftsByApp, {
-      showHidden: false,
-      depth: null
-    }))
+    console.log(util.inspect(workshiftsByApp, false, null))
+
     console.log('Retrieve all services by all users for an specific application ordered by the name of the user and service name:\n')
-    console.log(util.inspect(servicesByAllUsers, {
-      showHidden: false,
-      depth: null
-    }))
+    console.log(util.inspect(servicesByAllUsers, false, null))
+
     console.log('Retrieve all services by an user for an specific application ordered by service name:\n')
-    console.log(util.inspect(servicesByAnUser, {
-      showHidden: false,
-      depth: null
-    }))
+    console.log(util.inspect(servicesByAnUser, false, null))
+
     console.log('Retrieve all schedule by all users for an specific application ordered by the name of the user and schedule time ascending:\n')
-    console.log(util.inspect(schedulesByAllUsers, {
-      showHidden: false,
-      depth: null
-    }))
+    console.log(util.inspect(schedulesByAllUsers, false, null))
+
     console.log('Retrieve all schedule by an user for an specific application ordered by schedule time ascending:\n')
-    console.log(util.inspect(schedulesByAnUser, {
-      showHidden: false,
-      depth: null
-    }))
+    console.log(util.inspect(schedulesByAnUser, false, null))
+
     console.log('Retrieve a schedule given a specific time, user and application:\n')
-    console.log(util.inspect(scheduleSpecificUser, {
-      showHidden: false,
-      depth: null
-    }))
+    console.log(util.inspect(scheduleSpecificUser, false, null))
     process.exit()
   })
