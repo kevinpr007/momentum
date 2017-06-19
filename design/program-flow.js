@@ -727,25 +727,19 @@ function runQueries () {
           }
         }
       }
-    ]),
-    // Retrieve available time on a date for a specific Employee
-    (function () {
-      const availability = require('../references/queries/employee-availability-by-date')(User)
-
-      const startDate = new Date('2017-06-19T10:00:00.000Z')
-      const endDate = new Date('2017-06-19T11:00:00.000Z')
-      
-      return User.findOne({'roles.name': 'Admin'}).exec().then(user => 
-        availability.getWorkAvailability(startDate, endDate, user.id, user.roles.appId))
-    }())
+    ])
   ])
 }
 
 function createApp (type, appName) {
-  var startDate = moment().hours(4).minutes(0).seconds(0).milliseconds(0) // 4:00am => 8:00am local
-  var endDate = moment().hours(13).minutes(0).seconds(0).milliseconds(0) // 1:00pm => 5:00pm local
-  var startAppointment = moment().hours(6).minutes(0).seconds(0).milliseconds(0) // 6:00am => 10:00am local
-  var endAppointment = moment().hours(7).minutes(0).seconds(0).milliseconds(0) // 7:00am => 11:00am local
+  var startDate = moment().hours(4)
+    .minutes(0).seconds(0).milliseconds(0) // 4:00am => 8:00am local
+  var endDate = moment().hours(13)
+    .minutes(0).seconds(0).milliseconds(0) // 1:00pm => 5:00pm local
+  var startAppointment = moment().hours(6)
+    .minutes(0).seconds(0).milliseconds(0) // 6:00am => 10:00am local
+  var endAppointment = moment().hours(7)
+    .minutes(0).seconds(0).milliseconds(0) // 7:00am => 11:00am local
 
   return createAppType(type)
     .then(appType => createApplication(appType.id, appName))
