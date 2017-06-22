@@ -4,7 +4,7 @@ const logger = require('./logger')
 
 module.exports = () => {
   mongoose.set('debug', (coll, method, query, doc, options) => {
-    let set = {
+    const set = {
       coll: coll,
       method: method,
       query: query,
