@@ -4,10 +4,10 @@ const pagedResult = require('../util/pagination/paged-result')
 const getPageValidations = require('../util/pagination/page-validations')
 const config = require('../config/config')
 
-let userController = userService => {
-  let getAllUsers = (req, res, next) => {
-    let page = parseInt(req.query.page || 0)
-    let pageSize = parseInt(req.query.pageSize || config.PAGE_SIZE)
+module.exports = userService => {
+  const getAllUsers = (req, res, next) => {
+    const page = parseInt(req.query.page || 0)
+    const pageSize = parseInt(req.query.pageSize || config.PAGE_SIZE)
 
     getPageValidations(page, pageSize)
 
@@ -17,10 +17,10 @@ let userController = userService => {
     }).catch(next)
   }
 
-  let getByUserEmail = (req, res, next) => {
+  const getByUserEmail = (req, res, next) => {
     userService.getByEmail(req.params.userName).then(user => {
       if (!user) {
-        let err = new Error('User not found.')
+        const err = new Error('User not found.')
         err.status = HttpStatus.NOT_FOUND
         throw err
       }
@@ -33,5 +33,3 @@ let userController = userService => {
     getByUserEmail
   }
 }
-
-module.exports = userController

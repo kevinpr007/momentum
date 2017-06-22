@@ -4,10 +4,10 @@ const pagedResult = require('../util/pagination/paged-result')
 const config = require('../config/config')
 const getPageValidations = require('../util/pagination/page-validations')
 
-let logController = (logService) => {
-  let getAllLogs = (req, res, next) => {
-    let page = parseInt(req.query.page || 0)
-    let pageSize = parseInt(req.query.pageSize || config.PAGE_SIZE)
+module.exports = (logService) => {
+  const getAllLogs = (req, res, next) => {
+    const page = parseInt(req.query.page || 0)
+    const pageSize = parseInt(req.query.pageSize || config.PAGE_SIZE)
 
     getPageValidations(page, pageSize)
 
@@ -19,9 +19,9 @@ let logController = (logService) => {
     .catch(next)
   }
 
-  let getByCode = (req, res, next) => {
-    let page = parseInt(req.query.page || 0)
-    let pageSize = parseInt(req.query.pageSize || config.PAGE_SIZE)
+  const getByCode = (req, res, next) => {
+    const page = parseInt(req.query.page || 0)
+    const pageSize = parseInt(req.query.pageSize || config.PAGE_SIZE)
 
     getPageValidations(page, pageSize)
 
@@ -33,9 +33,9 @@ let logController = (logService) => {
     .catch(next)
   }
 
-  let getByStatus = (req, res, next) => {
-    let page = parseInt(req.query.page || 0)
-    let pageSize = parseInt(req.query.pageSize || config.PAGE_SIZE)
+  const getByStatus = (req, res, next) => {
+    const page = parseInt(req.query.page || 0)
+    const pageSize = parseInt(req.query.pageSize || config.PAGE_SIZE)
 
     getPageValidations(page, pageSize)
 
@@ -53,5 +53,3 @@ let logController = (logService) => {
     getByStatus
   }
 }
-
-module.exports = logController
