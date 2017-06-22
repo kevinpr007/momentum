@@ -20,6 +20,7 @@ npm-debug.log*
 
 # Docs
 docs/
+!src/docs/
 
 # Runtime data
 pids

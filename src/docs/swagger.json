@@ -1,0 +1,94 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "Momentum is a scheduler that connects people to any service at the time and location of your choice!",
+    "version": "0.1.0",
+    "title": "MOMENTUM API Docs",
+    "license": {
+      "name": "TODO LICENSE"
+    }
+  },
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "schemes": [
+    "http"
+  ],
+  "basePath": "/api/swagger/v1",
+  "paths": {
+    "/logs": {
+      "get": {
+        "x-swagger-router-controller": "logs_mocks",
+        "operationId": "getAll",
+        "tags": [
+          "/logs"
+        ],
+        "security": [
+          "jwt"
+        ],
+        "summary": "List all logs",
+        "description": "Get list of all logs.",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "Object",
+              "$ref": "#/definitions/logs"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "logs": {
+      "properties": {
+        "code": {
+          "type": "String",
+          "default": null,
+          "index": true
+        },
+        "status": {
+          "type": "String",
+          "default": null,
+          "index": true
+        },
+        "message": {
+          "type": "String",
+          "default": null
+        },
+        "stack": {
+          "type": "String"
+        },
+        "createdOn": {
+          "type": "Date",
+          "default": "Date.now"
+        },
+        "appId": {
+          "type": "GUID",
+          "required": true
+        }
+      }
+    },
+    "error": {
+      "properties": {
+        "message": {
+          "type": "string"
+        },
+        "error": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
