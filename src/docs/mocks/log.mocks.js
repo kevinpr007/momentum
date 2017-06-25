@@ -10,17 +10,17 @@ module.exports = {
               {
                 'method': 'GET',
                 'rel': 'collection',
-                'href': `${req.headers.host}\/api\/logs`
+                'href': `${req.headers.host}/api/logs`
               },
               {
                 'method': 'GET',
                 'rel': 'code-filter',
-                'href': `${req.headers.host}\/api\/logs\/77479`
+                'href': `${req.headers.host}/api/logs/77479`
               },
               {
                 'method': 'GET',
                 'rel': 'status-filter',
-                'href': `${req.headers.host}\/api\/logs\/`
+                'href': `${req.headers.host}/api/logs/`
               }
             ],
             '_id': '592dfb7d0448021a24cdbe7e',
@@ -34,17 +34,17 @@ module.exports = {
               {
                 'method': 'GET',
                 'rel': 'collection',
-                'href': `${req.headers.host}\/api\/logs`
+                'href': `${req.headers.host}/api/logs`
               },
               {
                 'method': 'GET',
                 'rel': 'code-filter',
-                'href': `${req.headers.host}\/api\/logs\/13770`
+                'href': `${req.headers.host}/api/logs/13770`
               },
               {
                 'method': 'GET',
                 'rel': 'status-filter',
-                'href': `${req.headers.host}\/api\/logs\/`
+                'href': `${req.headers.host}/api/logs/`
               }
             ],
             '_id': '592dfb7d0448021a24cdbe77',
@@ -58,17 +58,17 @@ module.exports = {
               {
                 'method': 'GET',
                 'rel': 'collection',
-                'href': `${req.headers.host}\/api\/logs`
+                'href': `${req.headers.host}/api/logs`
               },
               {
                 'method': 'GET',
                 'rel': 'code-filter',
-                'href': `${req.headers.host}\/api\/logs\/48354`
+                'href': `${req.headers.host}/api/logs/48354`
               },
               {
                 'method': 'GET',
                 'rel': 'status-filter',
-                'href': `${req.headers.host}\/api\/logs\/`
+                'href': `${req.headers.host}/api/logs/`
               }
             ],
             '_id': '592dac87e862b32b70e9cbbf',
@@ -79,7 +79,7 @@ module.exports = {
           }
         ],
         'prevPage': null,
-        'nextPage': `${req.headers.host}\/api\/logs?page=1`
+        'nextPage': `${req.headers.host}/api/logs?page=1`
       }
     ])
   }
