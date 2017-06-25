@@ -11,7 +11,8 @@ const options = {}
 const customCss = fs.readFileSync(path.resolve(__dirname, 'swagger-ui.css'), 'utf-8')
 
 const middlewares = {
-  'logs_mocks': require('./mocks/log.mocks')
+  'logs_mocks': require('./mocks/log.mocks'),
+  'users_mocks': require('./mocks/user.mocks')
 }
 
 module.exports = app => {
