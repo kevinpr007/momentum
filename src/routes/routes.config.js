@@ -1,7 +1,7 @@
 const GET = 'GET'
 const POST = 'POST'
 
-let routeMap = new Map()
+const routeMap = new Map()
 
 /**
  * @Index routes
