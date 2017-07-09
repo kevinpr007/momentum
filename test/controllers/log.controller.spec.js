@@ -25,6 +25,7 @@ describe('Log entity requests', () => {
         let result = [TotalCount, [new Log({code: '200'}), new Log({code: '201'})]]
         let next = err => done(err)
         req.query.page = '1'
+        req.query.pageSize = 1
 
         logService = this.stub(logService())
         logService.getAll.resolves(result)
@@ -40,36 +41,6 @@ describe('Log entity requests', () => {
           expect(response.data[DATA_FIELD].code).to.equal(result[DATA_FIELD][1].code)
           done()
         })
-      }))
-
-      it('returns Internal Server Error (500) with invalid page as argument', sinon.test(function (done) {
-        req.query.page = 'Invalid'
-        let next = args => done(args)
-
-        logService = this.stub(logService())
-
-        try {
-          logController(logService).getAllLogs(req, res, next)
-        } catch (err) {
-          expect(err).to.be.an('Error')
-          expect(err).to.have.property('status', HttpStatus.INTERNAL_SERVER_ERROR)
-          done()
-        }
-      }))
-
-      it('returns Internal Server Error (500) with invalid page size as argument', sinon.test(function (done) {
-        req.query.pageSize = 'Invalid'
-        let next = args => done(args)
-
-        logService = this.stub(logService())
-
-        try {
-          logController(logService).getAllLogs(req, res, next)
-        } catch (err) {
-          expect(err).to.be.an('Error')
-          expect(err).to.have.property('status', HttpStatus.INTERNAL_SERVER_ERROR)
-          done()
-        }
       }))
     })
 
