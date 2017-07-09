@@ -1,8 +1,7 @@
 module.exports = (host, token) => {
-  let getTemplate = () => {
-    return {
-      subject: 'Style Point: Reset your password',
-      html: `
+  const getTemplate = () => ({
+    subject: 'Style Point: Reset your password',
+    html: `
         <p>
             You are receiving this because you (or someone else) have requested the reset of the password for your account.
             <br>Please click on the following link, or paste this into your browser to complete the process:<br><br>
@@ -10,8 +9,7 @@ module.exports = (host, token) => {
             If you did not request this, please ignore this email and your password will remain unchanged.
         </p>
     `
-    }
-  }
+  })
 
   return {
     getTemplate
