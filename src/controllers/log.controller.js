@@ -33,23 +33,8 @@ module.exports = (logService) => {
     .catch(next)
   }
 
-  const getByStatus = (req, res, next) => {
-    const page = parseInt(req.query.page || 0)
-    const pageSize = parseInt(req.query.pageSize || config.PAGE_SIZE)
-
-    getPageValidations(page, pageSize)
-
-    logService.getByStatus(req.params.status, page, pageSize)
-    .then(logs => {
-      logs = pagedResult(req, page, pageSize, logs)
-      res.status(HttpStatus.OK).json(new Hypermedia(req).setResponse(logs, next))
-    })
-    .catch(next)
-  }
-
   return {
     getAllLogs,
-    getByCode,
-    getByStatus
+    getByCode
   }
 }
