@@ -1,11 +1,7 @@
 const HttpStatus = require('http-status-codes')
 
 module.exports = () => {
-  /**
-   * TODO:
-   * return swagger main page once implemented.
-   */
-  const index = (req, res, next) =>
+  const index = (req, res) =>
     res.status(HttpStatus.OK).json({
       message: 'success'
     })
@@ -14,5 +10,3 @@ module.exports = () => {
     index
   }
 }
-
-module.exports = indexController
