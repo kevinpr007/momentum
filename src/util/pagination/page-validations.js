@@ -5,13 +5,13 @@ const HttpStatus = require('http-status-codes')
  */
 module.exports = (page, pageSize) => {
   if (page === undefined || isNaN(page)) {
-    let err = new Error('You must provide a page number')
+    const err = new Error('You must provide a page number')
     err.status = HttpStatus.INTERNAL_SERVER_ERROR
     throw err
   }
 
   if (pageSize === undefined || isNaN(pageSize)) {
-    let err = new Error('Page size must be a number')
+    const err = new Error('Page size must be a number')
     err.status = HttpStatus.INTERNAL_SERVER_ERROR
     throw err
   }

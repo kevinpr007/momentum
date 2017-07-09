@@ -1,4 +1,4 @@
-let config = require('../../config/config')
+const config = require('../../config/config')
 const TOTAL_COUNT_FIELD = 0
 const DATA_FIELD = 1
 
@@ -8,10 +8,10 @@ const DATA_FIELD = 1
  */
 module.exports = (req, page = 0, pageSize = parseInt(config.PAGE_SIZE), data) => {
   const REGEX = /(\?(page)=(\d+))/gi
-  let host = `${req.protocol}://${req.headers.host}`
-  let url = `${req.originalUrl.replace(REGEX, '')}`
+  const host = `${req.protocol}://${req.headers.host}`
+  const url = `${req.originalUrl.replace(REGEX, '')}`
 
-  let totalPages = parseInt((data[TOTAL_COUNT_FIELD] / pageSize).toFixed())
+  const totalPages = parseInt((data[TOTAL_COUNT_FIELD] / pageSize).toFixed())
 
   return {
     totalPages: totalPages,

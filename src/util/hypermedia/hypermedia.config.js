@@ -16,7 +16,7 @@ class Hypermedia {
         require('./user.hypermedia')(entity, this.baseUrl)
         break
       default:
-        let err = new Error('Entity not defined')
+        const err = new Error('Entity not defined')
         err.status = HttpStatus.INTERNAL_SERVER_ERROR
         throw err
     }
@@ -27,7 +27,7 @@ class Hypermedia {
     try {
       if ('data' in entity) {
         if (entity.data.length > 0) {
-          let model = entity.data[0].constructor.modelName
+          const model = entity.data[0].constructor.modelName
           entity.data = _.each(entity.data, item => this.setLinks(model, item._doc))
         }
       } else {
