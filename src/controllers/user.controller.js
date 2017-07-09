@@ -1,7 +1,6 @@
 const Hypermedia = require('../util/hypermedia/hypermedia.config')
 const HttpStatus = require('http-status-codes')
 const pagedResult = require('../util/pagination/paged-result')
-const getPageValidations = require('../util/pagination/page-validations')
 const config = require('../config/config')
 
 module.exports = userService => {
@@ -9,10 +8,8 @@ module.exports = userService => {
     const page = parseInt(req.query.page || 0)
     const pageSize = parseInt(req.query.pageSize || config.PAGE_SIZE)
 
-    getPageValidations(page, pageSize)
-
     userService.getAll(page, pageSize).then(users => {
-      users = pagedResult(req, page, pageSize, users)
+      users = pagedResult(req, users)
       res.status(HttpStatus.OK).json(new Hypermedia(req).setResponse(users, next))
     }).catch(next)
   }
