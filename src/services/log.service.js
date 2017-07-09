@@ -3,12 +3,8 @@ mongoose.Promise = require('bluebird')
 
 const Log = require('../models/logs.model')
 
-/**
- * TODO:
- * module doesn't have any dependencies. Export as object.
- */
-let logService = () => {
-  let getAll = (page, pageSize) => {
+module.exports = () => {
+  const getAll = (page, pageSize) => {
     page = Math.max(0, page)
     return Promise.all([
       Log.count().exec(),
@@ -21,7 +17,7 @@ let logService = () => {
     ])
   }
 
-  let getByCode = (code, page, pageSize) => {
+  const getByCode = (code, page, pageSize) => {
     page = Math.max(0, page)
     return Promise.all([
       Log.find().where('code', code).count().exec(),
@@ -34,30 +30,12 @@ let logService = () => {
     ])
   }
 
-  let getByStatus = (status, page, pageSize) => {
-    page = Math.max(0, page)
-    status = status.replace(/-/g, ' ') // TODO: Remove this and slugify
-    return Promise.all([
-      Log.find().where('status', status).count().exec(),
-      Log.find()
-        .where('status', status)
-        .sort({createdOn: -1})
-        .skip(pageSize * page)
-        .limit(pageSize)
-        .exec()
-    ])
-  }
-
-  let saveLog = log => {
-    return Object.assign(new Log(), log).save()
-  }
+  const saveLog = log =>
+    Object.assign(new Log(), log).save()
 
   return {
     getAll,
     getByCode,
-    getByStatus,
     saveLog
   }
 }
-
-module.exports = logService
