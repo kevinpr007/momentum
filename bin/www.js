@@ -10,13 +10,13 @@ cluster(function (worker) {
   require('../src/config/mongoose')()
   require('../src/config/passport')()
 
-  let app = express()
-  let server = http.createServer(app)
+  const app = express()
+  const server = http.createServer(app)
 
   server.listen(port)
   server.on('error', error => {
     if (error.syscall !== 'listen') throw error
-    let bind = typeof port === 'string' ? `Pipe ${port}` : `Port ${port}`
+    const bind = typeof port === 'string' ? `Pipe ${port}` : `Port ${port}`
 
     switch (error.code) {
       case 'EACCES':
@@ -33,8 +33,8 @@ cluster(function (worker) {
   })
 
   server.on('listening', () => {
-    let addr = server.address()
-    let bind = typeof addr === 'string' ? `pipe ${addr}` : `port ${addr.port}`
+    const addr = server.address()
+    const bind = typeof addr === 'string' ? `pipe ${addr}` : `port ${addr.port}`
     console.log(`Listening on ${bind}`)
   })
 
