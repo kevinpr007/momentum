@@ -40,7 +40,8 @@
       "it",
       "beforeEach",
       "assert",
-      "clearModule"
+      "clearModule",
+      "config"
     ],
     "ignore": [
       "src/config/mongoose_seed/"
