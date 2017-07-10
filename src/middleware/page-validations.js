@@ -2,23 +2,20 @@ const HttpStatus = require('http-status-codes')
 const config = require('../config/config')
 
 module.exports = (req, res, next) => {
-  const page = parseInt(req.query.page || 0)
-  const pageSize = parseInt(req.query.pageSize || config.PAGE_SIZE)
+  req.query.page = parseInt(req.query.page || 0)
+  req.query.pageSize = parseInt(req.query.pageSize || config.PAGE_SIZE)
 
-  if (page === undefined || isNaN(page)) {
+  if (req.query.page === undefined || isNaN(req.query.page)) {
     const err = new Error('You must provide a page number')
-    err.status = HttpStatus.INTERNAL_SERVER_ERROR
+    err.status = HttpStatus.BAD_REQUEST
     next(err)
   }
 
-  if (pageSize === undefined || isNaN(pageSize)) {
+  if (req.query.pageSize === undefined || isNaN(req.query.pageSize)) {
     const err = new Error('Page size must be a number')
-    err.status = HttpStatus.INTERNAL_SERVER_ERROR
+    err.status = HttpStatus.BAD_REQUEST
     next(err)
   }
-
-  req.query.page = page
-  req.query.pageSize = pageSize
 
   next()
 }

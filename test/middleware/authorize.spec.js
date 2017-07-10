@@ -1,5 +1,5 @@
 describe('authorize middleware tests', () => {
-  let authorize = require('../../src/middleware/authorize')
+  const authorize = require('../../src/middleware/authorize')
 
   describe('Given an authentication request', () => {
     context('when requesting an action that requires an authorization role', () => {
