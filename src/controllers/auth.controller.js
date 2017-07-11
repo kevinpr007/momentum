@@ -56,7 +56,7 @@ module.exports = (authService, userService, emailService) => {
           err.status = HttpStatus.NOT_FOUND
           throw err
         }
-        return authService.resetToken(user)
+        return authService.resetPasswordToken(user)
       })
       .then(user => {
         const emailTemplate = require('../services/emails/confirm-reset-password')(req.headers.host,

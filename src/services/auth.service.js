@@ -18,7 +18,7 @@ module.exports = () => {
 
   const getToken = user => `JWT ${generateToken(user)}`
 
-  const resetToken = user => {
+  const resetPasswordToken = user => {
     const date = new Date()
     user = _.extend(user, User)
     return randomBytes(parseInt(config.RANDOM_BYTES)).then(buffer => {
@@ -37,7 +37,7 @@ module.exports = () => {
     }).exec()
 
   return {
-    resetToken,
+    resetPasswordToken,
     getToken,
     findByPasswordToken
   }

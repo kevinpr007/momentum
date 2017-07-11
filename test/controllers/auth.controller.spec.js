@@ -286,7 +286,7 @@ describe('User authentication requests', () => {
         userService.getByEmail.resolves(user)
 
         authService = this.stub(authService())
-        authService.resetToken.resolves(user)
+        authService.resetPasswordToken.resolves(user)
 
         emailService = this.stub(emailService({
           to: 'test@dev.com'
@@ -304,7 +304,7 @@ describe('User authentication requests', () => {
           let data = JSON.parse(res._getData())
           expect(res.statusCode).to.equal(HttpStatus.OK)
           expect(data.data).to.have.deep.property('sent', true)
-          assert.isTrue(authService.resetToken.calledOnce)
+          assert.isTrue(authService.resetPasswordToken.calledOnce)
           assert.isTrue(userService.getByEmail.calledOnce)
           done()
         })
