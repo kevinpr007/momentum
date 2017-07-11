@@ -13,7 +13,5 @@ module.exports = (router) => {
 
   router.post(routes.get('newPassword').path, authController.newPassword)
 
-  router.get(routes.get('confirmResetPassword').path, authController.confirmResetPassword)
-
   router.post(routes.get('resetPassword').path, authController.resetPassword)
 }

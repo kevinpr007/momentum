@@ -29,11 +29,6 @@ routeMap.set('newPassword', {
   method: POST
 })
 
-routeMap.set('confirmResetPassword', {
-  path: '/api/confirm-reset-password/:token',
-  method: GET
-})
-
 routeMap.set('resetPassword', {
   path: '/api/reset-password',
   method: POST
