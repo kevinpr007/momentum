@@ -110,7 +110,6 @@ module.exports = (authService, userService, emailService) => {
     auth,
     register,
     newPassword,
-    resetPassword,
-    confirmResetPassword
+    resetPassword
   }
 }

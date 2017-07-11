@@ -312,44 +312,6 @@ describe('User authentication requests', () => {
     })
   })
 
-  describe('Given a user requesting to reset password via email confirmation', () => {
-    context('when token is not set inside route', () => {
-      it('returns Not Found (404)', sinon.test(function (done) {
-        let templateModel = {}
-        req.method = 'GET'
-        req.url = 'api/confirm-reset-password'
-
-        authController(null, null, null, templateModel).confirmResetPassword(req, res, next)
-
-        function next (args) {
-          try {
-            expect(args).to.be.an('Error')
-            expect(args.status).to.equal(HttpStatus.NOT_FOUND)
-            done()
-          } catch (err) {
-            done(err)
-          }
-        }
-      }))
-    })
-
-    context('when token is provided inside route', () => {
-      it('returns Ok (200) with reset-password page', sinon.test(function (done) {
-        let templateModel = {}
-        req.method = 'GET'
-        req.url = 'api/confirm-reset-password'
-        req.params = {
-          token: 'ABCD-1234'
-        }
-
-        authController(null, null, null, templateModel).confirmResetPassword(req, res)
-
-        expect(res.statusCode).to.equal(HttpStatus.OK)
-        done()
-      }))
-    })
-  })
-
   describe('Given a user resetting password via reset-password page', () => {
     context('when providing an invalid token', () => {
       it('returns Unprocessable Entity (422)', sinon.test(function (done) {
