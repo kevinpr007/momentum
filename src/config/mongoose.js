@@ -30,7 +30,7 @@ module.exports = () => {
   })
 
   mongoose.connection.on('disconnected', () => {
-    logger.log('MongoDB connection closed')
+    logger.info('MongoDB connection closed')
   })
 
   return mongoose.connect(config.DB_URL)
