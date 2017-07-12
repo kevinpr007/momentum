@@ -59,7 +59,8 @@ module.exports = (authService, userService, emailService) => {
         return authService.resetPasswordToken(user)
       })
       .then(user => {
-        const emailTemplate = require('../services/emails/confirm-reset-password')(req.headers.host,
+        const host = req.headers.referer || `${req.protocol}://${req.headers.host}/`
+        const emailTemplate = require('../services/emails/confirm-reset-password')(host,
         user.resetPasswordToken).getTemplate()
         const emailInfo = emailFactory(user.email, emailTemplate.subject, emailTemplate.html).getInfo()
         return emailService(emailInfo).send()
