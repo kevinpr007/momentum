@@ -1,5 +1,4 @@
 const config = require('../config')
-const Promise = require('bluebird')
 const passport = require('passport')
 const JwtStrategy = require('passport-jwt').Strategy
 const ExtractJwt = require('passport-jwt').ExtractJwt
@@ -15,12 +14,12 @@ module.exports = () => {
   passport.use(new JwtStrategy(jwtOptions, (payload, cb) => {
     userService.getById(payload._doc._id).then(user => {
       if (!user) {
-        return Promise.resolve(cb(null, false, {
+        return cb(null, false, {
           message: 'Unknown user'
-        }))
+        })
       } else {
-        return Promise.resolve(cb(null, user))
+        return cb(null, user)
       }
-    }).catch(err => Promise.resolve(cb(err)))
+    }).catch(err => cb(err))
   }))
 }
