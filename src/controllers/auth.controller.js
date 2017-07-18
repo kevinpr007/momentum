@@ -2,6 +2,12 @@ const Hypermedia = require('../util/hypermedia/hypermedia.config')
 const HttpStatus = require('http-status-codes')
 const emailFactory = require('../util/email.factory')
 
+const emails = {
+  resetPassword: require('../services/emails/reset-password'),
+  confirmResetPassword: require('../services/emails/confirm-reset-password'),
+  newAccount: require('../services/emails/new-account')
+}
+
 module.exports = (authService, userService, emailService) => {
   const auth = (req, res, next) =>
     userService.getByEmail(req.body.email)
@@ -41,8 +47,8 @@ module.exports = (authService, userService, emailService) => {
         user._doc.token = authService.getToken(user)
         res.status(HttpStatus.CREATED).json(new Hypermedia(req).setResponse(user, next))
 
-        const emailTemplate = require('../services/emails/new-account')(user, req.headers.host).getTemplate()
-        const emailInfo = emailFactory(user.email, emailTemplate.subject, emailTemplate.html).getInfo()
+        const email = emails.newAccount(user, req.headers.host).getTemplate()
+        const emailInfo = emailFactory(user.email, email.subject, email.html).getInfo()
 
         return emailService(emailInfo).send()
       })
@@ -60,9 +66,9 @@ module.exports = (authService, userService, emailService) => {
       })
       .then(user => {
         const host = req.headers.referer || `${req.protocol}://${req.headers.host}/`
-        const emailTemplate = require('../services/emails/confirm-reset-password')(host,
-          user.resetPasswordToken).getTemplate()
-        const emailInfo = emailFactory(user.email, emailTemplate.subject, emailTemplate.html).getInfo()
+        const email = emails.confirmResetPassword(host, user.resetPasswordToken).getTemplate()
+        const emailInfo = emailFactory(user.email, email.subject, email.html).getInfo()
+
         return emailService(emailInfo).send()
       })
       .then(data => res.status(HttpStatus.OK).json({ data }))
@@ -100,8 +106,9 @@ module.exports = (authService, userService, emailService) => {
           })
       })
       .then(user => {
-        const emailTemplate = require('../services/emails/reset-password')().getTemplate()
-        const emailInfo = emailFactory(user.email, emailTemplate.subject, emailTemplate.html).getInfo()
+        const email = emails.resetPassword().getTemplate()
+        const emailInfo = emailFactory(user.email, email.subject, email.html).getInfo()
+
         return emailService(emailInfo).send()
       })
       .then(data => res.status(HttpStatus.OK).json({ data }))
