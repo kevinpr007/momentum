@@ -1,9 +1,7 @@
 const routes = require('../../routes/routes.config')
-const slugify = require('slugify')
 
 module.exports = (log, baseUrl) => {
-  // TODO: Business Logic
-  return log.links = [{
+  log.links = [{
     href: `${baseUrl}${routes.get('getLogs').path}`,
     rel: 'collection',
     method: routes.get('getLogs').method
@@ -13,8 +11,10 @@ module.exports = (log, baseUrl) => {
     method: routes.get('getByLogCode').method
   },
   {
-    href: `${baseUrl}${routes.get('getLogs').path}/${slugify(log.status || '')}`, // TODO: Remove this and slugify
+    href: `${baseUrl}${routes.get('getLogs').path}/${log.code}`,
     rel: 'status-filter',
     method: routes.get('getByLogStatus').method
   }]
+
+  return log
 }

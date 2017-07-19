@@ -1,8 +1,7 @@
 const routes = require('../../routes/routes.config')
 
 module.exports = (user, baseUrl) => {
-  // TODO: Business Logic
-  return user.links = [{
+  user.links = [{
     href: `${baseUrl}${routes.get('getUsers').path}`,
     rel: 'collection',
     method: routes.get('getUsers').method
@@ -11,4 +10,6 @@ module.exports = (user, baseUrl) => {
     rel: 'self',
     method: routes.get('getUsers').method
   }]
+
+  return user
 }

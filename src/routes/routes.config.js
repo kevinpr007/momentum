@@ -1,9 +1,7 @@
 const GET = 'GET'
 const POST = 'POST'
-const PUT = 'PUT'
-const DELETE = 'DELETE'
 
-let routeMap = new Map()
+const routeMap = new Map()
 
 /**
  * @Index routes
@@ -29,11 +27,6 @@ routeMap.set('register', {
 routeMap.set('newPassword', {
   path: '/api/complete-reset-password',
   method: POST
-})
-
-routeMap.set('confirmResetPassword', {
-  path: '/api/confirm-reset-password/:token',
-  method: GET
 })
 
 routeMap.set('resetPassword', {

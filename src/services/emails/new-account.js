@@ -1,8 +1,7 @@
 module.exports = (user, host) => {
-  let getTemplate = () => {
-    return {
-      subject: 'Style Point: New Account',
-      html: `
+  const getTemplate = () => ({
+    subject: 'Style Point: New Account',
+    html: `
         <p>
             Hi ${user.firstName} ${user.lastName}!<br><br>
 
@@ -15,8 +14,7 @@ module.exports = (user, host) => {
             The Style Point Team
         </p>
     `
-    }
-  }
+  })
 
   return {
     getTemplate

@@ -1,6 +1,5 @@
 const HttpStatus = require('http-status-codes')
 const httpMocks = require('node-mocks-http')
-const config = require('../../src/config/config')()
 
 describe('Log entity requests', () => {
   let Log = require('../../src/models/logs.model')
@@ -26,6 +25,7 @@ describe('Log entity requests', () => {
         let result = [TotalCount, [new Log({code: '200'}), new Log({code: '201'})]]
         let next = err => done(err)
         req.query.page = '1'
+        req.query.pageSize = 1
 
         logService = this.stub(logService())
         logService.getAll.resolves(result)
@@ -41,36 +41,6 @@ describe('Log entity requests', () => {
           expect(response.data[DATA_FIELD].code).to.equal(result[DATA_FIELD][1].code)
           done()
         })
-      }))
-
-      it('returns Internal Server Error (500) with invalid page as argument', sinon.test(function (done) {
-        req.query.page = 'Invalid'
-        let next = args => done(args)
-
-        logService = this.stub(logService())
-
-        try {
-          logController(logService).getAllLogs(req, res, next)
-        } catch (err) {
-          expect(err).to.be.an('Error')
-          expect(err).to.have.property('status', HttpStatus.INTERNAL_SERVER_ERROR)
-          done()
-        }
-      }))
-
-      it('returns Internal Server Error (500) with invalid page size as argument', sinon.test(function (done) {
-        req.query.pageSize = 'Invalid'
-        let next = args => done(args)
-
-        logService = this.stub(logService())
-
-        try {
-          logController(logService).getAllLogs(req, res, next)
-        } catch (err) {
-          expect(err).to.be.an('Error')
-          expect(err).to.have.property('status', HttpStatus.INTERNAL_SERVER_ERROR)
-          done()
-        }
       }))
     })
 
@@ -111,53 +81,6 @@ describe('Log entity requests', () => {
           try {
             expect(args).to.be.a('Error')
             expect(args.status).to.equal(HttpStatus.INTERNAL_SERVER_ERROR)
-            expect(args.message).to.equal(errMessage)
-            done()
-          } catch (err) {
-            done(err)
-          }
-        }
-      }))
-    })
-
-    context('when requesting to get a log by status', () => {
-      it('returns Ok (200) with json array containing all logs for that particular status', sinon.test(function (done) {
-        let codeStr = 'success'
-        req.params.status = codeStr
-
-        let totalCount = 1
-        let log = [totalCount, [new Log({status: codeStr})]]
-        let next = (err) => done(err)
-
-        logService = this.stub(logService())
-        logService.getByStatus.resolves(log)
-
-        logController(logService).getByStatus(req, res, next)
-
-        res.on('end', function () {
-          let data = JSON.parse(res._getData()).data
-          assert.isTrue(res._isJSON())
-          assert.isTrue(logService.getByStatus.calledOnce)
-          expect(data[0].status).to.equal(codeStr)
-          done()
-        })
-      }))
-
-      it('returns Internal Server Error (500) with error object', sinon.test(function (done) {
-        let errMessage = 'Internal Error Message'
-        let err = new Error(errMessage)
-        err.status = HttpStatus.INTERNAL_SERVER_ERROR
-
-        logService = this.stub(logService())
-        logService.getByStatus.rejects(err)
-
-        logController(logService).getByStatus(req, res, next)
-
-        function next (args) {
-          try {
-            expect(args).to.be.a('Error')
-            expect(args.status).to.equal(HttpStatus.INTERNAL_SERVER_ERROR)
-            assert.isTrue(logService.getByStatus.calledOnce)
             expect(args.message).to.equal(errMessage)
             done()
           } catch (err) {

@@ -1,10 +1,10 @@
-const config = require('./config')()
+const config = require('./config')
 const mongoose = require('mongoose')
 const logger = require('./logger')
 
 module.exports = () => {
   mongoose.set('debug', (coll, method, query, doc, options) => {
-    let set = {
+    const set = {
       coll: coll,
       method: method,
       query: query,
@@ -30,7 +30,7 @@ module.exports = () => {
   })
 
   mongoose.connection.on('disconnected', () => {
-    logger.log('MongoDB connection closed')
+    logger.info('MongoDB connection closed')
   })
 
   return mongoose.connect(config.DB_URL)

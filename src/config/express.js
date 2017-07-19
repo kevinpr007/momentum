@@ -1,19 +1,14 @@
 const express = require('express')
 const router = express.Router()
-const favicon = require('serve-favicon')
 const bodyParser = require('body-parser')
 const BunyanMiddleware = require('bunyan-middleware')
 const HttpStatus = require('http-status-codes')
 const helmet = require('helmet')
-const hbs = require('hbs')
-const hbsHelpers = require('handlebars-form-helpers')
 const logger = require('./logger')
 const logService = require('../services/log.service')()
-const config = require('../../package.json')
-const compression = require('compression')
 
 module.exports = () => {
-  let app = express()
+  const app = express()
 
   /**
    * Security middleware
@@ -40,31 +35,8 @@ module.exports = () => {
   }))
 
   /**
-   * Static Resources / View Engine middleware
-   */
-  app.use(compression())
-  app.use(favicon('./public/img/favicon.ico'))
-  app.use(express.static('./public'))
-
-  hbs.registerHelper('section', function (name, options) {
-    this.sections = {}
-    this.sections[name] = options.fn(this)
-  })
-  hbsHelpers.register(hbs.handlebars)
-  app.set('views', './src/views')
-  app.set('view engine', 'hbs')
-
-  /**
    * Routing middleware
    */
-  router.templateModel = {
-    year: new Date().getFullYear(),
-    gitUrl: config.homepage,
-    version: config.version
-  }
-
-  // TODO: Apply a General Security Routing to all paths
-  // TODO: Add the role features to all required paths
   app.use('/', router)
   require('../routes/index.routes')(router)
   require('../routes/auth.routes')(router)
@@ -87,7 +59,7 @@ module.exports = () => {
    * Global Error middleware
    */
   app.use((req, res, next) => {
-    let err = new Error(HttpStatus.getStatusText(HttpStatus.NOT_FOUND))
+    const err = new Error(HttpStatus.getStatusText(HttpStatus.NOT_FOUND))
     err.status = HttpStatus.NOT_FOUND
     next(err)
   })

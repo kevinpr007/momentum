@@ -1,6 +1,5 @@
 const httpMocks = require('node-mocks-http')
 const HttpStatus = require('http-status-codes')
-const config = require('../../src/config/config')()
 
 describe('User entity requests', () => {
   let User = require('../../src/models/user.model')
@@ -37,40 +36,6 @@ describe('User entity requests', () => {
           assert.isTrue(userService.getAll.calledOnce)
           done()
         })
-      }))
-
-      it('returns Internal Server Error (500) with invalid page as argument', sinon.test(function (done) {
-        req.method = 'GET'
-        req.url = 'api/users'
-        req.query.page = 'invalid'
-        let next = args => done(args)
-
-        userService = this.stub(userService())
-
-        try {
-          userController(userService).getAllUsers(req, res, next)
-        } catch (err) {
-          expect(err).to.be.an('Error')
-          expect(err).to.have.property('status', HttpStatus.INTERNAL_SERVER_ERROR)
-          done()
-        }
-      }))
-
-      it('returns Internal Server Error (500) with invalid page size as argument', sinon.test(function (done) {
-        req.method = 'GET'
-        req.url = 'api/users'
-        req.query.pageSize = 'invalid'
-        let next = args => done(args)
-
-        userService = this.stub(userService())
-
-        try {
-          userController(userService).getAllUsers(req, res, next)
-        } catch (err) {
-          expect(err).to.be.an('Error')
-          expect(err).to.have.property('status', HttpStatus.INTERNAL_SERVER_ERROR)
-          done()
-        }
       }))
     })
 
