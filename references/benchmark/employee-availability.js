@@ -90,6 +90,11 @@ var getAvailability = user =>
  * Result: min: 269 msec - max: 374 msec
  */
 
+ /**
+ * Benchmark: Execute getAvailability() query x1000
+ * Result: min: 2310 msec - max: 2839 msec - ave: 2523 msec
+ */
+
 User.findOne({
   'roles.name': 'Admin'
 }, {
@@ -97,7 +102,7 @@ User.findOne({
 })
   .then(user => {
     var promises = []
-    for (let i = 0; i < 10; i++) {
+    for (let i = 0; i < 1000; i++) {
       promises.push(getAvailability(user))
     }
 

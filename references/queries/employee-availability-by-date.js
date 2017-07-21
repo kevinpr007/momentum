@@ -2,7 +2,7 @@ var user = db.getCollection('m_user').findOne({'roles.name': 'Admin'},
   {'_id': 1, 'roles.appId': 1})
 
 /**
- * This time range is available on employee's workshift, but is already taken in schedule, 
+ * This time range is available on employee's workshift, but is already taken in schedule,
  * so schedule's array won't be null.
  */
 var startDate = '2017-06-19T10:00:00.000Z'
