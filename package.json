@@ -11,7 +11,14 @@
     "nodemon": "cross-env NODE_ENV=development nodemon ./bin/www --ignore public/ --ignore test/",
     "nsp": "nsp check",
     "benchmark": "node benchmark/homepage.js",
+<<<<<<< .merge_file_a32620
     "seed": "cross-env NODE_ENV=development node ./src/config/mongoose_seed/configuration"
+=======
+    "seed": "cross-env NODE_ENV=development node ./src/config/mongoose_seed/configuration",
+    "docs": "./node_modules/.bin/apidoc -i src/routes/ -o docs/",
+    "commit": "commit-wizard",
+    "temp": "cross-env NODE_ENV=development node ./design/program-flow"
+>>>>>>> .merge_file_a33996
   },
   "repository": {
     "type": "git",
@@ -39,12 +46,20 @@
       "context",
       "it",
       "beforeEach",
+<<<<<<< .merge_file_a32620
       "assert",
       "clearModule",
       "config"
     ],
     "ignore": [
       "src/config/mongoose_seed/json_generator"
+=======
+      "assert"
+    ],
+    "ignore": [
+      "references/",
+      "design/"
+>>>>>>> .merge_file_a33996
     ]
   },
   "engines": {
@@ -62,7 +77,11 @@
     "dotenv": "4.0.0",
     "express": "4.15.3",
     "express-cluster": "0.0.4",
+<<<<<<< .merge_file_a32620
     "helmet": "3.6.1",
+=======
+    "helmet": "3.4.0",
+>>>>>>> .merge_file_a33996
     "http-status-codes": "1.1.6",
     "jsonwebtoken": "7.4.1",
     "lodash": "4.17.4",
@@ -72,6 +91,7 @@
     "nodemailer": "4.0.1",
     "passport": "0.3.2",
     "passport-jwt": "2.2.1",
+<<<<<<< .merge_file_a32620
     "passport-local": "1.0.0"
   },
   "devDependencies": {
@@ -80,6 +100,18 @@
     "chai-as-promised": "7.1.1",
     "clear-module": "^2.1.0",
     "debug": "2.6.8",
+=======
+    "passport-local": "1.0.0",
+    "slugify": "1.1.0"
+  },
+  "devDependencies": {
+    "apidoc": "0.17.5",
+    "chai": "3.5.0",
+    "chai-as-promised": "6.0.0",
+    "compression": "1.6.2",
+    "debug": "2.6.1",
+    "faker": "^4.1.0",
+>>>>>>> .merge_file_a33996
     "istanbul": "0.4.5",
     "mocha": "3.4.2",
     "mongoose-seed": "0.3.2",
@@ -89,8 +121,14 @@
     "retire": "1.3.3",
     "siege": "0.2.0",
     "sinon": "1.17.7",
+<<<<<<< .merge_file_a32620
     "sinon-as-promised": "4.0.3",
     "sinon-mongoose": "2.0.2",
     "standard": "10.0.2"
+=======
+    "sinon-as-promised": "4.0.2",
+    "sinon-mongoose": "1.3.0",
+    "standard": "8.6.0"
+>>>>>>> .merge_file_a33996
   }
 }

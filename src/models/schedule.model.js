@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 const mongoDB = require('../config/mongoose.collections.json')
-const types = require('./schedule-types.enum')()
+const types = require('./schedule-types.enum')
 
 const scheduleSchema = new Schema({
   startDate: {
@@ -14,20 +14,35 @@ const scheduleSchema = new Schema({
     required: true,
     index: true
   },
+  other: {
+    type: String
+  },
+  userId: {
+    type: Schema.ObjectId,
+    ref: mongoDB.Model.User,
+    required: true,
+    index: true
+  },
   scheduleType: {
     type: String,
     enum: types,
     index: true
   },
-  service: {
+  serviceId: {
     type: Schema.ObjectId,
     ref: mongoDB.Model.Service,
     required: true,
     index: true
   },
-  workshift: {
+  workshiftId: {
     type: Schema.ObjectId,
     ref: mongoDB.Model.Workshift,
+    required: true,
+    index: true
+  },
+  locationId: {
+    type: Schema.ObjectId,
+    ref: mongoDB.Model.Location,
     required: true
   },
   createdBy: {

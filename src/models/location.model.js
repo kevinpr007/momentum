@@ -37,6 +37,11 @@ const locationSchema = new Schema({
       required: true
     }
   },
+  appId: {
+    type: Schema.ObjectId,
+    ref: mongoDB.Model.Application,
+    required: true
+  },
   createdBy: {
     type: Schema.ObjectId,
     ref: mongoDB.Model.User,

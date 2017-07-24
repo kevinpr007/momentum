@@ -7,6 +7,7 @@ describe('Environment variables test', () => {
     context('when passing "development" as value', () => {
       it('will set NODE_ENV to "development"', sinon.test(function (done) {
         process.env.NODE_ENV = 'development'
+        clearModule('../../src/config/config')
         let envVariable = require('../../src/config/config')
 
         expect(envVariable.NODE_ENV).to.equal(process.env.NODE_ENV)

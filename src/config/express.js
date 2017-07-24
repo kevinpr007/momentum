@@ -38,7 +38,6 @@ module.exports = () => {
    * Routing middleware
    */
   app.use('/', router)
-  require('../routes/index.routes')(router)
   require('../routes/auth.routes')(router)
   require('../routes/user.routes')(router)
   require('../routes/log.routes')(router)

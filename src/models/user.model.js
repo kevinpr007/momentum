@@ -2,8 +2,8 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 const bcrypt = require('bcrypt-nodejs')
 const mongoDB = require('../config/mongoose.collections.json')
-const roles = require('./roles.enum')()
 const config = require('../config/config')
+const roles = require('./roles.enum')
 const Promise = require('bluebird')
 
 const userSchema = new Schema({
@@ -55,11 +55,18 @@ const userSchema = new Schema({
     type: Date
   },
   phone: Number,
-  roles: {
-    type: [String],
-    enum: roles,
-    index: true
-  },
+  roles: [{
+    name: {
+      type: String,
+      enum: roles,
+      required: true
+    },
+    appId: {
+      type: Schema.ObjectId,
+      ref: mongoDB.Model.Application,
+      required: true
+    }
+  }],
   address: {
     address1: {
       type: String,
@@ -130,7 +137,7 @@ userSchema.methods.isValidPassword = function (password) {
 userSchema.methods.confirmPasswordValid = function (password, confirmPassword) {
   return new Promise((resolve, reject) => {
     if (password === null || password === undefined ||
-        confirmPassword === null || confirmPassword === undefined) {
+      confirmPassword === null || confirmPassword === undefined) {
       reject(new Error('Password and Confirm Password can not be null or undefined'))
     }
 

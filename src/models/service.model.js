@@ -16,10 +16,10 @@ const serviceSchema = new Schema({
     required: true
   },
   time: {
-    type: Number,
+    type: Number, // it's in minutes
     required: true
   },
-  user: {
+  userId: {
     type: Schema.ObjectId,
     ref: mongoDB.Model.User,
     required: true,

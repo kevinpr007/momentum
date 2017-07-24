@@ -3,6 +3,14 @@ const userService = require('../services/user.service')()
 const emailService = require('../services/email.service')
 const routes = require('./routes.config')
 
+const {
+  auth,
+  register,
+  newPassword,
+  confirmResetPassword,
+  resetPassword
+  } = require('../controllers/auth.controller')(authService, userService, emailService)
+
 module.exports = (router) => {
   const authController = require('../controllers/auth.controller')(authService, userService,
     emailService)
