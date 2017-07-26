@@ -11,15 +11,12 @@ const {
   resetPassword
   } = require('../controllers/auth.controller')(authService, userService, emailService)
 
-module.exports = (router) => {
-  const authController = require('../controllers/auth.controller')(authService, userService,
-    emailService)
+module.exports = router => {
+  router.post(routes.get('auth').path, auth)
 
-  router.post(routes.get('auth').path, authController.auth)
+  router.post(routes.get('register').path, register)
 
-  router.post(routes.get('register').path, authController.register)
+  router.post(routes.get('newPassword').path, newPassword)
 
-  router.post(routes.get('newPassword').path, authController.newPassword)
-
-  router.post(routes.get('resetPassword').path, authController.resetPassword)
+  router.post(routes.get('resetPassword').path, resetPassword)
 }
