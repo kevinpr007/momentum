@@ -1,0 +1,273 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "Momentum is a scheduler that connects people to any service at the time and location of your choice!",
+    "version": "0.1.0",
+    "title": "MOMENTUM API Docs",
+    "license": {
+      "name": "TODO LICENSE"
+    }
+  },
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "schemes": [
+    "http"
+  ],
+  "basePath": "/api/swagger/v1",
+  "paths": {
+    "/logs": {
+      "get": {
+        "x-swagger-router-controller": "logs_mocks",
+        "operationId": "getAll",
+        "tags": [
+          "/logs"
+        ],
+        "security": [
+          "jwt"
+        ],
+        "summary": "List all logs",
+        "description": "Get list of all logs.",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "This is the page number.",
+            "required": false,
+            "type": "number",
+            "format": "integer"
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "How many records you want in the result.",
+            "required": false,
+            "type": "number",
+            "format": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "Object",
+              "$ref": "#/definitions/log"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          }
+        }
+      }
+    },
+    "/users": {
+      "get": {
+        "x-swagger-router-controller": "users_mocks",
+        "operationId": "getAll",
+        "tags": [
+          "/users"
+        ],
+        "security": [
+          "jwt"
+        ],
+        "summary": "List all users",
+        "description": "Get list of all users.",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "This is the page number.",
+            "required": false,
+            "type": "number",
+            "format": "integer"
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "How many records you want in the result.",
+            "required": false,
+            "type": "number",
+            "format": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "Object",
+              "$ref": "#/definitions/user"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "log": {
+      "required": [
+        "appId"
+      ],
+      "properties": {
+        "code": {
+          "type": "String",
+          "default": null,
+          "index": true
+        },
+        "status": {
+          "type": "String",
+          "default": null,
+          "index": true
+        },
+        "message": {
+          "type": "String",
+          "default": null
+        },
+        "stack": {
+          "type": "String"
+        },
+        "createdOn": {
+          "type": "Date",
+          "default": "Date.now"
+        },
+        "appId": {
+          "type": "GUID",
+          "required": true
+        }
+      }
+    },
+    "user": {
+      "required": [
+        "firstName",
+        "lastName",
+        "email",
+        "password"
+      ],
+      "properties": {
+        "firstName": {
+          "type": "String",
+          "required": true,
+          "index": true
+        },
+        "lastName": {
+          "type": "String",
+          "required": true,
+          "index": true
+        },
+        "email": {
+          "type": "String",
+          "trim": true,
+          "lowercase": true,
+          "required": true,
+          "index": {
+            "unique": true
+          }
+        },
+        "dob": {
+          "type": "Date"
+        },
+        "password": {
+          "type": "String",
+          "required": true
+        },
+        "salt": {
+          "type": "String"
+        },
+        "resetPasswordToken": {
+          "type": "String"
+        },
+        "resetPasswordExpires": {
+          "type": "Date"
+        },
+        "phone": {
+          "type": "Number"
+        },
+        "roles": {
+          "required": [
+            "name",
+            "appId"
+          ],
+          "properties": {
+            "name": {
+              "type": "String",
+              "required": true
+            },
+            "appId": {
+              "type": "GUID",
+              "required": true
+            }
+          }
+        },
+        "address": {
+          "required": [
+            "address1",
+            "city",
+            "state",
+            "zipCode"
+          ],
+          "properties": {
+            "address1": {
+              "type": "String",
+              "required": true
+            },
+            "address2": {
+              "type": "String"
+            },
+            "city": {
+              "type": "String",
+              "required": true
+            },
+            "state": {
+              "type": "String",
+              "required": true
+            },
+            "zipCode": {
+              "type": "String",
+              "required": true
+            }
+          }
+        },
+        "createdBy": {
+          "type": "GUID"
+        },
+        "createdOn": {
+          "type": "Date",
+          "default": "Date.now"
+        }
+      }
+    },
+    "error": {
+      "properties": {
+        "message": {
+          "type": "string"
+        },
+        "error": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

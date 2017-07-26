@@ -11,7 +11,7 @@ const {
 
 module.exports = router => {
   router.get(routes.get('getUsers').path, authenticate,
-    authorize(['Admin']), pageValidations, userController.getAllUsers)
+    authorize(['Admin']), pageValidations, getAllUsers)
 
   router.get(routes.get('getByUserEmail').path, authenticate,
     authorize([{

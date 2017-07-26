@@ -4,6 +4,19 @@ const POST = 'POST'
 const routeMap = new Map()
 
 /**
+ * @Index routes
+ */
+routeMap.set('index', {
+  path: '/',
+  method: GET
+})
+
+routeMap.set('indexSwagger', {
+  path: '/api-docs',
+  method: GET
+})
+
+/**
  * @Authentication routes
  */
 routeMap.set('auth', {

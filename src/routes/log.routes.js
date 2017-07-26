@@ -11,8 +11,8 @@ const {
 
 module.exports = router => {
   router.get(routes.get('getLogs').path, authenticate,
-    authorize(['sysAdmin']), pageValidations, logController.getAllLogs)
+    authorize(['sysAdmin']), pageValidations, getAllLogs)
 
   router.get(routes.get('getByLogCode').path, authenticate,
-    authorize(['sysAdmin']), pageValidations, logController.getByCode)
+    authorize(['sysAdmin']), pageValidations, getByCode)
 }
