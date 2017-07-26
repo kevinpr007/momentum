@@ -45,7 +45,8 @@
       "config"
     ],
     "ignore": [
-      "src/config/mongoose_seed/json_generator"
+      "src/config/mongoose_seed/json_generator",
+      "references/queries"
     ]
   },
   "engines": {
