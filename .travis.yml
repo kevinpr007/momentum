@@ -14,7 +14,7 @@ deploy:
   api_key:
     secure: tH/nODXkw+NABhop0dGT7GdlvcpR+0dtAlEjjypmB/jqidqTaCxVVFCZY5nozjIHldnE1fQVmPcxYRGXwPVXCfiC7DZSbb3wd7u1BekiTR5U2oDLIVyMSgsXHN/QB8w7YAfqNvFiluIZYWocR/Lvx2AIucdpF3tgtehlNiVmV6aKa6L6idWq+C0cy9btVwlc1LP5cYF0ofsqvHXJ12CyNCoXuKe4V2S8fn5UoGd7AACmRg7Rd0GrDtzk7SzvoSG0GU9ARHtx8Wv6VWxHWRtfCDo8K3FaZc3++h3eVMMuq3RV1SpIhRCCMStfi620bk4AVdUcI9l7WhPxveYl07VI1qNHhFXtclCYnE0htPVpnLmT5TiWUaNFJUDtyPeGarh6V/HfsNEAZfVv+rDdx2bYOJfFQWayh9mNvgIarXMbSgGg2Ya8j48wp/EtFBI0r7gvYyWHoAEPgVx+EFYt5g1qELP+dabu9K8VSGasLQHUivbMgycutfI9M/JM7DdVYp0MaCpIcGrnoWgtqcSpbtzVY8Tn0Xyec30R+hBetTE2lgURGBi2TCwSCpaIvSvipUQHxff1IaMhh9vLOYzDGoS3K6Jttv+GAws00/N9rF7akQX1EikEqQ+1ujJNlYuWHPUUKq5eHOk7f+ingDQ097CaLuGHFytVriSokO4M1iXmLoI=
   app:
-    develop: angular-momentum-dev
-    master: angular-momentum
+    develop: momentum-net-dev
+    master: momentum-net
 notifications:
   slack: pulsartechnologies:A07O08GZgTrixj84mWvTSMb7
