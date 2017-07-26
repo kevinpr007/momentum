@@ -9,8 +9,8 @@ const serviceData = require('../mongoose_seed/service.seed')
 const scheduleData = require('../mongoose_seed/schedule.seed')
 const workshiftData = require('../mongoose_seed/workshift.seed')
 
-let mainData = _.concat(userData, logData, locationData, serviceData, scheduleData, workshiftData)
-let config = require('../config')()
+const mainData = _.concat(userData, logData, locationData, serviceData, scheduleData, workshiftData)
+const config = require('../config')
 
 // Connect to MongoDB via Mongoose
 seeder.connect(config.DB_URL, () => {

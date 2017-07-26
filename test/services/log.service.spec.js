@@ -55,49 +55,6 @@ describe('Log service tests', () => {
       }))
     })
 
-    context('when requesting a log by status', () => {
-      it('will return log(s) by specified status', sinon.test(function (done) {
-        log = new Log({
-          code: ERROR_CODE,
-          status: STATUS,
-          Messages: MESSAGE
-        })
-
-        let find = {
-          where () {
-            return this
-          },
-          sort () {
-            return this
-          },
-          skip () {
-            return this
-          },
-          limit () {
-            return this
-          },
-          exec () {
-            return Promise.resolve(log)
-          },
-          count () {
-            return {
-              exec () {
-                return Promise.resolve(1)
-              }
-            }
-          }
-        }
-
-        this.stub(Log, 'find').returns(find)
-
-        logService.getByStatus(STATUS).then(result => {
-          assert.notEqual(result, null)
-          expect(result[1].status).to.be.equal(STATUS)
-          done()
-        }).catch(err => done(err))
-      }))
-    })
-
     context('when requesting all logs', () => {
       it('will return a list of logs with pagination', sinon.test(function (done) {
         let logs = [new Log(), new Log(), new Log(), new Log(), new Log(), new Log(), new Log({code: '500'})]

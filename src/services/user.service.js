@@ -5,7 +5,7 @@ const User = require('../models/user.model')
 const _ = require('lodash')
 
 module.exports = () => {
-  let getAll = (page, pageSize) => {
+  const getAll = (page, pageSize) => {
     page = Math.max(0, page)
     return Promise.all([
       User.count().exec(),
@@ -18,21 +18,17 @@ module.exports = () => {
     ])
   }
 
-  let getByEmail = email => {
-    return User.findOne().where('email', email).exec()
-  }
+  const getByEmail = email =>
+    User.findOne().where('email', email).exec()
 
-  let getById = id => {
-    return User.findOne().where('_id', id).exec()
-  }
+  const getById = id =>
+    User.findOne().where('_id', id).exec()
 
-  let registerUser = user => {
-    return User.create(_.merge(user, User))
-  }
+  const registerUser = user =>
+    User.create(_.merge(user, User))
 
-  let upsertUser = user => {
-    return _.merge(new User(), user).save()
-  }
+  const upsertUser = user =>
+    _.merge(new User(), user).save()
 
   return {
     getAll,

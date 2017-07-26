@@ -286,7 +286,7 @@ describe('User authentication requests', () => {
         userService.getByEmail.resolves(user)
 
         authService = this.stub(authService())
-        authService.resetToken.resolves(user)
+        authService.resetPasswordToken.resolves(user)
 
         emailService = this.stub(emailService({
           to: 'test@dev.com'
@@ -304,48 +304,10 @@ describe('User authentication requests', () => {
           let data = JSON.parse(res._getData())
           expect(res.statusCode).to.equal(HttpStatus.OK)
           expect(data.data).to.have.deep.property('sent', true)
-          assert.isTrue(authService.resetToken.calledOnce)
+          assert.isTrue(authService.resetPasswordToken.calledOnce)
           assert.isTrue(userService.getByEmail.calledOnce)
           done()
         })
-      }))
-    })
-  })
-
-  describe('Given a user requesting to reset password via email confirmation', () => {
-    context('when token is not set inside route', () => {
-      it('returns Not Found (404)', sinon.test(function (done) {
-        let templateModel = {}
-        req.method = 'GET'
-        req.url = 'api/confirm-reset-password'
-
-        authController(null, null, null, templateModel).confirmResetPassword(req, res, next)
-
-        function next (args) {
-          try {
-            expect(args).to.be.an('Error')
-            expect(args.status).to.equal(HttpStatus.NOT_FOUND)
-            done()
-          } catch (err) {
-            done(err)
-          }
-        }
-      }))
-    })
-
-    context('when token is provided inside route', () => {
-      it('returns Ok (200) with reset-password page', sinon.test(function (done) {
-        let templateModel = {}
-        req.method = 'GET'
-        req.url = 'api/confirm-reset-password'
-        req.params = {
-          token: 'ABCD-1234'
-        }
-
-        authController(null, null, null, templateModel).confirmResetPassword(req, res)
-
-        expect(res.statusCode).to.equal(HttpStatus.OK)
-        done()
       }))
     })
   })

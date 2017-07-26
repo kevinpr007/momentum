@@ -20,7 +20,7 @@ describe('User authentication service test', () => {
         let user = new User()
         this.stub(user, 'save').resolves(user)
 
-        authService.resetToken(user).then(user => {
+        authService.resetPasswordToken(user).then(user => {
           assert.notEqual(user.resetPasswordToken, null)
           expect(user.save.calledOnce).to.equal(true)
           done()

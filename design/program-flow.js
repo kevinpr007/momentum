@@ -69,7 +69,7 @@ function createLocation (createdBy, appId) {
 
 function createWorkshift (userId, startDate, endDate) {
   return Workshift.create(new Workshift({
-    startDate, 
+    startDate,
     endDate,
     createdBy: userId,
     userId
@@ -88,7 +88,6 @@ function createService (userId) {
 }
 
 function createSchedule (userId, serviceId, workshiftId, locationId, startDate, endDate) {
-
   return Schedule.create(new Schedule({
     startDate,
     endDate,
@@ -762,14 +761,14 @@ function createApp (type, appName) {
       createService(admin.id),
       createService(admin.id)
     ]).then(([location, workshift, service]) => Promise.all([
-      createSchedule(admin.id, service.id, workshift.id, location.id, 
+      createSchedule(admin.id, service.id, workshift.id, location.id,
         startAppointment, endAppointment),
-      (function () { 
+      (function () {
         startAppointment = moment().hours(7).minutes(0)
         endAppointment = moment().hours(8).minutes(0)
-        createSchedule(admin.id, service.id, workshift.id, location.id, 
+        createSchedule(admin.id, service.id, workshift.id, location.id,
           startAppointment, endAppointment)
-      } ())
+      }())
     ]))))
 }
 
@@ -781,19 +780,19 @@ setupEnv().then(() => Promise.all([
   createApp('Landscaping', 'The Show Land Scaping')
 ])).then(() => runQueries())
   .then(([
-    users, 
-    apps, 
-    sortedUsers, 
-    appTypes, 
-    usersByApp, 
-    adminsByApp, 
-    workshiftsByUser, 
-    logsByApp, 
-    workshiftsByApp, 
-    servicesByAllUsers, 
-    servicesByAnUser, 
-    schedulesByAllUsers, 
-    schedulesByAnUser, 
+    users,
+    apps,
+    sortedUsers,
+    appTypes,
+    usersByApp,
+    adminsByApp,
+    workshiftsByUser,
+    logsByApp,
+    workshiftsByApp,
+    servicesByAllUsers,
+    servicesByAnUser,
+    schedulesByAllUsers,
+    schedulesByAnUser,
     scheduleSpecificUser
     ]) => {
     console.log('Retrieve all users with Admin role:\n')

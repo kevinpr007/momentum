@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 const bcrypt = require('bcrypt-nodejs')
 const mongoDB = require('../config/mongoose.collections.json')
-const config = require('../config/config')()
+const config = require('../config/config')
 const roles = require('./roles.enum')
 const Promise = require('bluebird')
 

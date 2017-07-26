@@ -1,5 +1,5 @@
 const { createTransport } = require('nodemailer')
-const config = require('./config')()
+const config = require('./config')
 
 module.exports = createTransport({
   service: config.EMAIL_SERVICE,

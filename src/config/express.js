@@ -8,7 +8,7 @@ const logger = require('./logger')
 const logService = require('../services/log.service')()
 
 module.exports = () => {
-  let app = express()
+  const app = express()
 
   /**
    * Security middleware
@@ -37,9 +37,6 @@ module.exports = () => {
   /**
    * Routing middleware
    */
-
-  // TODO: Apply a General Security Routing to all paths
-  // TODO: Add the role features to all required paths
   app.use('/', router)
   require('../routes/auth.routes')(router)
   require('../routes/user.routes')(router)
@@ -66,7 +63,7 @@ module.exports = () => {
    * Global Error middleware
    */
   app.use((req, res, next) => {
-    let err = new Error(HttpStatus.getStatusText(HttpStatus.NOT_FOUND))
+    const err = new Error(HttpStatus.getStatusText(HttpStatus.NOT_FOUND))
     err.status = HttpStatus.NOT_FOUND
     next(err)
   })

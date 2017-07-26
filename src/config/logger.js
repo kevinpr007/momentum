@@ -2,14 +2,14 @@ const bunyan = require('bunyan')
 const bFormat = require('bunyan-format')
 const RotatingFileStream = require('bunyan-rotating-file-stream')
 
-let formatOut = bFormat({
+const formatOut = bFormat({
   outputMode: 'short',
   levelInString: true
 })
 
-let serializer = data => {
-  let query = JSON.stringify(data.query)
-  let options = JSON.stringify(data.options || {})
+const serializer = data => {
+  const query = JSON.stringify(data.query)
+  const options = JSON.stringify(data.options || {})
 
   return `db.${data.coll}.${data.method}(${query}, ${options})`
 }
