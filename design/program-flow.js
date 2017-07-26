@@ -114,12 +114,6 @@ function setupEnv () {
 }
 
 /**
- * Helpers to pipe functions
- */
-const _pipe = (fn1, fn2) => (...args) => fn2(fn1(...args))
-const pipe = (...fns) => fns.reduce(_pipe)
-
-/**
  * Queries
  */
 function runQueries () {

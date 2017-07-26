@@ -1,3 +1,4 @@
+const {ObjectID} = require('mongodb')
 var user = db.getCollection('m_user').findOne({'roles.name': 'Admin'},
   {'_id': 1, 'roles.appId': 1})
 
@@ -11,8 +12,8 @@ var endDate = '2017-06-19T11:00:00.000Z'
 db.getCollection('m_user').aggregate([
   {
     $match: {
-      _id: ObjectId(user._id.valueOf()),
-      'roles.appId': ObjectId(user.roles[0].appId.valueOf())
+      _id: ObjectID(user._id.valueOf()),
+      'roles.appId': ObjectID(user.roles[0].appId.valueOf())
     }
   },
   {

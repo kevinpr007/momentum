@@ -7,7 +7,6 @@ const {
   auth,
   register,
   newPassword,
-  confirmResetPassword,
   resetPassword
   } = require('../controllers/auth.controller')(authService, userService, emailService)
 
