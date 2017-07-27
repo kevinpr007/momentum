@@ -31,7 +31,7 @@ module.exports = () => {
     propertyName: 'reqId',
     logName: 'req_id',
     obscureHeaders: [],
-    logger: logger
+    logger
   }))
 
   /**
@@ -49,7 +49,7 @@ module.exports = () => {
   app.use((req, res, next) => {
     const allowedHeaders = ['Origin', 'X-Requested-With', 'Content-Type', 'Accept', 'Authorization',
       'Access-Control-Allow-Credentials']
-      
+
     res.header('Access-Control-Allow-Origin', '*')
     res.header('Access-Control-Allow-Credentials', 'true')
     res.header('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, OPTIONS')
