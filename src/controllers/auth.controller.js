@@ -24,7 +24,7 @@ module.exports = (authService, userService, emailService) => {
               let token = authService.getToken(user)
               let expiresIn = authService.setExpirationDate()
               user._doc.jwt = { token, expiresIn }
-              
+
               return res.status(HttpStatus.OK).json(new Hypermedia(req).setResponse(user, next))
             } else {
               const err = new Error('Authentication failed. Wrong password.')

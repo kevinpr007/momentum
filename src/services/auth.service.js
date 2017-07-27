@@ -22,12 +22,12 @@ module.exports = () => {
   const setExpirationDate = () =>
     moment().add((parseInt(tokenExpTime) / 3600), 'h')
 
-  const refreshToken = user => 
+  const refreshToken = user =>
     Promise.all([
       getToken(_.omit(user, ['exp'])),
       setExpirationDate()
     ])
-    .then(([token, expiresIn]) => 
+    .then(([token, expiresIn]) =>
       JSON.stringify({ token, expiresIn }))
 
   const resetPasswordToken = user => {
