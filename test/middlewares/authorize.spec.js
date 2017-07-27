@@ -1,6 +1,6 @@
 describe('authorize middleware tests', () => {
   let User = require('../../src/models/user.model')
-  let authorize = require('../../src/middlewares/authorize')
+  let authorize = require('../../src/middleware/authorize')
 
   describe('Given an authentication request', () => {
     context('when requesting an action that requires an authorization role', () => {
