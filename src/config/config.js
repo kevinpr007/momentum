@@ -27,5 +27,6 @@ module.exports = {
   SALT_FACTOR: process.env.SALT_FACTOR,
   PASSWORD_LENGHT: process.env.PASSWORD_LENGHT,
   RANDOM_BYTES: process.env.RANDOM_BYTES,
-  PAGE_SIZE: process.env.PAGE_SIZE
+  PAGE_SIZE: process.env.PAGE_SIZE,
+  EXP_SECONDS: process.env.EXP_SECONDS
 }
