@@ -33,11 +33,12 @@ module.exports = () => {
   const resetPasswordToken = user => {
     const date = new Date()
     user = _.extend(user, User)
-    return randomBytes(parseInt(config.RANDOM_BYTES)).then(buffer => {
-      user.resetPasswordToken = buffer.toString('hex')
-      user.resetPasswordExpires = date.setSeconds(date.getSeconds() + parseInt(tokenExpTime))
-      return user.save()
-    })
+    return randomBytes(parseInt(config.RANDOM_BYTES))
+      .then(buffer => {
+        user.resetPasswordToken = buffer.toString('hex')
+        user.resetPasswordExpires = date.setSeconds(date.getSeconds() + parseInt(tokenExpTime))
+        return user.save()
+      })
   }
 
   const findByPasswordToken = token =>
