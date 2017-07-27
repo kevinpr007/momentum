@@ -26,7 +26,7 @@ module.exports = () => {
           })
         }
 
-        if (getRemainingTime(expDate) <= config.EXP_SECONDS) {
+        if (getRemainingTime(expDate) <= parseInt(config.EXP_SECONDS)) {
           return refreshToken(user)
           .then(jwt => {
             req.res.set('X-Updated-JWT', jwt)
