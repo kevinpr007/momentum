@@ -22,6 +22,7 @@ module.exports = (authService, userService, emailService) => {
           .then(isMatch => {
             if (isMatch) {
               user._doc.token = authService.getToken(user)
+              user._doc.expiresIn = authService.setExpirationDate()
               return res.status(HttpStatus.OK).json(new Hypermedia(req).setResponse(user, next))
             } else {
               const err = new Error('Authentication failed. Wrong password.')
@@ -45,6 +46,7 @@ module.exports = (authService, userService, emailService) => {
       })
       .then(user => {
         user._doc.token = authService.getToken(user)
+        user._doc.expiresIn = authService.setExpirationDate()
         res.status(HttpStatus.CREATED).json(new Hypermedia(req).setResponse(user, next))
 
         const email = emails.newAccount(user, req.headers.host).getTemplate()
