@@ -2,7 +2,9 @@ const config = require('../config')
 const passport = require('passport')
 const JwtStrategy = require('passport-jwt').Strategy
 const ExtractJwt = require('passport-jwt').ExtractJwt
+const Promise = require('bluebird')
 const {refreshToken} = require('../../services/auth.service')()
+const {getRemainingTime} = require('../../util/util.helpers')
 
 const jwtOptions = {
   jwtFromRequest: ExtractJwt.fromAuthHeader(),
@@ -24,14 +26,14 @@ module.exports = () => {
           })
         }
 
-        if (2 === 2) { // TODO: validate expDate remaining time.
+        if (getRemainingTime(expDate) <= config.EXP_SECONDS) {
           return refreshToken(user)
           .then(jwt => {
             req.res.set('X-Updated-JWT', jwt)
-            return cb(null, user)
+            return Promise.resolve(cb(null, user))
           })
         } else {
-          return cb(null, user)
+          return Promise.resolve(cb(null, user))
         }
       }).catch(err => cb(err))
   }))
