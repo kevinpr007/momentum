@@ -22,6 +22,14 @@ module.exports = () => {
   const setExpirationDate = () =>
     moment().add((parseInt(tokenExpTime) / 3600), 'h')
 
+  const refreshToken = user => 
+    Promise.all([
+      getToken(_.omit(user, ['exp'])),
+      setExpirationDate()
+    ])
+    .then(([token, expiresIn]) => 
+      JSON.stringify({ token, expiresIn }))
+
   const resetPasswordToken = user => {
     const date = new Date()
     user = _.extend(user, User)
@@ -44,6 +52,7 @@ module.exports = () => {
     resetPasswordToken,
     getToken,
     findByPasswordToken,
-    setExpirationDate
+    setExpirationDate,
+    refreshToken
   }
 }
