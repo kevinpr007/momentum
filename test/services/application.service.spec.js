@@ -25,7 +25,7 @@ describe('Application service tests', () => {
     })
 
     context('when requesting to register a new application', () => {
-      it.skip('will create a new application', sinon.test(function (done) {
+      it('will create a new application', sinon.test(function (done) {
         let app = new Application()
         this.stub(Application, 'create').resolves(app)
 
