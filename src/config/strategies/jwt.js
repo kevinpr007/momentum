@@ -18,6 +18,11 @@ module.exports = () => {
   passport.use(new JwtStrategy(jwtOptions, (req, payload, cb) => {
     const expDate = new Date(parseInt(`${payload.exp}000`))
 
+    const setHeaders = jwt => {
+      req.res.set('X-Updated-JWT', jwt)
+      return user => Promise.resolve(cb(null, user))
+    }
+
     userService.getById(payload._doc._id)
       .then(user => {
         if (!user) {
@@ -27,11 +32,7 @@ module.exports = () => {
         }
 
         if (getRemainingTime(expDate) <= parseInt(config.EXP_SECONDS)) {
-          return refreshToken(user)
-          .then(jwt => {
-            req.res.set('X-Updated-JWT', jwt)
-            return Promise.resolve(cb(null, user))
-          })
+          return refreshToken(user).then(jwt => setHeaders(jwt)(user))
         } else {
           return Promise.resolve(cb(null, user))
         }
