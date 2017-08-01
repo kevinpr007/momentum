@@ -9,6 +9,17 @@ const getRemainingTime = endTime => {
   return (endTime.getTime() - startDate.getTime()) / SECONDS
 }
 
+/**
+ * @desc Converts UTC Epoch to a Date object.
+ * @param {number} epoch
+ * @returns {Date}
+ */
+const getDateFromEpoch = epoch => {
+  const MILLISECONDS = 1000
+  return new Date(epoch * MILLISECONDS)
+}
+
 module.exports = {
-  getRemainingTime
+  getRemainingTime,
+  getDateFromEpoch
 }

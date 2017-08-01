@@ -27,7 +27,8 @@ module.exports = () => {
     getToken(_.omit(user, ['exp'])),
     setExpirationDate()
   ])
-    .then(([token, expiresIn]) => JSON.stringify({ token, expiresIn }))
+    .then(([token, expiresIn]) =>
+      JSON.stringify({ token, expiresIn: new Date(expiresIn).getTime() }))
 
   const resetPasswordToken = user => {
     const date = new Date()
