@@ -1,11 +1,11 @@
-const {SECRET, EXP_SECONDS} = require('../config/config')
+const {SECRET, TOKEN_EXP_TIME} = require('../config/config')
 const jwt = require('jsonwebtoken')
 const Promise = require('bluebird')
 const mongoose = require('mongoose')
 mongoose.Promise = Promise
 
 const User = require('../models/user.model')
-const tokenExpTime = parseInt(EXP_SECONDS)
+const tokenExpTime = parseInt(TOKEN_EXP_TIME)
 const moment = require('moment')
 const _ = require('lodash')
 
@@ -14,7 +14,7 @@ const HOURS = 3600
 const BYTES = 48
 
 module.exports = () => {
-  const generateToken = user =>
+  const generateToken = user => 
     jwt.sign(user, SECRET, {
       expiresIn: tokenExpTime
     })
@@ -40,13 +40,12 @@ module.exports = () => {
       })
   }
 
-  const findByPasswordToken = token =>
-    User.findOne({
-      resetPasswordToken: token,
-      resetPasswordExpires: {
-        $gt: new Date()
-      }
-    }).exec()
+  const findByPasswordToken = token => User.findOne({
+    resetPasswordToken: token,
+    resetPasswordExpires: {
+      $gt: new Date()
+    }
+  }).exec()
 
   return {
     resetPasswordToken,
