@@ -14,7 +14,7 @@ const HOURS = 3600
 const BYTES = 48
 
 module.exports = () => {
-  const generateToken = user => 
+  const generateToken = user =>
     jwt.sign(user, SECRET, {
       expiresIn: tokenExpTime
     })
