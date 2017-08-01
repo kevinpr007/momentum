@@ -32,7 +32,7 @@ describe('User authentication service test', () => {
       it('will return a user by specified token', sinon.test(function (done) {
         let token = 'A1244'
         let findOne = {
-          exec() {
+          exec () {
             return Promise.resolve(new User({
               resetPasswordToken: token,
               resetPasswordExpires: moment(new Date()).add(1, 'd')
@@ -58,7 +58,7 @@ describe('User authentication service test', () => {
           name: 'John',
           lastName: 'Smith'
         }
-        let result = authService.refreshToken(user)
+        authService.refreshToken(user)
           .then(jwt => {
             jwt = JSON.parse(jwt)
             expect(jwt).to.have.property('token')
