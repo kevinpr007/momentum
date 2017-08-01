@@ -1,41 +1,42 @@
-const config = require('../config')
+const _ = require('lodash')
 const passport = require('passport')
 const JwtStrategy = require('passport-jwt').Strategy
 const ExtractJwt = require('passport-jwt').ExtractJwt
 const Promise = require('bluebird')
-const {refreshToken} = require('../../services/auth.service')()
-const {getRemainingTime} = require('../../util/util.helpers')
 
-const jwtOptions = {
-  jwtFromRequest: ExtractJwt.fromAuthHeader(),
-  secretOrKey: config.SECRET,
-  passReqToCallback: true
-}
+const {SECRET, EXP_SECONDS} = require('../config')
+const {getById} = require('../../services/user.service')()
+const {refreshToken} = require('../../services/auth.service')()
+const {getRemainingTime, getDateFromEpoch} = require('../../util/util.helpers')
 
 module.exports = () => {
-  const userService = require('../../services/user.service')()
+  const jwtOptions = {
+    jwtFromRequest: ExtractJwt.fromAuthHeader(),
+    secretOrKey: SECRET,
+    passReqToCallback: true
+  }
 
-  passport.use(new JwtStrategy(jwtOptions, (req, payload, cb) => {
-    const expDate = new Date(parseInt(`${payload.exp}000`))
+  function jwtHandler (req, payload, cb) {
+    const expDate = _.flowRight([getRemainingTime, getDateFromEpoch])
 
-    const setHeaders = jwt => {
-      req.res.set('X-Updated-JWT', jwt)
-      return user => Promise.resolve(cb(null, user))
+    const setJWTHeader = jwt => req.res.set('X-Updated-JWT', jwt)
+
+    const setUserFromPayload = user => {
+      if (!user) {
+        return cb(null, false, { message: 'Unknown user' })
+      }
+
+      if (expDate(payload.exp) <= parseInt(EXP_SECONDS)) {
+        refreshToken(user).then(setJWTHeader)
+      }
+
+      return Promise.resolve(cb(null, user))
     }
 
-    userService.getById(payload._doc._id)
-      .then(user => {
-        if (!user) {
-          return cb(null, false, {
-            message: 'Unknown user'
-          })
-        }
+    return getById(payload._doc._id)
+      .then(setUserFromPayload)
+      .catch(cb)
+  }
 
-        if (getRemainingTime(expDate) <= parseInt(config.EXP_SECONDS)) {
-          return refreshToken(user).then(jwt => setHeaders(jwt)(user))
-        } else {
-          return Promise.resolve(cb(null, user))
-        }
-      }).catch(err => cb(err))
-  }))
+  passport.use(new JwtStrategy(jwtOptions, jwtHandler))
 }
