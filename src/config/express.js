@@ -31,7 +31,8 @@ module.exports = () => {
     propertyName: 'reqId',
     logName: 'req_id',
     obscureHeaders: [],
-  logger}))
+    logger
+  }))
 
   /**
    * Routing middleware
