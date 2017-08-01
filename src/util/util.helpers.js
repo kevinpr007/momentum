@@ -4,8 +4,9 @@
  * @returns {number}
  */
 const getRemainingTime = endTime => {
-  var startDate = new Date()
-  return (endTime.getTime() - startDate.getTime()) / 1000
+  const SECONDS = 1000
+  const startDate = new Date()
+  return (endTime.getTime() - startDate.getTime()) / SECONDS
 }
 
 module.exports = {
