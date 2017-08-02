@@ -2,9 +2,11 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 const bcrypt = require('bcrypt-nodejs')
 const mongoDB = require('../config/mongoose.collections.json')
-const config = require('../config/config')
 const roles = require('./roles.enum')
 const Promise = require('bluebird')
+
+const SALT_FACTOR = 5
+const PASSWORD_LENGHT = 6
 
 const userSchema = new Schema({
   firstName: {
@@ -40,8 +42,8 @@ const userSchema = new Schema({
     type: String,
     validate: [
       password => {
-        return password && password.length > parseInt(config.PASSWORD_LENGHT)
-      }, `Password should be longer than ${config.PASSWORD_LENGHT} characters`
+        return password && password.length > PASSWORD_LENGHT
+      }, `Password should be longer than ${PASSWORD_LENGHT} characters`
     ],
     required: true
   },
@@ -109,7 +111,7 @@ userSchema.pre('save', function (next) {
   if (!user.isModified('password')) {
     return next()
   }
-  bcrypt.genSalt(config.SALT_FACTOR, (err, salt) => {
+  bcrypt.genSalt(SALT_FACTOR, (err, salt) => {
     if (err) {
       return next(err)
     }
