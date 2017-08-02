@@ -19,6 +19,19 @@ const getDateFromEpoch = epoch => {
   return new Date(epoch * MILLISECONDS)
 }
 
+/**
+ * Generates an error for invalid API calls
+ * @param {string} [message='Error'] 
+ * @param {number} [status=500] 
+ * @throws {Error}
+ */
+const generateError = (message = 'Error' , status = 500) => {
+  const error = new Error(message)
+  error.status = status
+
+  throw error
+}
+
 module.exports = {
   getRemainingTime,
   getDateFromEpoch
