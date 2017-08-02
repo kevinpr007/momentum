@@ -2,7 +2,7 @@ const Hypermedia = require('../util/hypermedia/hypermedia.config')
 const HttpStatus = require('http-status-codes')
 const pagedResult = require('../util/pagination/paged-result')
 
-module.exports = (logService) => {
+module.exports = logService => {
   const getAllLogs = (req, res, next) =>
     logService.getAll(req.query.page, req.query.pageSize)
       .then(logs => {
