@@ -7,6 +7,7 @@ const _ = require('lodash')
 module.exports = () => {
   const getAll = (page, pageSize) => {
     page = Math.max(0, page)
+
     return Promise.all([
       User.count().exec(),
       User.find()

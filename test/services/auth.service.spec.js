@@ -50,4 +50,22 @@ describe('User authentication service test', () => {
       }))
     })
   })
+
+  describe('Given a request with a JWT token', () => {
+    context('When token is outdated (expTime <= 30 mins.)', () => {
+      it('will generate a new token for the requester', done => {
+        let user = {
+          name: 'John',
+          lastName: 'Smith'
+        }
+        authService.refreshToken(user)
+          .then(jwt => {
+            jwt = JSON.parse(jwt)
+            expect(jwt).to.have.property('token')
+            expect(jwt).to.have.property('expiresIn')
+            done()
+          })
+      })
+    })
+  })
 })

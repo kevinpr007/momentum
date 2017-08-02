@@ -13,7 +13,7 @@ const serializer = data => {
 
   return `db.${data.coll}.${data.method}(${query}, ${options})`
 }
-
+// TODO: create script to delete files after a certain period of time.
 module.exports = bunyan.createLogger({
   name: 'StylePoint',
   src: false,
@@ -28,7 +28,6 @@ module.exports = bunyan.createLogger({
       stream: new RotatingFileStream({
         path: './logs/db.log',
         period: '1d',
-        totalFiles: 10,
         rotateExisting: true,
         threshold: '5m',
         totalSize: '20m',

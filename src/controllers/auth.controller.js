@@ -21,7 +21,10 @@ module.exports = (authService, userService, emailService) => {
         return user.isValidPassword(req.body.password)
           .then(isMatch => {
             if (isMatch) {
-              user._doc.token = authService.getToken(user)
+              let token = authService.getToken(user)
+              let expiresIn = authService.setExpirationDate()
+              user._doc.jwt = { token, expiresIn }
+
               return res.status(HttpStatus.OK).json(new Hypermedia(req).setResponse(user, next))
             } else {
               const err = new Error('Authentication failed. Wrong password.')
@@ -44,7 +47,10 @@ module.exports = (authService, userService, emailService) => {
         return userService.registerUser(req.body)
       })
       .then(user => {
-        user._doc.token = authService.getToken(user)
+        let token = authService.getToken(user)
+        let expiresIn = authService.setExpirationDate()
+        user._doc.jwt = { token, expiresIn }
+
         res.status(HttpStatus.CREATED).json(new Hypermedia(req).setResponse(user, next))
 
         const email = emails.newAccount(user, req.headers.host).getTemplate()
