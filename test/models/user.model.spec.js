@@ -267,8 +267,8 @@ describe('User schema validation tests', () => {
         let user = new User({
           password: bcrypt.hashSync('Qwerty123')
         })
-        user.isValidPassword('Qwerty123').then(result => {
-          expect(result).to.equal(true)
+        user.isValidPassword('Qwerty123').then(({user, isMatch}) => {
+          expect(isMatch).to.equal(true)
           done()
         }).catch(err => done(err))
       })
@@ -279,8 +279,8 @@ describe('User schema validation tests', () => {
         let user = new User({
           password: bcrypt.hashSync('Qwerty123')
         })
-        user.isValidPassword('Qwerty19q').then(result => {
-          expect(result).to.equal(false)
+        user.isValidPassword('Qwerty19q').then(({user, isMatch}) => {
+          expect(isMatch).to.equal(false)
           done()
         }).catch(err => done(err))
       })

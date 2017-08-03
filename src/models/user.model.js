@@ -131,7 +131,7 @@ userSchema.methods.isValidPassword = function (password) {
       if (err) {
         reject(err)
       }
-      resolve(isMatch)
+      resolve({ user: this, isMatch })
     })
   })
 }
