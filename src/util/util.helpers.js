@@ -21,11 +21,11 @@ const getDateFromEpoch = epoch => {
 
 /**
  * @desc Generates an error for invalid API calls
- * @param {string} [message='Error'] 
- * @param {number} [status=500] 
+ * @param {string} [message='Error']
+ * @param {number} [status=500]
  * @throws {Error}
  */
-const generateError = (message = 'Error' , status = 500) => {
+const generateError = (message = 'Error', status = 500) => {
   const error = new Error(message)
   error.status = status
 
