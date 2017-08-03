@@ -1,6 +1,7 @@
 const authService = require('../services/auth.service')()
 const userService = require('../services/user.service')()
 const emailService = require('../services/email.service')
+const hypermedia = require('../middleware/hypermedia')
 const routes = require('./routes.config')
 
 const {
@@ -11,7 +12,7 @@ const {
   } = require('../controllers/auth.controller')(authService, userService, emailService)
 
 module.exports = router => {
-  router.post(routes.get('auth').path, auth)
+  router.post(routes.get('auth').path, auth, hypermedia)
 
   router.post(routes.get('register').path, register)
 
