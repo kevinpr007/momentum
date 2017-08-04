@@ -3,6 +3,9 @@ const Hypermedia = require('../util/hypermedia/hypermedia.config')
 const pagedResult = require('../util/pagination/paged-result')
 
 module.exports = logService => {
+  /**
+   * @desc Returns all logs.
+   */
   function getAllLogs (req, res, next) {
     const setResponse = logs => {
       logs = pagedResult(req, logs)
@@ -19,6 +22,9 @@ module.exports = logService => {
       .catch(next)
   }
 
+  /**
+   * @desc Returns log by status code.
+   */
   function getByCode (req, res, next) {
     const setResponse = logs => {
       logs = pagedResult(req, logs)

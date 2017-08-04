@@ -142,8 +142,8 @@ userSchema.methods.confirmPasswordValid = function (password, confirmPassword) {
       confirmPassword === null || confirmPassword === undefined) {
       reject(new Error('Password and Confirm Password can not be null or undefined'))
     }
-
-    resolve(password === confirmPassword)
+    let isValid = password === confirmPassword
+    resolve({ user: this, isValid })
   })
 }
 
