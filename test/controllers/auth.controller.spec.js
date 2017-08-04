@@ -97,7 +97,7 @@ describe('User authentication requests', () => {
         emailService = this.stub(emailService({
           to: 'test@dev.com'
         }), 'send').returns({
-          send() {
+          send () {
             return Promise.resolve({
               sent: true
             })
@@ -188,7 +188,7 @@ describe('User authentication requests', () => {
           email: user.email
         }
 
-        this.stub(user, 'isValidPassword').resolves(({user, isMatch: false }))
+        this.stub(user, 'isValidPassword').resolves(({ user, isMatch: false }))
 
         userService = this.stub(userService())
         userService.getByEmail.resolves(user)
@@ -220,7 +220,7 @@ describe('User authentication requests', () => {
         }
         let next = args => done(args)
 
-        this.stub(user, 'isValidPassword').resolves(({user, isMatch: true }))
+        this.stub(user, 'isValidPassword').resolves(({ user, isMatch: true }))
 
         userService = this.stub(userService())
         userService.getByEmail.resolves(user)
@@ -291,7 +291,7 @@ describe('User authentication requests', () => {
         emailService = this.stub(emailService({
           to: 'test@dev.com'
         }), 'send').returns({
-          send() {
+          send () {
             return Promise.resolve({
               sent: true
             })
@@ -423,8 +423,8 @@ describe('User authentication requests', () => {
         })
 
         user = this.stub(user)
-        user.isValidPassword.resolves({ user, isMatch: true})
-        user.confirmPasswordValid.resolves(true)
+        user.isValidPassword.resolves({ user, isMatch: true })
+        user.confirmPasswordValid.resolves({ user, isValid: true })
 
         authService = this.stub(authService())
         authService.findByPasswordToken.resolves(user)
@@ -435,7 +435,7 @@ describe('User authentication requests', () => {
         emailService = this.stub(emailService({
           to: 'test@dev.com'
         }), 'send').returns({
-          send() {
+          send () {
             return Promise.resolve({
               sent: true
             })
