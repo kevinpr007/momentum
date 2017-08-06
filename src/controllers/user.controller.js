@@ -1,4 +1,4 @@
-const pagedResult = require('../util/pagination/paged-result')
+const pagedResult = require('../util/paged-result')
 const HttpStatus = require('http-status-codes')
 const util = require('../util/util.helpers')
 

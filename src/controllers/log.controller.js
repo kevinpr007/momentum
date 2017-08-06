@@ -1,5 +1,5 @@
 const HttpStatus = require('http-status-codes')
-const pagedResult = require('../util/pagination/paged-result')
+const pagedResult = require('../util/paged-result')
 
 module.exports = logService => {
   /**
