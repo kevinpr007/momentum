@@ -31,20 +31,19 @@ module.exports = (authService, userService, emailService) => {
       return user
     }
 
-    const setJWT = user => {
+    const setResponse = user => {
       user._doc.jwt = {
         token: authService.getToken(user),
         expiresIn: authService.setExpirationDate()
       }
 
-      res.locals = user
-      next()
+      return res.status(HttpStatus.OK).json(user)
     }
 
     return userService.getByEmail(req.body.email)
       .then(validateUser)
       .then(validatePassword)
-      .then(setJWT)
+      .then(setResponse)
       .catch(next)
   }
 
@@ -67,8 +66,7 @@ module.exports = (authService, userService, emailService) => {
         expiresIn: authService.setExpirationDate()
       }
 
-      res.status(HttpStatus.CREATED)
-        .json(user)
+      res.status(HttpStatus.CREATED).json(user)
 
       return user
     }

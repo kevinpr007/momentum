@@ -1,4 +1,3 @@
-const Hypermedia = require('../util/hypermedia/hypermedia.config')
 const pagedResult = require('../util/pagination/paged-result')
 const HttpStatus = require('http-status-codes')
 const util = require('../util/util.helpers')
@@ -8,13 +7,8 @@ module.exports = userService => {
    * @desc Returns all users.
    */
   function getAllUsers (req, res, next) {
-    const setResponse = users => {
-      users = pagedResult(req, users)
-
-      res.status(HttpStatus.OK)
-        .json(new Hypermedia(req)
-        .setResponse(users, next))
-    }
+    const setResponse = users =>
+      res.status(HttpStatus.OK).json(pagedResult(req, users))
 
     const {page, pageSize} = req.query
 
@@ -33,9 +27,7 @@ module.exports = userService => {
         return util.generateError(message, HttpStatus.NOT_FOUND)
       }
 
-      res.status(HttpStatus.OK)
-        .json(new Hypermedia(req)
-        .setResponse(user, next))
+      return res.status(HttpStatus.OK).json(user)
     }
 
     return userService.getByEmail(req.params.userName)
