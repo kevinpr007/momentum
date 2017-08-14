@@ -1,4 +1,3 @@
-const pagedResult = require('../util/paged-result')
 const HttpStatus = require('http-status-codes')
 const util = require('../util/util.helpers')
 
@@ -7,8 +6,8 @@ module.exports = userService => {
    * @desc Returns all users.
    */
   function getAllUsers (req, res, next) {
-    const setResponse = users =>
-      res.status(HttpStatus.OK).json(pagedResult(req, users))
+    const setResponse = users => 
+      res.status(HttpStatus.OK).pagedJson(users)
 
     const {page, pageSize} = req.query
 
