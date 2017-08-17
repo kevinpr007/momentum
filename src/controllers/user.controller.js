@@ -1,23 +1,38 @@
-const Hypermedia = require('../util/hypermedia/hypermedia.config')
-const pagedResult = require('../util/pagination/paged-result')
 const HttpStatus = require('http-status-codes')
+const util = require('../util/util.helpers')
 
 module.exports = userService => {
-  const getAllUsers = (req, res, next) =>
-    userService.getAll(req.query.page, req.query.pageSize).then(users => {
-      users = pagedResult(req, users)
-      return res.status(HttpStatus.OK).json(new Hypermedia(req).setResponse(users, next))
-    }).catch(next)
+  /**
+   * @desc Returns all users.
+   */
+  function getAllUsers (req, res, next) {
+    const setResponse = users => 
+      res.status(HttpStatus.OK).pagedJson(users)
 
-  const getByUserEmail = (req, res, next) =>
-    userService.getByEmail(req.params.userName).then(user => {
+    const {page, pageSize} = req.query
+
+    return userService.getAll(page, pageSize)
+      .then(setResponse)
+      .catch(next)
+  }
+
+  /**
+   * @desc Returns user by email address.
+   */
+  function getByUserEmail (req, res, next) {
+    const setResponse = user => {
       if (!user) {
-        const err = new Error('User not found.')
-        err.status = HttpStatus.NOT_FOUND
-        throw err
+        let message = 'User not found.'
+        return util.generateError(message, HttpStatus.NOT_FOUND)
       }
-      return res.status(HttpStatus.OK).json(new Hypermedia(req).setResponse(user, next))
-    }).catch(next)
+
+      return res.status(HttpStatus.OK).json(user)
+    }
+
+    return userService.getByEmail(req.params.userName)
+      .then(setResponse)
+      .catch(next)
+  }
 
   return {
     getAllUsers,

@@ -5,6 +5,7 @@ const BunyanMiddleware = require('bunyan-middleware')
 const HttpStatus = require('http-status-codes')
 const helmet = require('helmet')
 const logger = require('./logger')
+const pagedJson = require('../middleware/paged-json')
 const logService = require('../services/log.service')()
 
 module.exports = () => {
@@ -22,6 +23,11 @@ module.exports = () => {
   app.use(bodyParser.urlencoded({
     extended: true
   }))
+
+  /**
+   * Pagination middleware
+   */
+  app.use(pagedJson)
 
   /**
    * Logging middleware

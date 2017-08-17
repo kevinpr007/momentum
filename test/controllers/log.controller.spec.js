@@ -11,9 +11,9 @@ describe('Log entity requests', () => {
 
   beforeEach(() => {
     req = httpMocks.createRequest()
-    res = httpMocks.createResponse({
+    res = setPagedJson(req, httpMocks.createResponse({
       eventEmitter: require('events').EventEmitter
-    })
+    }))
     logService = require('../../src/services/log.service')
   })
 

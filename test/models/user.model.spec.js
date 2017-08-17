@@ -267,8 +267,8 @@ describe('User schema validation tests', () => {
         let user = new User({
           password: bcrypt.hashSync('Qwerty123')
         })
-        user.isValidPassword('Qwerty123').then(result => {
-          expect(result).to.equal(true)
+        user.isValidPassword('Qwerty123').then(({user, isMatch}) => {
+          expect(isMatch).to.equal(true)
           done()
         }).catch(err => done(err))
       })
@@ -279,8 +279,8 @@ describe('User schema validation tests', () => {
         let user = new User({
           password: bcrypt.hashSync('Qwerty123')
         })
-        user.isValidPassword('Qwerty19q').then(result => {
-          expect(result).to.equal(false)
+        user.isValidPassword('Qwerty19q').then(({user, isMatch}) => {
+          expect(isMatch).to.equal(false)
           done()
         }).catch(err => done(err))
       })
@@ -296,8 +296,8 @@ describe('User schema validation tests', () => {
         password = 'qwerty12345'
         confirmPassword = 'qwerty12345'
 
-        user.confirmPasswordValid(password, confirmPassword).then(result => {
-          expect(result).to.equal(true)
+        user.confirmPasswordValid(password, confirmPassword).then(({isValid}) => {
+          expect(isValid).to.equal(true)
           done()
         }).catch(err => done(err))
       })
@@ -309,8 +309,8 @@ describe('User schema validation tests', () => {
         let confirmPassword = 'changed'
         let user = new User()
 
-        user.confirmPasswordValid(password, confirmPassword).then(result => {
-          expect(result).to.equal(false)
+        user.confirmPasswordValid(password, confirmPassword).then(({isValid}) => {
+          expect(isValid).to.equal(false)
           done()
         }).catch(err => done(err))
       })

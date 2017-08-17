@@ -1,9 +1,5 @@
-const routes = require('../routes/routes.config')
-
 module.exports = () => {
-  const getIndex = (req, res, next) => {
-    return res.redirect(routes.get('indexSwagger').path)
-  }
+  const getIndex = (req, res, next) => res.redirect('/api-docs')
 
   return {
     getIndex

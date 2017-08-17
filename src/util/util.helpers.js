@@ -20,12 +20,12 @@ const getDateFromEpoch = epoch => {
 }
 
 /**
- * Generates an error for invalid API calls
- * @param {string} [message='Error'] 
- * @param {number} [status=500] 
+ * @desc Generates an error for invalid API calls.
+ * @param {string} [message='Error']
+ * @param {number} [status=500]
  * @throws {Error}
  */
-const generateError = (message = 'Error' , status = 500) => {
+const generateError = (message = 'Error', status = 500) => {
   const error = new Error(message)
   error.status = status
 
@@ -34,5 +34,6 @@ const generateError = (message = 'Error' , status = 500) => {
 
 module.exports = {
   getRemainingTime,
-  getDateFromEpoch
+  getDateFromEpoch,
+  generateError
 }

@@ -8,9 +8,9 @@ describe('User entity requests', () => {
 
   beforeEach(() => {
     req = httpMocks.createRequest()
-    res = httpMocks.createResponse({
+    res = setPagedJson(req, httpMocks.createResponse({
       eventEmitter: require('events').EventEmitter
-    })
+    }))
     userService = require('../../src/services/user.service')
   })
 
