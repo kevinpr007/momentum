@@ -188,7 +188,7 @@ describe('User authentication requests', () => {
           email: user.email
         }
 
-        this.stub(user, 'isValidPassword').resolves(false)
+        this.stub(user, 'isValidPassword').resolves(({ user, isMatch: false }))
 
         userService = this.stub(userService())
         userService.getByEmail.resolves(user)
@@ -220,7 +220,7 @@ describe('User authentication requests', () => {
         }
         let next = args => done(args)
 
-        this.stub(user, 'isValidPassword').resolves(true)
+        this.stub(user, 'isValidPassword').resolves(({ user, isMatch: true }))
 
         userService = this.stub(userService())
         userService.getByEmail.resolves(user)
@@ -339,7 +339,7 @@ describe('User authentication requests', () => {
       }))
     })
 
-    context('when providing invalid current password', () => {
+    context('when providing invalid password', () => {
       it('returns Bad Request (400)', sinon.test(function (done) {
         req.method = 'POST'
         req.url = 'api/complete-reset-password'
@@ -350,7 +350,7 @@ describe('User authentication requests', () => {
         let user = new User({
           email: 'test@dev.com'
         })
-        this.stub(user, 'isValidPassword').resolves(false)
+        this.stub(user, 'isValidPassword').resolves(({user, isMatch: false}))
 
         authService = this.stub(authService())
         authService.findByPasswordToken.resolves(user)
@@ -384,7 +384,7 @@ describe('User authentication requests', () => {
         })
 
         user = this.stub(user)
-        user.isValidPassword.resolves(true)
+        user.isValidPassword.resolves({ user, isMatch: true })
         user.confirmPasswordValid.resolves(false)
 
         authService = this.stub(authService())
@@ -423,8 +423,8 @@ describe('User authentication requests', () => {
         })
 
         user = this.stub(user)
-        user.isValidPassword.resolves(true)
-        user.confirmPasswordValid.resolves(true)
+        user.isValidPassword.resolves({ user, isMatch: true })
+        user.confirmPasswordValid.resolves({ user, isValid: true })
 
         authService = this.stub(authService())
         authService.findByPasswordToken.resolves(user)

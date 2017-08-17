@@ -1,7 +1,6 @@
 const authService = require('../services/auth.service')()
 const userService = require('../services/user.service')()
 const emailService = require('../services/email.service')
-const routes = require('./routes.config')
 
 const {
   auth,
@@ -11,11 +10,8 @@ const {
   } = require('../controllers/auth.controller')(authService, userService, emailService)
 
 module.exports = router => {
-  router.post(routes.get('auth').path, auth)
-
-  router.post(routes.get('register').path, register)
-
-  router.post(routes.get('newPassword').path, newPassword)
-
-  router.post(routes.get('resetPassword').path, resetPassword)
+  router.post('/api/auth', auth)
+  router.post('/api/register', register)
+  router.post('/api/complete-reset-password', newPassword)
+  router.post('/api/reset-password', resetPassword)
 }

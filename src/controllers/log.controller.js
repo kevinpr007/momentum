@@ -1,16 +1,12 @@
 const HttpStatus = require('http-status-codes')
-const Hypermedia = require('../util/hypermedia/hypermedia.config')
-const pagedResult = require('../util/pagination/paged-result')
 
 module.exports = logService => {
+  /**
+   * @desc Returns all logs.
+   */
   function getAllLogs (req, res, next) {
-    const setResponse = logs => {
-      logs = pagedResult(req, logs)
-
-      res.status(HttpStatus.OK)
-        .json(new Hypermedia(req)
-        .setResponse(logs, next))
-    }
+    const setResponse = logs => 
+      res.status(HttpStatus.OK).pagedJson(logs)
 
     const {page, pageSize} = req.query
 
@@ -19,14 +15,12 @@ module.exports = logService => {
       .catch(next)
   }
 
+  /**
+   * @desc Returns log by status code.
+   */
   function getByCode (req, res, next) {
-    const setResponse = logs => {
-      logs = pagedResult(req, logs)
-
-      res.status(HttpStatus.OK)
-        .json(new Hypermedia(req)
-        .setResponse(logs, next))
-    }
+    const setResponse = logs => 
+      res.status(HttpStatus.OK).pagedJson(logs)
 
     const {code, page, pageSize} = req.params
 
