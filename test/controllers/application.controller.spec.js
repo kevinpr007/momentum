@@ -3,7 +3,7 @@ const HttpStatus = require('http-status-codes')
 
 describe.skip('Application entity requests', () => {
   let Aplication = require('../../src/models/application.model')
-//   let appController = require('../../src/controllers/application.controller')
+  let appController = require('../../src/controllers/application.controller')
   let appService, req, res
 
   beforeEach(() => {
