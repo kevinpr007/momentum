@@ -11,6 +11,7 @@
       state: '{{state()}}',
       zipCode: '{{integer(10000, 90000)}}'
     },
+    appId: '{{objectId()}}',
     createdBy: '{{objectId()}}'
   }
 ]

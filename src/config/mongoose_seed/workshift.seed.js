@@ -6,704 +6,604 @@ var data = [
     'model': mongoDB.Model.Workshift,
     'documents': [
       {
-        'startDate': '2016-04-12 01:50:12',
-        'endDate': '2014-12-24 08:38:28',
-        'day': 'Tuesday',
-        'user': '57fb0d824cad8c4ad1b58757',
-        'createdBy': '57fb0d8238ad6faec7efc0bb'
+        'startDate': '2014-02-24 12:53:52',
+        'endDate': '2017-07-24 01:33:16',
+        'userId': '59a755b57826db094764bcea',
+        'createdBy': '59a755b5c043db9cef45f26a'
       },
       {
-        'startDate': '2014-07-16 08:30:00',
-        'endDate': '2015-09-16 06:49:15',
-        'day': 'Sunday',
-        'user': '57fb0d826020ba42f5af47e5',
-        'createdBy': '57fb0d821e0a9a0db185c6ff'
+        'startDate': '2015-11-13 08:47:57',
+        'endDate': '2015-04-27 08:44:36',
+        'userId': '59a755b5d2d1b93abffe9167',
+        'createdBy': '59a755b5447e93716fd60ba9'
       },
       {
-        'startDate': '2014-09-11 03:16:50',
-        'endDate': '2016-05-11 07:26:04',
-        'day': 'Saturday',
-        'user': '57fb0d826bf1ab0280da6265',
-        'createdBy': '57fb0d8256bee49327aad2bb'
+        'startDate': '2015-11-25 05:07:19',
+        'endDate': '2015-11-14 09:03:22',
+        'userId': '59a755b5573f6e2f43dddbcd',
+        'createdBy': '59a755b597ea80ebf56306ad'
       },
       {
-        'startDate': '2014-02-22 06:48:18',
-        'endDate': '2015-10-13 04:33:58',
-        'day': 'Tuesday',
-        'user': '57fb0d829ac1fbfa6b58d4ba',
-        'createdBy': '57fb0d82495db2a5d46e4aaa'
+        'startDate': '2017-01-13 06:54:45',
+        'endDate': '2014-02-02 05:36:49',
+        'userId': '59a755b5f87eda833394ba5d',
+        'createdBy': '59a755b5ac0675e9c61297ba'
       },
       {
-        'startDate': '2014-04-04 01:47:48',
-        'endDate': '2015-01-03 12:55:59',
-        'day': 'Monday',
-        'user': '57fb0d82f95782097be90c97',
-        'createdBy': '57fb0d82e372750941500d31'
+        'startDate': '2015-06-26 07:29:13',
+        'endDate': '2017-03-04 06:33:32',
+        'userId': '59a755b5027732b8c6f04e7c',
+        'createdBy': '59a755b531895ef959adb252'
       },
       {
-        'startDate': '2016-08-11 05:21:26',
-        'endDate': '2014-09-19 08:26:23',
-        'day': 'Wednesday',
-        'user': '57fb0d82b67f7663162d6dc4',
-        'createdBy': '57fb0d82047ccec18bf257a5'
+        'startDate': '2014-12-06 06:40:14',
+        'endDate': '2015-03-04 01:33:51',
+        'userId': '59a755b5ee09238314ffe4cd',
+        'createdBy': '59a755b5e6d83d216f3e5099'
       },
       {
-        'startDate': '2016-05-03 09:49:09',
-        'endDate': '2016-06-09 03:52:37',
-        'day': 'Saturday',
-        'user': '57fb0d82b5c49eddaf2a2764',
-        'createdBy': '57fb0d82bfe58331333ac328'
+        'startDate': '2015-03-10 10:04:38',
+        'endDate': '2016-03-15 05:05:08',
+        'userId': '59a755b546c7b706d87f4820',
+        'createdBy': '59a755b5dfbaf43c42f1945d'
       },
       {
-        'startDate': '2014-09-24 05:47:34',
-        'endDate': '2014-11-19 12:10:11',
-        'day': 'Wednesday',
-        'user': '57fb0d82b98e84b7e4155840',
-        'createdBy': '57fb0d82022f0269d3e3e3c5'
+        'startDate': '2015-08-14 06:42:35',
+        'endDate': '2017-03-14 06:19:49',
+        'userId': '59a755b582fcdef934924464',
+        'createdBy': '59a755b5a57bc1703cc9f84b'
       },
       {
-        'startDate': '2014-07-28 04:09:04',
-        'endDate': '2014-08-29 06:13:05',
-        'day': 'Friday',
-        'user': '57fb0d82e1940091ca00ffe8',
-        'createdBy': '57fb0d8270c4f94cabba2298'
+        'startDate': '2014-08-13 05:03:37',
+        'endDate': '2016-05-18 11:13:08',
+        'userId': '59a755b5d76a0802b96bf2f1',
+        'createdBy': '59a755b55041329e8b6624d1'
       },
       {
-        'startDate': '2014-02-09 04:22:41',
-        'endDate': '2015-01-27 03:34:45',
-        'day': 'Wednesday',
-        'user': '57fb0d826c12642ef90452bf',
-        'createdBy': '57fb0d823a10df528aff9d1e'
+        'startDate': '2015-03-07 02:29:14',
+        'endDate': '2017-01-30 04:05:00',
+        'userId': '59a755b5cbc84813df040232',
+        'createdBy': '59a755b54f2beb74bf6e7adf'
       },
       {
-        'startDate': '2015-04-30 11:41:52',
-        'endDate': '2016-07-11 02:55:14',
-        'day': 'Sunday',
-        'user': '57fb0d82077eaf2a13fe7614',
-        'createdBy': '57fb0d82c4d2a4a5ef04bfc0'
+        'startDate': '2016-06-07 12:59:36',
+        'endDate': '2017-07-31 05:22:48',
+        'userId': '59a755b5e2609dd0aebce0a7',
+        'createdBy': '59a755b51868fdcf5501bce1'
       },
       {
-        'startDate': '2016-05-17 04:26:11',
-        'endDate': '2014-07-22 12:39:14',
-        'day': 'Wednesday',
-        'user': '57fb0d82f473e863b6409a44',
-        'createdBy': '57fb0d826eac36347d81b66a'
+        'startDate': '2015-06-18 07:14:20',
+        'endDate': '2014-04-06 07:21:31',
+        'userId': '59a755b563cfbdbf22f5f5f9',
+        'createdBy': '59a755b53af7902b9e84a714'
       },
       {
-        'startDate': '2015-01-31 01:34:15',
-        'endDate': '2015-09-28 09:11:44',
-        'day': 'Friday',
-        'user': '57fb0d8288f20d2ded08183d',
-        'createdBy': '57fb0d829b9e61b3e6136d32'
+        'startDate': '2016-12-20 06:11:42',
+        'endDate': '2017-05-01 10:33:16',
+        'userId': '59a755b58a500fd8e14451d3',
+        'createdBy': '59a755b5c5b69e12272d0223'
       },
       {
-        'startDate': '2015-08-12 04:11:20',
-        'endDate': '2015-10-03 09:01:15',
-        'day': 'Monday',
-        'user': '57fb0d82bd4b2c65940572ca',
-        'createdBy': '57fb0d82cc5d86f5b4e90853'
+        'startDate': '2015-03-23 04:02:19',
+        'endDate': '2017-05-04 08:36:50',
+        'userId': '59a755b5b3c29ed414650e99',
+        'createdBy': '59a755b5668d3ab154182065'
       },
       {
-        'startDate': '2016-09-25 04:20:14',
-        'endDate': '2015-03-22 04:29:00',
-        'day': 'Sunday',
-        'user': '57fb0d826d6f6cf867039ec6',
-        'createdBy': '57fb0d82afae9131877e233d'
+        'startDate': '2017-08-01 08:01:24',
+        'endDate': '2016-05-08 09:00:50',
+        'userId': '59a755b5608f170a7ed49db3',
+        'createdBy': '59a755b5beb790dc762d0e26'
       },
       {
-        'startDate': '2016-03-22 03:22:01',
-        'endDate': '2014-11-09 04:15:45',
-        'day': 'Saturday',
-        'user': '57fb0d82daa3a825f1ee6073',
-        'createdBy': '57fb0d82dbb9663bf371a37a'
+        'startDate': '2015-11-27 09:22:12',
+        'endDate': '2015-02-03 01:34:51',
+        'userId': '59a755b5bd2534413feee4eb',
+        'createdBy': '59a755b5043b914bcf844eba'
       },
       {
-        'startDate': '2014-01-04 02:23:54',
-        'endDate': '2015-06-04 01:18:28',
-        'day': 'Saturday',
-        'user': '57fb0d82c5c17dfe96dcc8e6',
-        'createdBy': '57fb0d8221d2c812905dbf10'
+        'startDate': '2016-05-24 06:40:12',
+        'endDate': '2017-08-25 04:51:32',
+        'userId': '59a755b554338d900dd2163e',
+        'createdBy': '59a755b56871e5afa0970061'
       },
       {
-        'startDate': '2016-05-13 05:20:30',
-        'endDate': '2016-06-20 05:04:50',
-        'day': 'Sunday',
-        'user': '57fb0d82421da308bb03f168',
-        'createdBy': '57fb0d82b31fdb3fc58af6b8'
+        'startDate': '2015-04-27 09:38:21',
+        'endDate': '2014-08-03 03:57:19',
+        'userId': '59a755b5ae2ef095d401b0e7',
+        'createdBy': '59a755b5335b02819b840d37'
       },
       {
-        'startDate': '2014-01-27 12:43:42',
-        'endDate': '2016-02-03 05:18:08',
-        'day': 'Sunday',
-        'user': '57fb0d821d71f18a29108da1',
-        'createdBy': '57fb0d82398cca66bca3e917'
+        'startDate': '2017-04-06 12:52:49',
+        'endDate': '2015-08-03 02:08:31',
+        'userId': '59a755b50df1b627988da15f',
+        'createdBy': '59a755b56f6ed2e802a37012'
       },
       {
-        'startDate': '2016-09-13 09:07:56',
-        'endDate': '2016-07-04 06:35:06',
-        'day': 'Saturday',
-        'user': '57fb0d82d3fc1b8a8a510c7a',
-        'createdBy': '57fb0d8220e7579cd9f083e8'
+        'startDate': '2016-01-05 09:24:25',
+        'endDate': '2016-07-12 10:55:33',
+        'userId': '59a755b53d23cd5c1e47a9b4',
+        'createdBy': '59a755b56b80b52e536fafe1'
       },
       {
-        'startDate': '2016-08-19 02:45:32',
-        'endDate': '2014-01-23 07:28:59',
-        'day': 'Thursday',
-        'user': '57fb0d8236e902255bb16744',
-        'createdBy': '57fb0d826eeaa92e69cf77c5'
+        'startDate': '2014-06-10 03:53:29',
+        'endDate': '2016-08-30 06:39:46',
+        'userId': '59a755b588e543e4448f24fd',
+        'createdBy': '59a755b5d3c275fc53a3a92c'
       },
       {
-        'startDate': '2015-09-08 02:08:21',
-        'endDate': '2016-02-28 03:39:10',
-        'day': 'Saturday',
-        'user': '57fb0d82c5b1c5fe768cb934',
-        'createdBy': '57fb0d8277f47b3e5c865a49'
+        'startDate': '2016-02-07 09:47:21',
+        'endDate': '2017-06-15 08:15:53',
+        'userId': '59a755b5b3bb11915de44cc8',
+        'createdBy': '59a755b5116e42622bf1732a'
       },
       {
-        'startDate': '2015-06-24 09:41:37',
-        'endDate': '2015-12-31 08:51:55',
-        'day': 'Monday',
-        'user': '57fb0d82eb0bfc9ce257e193',
-        'createdBy': '57fb0d826871b19e27e80bdc'
+        'startDate': '2015-03-28 05:10:54',
+        'endDate': '2014-12-13 10:22:36',
+        'userId': '59a755b505e23561cc5cf6b1',
+        'createdBy': '59a755b55718891080a3043e'
       },
       {
-        'startDate': '2014-12-23 09:17:08',
-        'endDate': '2015-09-25 08:33:35',
-        'day': 'Wednesday',
-        'user': '57fb0d822ad495b94bf67846',
-        'createdBy': '57fb0d82b2ddabada5f04f1a'
+        'startDate': '2014-11-17 08:55:21',
+        'endDate': '2016-03-30 04:56:35',
+        'userId': '59a755b5a82181cf8fed0831',
+        'createdBy': '59a755b52c915b909dff770b'
       },
       {
-        'startDate': '2016-08-15 07:23:41',
-        'endDate': '2015-04-18 02:27:42',
-        'day': 'Monday',
-        'user': '57fb0d82fd00c651bdbebebe',
-        'createdBy': '57fb0d821f51e72f634ec306'
+        'startDate': '2015-10-31 07:17:36',
+        'endDate': '2016-04-16 04:17:19',
+        'userId': '59a755b59f60be2ef5afac81',
+        'createdBy': '59a755b515b639393a75bf52'
       },
       {
-        'startDate': '2015-12-22 12:50:23',
-        'endDate': '2015-09-07 04:58:29',
-        'day': 'Monday',
-        'user': '57fb0d82ba6f495674dc3d0e',
-        'createdBy': '57fb0d8296abac4d883c011e'
+        'startDate': '2015-04-10 09:40:24',
+        'endDate': '2015-06-25 08:25:28',
+        'userId': '59a755b5812947c54a00261d',
+        'createdBy': '59a755b584c6d8a548794f75'
       },
       {
-        'startDate': '2016-08-07 11:11:46',
-        'endDate': '2014-03-26 10:29:40',
-        'day': 'Sunday',
-        'user': '57fb0d82c26a32bb51424eac',
-        'createdBy': '57fb0d82ebe29f2836c0ff27'
+        'startDate': '2014-06-02 08:24:46',
+        'endDate': '2014-09-13 11:55:29',
+        'userId': '59a755b574921aa9bc557d60',
+        'createdBy': '59a755b541a89ce52bbd75f6'
       },
       {
-        'startDate': '2015-04-20 10:49:12',
-        'endDate': '2016-09-05 09:13:51',
-        'day': 'Saturday',
-        'user': '57fb0d825f40a2fbb9c0f500',
-        'createdBy': '57fb0d823b86e5c435b3bd85'
+        'startDate': '2016-01-06 11:17:13',
+        'endDate': '2016-02-17 01:08:06',
+        'userId': '59a755b5fb970386c6e12c1a',
+        'createdBy': '59a755b5b6ff7ffbc5409202'
       },
       {
-        'startDate': '2014-08-23 01:11:05',
-        'endDate': '2014-05-09 02:05:56',
-        'day': 'Thursday',
-        'user': '57fb0d82ef9ed0282cabfd1f',
-        'createdBy': '57fb0d821c908ba8aad40f61'
+        'startDate': '2017-02-13 08:42:36',
+        'endDate': '2014-10-27 08:08:46',
+        'userId': '59a755b580aa03599ef3604e',
+        'createdBy': '59a755b537de97052a6c0cc4'
       },
       {
-        'startDate': '2014-07-27 01:51:00',
-        'endDate': '2016-08-30 03:11:31',
-        'day': 'Saturday',
-        'user': '57fb0d827d985fb909c4cdba',
-        'createdBy': '57fb0d82958437e9e331dbe7'
+        'startDate': '2014-03-12 09:12:25',
+        'endDate': '2014-09-11 03:24:48',
+        'userId': '59a755b5ff1b3961a8630e98',
+        'createdBy': '59a755b59efa5c855f5699f3'
       },
       {
-        'startDate': '2014-11-09 10:51:31',
-        'endDate': '2016-01-07 09:03:55',
-        'day': 'Wednesday',
-        'user': '57fb0d8210a7c88e122848e5',
-        'createdBy': '57fb0d82cd247d1ed161ae61'
+        'startDate': '2014-03-07 10:26:34',
+        'endDate': '2015-06-08 10:04:59',
+        'userId': '59a755b50f80755c81092fd1',
+        'createdBy': '59a755b5912b24b271027b60'
       },
       {
-        'startDate': '2014-04-01 04:34:41',
-        'endDate': '2015-10-28 07:43:40',
-        'day': 'Saturday',
-        'user': '57fb0d825118395c3c6dce8c',
-        'createdBy': '57fb0d82ff768c13129c208a'
+        'startDate': '2014-07-19 11:34:51',
+        'endDate': '2017-06-01 01:42:51',
+        'userId': '59a755b50fbb6b9609bd80d7',
+        'createdBy': '59a755b5015d325d5995deb2'
       },
       {
-        'startDate': '2014-07-11 05:37:36',
-        'endDate': '2016-06-27 05:07:09',
-        'day': 'Friday',
-        'user': '57fb0d82cb51414eb8d47ecc',
-        'createdBy': '57fb0d822d10b465934b0168'
+        'startDate': '2015-10-17 07:46:35',
+        'endDate': '2015-11-25 06:06:12',
+        'userId': '59a755b56a628756cbcc2240',
+        'createdBy': '59a755b50022c1d7a49b03c4'
       },
       {
-        'startDate': '2016-06-15 06:48:09',
-        'endDate': '2015-10-22 04:53:55',
-        'day': 'Saturday',
-        'user': '57fb0d82a6cc62b22670a9bc',
-        'createdBy': '57fb0d8220919ee527a50873'
+        'startDate': '2016-02-21 10:07:26',
+        'endDate': '2014-02-07 10:09:22',
+        'userId': '59a755b5bdd59486a9d6dcd9',
+        'createdBy': '59a755b5d6ffeee34005097e'
       },
       {
-        'startDate': '2014-03-06 02:17:18',
-        'endDate': '2016-01-04 04:10:37',
-        'day': 'Saturday',
-        'user': '57fb0d82b090e1aff6d69083',
-        'createdBy': '57fb0d826456f7148e6a675d'
+        'startDate': '2017-07-11 02:33:17',
+        'endDate': '2017-06-18 05:18:52',
+        'userId': '59a755b55b0f23f64dc74497',
+        'createdBy': '59a755b5c06f7436c295b66d'
       },
       {
-        'startDate': '2014-01-02 09:36:52',
-        'endDate': '2016-09-18 02:36:13',
-        'day': 'Wednesday',
-        'user': '57fb0d82d55dca6a9dc4b6c0',
-        'createdBy': '57fb0d82cf70229b6f709e2e'
+        'startDate': '2014-06-02 12:43:57',
+        'endDate': '2014-08-04 07:57:59',
+        'userId': '59a755b5883aef84eecd725b',
+        'createdBy': '59a755b53b55a1d13fb0eb4b'
       },
       {
-        'startDate': '2015-12-10 12:14:43',
-        'endDate': '2015-10-12 11:29:33',
-        'day': 'Sunday',
-        'user': '57fb0d821c357ec53ae9ac40',
-        'createdBy': '57fb0d821241485e2fc189c6'
+        'startDate': '2017-08-23 02:06:52',
+        'endDate': '2016-08-27 12:23:05',
+        'userId': '59a755b5c6e84f45ea2347cd',
+        'createdBy': '59a755b590a7d3d801577960'
       },
       {
-        'startDate': '2015-11-25 01:13:41',
-        'endDate': '2015-07-21 09:22:06',
-        'day': 'Friday',
-        'user': '57fb0d824dddea6445abf1d9',
-        'createdBy': '57fb0d82f4b13d8556fb0bc8'
+        'startDate': '2017-04-12 04:59:50',
+        'endDate': '2015-06-12 10:59:35',
+        'userId': '59a755b56c2bfd0c0d39c7c4',
+        'createdBy': '59a755b51370bb7f601738ee'
       },
       {
-        'startDate': '2015-02-06 11:05:53',
-        'endDate': '2016-01-01 01:04:56',
-        'day': 'Friday',
-        'user': '57fb0d82f1814d202c26aec9',
-        'createdBy': '57fb0d8212e3ebfa5d8aa3ae'
+        'startDate': '2014-06-07 03:05:54',
+        'endDate': '2015-06-07 03:01:15',
+        'userId': '59a755b541a41e7813d9822d',
+        'createdBy': '59a755b5a4084493ee4a7ae8'
       },
       {
-        'startDate': '2014-06-13 11:13:45',
-        'endDate': '2014-04-11 09:03:12',
-        'day': 'Monday',
-        'user': '57fb0d820fa8b8c539000c37',
-        'createdBy': '57fb0d82c10005dd608da2e3'
+        'startDate': '2014-10-06 07:30:05',
+        'endDate': '2014-04-03 10:42:34',
+        'userId': '59a755b5b04d2401cb6f6621',
+        'createdBy': '59a755b57b0440c7de2fd3a9'
       },
       {
-        'startDate': '2014-07-23 09:43:07',
-        'endDate': '2015-02-12 05:18:42',
-        'day': 'Thursday',
-        'user': '57fb0d82e01ee0a0a69ca74a',
-        'createdBy': '57fb0d82e8ebc5e2025cb99c'
+        'startDate': '2015-02-15 07:37:25',
+        'endDate': '2015-04-04 12:18:51',
+        'userId': '59a755b54d1cf0cc84b3e09a',
+        'createdBy': '59a755b5ebaab53d925ff61b'
       },
       {
-        'startDate': '2015-05-16 09:48:04',
-        'endDate': '2015-02-01 10:39:22',
-        'day': 'Thursday',
-        'user': '57fb0d8217d52fbcf761009a',
-        'createdBy': '57fb0d8203c1bb7af7432f91'
+        'startDate': '2017-02-09 03:47:28',
+        'endDate': '2017-04-10 07:12:34',
+        'userId': '59a755b536d65e4f7c2447bc',
+        'createdBy': '59a755b54d1d5c2f1a57bd71'
       },
       {
-        'startDate': '2014-05-09 09:55:05',
-        'endDate': '2015-02-07 05:37:14',
-        'day': 'Wednesday',
-        'user': '57fb0d820665a3c4e1f690f3',
-        'createdBy': '57fb0d8219ac672c0de1ba69'
+        'startDate': '2016-10-21 10:15:08',
+        'endDate': '2015-07-25 10:22:57',
+        'userId': '59a755b590b2501ca73168c5',
+        'createdBy': '59a755b50410d3590320554e'
       },
       {
-        'startDate': '2014-09-07 05:59:48',
-        'endDate': '2015-05-28 06:25:32',
-        'day': 'Saturday',
-        'user': '57fb0d8275119a3caeee1605',
-        'createdBy': '57fb0d82d2b49d8a8f6eaee8'
+        'startDate': '2015-01-06 11:05:10',
+        'endDate': '2015-03-22 08:31:29',
+        'userId': '59a755b5f54c741fda25946c',
+        'createdBy': '59a755b5eda9a203fc6acc82'
       },
       {
-        'startDate': '2015-05-11 11:15:57',
-        'endDate': '2014-04-05 06:33:17',
-        'day': 'Wednesday',
-        'user': '57fb0d82a839fc5a178b3144',
-        'createdBy': '57fb0d82059b778f9265602e'
+        'startDate': '2015-02-11 11:02:42',
+        'endDate': '2015-02-21 11:13:34',
+        'userId': '59a755b5ac0e23a741f7c0eb',
+        'createdBy': '59a755b53790777279ce6542'
       },
       {
-        'startDate': '2016-07-04 06:09:46',
-        'endDate': '2014-05-18 07:32:08',
-        'day': 'Thursday',
-        'user': '57fb0d82cd8dce15b6f08bfc',
-        'createdBy': '57fb0d82cc8f35c5cd50d284'
+        'startDate': '2017-01-11 06:53:18',
+        'endDate': '2014-05-17 02:24:06',
+        'userId': '59a755b53bda4982c602e669',
+        'createdBy': '59a755b50852859ae7cd2fa4'
       },
       {
-        'startDate': '2015-06-10 02:50:27',
-        'endDate': '2014-02-25 05:16:21',
-        'day': 'Saturday',
-        'user': '57fb0d821825bc1d993bc052',
-        'createdBy': '57fb0d82fa1cb0595a99a103'
+        'startDate': '2014-11-05 08:55:24',
+        'endDate': '2016-10-11 05:55:02',
+        'userId': '59a755b5ca49edc010dccce8',
+        'createdBy': '59a755b51d546e4f72d0f86a'
       },
       {
-        'startDate': '2014-01-04 09:01:45',
-        'endDate': '2014-09-17 06:56:04',
-        'day': 'Monday',
-        'user': '57fb0d824580e62d756ea3f5',
-        'createdBy': '57fb0d82d2501a654b0ea016'
+        'startDate': '2017-08-14 09:39:57',
+        'endDate': '2016-09-08 06:06:28',
+        'userId': '59a755b5f7880b176c155c0d',
+        'createdBy': '59a755b5d5733d9c1c63637b'
       },
       {
-        'startDate': '2014-09-30 06:04:39',
-        'endDate': '2016-05-30 11:42:56',
-        'day': 'Wednesday',
-        'user': '57fb0d82d26d5c0f3284e010',
-        'createdBy': '57fb0d8207579414b8175719'
+        'startDate': '2017-03-05 08:49:33',
+        'endDate': '2014-03-05 08:33:31',
+        'userId': '59a755b52ab616f81c34d2bf',
+        'createdBy': '59a755b5951ced554cce7aef'
       },
       {
-        'startDate': '2014-12-24 02:39:45',
-        'endDate': '2014-05-26 11:47:29',
-        'day': 'Monday',
-        'user': '57fb0d82d66c66627d77e84e',
-        'createdBy': '57fb0d820685320cf194f8bf'
+        'startDate': '2014-03-11 12:54:49',
+        'endDate': '2014-11-24 02:12:40',
+        'userId': '59a755b5c95f0136c20c1c6e',
+        'createdBy': '59a755b5a914b2416cf9b3f5'
       },
       {
-        'startDate': '2014-11-07 12:28:52',
-        'endDate': '2016-06-30 02:35:26',
-        'day': 'Friday',
-        'user': '57fb0d825a08a4d6a6b2484a',
-        'createdBy': '57fb0d825efd4360e48b509d'
+        'startDate': '2015-09-12 01:55:21',
+        'endDate': '2015-12-26 11:53:49',
+        'userId': '59a755b5f88218d3c5bbeadf',
+        'createdBy': '59a755b55a359791f4e60c79'
       },
       {
-        'startDate': '2015-04-08 06:55:37',
-        'endDate': '2014-02-01 02:07:24',
-        'day': 'Monday',
-        'user': '57fb0d82450fb1be3a320434',
-        'createdBy': '57fb0d824302b87e4e4a6869'
+        'startDate': '2016-05-16 01:28:35',
+        'endDate': '2014-05-19 11:50:53',
+        'userId': '59a755b5db1d675c984de23b',
+        'createdBy': '59a755b536b540d10c9485d1'
       },
       {
-        'startDate': '2014-10-21 04:27:00',
-        'endDate': '2014-05-07 02:53:59',
-        'day': 'Monday',
-        'user': '57fb0d82a10dcf7160dca1fb',
-        'createdBy': '57fb0d82a41d3eeba612435b'
+        'startDate': '2017-02-10 09:24:33',
+        'endDate': '2014-01-02 01:28:25',
+        'userId': '59a755b5cc2c4828410c0044',
+        'createdBy': '59a755b5337e5afa1b248f8a'
       },
       {
-        'startDate': '2015-05-11 12:23:13',
-        'endDate': '2016-05-17 07:33:29',
-        'day': 'Saturday',
-        'user': '57fb0d8225bc2779031d41dd',
-        'createdBy': '57fb0d827bb12d71e77fe493'
+        'startDate': '2015-01-09 01:48:10',
+        'endDate': '2014-06-21 02:47:26',
+        'userId': '59a755b5dc515df10cfa0b88',
+        'createdBy': '59a755b5295030b50eda8499'
       },
       {
-        'startDate': '2015-10-27 07:18:46',
-        'endDate': '2014-03-02 02:52:57',
-        'day': 'Tuesday',
-        'user': '57fb0d8231e994e7ec95976d',
-        'createdBy': '57fb0d82996c1e3e858e8648'
+        'startDate': '2015-09-19 08:20:54',
+        'endDate': '2014-11-07 08:11:49',
+        'userId': '59a755b590ba1fd7a8880c5f',
+        'createdBy': '59a755b53304011f961dfe04'
       },
       {
-        'startDate': '2016-05-29 08:26:00',
-        'endDate': '2016-05-17 11:53:43',
-        'day': 'Saturday',
-        'user': '57fb0d823290e219347daf96',
-        'createdBy': '57fb0d8201bcfc7d6fa33e3a'
+        'startDate': '2016-09-23 08:16:46',
+        'endDate': '2016-10-07 10:29:37',
+        'userId': '59a755b518f9ab403c2affd8',
+        'createdBy': '59a755b5ac4bf4bf9d131de8'
       },
       {
-        'startDate': '2016-05-10 02:58:42',
-        'endDate': '2015-12-01 05:50:10',
-        'day': 'Thursday',
-        'user': '57fb0d82be9a54906b978604',
-        'createdBy': '57fb0d824710cf5a063928cd'
+        'startDate': '2014-03-27 04:08:32',
+        'endDate': '2016-12-17 03:47:07',
+        'userId': '59a755b5e44cb24c1a5026ef',
+        'createdBy': '59a755b58444111423613986'
       },
       {
-        'startDate': '2014-11-20 04:34:39',
-        'endDate': '2014-01-24 05:22:59',
-        'day': 'Sunday',
-        'user': '57fb0d821246f18bd223c66d',
-        'createdBy': '57fb0d8209cd2abe20a3533c'
+        'startDate': '2016-12-26 08:10:39',
+        'endDate': '2016-10-17 02:27:23',
+        'userId': '59a755b5d1170f3355e620de',
+        'createdBy': '59a755b507bc9fac89f81b44'
       },
       {
-        'startDate': '2015-04-01 11:32:13',
-        'endDate': '2014-01-31 07:56:47',
-        'day': 'Sunday',
-        'user': '57fb0d8219778ad861d1692c',
-        'createdBy': '57fb0d825b21b18a1d0a79b1'
+        'startDate': '2014-07-24 04:28:44',
+        'endDate': '2016-01-27 10:24:38',
+        'userId': '59a755b54f6df723721015fb',
+        'createdBy': '59a755b50b5a552996fb16a5'
       },
       {
-        'startDate': '2016-08-03 11:12:47',
-        'endDate': '2015-06-22 01:59:46',
-        'day': 'Tuesday',
-        'user': '57fb0d82a2dffac553eeee69',
-        'createdBy': '57fb0d82d1c09bac7dafaa9d'
+        'startDate': '2016-02-26 10:09:19',
+        'endDate': '2015-03-02 12:49:49',
+        'userId': '59a755b5411448c7e771a88b',
+        'createdBy': '59a755b5814226dbeb00ab48'
       },
       {
-        'startDate': '2015-06-07 05:14:00',
-        'endDate': '2014-08-30 06:00:01',
-        'day': 'Thursday',
-        'user': '57fb0d82f2c13b2b4140c5ea',
-        'createdBy': '57fb0d826f392619ffc5f7b0'
+        'startDate': '2016-02-07 04:37:13',
+        'endDate': '2016-04-29 05:54:23',
+        'userId': '59a755b53f216796c0225d78',
+        'createdBy': '59a755b59d9ecb48aacf1d48'
       },
       {
-        'startDate': '2014-08-14 03:39:55',
-        'endDate': '2015-11-30 08:12:10',
-        'day': 'Thursday',
-        'user': '57fb0d826786fa2c6490eca3',
-        'createdBy': '57fb0d821e11b873a62da9cf'
+        'startDate': '2016-12-26 08:19:01',
+        'endDate': '2016-10-19 06:18:20',
+        'userId': '59a755b53e0c98f19180f194',
+        'createdBy': '59a755b53b0995b3a09953b7'
       },
       {
-        'startDate': '2015-03-26 04:20:36',
-        'endDate': '2014-10-18 04:50:01',
-        'day': 'Wednesday',
-        'user': '57fb0d82d250d74cb52b9daa',
-        'createdBy': '57fb0d8282f8380c3517fc94'
+        'startDate': '2015-02-13 04:47:11',
+        'endDate': '2015-05-24 12:05:43',
+        'userId': '59a755b5610d9c8a426e68a6',
+        'createdBy': '59a755b5ec901dec47f61b6b'
       },
       {
-        'startDate': '2015-12-20 05:35:20',
-        'endDate': '2016-04-23 10:04:39',
-        'day': 'Monday',
-        'user': '57fb0d8287f75a61c28ba6e6',
-        'createdBy': '57fb0d828bd5d5f2254ad28f'
+        'startDate': '2017-04-14 04:52:40',
+        'endDate': '2016-04-25 11:08:53',
+        'userId': '59a755b5dede269df90b3f8b',
+        'createdBy': '59a755b58523e812fa76c103'
       },
       {
-        'startDate': '2015-10-05 07:50:00',
-        'endDate': '2014-06-17 08:46:44',
-        'day': 'Sunday',
-        'user': '57fb0d829e17ae3d4610b509',
-        'createdBy': '57fb0d82e9960e93a2d0e9a9'
+        'startDate': '2017-05-13 03:24:41',
+        'endDate': '2016-11-21 01:00:19',
+        'userId': '59a755b5ded058b00e6c5085',
+        'createdBy': '59a755b5627818fbdbd15249'
       },
       {
-        'startDate': '2014-01-27 01:36:34',
-        'endDate': '2014-07-13 08:46:13',
-        'day': 'Tuesday',
-        'user': '57fb0d82dbfb84ed11b96049',
-        'createdBy': '57fb0d82213a89802c448876'
+        'startDate': '2015-12-06 05:08:41',
+        'endDate': '2017-07-08 02:58:10',
+        'userId': '59a755b548ca67aa24685789',
+        'createdBy': '59a755b5ee3baba00c4da847'
       },
       {
-        'startDate': '2015-12-20 05:11:02',
-        'endDate': '2015-06-25 09:48:13',
-        'day': 'Monday',
-        'user': '57fb0d82113cb1e6030b1b32',
-        'createdBy': '57fb0d82aa5dfb56430fd9b2'
+        'startDate': '2016-08-27 10:28:24',
+        'endDate': '2014-03-25 09:35:25',
+        'userId': '59a755b59e788cf2496e3927',
+        'createdBy': '59a755b5b9a8585e5379c225'
       },
       {
-        'startDate': '2016-03-24 10:35:09',
-        'endDate': '2015-07-07 09:20:26',
-        'day': 'Friday',
-        'user': '57fb0d82ba94177f272f32c7',
-        'createdBy': '57fb0d82f665e3e1110a0868'
+        'startDate': '2014-07-06 08:34:41',
+        'endDate': '2014-05-07 10:02:59',
+        'userId': '59a755b541cc5b8fa2b64261',
+        'createdBy': '59a755b508b63e74449e6195'
       },
       {
-        'startDate': '2014-06-24 01:29:02',
-        'endDate': '2016-03-05 08:48:03',
-        'day': 'Sunday',
-        'user': '57fb0d82d0b1af2c5b097c9e',
-        'createdBy': '57fb0d824d9129e2db804317'
+        'startDate': '2016-01-23 10:08:04',
+        'endDate': '2016-03-25 02:49:14',
+        'userId': '59a755b515746a69bf7777a8',
+        'createdBy': '59a755b508002cc9724384bf'
       },
       {
-        'startDate': '2015-07-11 07:49:36',
-        'endDate': '2016-01-29 10:59:16',
-        'day': 'Thursday',
-        'user': '57fb0d82de3edb299ce87bba',
-        'createdBy': '57fb0d82ae248904c604070b'
+        'startDate': '2014-06-18 05:15:54',
+        'endDate': '2016-11-23 03:49:03',
+        'userId': '59a755b584a09e4ad11ef216',
+        'createdBy': '59a755b5e02e203a3f44a227'
       },
       {
-        'startDate': '2014-12-30 02:56:07',
-        'endDate': '2015-02-01 06:55:31',
-        'day': 'Wednesday',
-        'user': '57fb0d8298740a4f93d6a95a',
-        'createdBy': '57fb0d828aa1c44b07eaf4af'
+        'startDate': '2015-03-22 09:45:41',
+        'endDate': '2015-11-12 02:06:44',
+        'userId': '59a755b55229c78c2dba2277',
+        'createdBy': '59a755b5de5d1ea4732500b2'
       },
       {
-        'startDate': '2014-12-21 03:03:01',
-        'endDate': '2014-02-24 11:55:42',
-        'day': 'Tuesday',
-        'user': '57fb0d823156ce0f8af1386b',
-        'createdBy': '57fb0d82954365d756422a59'
+        'startDate': '2017-01-19 02:59:22',
+        'endDate': '2016-10-19 04:08:49',
+        'userId': '59a755b550cc254f388e367a',
+        'createdBy': '59a755b5adedeb40842542e6'
       },
       {
-        'startDate': '2015-05-07 01:56:01',
-        'endDate': '2016-05-23 01:47:07',
-        'day': 'Friday',
-        'user': '57fb0d825fcfbe83dc30e645',
-        'createdBy': '57fb0d822d7a1b36ae5202b5'
+        'startDate': '2014-12-14 07:46:32',
+        'endDate': '2015-01-31 09:51:58',
+        'userId': '59a755b5e916b0850b1b4e78',
+        'createdBy': '59a755b578bb314d36de41ab'
       },
       {
-        'startDate': '2016-03-08 11:01:46',
-        'endDate': '2016-04-19 09:48:32',
-        'day': 'Friday',
-        'user': '57fb0d82e0efeb4e1b2d0356',
-        'createdBy': '57fb0d82bfd79180d0af2154'
+        'startDate': '2015-12-07 07:23:48',
+        'endDate': '2016-06-15 04:16:47',
+        'userId': '59a755b5d4608378275ab292',
+        'createdBy': '59a755b5787f6cd99825f908'
       },
       {
-        'startDate': '2016-07-09 03:31:03',
-        'endDate': '2014-02-28 04:36:43',
-        'day': 'Tuesday',
-        'user': '57fb0d821a53423bdc1d8d43',
-        'createdBy': '57fb0d8232857a3ccc40ff7e'
+        'startDate': '2016-12-22 08:55:17',
+        'endDate': '2016-05-08 07:20:20',
+        'userId': '59a755b5d8dff91d43a9fdc4',
+        'createdBy': '59a755b5622bd01c99d8c5d9'
       },
       {
-        'startDate': '2016-09-21 09:17:24',
-        'endDate': '2015-06-14 05:31:43',
-        'day': 'Friday',
-        'user': '57fb0d82512dd6adde326841',
-        'createdBy': '57fb0d820763370bb672fee4'
+        'startDate': '2017-07-08 11:38:08',
+        'endDate': '2014-02-06 05:18:42',
+        'userId': '59a755b5ec5e03122a0cfa14',
+        'createdBy': '59a755b55ef9097423226be1'
       },
       {
-        'startDate': '2014-01-12 04:23:05',
-        'endDate': '2014-07-30 12:20:13',
-        'day': 'Monday',
-        'user': '57fb0d82c77130def3d0954c',
-        'createdBy': '57fb0d824c1cae760c5de31e'
+        'startDate': '2014-01-01 08:52:47',
+        'endDate': '2015-09-24 12:43:08',
+        'userId': '59a755b5cb68789a1dd427fa',
+        'createdBy': '59a755b55f55b7b3eb127323'
       },
       {
-        'startDate': '2015-11-06 11:02:30',
-        'endDate': '2015-11-19 08:25:04',
-        'day': 'Monday',
-        'user': '57fb0d82b647bfa7f0ff4bb4',
-        'createdBy': '57fb0d8292b3265e7f94311b'
+        'startDate': '2017-06-05 12:06:16',
+        'endDate': '2015-03-28 08:30:12',
+        'userId': '59a755b51713effcae685e67',
+        'createdBy': '59a755b5714ee0c39992ce94'
       },
       {
-        'startDate': '2014-10-01 02:21:08',
-        'endDate': '2014-04-25 04:16:49',
-        'day': 'Saturday',
-        'user': '57fb0d82247be257ce6f67a8',
-        'createdBy': '57fb0d828052bfeed85f3089'
+        'startDate': '2015-04-21 08:31:08',
+        'endDate': '2016-06-05 09:34:10',
+        'userId': '59a755b5da7cdf7f530d844b',
+        'createdBy': '59a755b5bfa334ba82234ebc'
       },
       {
-        'startDate': '2016-01-26 07:18:18',
-        'endDate': '2015-05-16 01:02:43',
-        'day': 'Friday',
-        'user': '57fb0d8298e3e29c0f133456',
-        'createdBy': '57fb0d829bbffb3057b9a6d8'
+        'startDate': '2016-07-16 10:10:29',
+        'endDate': '2017-02-09 11:53:39',
+        'userId': '59a755b5cef4fea48dd69ffa',
+        'createdBy': '59a755b5e26d3c4f97c2c4b3'
       },
       {
-        'startDate': '2015-04-20 07:14:11',
-        'endDate': '2014-02-24 12:49:28',
-        'day': 'Thursday',
-        'user': '57fb0d821f7cc70f51f9c965',
-        'createdBy': '57fb0d82889cc439aed7cfdf'
+        'startDate': '2016-08-21 07:19:02',
+        'endDate': '2017-01-14 05:34:11',
+        'userId': '59a755b5b15e6232f272803c',
+        'createdBy': '59a755b5167cbba916afb51a'
       },
       {
-        'startDate': '2015-02-19 08:39:46',
-        'endDate': '2015-12-30 05:51:31',
-        'day': 'Monday',
-        'user': '57fb0d829add495b1b3b9f29',
-        'createdBy': '57fb0d82d89a84cc8cd16bdf'
+        'startDate': '2016-07-12 09:16:25',
+        'endDate': '2015-04-02 10:52:53',
+        'userId': '59a755b565994b5da05f9137',
+        'createdBy': '59a755b5b060b3f39090fc19'
       },
       {
-        'startDate': '2015-06-14 12:12:03',
-        'endDate': '2016-08-23 04:43:33',
-        'day': 'Monday',
-        'user': '57fb0d82713f5921ae56103c',
-        'createdBy': '57fb0d828639138c206a0816'
+        'startDate': '2015-03-13 01:34:42',
+        'endDate': '2017-06-04 04:30:06',
+        'userId': '59a755b5a9c014934e3cb453',
+        'createdBy': '59a755b5e976b18c30625a07'
       },
       {
-        'startDate': '2014-06-21 05:44:18',
-        'endDate': '2014-01-30 08:22:11',
-        'day': 'Saturday',
-        'user': '57fb0d82551b954e45eb0725',
-        'createdBy': '57fb0d8298d21d779d4b855d'
+        'startDate': '2014-06-21 08:24:31',
+        'endDate': '2014-05-08 08:04:39',
+        'userId': '59a755b5aca0c324451eb8b3',
+        'createdBy': '59a755b5717361696c1a1d5a'
       },
       {
-        'startDate': '2014-03-06 08:16:58',
-        'endDate': '2014-06-21 01:16:32',
-        'day': 'Saturday',
-        'user': '57fb0d82296ca980d0b56ed5',
-        'createdBy': '57fb0d824f9ee2888ebbd98a'
+        'startDate': '2015-12-30 08:59:11',
+        'endDate': '2014-03-27 07:07:24',
+        'userId': '59a755b56016f31e698bd131',
+        'createdBy': '59a755b566007557e20a76e2'
       },
       {
-        'startDate': '2014-11-04 01:24:41',
-        'endDate': '2014-05-20 12:56:06',
-        'day': 'Thursday',
-        'user': '57fb0d82dd7fff0a04c6a0d8',
-        'createdBy': '57fb0d825e4e15048fab1b44'
+        'startDate': '2014-05-22 07:10:17',
+        'endDate': '2016-07-27 09:36:38',
+        'userId': '59a755b5370930a942e3c192',
+        'createdBy': '59a755b50ff3895a7a7c2674'
       },
       {
-        'startDate': '2016-02-28 05:30:05',
-        'endDate': '2015-07-03 02:28:03',
-        'day': 'Friday',
-        'user': '57fb0d826692284dde5a1929',
-        'createdBy': '57fb0d82627bc699dbbb4b89'
+        'startDate': '2014-06-02 09:05:15',
+        'endDate': '2016-04-28 04:46:00',
+        'userId': '59a755b5dec14b0a7c226b3a',
+        'createdBy': '59a755b5be68e90d4342c557'
       },
       {
-        'startDate': '2014-08-05 12:36:04',
-        'endDate': '2016-09-26 06:44:26',
-        'day': 'Friday',
-        'user': '57fb0d82efbd91abde30abed',
-        'createdBy': '57fb0d8246c5e478a200926e'
+        'startDate': '2016-06-21 04:52:38',
+        'endDate': '2015-05-27 01:06:04',
+        'userId': '59a755b57b1aa15cdf03e65d',
+        'createdBy': '59a755b50fa4456794a47286'
       },
       {
-        'startDate': '2015-05-23 09:35:42',
-        'endDate': '2016-08-10 03:18:46',
-        'day': 'Wednesday',
-        'user': '57fb0d82f5669af4bf0dad84',
-        'createdBy': '57fb0d82f59ef866e0f6c31e'
+        'startDate': '2017-04-29 12:21:54',
+        'endDate': '2016-02-07 09:20:56',
+        'userId': '59a755b55ea04939fa92f134',
+        'createdBy': '59a755b5b01908d8e96d84aa'
       },
       {
-        'startDate': '2015-08-27 03:34:48',
-        'endDate': '2015-10-22 03:26:35',
-        'day': 'Wednesday',
-        'user': '57fb0d82bc72f09f1b548b03',
-        'createdBy': '57fb0d82ca7855186ba07bae'
+        'startDate': '2014-02-10 10:52:51',
+        'endDate': '2016-05-14 07:17:08',
+        'userId': '59a755b529cb2ea8ec2c341f',
+        'createdBy': '59a755b5f879a401706d0415'
       },
       {
-        'startDate': '2015-01-26 03:31:44',
-        'endDate': '2016-03-25 02:26:52',
-        'day': 'Saturday',
-        'user': '57fb0d824da761cdec49e858',
-        'createdBy': '57fb0d824b8b6271ba760820'
+        'startDate': '2014-08-11 11:17:33',
+        'endDate': '2016-09-12 10:12:02',
+        'userId': '59a755b55f4ea2ef6f5b5974',
+        'createdBy': '59a755b565f964ed3c5c6619'
       },
       {
-        'startDate': '2014-08-26 03:13:58',
-        'endDate': '2016-09-26 08:25:34',
-        'day': 'Thursday',
-        'user': '57fb0d82291338aa61966ef2',
-        'createdBy': '57fb0d822916d6461bff85e1'
+        'startDate': '2017-08-05 05:46:43',
+        'endDate': '2016-03-12 12:15:41',
+        'userId': '59a755b5da8d5af8ebbd777f',
+        'createdBy': '59a755b522a2ae867b21b475'
       },
       {
-        'startDate': '2016-08-26 03:05:17',
-        'endDate': '2015-03-06 07:33:15',
-        'day': 'Sunday',
-        'user': '57fb0d8235259d95e336d3dc',
-        'createdBy': '57fb0d82ccbb344cac2c527c'
+        'startDate': '2014-03-17 07:42:22',
+        'endDate': '2014-06-11 11:52:43',
+        'userId': '59a755b501520086e4261a70',
+        'createdBy': '59a755b56da0bf11f2303877'
       },
       {
-        'startDate': '2015-01-17 09:53:45',
-        'endDate': '2014-05-18 08:44:51',
-        'day': 'Tuesday',
-        'user': '57fb0d82917ccb147b48af9f',
-        'createdBy': '57fb0d823830cbc45b18a883'
+        'startDate': '2014-05-07 08:29:27',
+        'endDate': '2014-03-21 03:47:22',
+        'userId': '59a755b520ed99c627403eab',
+        'createdBy': '59a755b58928e1e9e086cc40'
       },
       {
-        'startDate': '2014-05-04 07:24:49',
-        'endDate': '2014-05-11 04:05:43',
-        'day': 'Friday',
-        'user': '57fb0d82975db0f07d5ece83',
-        'createdBy': '57fb0d8249870c2dda858ddb'
+        'startDate': '2014-05-30 06:52:48',
+        'endDate': '2015-08-31 05:39:33',
+        'userId': '59a755b594d3a2cb6ca5a525',
+        'createdBy': '59a755b53f5d88f078011d67'
       },
       {
-        'startDate': '2014-04-05 07:22:40',
-        'endDate': '2015-12-19 08:27:53',
-        'day': 'Wednesday',
-        'user': '57fb0d828600b57ba4f71811',
-        'createdBy': '57fb0d8202a5e2c29f9d08f9'
+        'startDate': '2017-08-05 04:07:35',
+        'endDate': '2015-04-13 09:29:50',
+        'userId': '59a755b57c9eec0d446f404e',
+        'createdBy': '59a755b5d338d2ca1f666117'
       },
       {
-        'startDate': '2014-12-08 07:16:51',
-        'endDate': '2015-04-14 04:27:24',
-        'day': 'Tuesday',
-        'user': '57fb0d82704f8089bbd53fa0',
-        'createdBy': '57fb0d823e349743dddee246'
+        'startDate': '2014-12-25 09:13:11',
+        'endDate': '2016-04-29 06:17:47',
+        'userId': '59a755b527cd0cde684275ed',
+        'createdBy': '59a755b5f204aac99d522006'
       },
       {
-        'startDate': '2014-12-01 10:24:48',
-        'endDate': '2016-06-05 06:05:41',
-        'day': 'Monday',
-        'user': '57fb0d825d6d025ceb521496',
-        'createdBy': '57fb0d821aabd0001e4f5b7c'
+        'startDate': '2014-10-31 07:04:34',
+        'endDate': '2014-03-03 09:58:25',
+        'userId': '59a755b59b33d5fb3f25e851',
+        'createdBy': '59a755b542537d763b78f6c8'
       },
       {
-        'startDate': '2015-01-28 09:51:18',
-        'endDate': '2016-08-04 11:04:28',
-        'day': 'Monday',
-        'user': '57fb0d82b158c8e698a38f4a',
-        'createdBy': '57fb0d82f45a41fa3e9c1418'
+        'startDate': '2014-08-08 11:44:46',
+        'endDate': '2016-07-27 02:19:09',
+        'userId': '59a755b58e3e8c84f9e2c437',
+        'createdBy': '59a755b5055b585a225f51b6'
       },
       {
-        'startDate': '2015-06-07 10:34:22',
-        'endDate': '2014-05-20 08:50:27',
-        'day': 'Monday',
-        'user': '57fb0d82cf4edcbce63f3710',
-        'createdBy': '57fb0d82f8fec9bb6fd54744'
+        'startDate': '2015-04-05 07:55:58',
+        'endDate': '2016-06-07 05:46:57',
+        'userId': '59a755b5e8abb12d1702cc36',
+        'createdBy': '59a755b521fa1604ddfd34d4'
       }
     ]
   }
