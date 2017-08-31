@@ -48,6 +48,7 @@ module.exports = () => {
   require('../routes/user.routes')(router)
   require('../routes/log.routes')(router)
   require('../routes/index.routes')(router)
+  require('../routes/application-type.routes')(router)
 
   /**
    * CORS middleware
