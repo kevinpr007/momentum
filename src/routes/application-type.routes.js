@@ -16,11 +16,11 @@ module.exports = router => {
   authenticate,
   pageValidations, getAllApplicationTypes)
 
-// TODO: Remove all hardcode roles
   router.get('/api/application-type/:id',
   authenticate,
   getByApplicationType)
 
+  // TODO: Remove all hardcode roles
   router.post('/api/application-type',
   authenticate,
   authorize([{ name: 'sysAdmin' }]),

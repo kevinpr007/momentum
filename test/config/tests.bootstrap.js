@@ -12,6 +12,7 @@ require('sinon-as-promised')
 global.config = require('../../src/config/config')
 global.clearModule = require('clear-module')
 
+// TODO: We are not testing the real code
 global.setPagedJson = (req, res) => {
   const host = 'http://localhost'
   const url = '/test'
