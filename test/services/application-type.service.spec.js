@@ -101,7 +101,7 @@ describe('Application Type service tests', () => {
         }
         this.stub(AppType, 'remove').returns(remove)
 
-        appTypeService.delet('appType-ID-01234').then(() => {
+        appTypeService._delete('appType-ID-01234').then(() => {
           expect(AppType.remove.calledOnce).to.equal(true)
           done()
         }).catch(err => done(err))

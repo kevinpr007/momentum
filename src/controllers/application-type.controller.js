@@ -26,7 +26,7 @@ module.exports = appTypeService => {
         .json(appType)
     }
 
-    const { id } = req.params
+    const {id} = req.params
 
     return appTypeService.getById(id)
       .then(setResponse)
@@ -52,6 +52,8 @@ module.exports = appTypeService => {
     }
 
     const getAppType = appType => {
+      const values = req.body
+
       if (!appType) {
         let message = 'Application Type not found.'
         return util.generateError(message, HttpStatus.NOT_FOUND)
@@ -61,7 +63,6 @@ module.exports = appTypeService => {
     }
 
     const {id} = req.params
-    const values = req.body
 
     return appTypeService.getById(id)
       .then(getAppType)
@@ -76,7 +77,7 @@ module.exports = appTypeService => {
 
     const { id } = req.params
 
-    return appTypeService.delet(id)
+    return appTypeService._delete(id)
       .then(setResponse)
       .catch(next)
   }

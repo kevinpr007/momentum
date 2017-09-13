@@ -22,16 +22,15 @@ module.exports = () => {
 
   const create = appType => applicationType.create(appType)
 
-  const update = (appType, values) => { _.merge(appType, values).save() }
+  const update = (appType, values) => _.merge(appType, values).save()
 
-  // Can't be delete because it's a reserve word
-  const delet = id => applicationType.remove().where('_id', id).exec()
+  const _delete = id => applicationType.remove().where('_id', id).exec()
 
   return {
     getAll,
     getById,
     create,
     update,
-    delet
+    _delete
   }
 }

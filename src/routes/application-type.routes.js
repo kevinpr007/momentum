@@ -13,26 +13,27 @@ const {
 
 module.exports = router => {
   router.get('/api/application-type',
-  authenticate,
-  pageValidations, getAllApplicationTypes)
+    authenticate,
+    pageValidations,
+    getAllApplicationTypes)
 
   router.get('/api/application-type/:id',
-  authenticate,
-  getByApplicationType)
+    authenticate,
+    getByApplicationType)
 
   // TODO: Remove all hardcode roles
   router.post('/api/application-type',
-  authenticate,
-  authorize([{ name: 'sysAdmin' }]),
-  setApplicationType)
+    authenticate,
+    authorize([{ name: 'sysAdmin' }]),
+    setApplicationType)
 
   router.put('/api/application-type/:id',
-  authenticate,
-  authorize([{ name: 'sysAdmin' }]),
-  updateApplicationType)
+    authenticate,
+    authorize([{ name: 'sysAdmin' }]),
+    updateApplicationType)
 
   router.delete('/api/application-type/:id',
-  authenticate,
-  authorize([{ name: 'sysAdmin' }]),
-  deleteApplicationType)
+    authenticate,
+    authorize([{ name: 'sysAdmin' }]),
+    deleteApplicationType)
 }

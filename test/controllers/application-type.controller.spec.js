@@ -205,7 +205,7 @@ describe('Application Type entity requests', () => {
         let next = args => done(args)
 
         appTypeService = this.stub(appTypeService())
-        appTypeService.delet.resolves(null)
+        appTypeService._delete.resolves(null)
 
         appTypeController(appTypeService).deleteApplicationType(req, res, next)
 
@@ -213,7 +213,7 @@ describe('Application Type entity requests', () => {
           let result = res._getData()
           expect(res.statusCode).to.equal(HttpStatus.OK)
           expect(result).to.equal('')
-          assert.isTrue(appTypeService.delet.calledOnce)
+          assert.isTrue(appTypeService._delete.calledOnce)
           done()
         })
       }))
