@@ -6,804 +6,1004 @@ var data = [
     'model': mongoDB.Model.Schedule,
     'documents': [
       {
-        'startDate': '2015-07-12 06:20:10',
-        'endDate': '2016-09-13 10:29:01',
+        'startDate': '2015-02-07 01:22:34',
+        'endDate': '2016-04-30 04:31:07',
+        'userId': '59a75532e4251a17adf48ee7',
         'scheduleType': 'General',
-        'service': '57fb0c643d50b67d3fb5dc06',
-        'workshift': '57fb0c6416c2812bbc5728fa',
-        'createdBy': '57fb0c64caf7f559fdad079f'
+        'serviceId': '59a75532a6104cc9e3407592',
+        'workshiftId': '59a755321c8bf9a10c2f0dea',
+        'locationId': '59a7553264295cec6f293a31',
+        'createdBy': '59a755322ef80f349cc156db'
       },
       {
-        'startDate': '2014-11-14 06:22:18',
-        'endDate': '2015-08-28 02:01:21',
+        'startDate': '2015-06-09 01:34:27',
+        'endDate': '2017-01-01 03:26:19',
+        'userId': '59a75532768092d7fb2de30f',
+        'scheduleType': 'General',
+        'serviceId': '59a7553279bd2fe17bc3ddd8',
+        'workshiftId': '59a75532d2c1f55b89b39c8f',
+        'locationId': '59a75532f7140a568b70809f',
+        'createdBy': '59a755325da3fef3ec328627'
+      },
+      {
+        'startDate': '2017-02-03 01:06:45',
+        'endDate': '2016-12-30 04:38:52',
+        'userId': '59a75532a9a4bf5839ad3e3b',
+        'scheduleType': 'General',
+        'serviceId': '59a75532d7f6314ff30daa37',
+        'workshiftId': '59a75532a1d20520cba05e78',
+        'locationId': '59a755327fc0a8b87c47af56',
+        'createdBy': '59a75532015e7d564b7c4860'
+      },
+      {
+        'startDate': '2015-04-03 11:49:58',
+        'endDate': '2016-03-13 07:15:58',
+        'userId': '59a755327b88844bbdb08698',
+        'scheduleType': 'General',
+        'serviceId': '59a75532361d035b8056bb44',
+        'workshiftId': '59a75532c9d10778e74dbe3b',
+        'locationId': '59a75532f5fc8da6f7f061ff',
+        'createdBy': '59a75532a8f2ae6e11f58205'
+      },
+      {
+        'startDate': '2014-01-25 05:15:31',
+        'endDate': '2016-08-23 03:57:38',
+        'userId': '59a75532fd1f4080112988a3',
+        'scheduleType': 'General',
+        'serviceId': '59a755322f054b02b2bcbab3',
+        'workshiftId': '59a7553201a8d04b3854386f',
+        'locationId': '59a75532795031aae208ea58',
+        'createdBy': '59a755327004f09d541c68e4'
+      },
+      {
+        'startDate': '2014-03-22 03:57:02',
+        'endDate': '2017-08-23 12:29:14',
+        'userId': '59a755326e4203e2686ff7e4',
+        'scheduleType': 'General',
+        'serviceId': '59a75532220a6ced892b5b49',
+        'workshiftId': '59a75532440b85998bfacd59',
+        'locationId': '59a75532e96e25fdb41d4fcd',
+        'createdBy': '59a75532c635ee1a48a4b855'
+      },
+      {
+        'startDate': '2015-09-23 07:06:11',
+        'endDate': '2014-01-28 01:43:54',
+        'userId': '59a75532e3eff854a1e4acb0',
+        'scheduleType': 'General',
+        'serviceId': '59a755324150a96f8c1ccdfc',
+        'workshiftId': '59a755323fec51c341499102',
+        'locationId': '59a7553220e9e9e7e10c9f51',
+        'createdBy': '59a755328613e67bde310247'
+      },
+      {
+        'startDate': '2014-12-15 08:52:14',
+        'endDate': '2017-04-09 03:29:26',
+        'userId': '59a75532a2a048ce2116a25c',
+        'scheduleType': 'General',
+        'serviceId': '59a75532b7370a6c8c1afb08',
+        'workshiftId': '59a75532b5ca152011269e56',
+        'locationId': '59a75532e4537b8a19c859d4',
+        'createdBy': '59a75532a49c093e98b1c0da'
+      },
+      {
+        'startDate': '2017-02-11 02:31:54',
+        'endDate': '2014-06-18 09:29:19',
+        'userId': '59a75532a3496588e48813f2',
+        'scheduleType': 'General',
+        'serviceId': '59a75532bb15955a5a9eeed6',
+        'workshiftId': '59a75532ef1616aa8870c303',
+        'locationId': '59a7553255fab2537e069821',
+        'createdBy': '59a755326d61622e7213bcac'
+      },
+      {
+        'startDate': '2015-03-13 10:07:19',
+        'endDate': '2015-12-17 12:46:05',
+        'userId': '59a75532cd41c24d0b05a91d',
+        'scheduleType': 'General',
+        'serviceId': '59a755329d9b8857f288b13d',
+        'workshiftId': '59a755325f2c12d0ae91737f',
+        'locationId': '59a755324a5f1c0cd72af2e7',
+        'createdBy': '59a755323aad6b3a612afbe2'
+      },
+      {
+        'startDate': '2015-10-26 10:34:19',
+        'endDate': '2016-04-28 03:08:47',
+        'userId': '59a755328791dbaa816e1257',
+        'scheduleType': 'General',
+        'serviceId': '59a7553295b137601ceeb749',
+        'workshiftId': '59a75532fb10e940f1e18a18',
+        'locationId': '59a755327eeed5289ddd9cc1',
+        'createdBy': '59a7553289afd5844d1f3fc6'
+      },
+      {
+        'startDate': '2014-12-18 08:02:43',
+        'endDate': '2016-06-24 01:06:40',
+        'userId': '59a755320568715b13be9612',
         'scheduleType': 'Exception',
-        'service': '57fb0c64e6482480087bf3f2',
-        'workshift': '57fb0c6457c57a594b71af04',
-        'createdBy': '57fb0c648917913dd46ecf2a'
+        'serviceId': '59a75532820e3596254878d6',
+        'workshiftId': '59a75532baefe170d1845913',
+        'locationId': '59a75532e236172d180a3d25',
+        'createdBy': '59a75532a0ef50e5378f6fd5'
       },
       {
-        'startDate': '2016-05-22 12:10:05',
-        'endDate': '2015-03-30 11:24:31',
+        'startDate': '2017-02-17 04:51:14',
+        'endDate': '2016-08-20 07:10:16',
+        'userId': '59a75532ff41d42b54ea2837',
+        'scheduleType': 'General',
+        'serviceId': '59a7553242b0eb637b2c8b8c',
+        'workshiftId': '59a7553281e42994c6896ae0',
+        'locationId': '59a755321bf74e3ca0fc717e',
+        'createdBy': '59a75532ba353f1dba9b0a7b'
+      },
+      {
+        'startDate': '2016-06-02 06:10:58',
+        'endDate': '2016-07-31 04:21:10',
+        'userId': '59a755323916bdb3662e1de5',
+        'scheduleType': 'General',
+        'serviceId': '59a75532152405a4cf000494',
+        'workshiftId': '59a755328b58cf57db5903d7',
+        'locationId': '59a75532f95ac1f75f63d8bd',
+        'createdBy': '59a7553290fecdb41510630b'
+      },
+      {
+        'startDate': '2017-05-06 01:55:00',
+        'endDate': '2014-07-26 08:36:15',
+        'userId': '59a75532cb05ae0baef78d7b',
         'scheduleType': 'Exception',
-        'service': '57fb0c64434830d880799fdc',
-        'workshift': '57fb0c64711ec3e3ad925654',
-        'createdBy': '57fb0c64602cf50c4b9b62b1'
+        'serviceId': '59a75532af5ec690885dbf7b',
+        'workshiftId': '59a7553250b1959b6c3bfcb0',
+        'locationId': '59a75532f107f5593a04ce89',
+        'createdBy': '59a75532fbfb3b946f458bad'
       },
       {
-        'startDate': '2015-04-07 01:27:50',
-        'endDate': '2014-03-08 10:28:23',
+        'startDate': '2017-03-07 08:21:01',
+        'endDate': '2015-10-07 02:47:15',
+        'userId': '59a7553205c34474d905bab1',
         'scheduleType': 'Exception',
-        'service': '57fb0c64567e4c2ab5ce1348',
-        'workshift': '57fb0c640d09a8a226da5a03',
-        'createdBy': '57fb0c643726e7b0e3773e28'
+        'serviceId': '59a75532bc2c0d2ce5772414',
+        'workshiftId': '59a75532f392e4f3a86ce20e',
+        'locationId': '59a75532a0e90763049500a0',
+        'createdBy': '59a755320c723071c585a61e'
       },
       {
-        'startDate': '2015-06-25 11:20:07',
-        'endDate': '2014-07-24 04:33:36',
+        'startDate': '2014-09-13 05:52:09',
+        'endDate': '2014-10-01 09:34:14',
+        'userId': '59a75532a4f30a0a852db1cf',
         'scheduleType': 'Exception',
-        'service': '57fb0c6472d19777dfe5d429',
-        'workshift': '57fb0c644abfd97fd3eb0b2d',
-        'createdBy': '57fb0c64829bc3ce8da780c3'
+        'serviceId': '59a75532f96f2bdff26824c1',
+        'workshiftId': '59a755323eb38e610935064a',
+        'locationId': '59a755329bdb6bb9324968b5',
+        'createdBy': '59a75532982e0ed8545015c5'
       },
       {
-        'startDate': '2016-08-14 08:09:32',
-        'endDate': '2015-10-06 04:38:39',
+        'startDate': '2016-01-05 10:09:03',
+        'endDate': '2016-12-13 02:06:06',
+        'userId': '59a7553219bd731eec327bac',
         'scheduleType': 'General',
-        'service': '57fb0c6477583c3678d1d3f7',
-        'workshift': '57fb0c642a115a51a526ffc8',
-        'createdBy': '57fb0c64c34ba13e94ef843e'
+        'serviceId': '59a7553282ea621fc92af9c0',
+        'workshiftId': '59a75532385efd3c3d65068d',
+        'locationId': '59a75532b14077010af662f0',
+        'createdBy': '59a755329a92d0ccaa1b6704'
       },
       {
-        'startDate': '2015-07-01 01:49:18',
-        'endDate': '2016-07-22 05:09:45',
+        'startDate': '2017-03-29 05:34:22',
+        'endDate': '2017-03-22 04:55:28',
+        'userId': '59a75532336ebbc9401d4963',
+        'scheduleType': 'General',
+        'serviceId': '59a75532a3f1540d265a6d88',
+        'workshiftId': '59a755325e1af4dde80b8aea',
+        'locationId': '59a7553235d18a45afb9e4c7',
+        'createdBy': '59a755327cee7d767eb8944f'
+      },
+      {
+        'startDate': '2015-02-10 10:07:27',
+        'endDate': '2016-02-07 01:18:15',
+        'userId': '59a75532c6371eb2d659d2c8',
         'scheduleType': 'Exception',
-        'service': '57fb0c64d799fa9893eb1c21',
-        'workshift': '57fb0c646ac5bd680a4c9ff7',
-        'createdBy': '57fb0c64ef14017a50768494'
+        'serviceId': '59a755326606c281991d15ce',
+        'workshiftId': '59a75532b994a14ee46e9563',
+        'locationId': '59a75532a13cc595b61b0d1a',
+        'createdBy': '59a755329f97342c026bc01f'
       },
       {
-        'startDate': '2015-02-01 03:49:44',
-        'endDate': '2015-06-02 02:57:58',
+        'startDate': '2017-02-21 03:21:23',
+        'endDate': '2017-03-15 01:52:21',
+        'userId': '59a75532f5a544aaa07c3a2b',
         'scheduleType': 'General',
-        'service': '57fb0c6459dfb6ac253b63b1',
-        'workshift': '57fb0c64ad8dc7f3bb0c730f',
-        'createdBy': '57fb0c64b9e7c5aa16c6b581'
+        'serviceId': '59a75532fa6c9fb14f2bb929',
+        'workshiftId': '59a755321d7bd4df6ef88ff7',
+        'locationId': '59a755326b002ac1fc26d688',
+        'createdBy': '59a755324db7cfe909954d20'
       },
       {
-        'startDate': '2014-12-29 11:15:03',
-        'endDate': '2014-05-25 11:49:37',
+        'startDate': '2014-11-08 06:20:05',
+        'endDate': '2016-02-16 04:02:58',
+        'userId': '59a7553268334408ee2ed88a',
         'scheduleType': 'General',
-        'service': '57fb0c648d7d836efbd97654',
-        'workshift': '57fb0c64cb320e4213ccd49e',
-        'createdBy': '57fb0c64d78def6d180ad32f'
+        'serviceId': '59a75532429756ae92d1d538',
+        'workshiftId': '59a75532a0d967ef9df070cd',
+        'locationId': '59a75532a199e06b85090121',
+        'createdBy': '59a75532a16c8310a4be8bfc'
       },
       {
-        'startDate': '2015-06-02 09:13:48',
-        'endDate': '2014-10-25 06:07:54',
+        'startDate': '2014-08-16 08:53:07',
+        'endDate': '2015-04-12 10:40:45',
+        'userId': '59a75532f8f0f59d0b8e1f43',
+        'scheduleType': 'General',
+        'serviceId': '59a755329deb64e5767b775c',
+        'workshiftId': '59a75532ca0c10c0c88626dd',
+        'locationId': '59a755329845bb9520dd150d',
+        'createdBy': '59a75532ca324da157bfe725'
+      },
+      {
+        'startDate': '2015-03-20 04:22:50',
+        'endDate': '2016-03-16 09:39:01',
+        'userId': '59a75532bb6a9c1d44643224',
+        'scheduleType': 'General',
+        'serviceId': '59a755324e102755231cb057',
+        'workshiftId': '59a75532e13fb1d84c540c84',
+        'locationId': '59a755323afba3f6beef31ec',
+        'createdBy': '59a7553281282e263d7a70b3'
+      },
+      {
+        'startDate': '2015-02-24 12:04:16',
+        'endDate': '2016-04-20 11:13:17',
+        'userId': '59a755326630801187c3d370',
         'scheduleType': 'Exception',
-        'service': '57fb0c64203d4cdce22f1a9c',
-        'workshift': '57fb0c64165c8a334ed95201',
-        'createdBy': '57fb0c64a1eed4e9a7a480a7'
+        'serviceId': '59a75532abc932aadc8532dd',
+        'workshiftId': '59a75532342533c9e55702ac',
+        'locationId': '59a7553224405909f0b2cc8c',
+        'createdBy': '59a7553296a9f349994abd0b'
       },
       {
-        'startDate': '2015-06-23 03:37:36',
-        'endDate': '2016-06-08 07:00:39',
+        'startDate': '2016-05-21 02:06:11',
+        'endDate': '2016-01-19 09:36:08',
+        'userId': '59a75532ae28b940a9ca1b6f',
+        'scheduleType': 'General',
+        'serviceId': '59a755326acffbb38075ad47',
+        'workshiftId': '59a75532f5e4ced62a13c6dc',
+        'locationId': '59a7553267d2f8f76e4402db',
+        'createdBy': '59a75532f75a4a4fbb887349'
+      },
+      {
+        'startDate': '2016-12-27 10:24:08',
+        'endDate': '2016-01-25 02:50:56',
+        'userId': '59a75532b9975aa9593577fa',
         'scheduleType': 'Exception',
-        'service': '57fb0c642a3509f4c1edb8ba',
-        'workshift': '57fb0c64e174320477ba06b9',
-        'createdBy': '57fb0c64a1b40876e3271f24'
+        'serviceId': '59a75532a7c87573e4b2294d',
+        'workshiftId': '59a75532271f55b3edca7caf',
+        'locationId': '59a755327f4c31f912d2fd3a',
+        'createdBy': '59a75532a24f5a2ea5a3acb3'
       },
       {
-        'startDate': '2015-07-14 11:56:18',
-        'endDate': '2014-01-07 11:51:03',
-        'scheduleType': 'General',
-        'service': '57fb0c6427c3a0179b4bddba',
-        'workshift': '57fb0c649d83e379c37be0f9',
-        'createdBy': '57fb0c6496105ce6ad7749fd'
-      },
-      {
-        'startDate': '2014-01-01 07:01:06',
-        'endDate': '2014-12-03 05:12:45',
+        'startDate': '2015-05-05 07:13:02',
+        'endDate': '2017-03-09 11:02:24',
+        'userId': '59a755325e99c2cbbfefee3f',
         'scheduleType': 'Exception',
-        'service': '57fb0c64f00d7eaff7331440',
-        'workshift': '57fb0c6422027654ff3b6023',
-        'createdBy': '57fb0c64886ceb7182e3c796'
+        'serviceId': '59a75532a7594bde89542a80',
+        'workshiftId': '59a755327be9d812e13175ea',
+        'locationId': '59a755321645e94277958665',
+        'createdBy': '59a755323e207203470e7241'
       },
       {
-        'startDate': '2014-10-26 02:50:02',
-        'endDate': '2015-05-06 11:09:13',
+        'startDate': '2015-11-20 01:08:16',
+        'endDate': '2014-08-13 02:42:48',
+        'userId': '59a755323025115befcabc48',
         'scheduleType': 'Exception',
-        'service': '57fb0c64d3393514c171cd69',
-        'workshift': '57fb0c644c24d80e20da950d',
-        'createdBy': '57fb0c64aac5e929bbb8b909'
+        'serviceId': '59a7553278bd2f8bcaa0e4bd',
+        'workshiftId': '59a755321112d053ac59ce3c',
+        'locationId': '59a75532c52601495a8374db',
+        'createdBy': '59a75532df8a6d0a1f308fbc'
       },
       {
-        'startDate': '2016-10-03 04:57:05',
-        'endDate': '2015-11-29 04:17:24',
-        'scheduleType': 'General',
-        'service': '57fb0c6417b6da0854309806',
-        'workshift': '57fb0c64f070bd0ff8ba2fb2',
-        'createdBy': '57fb0c644561cd0e1b8f4e89'
-      },
-      {
-        'startDate': '2015-07-21 10:19:37',
-        'endDate': '2016-10-02 04:33:42',
+        'startDate': '2017-04-23 06:46:25',
+        'endDate': '2014-01-31 04:15:17',
+        'userId': '59a755325d4049c461847f58',
         'scheduleType': 'Exception',
-        'service': '57fb0c645e11bc906cc8beee',
-        'workshift': '57fb0c640303efc3e464d096',
-        'createdBy': '57fb0c64eab5a8ff8784ac44'
+        'serviceId': '59a755326631b4c5695d0af9',
+        'workshiftId': '59a75532056bc09d6827f91a',
+        'locationId': '59a755323b8547235c873a5c',
+        'createdBy': '59a75532f2168b1aff83be17'
       },
       {
-        'startDate': '2014-03-22 05:15:32',
-        'endDate': '2014-08-14 02:53:56',
+        'startDate': '2016-05-21 10:50:16',
+        'endDate': '2015-06-17 11:29:14',
+        'userId': '59a755322466d4bd376d496c',
         'scheduleType': 'General',
-        'service': '57fb0c64ffe3895cd7bde416',
-        'workshift': '57fb0c64591183ca3998093f',
-        'createdBy': '57fb0c64a7f7b57160d38dea'
+        'serviceId': '59a75532a546a36d267fdc84',
+        'workshiftId': '59a7553248268adda3756bbb',
+        'locationId': '59a7553213aadf3f221f8e34',
+        'createdBy': '59a75532dbdc3315382f828c'
       },
       {
-        'startDate': '2014-02-19 10:51:12',
-        'endDate': '2016-05-28 03:52:19',
-        'scheduleType': 'General',
-        'service': '57fb0c64401961272bde3e53',
-        'workshift': '57fb0c64dbee3dd6b5dcf33f',
-        'createdBy': '57fb0c645b2e9781b10fa36e'
-      },
-      {
-        'startDate': '2016-10-07 04:04:53',
-        'endDate': '2015-11-25 04:15:46',
-        'scheduleType': 'General',
-        'service': '57fb0c64c2a15866eaf8cc46',
-        'workshift': '57fb0c64e2282fbd3c79990d',
-        'createdBy': '57fb0c6411d6591630386864'
-      },
-      {
-        'startDate': '2015-04-11 02:42:25',
-        'endDate': '2016-03-21 04:20:20',
+        'startDate': '2015-05-28 04:40:27',
+        'endDate': '2017-08-27 12:56:34',
+        'userId': '59a75532bbaf0ef9a13507b7',
         'scheduleType': 'Exception',
-        'service': '57fb0c64d25f8b397766235b',
-        'workshift': '57fb0c6425f9284110df3c70',
-        'createdBy': '57fb0c64a1f931ac0003377c'
+        'serviceId': '59a755322ba8b21db6f3a5aa',
+        'workshiftId': '59a755320cf83a17725f57fd',
+        'locationId': '59a75532e877e2dc26c24ded',
+        'createdBy': '59a7553248eade1b899fe6c0'
       },
       {
-        'startDate': '2015-11-04 05:45:07',
-        'endDate': '2014-04-13 07:40:57',
-        'scheduleType': 'General',
-        'service': '57fb0c6409a2301ada9dddb6',
-        'workshift': '57fb0c64b71b51071109e424',
-        'createdBy': '57fb0c645bb028f9c2ca99b8'
-      },
-      {
-        'startDate': '2015-11-27 10:08:51',
-        'endDate': '2016-09-22 03:31:51',
+        'startDate': '2015-05-18 10:09:18',
+        'endDate': '2015-11-11 04:56:33',
+        'userId': '59a75532a35e6a8bcdd3be0d',
         'scheduleType': 'Exception',
-        'service': '57fb0c647f31c7e496aa7a6c',
-        'workshift': '57fb0c64a22bb3ca70aa9593',
-        'createdBy': '57fb0c6446cc532c052718af'
+        'serviceId': '59a75532252438c1195ab94c',
+        'workshiftId': '59a75532afccd994edf83fab',
+        'locationId': '59a7553260d7eb9a063585e5',
+        'createdBy': '59a755323dbdd2cbf09264b9'
       },
       {
-        'startDate': '2014-11-30 08:23:04',
-        'endDate': '2015-07-13 03:14:08',
+        'startDate': '2014-10-19 04:45:40',
+        'endDate': '2016-05-04 10:42:20',
+        'userId': '59a75532c88463d524bb29b8',
         'scheduleType': 'Exception',
-        'service': '57fb0c6462e6eed8a7e82547',
-        'workshift': '57fb0c648ec58e5d593492f2',
-        'createdBy': '57fb0c64d8d4c7ad1969ec06'
+        'serviceId': '59a75532232660ed2662e07e',
+        'workshiftId': '59a75532f3028ec64ab417c1',
+        'locationId': '59a75532cd496e503fa8ba91',
+        'createdBy': '59a755323dd5b3b8e0c4c66e'
       },
       {
-        'startDate': '2014-01-04 03:03:03',
-        'endDate': '2016-06-25 02:26:19',
+        'startDate': '2017-02-20 10:24:08',
+        'endDate': '2014-10-20 11:09:38',
+        'userId': '59a755323cdfd640378fba8e',
         'scheduleType': 'General',
-        'service': '57fb0c646c0b1afd1337dc46',
-        'workshift': '57fb0c649144b4add2e2dc55',
-        'createdBy': '57fb0c64267476df147b6c7d'
+        'serviceId': '59a75532fbe71e8201b879bf',
+        'workshiftId': '59a755326c527a9383deed65',
+        'locationId': '59a755326519118a33dff843',
+        'createdBy': '59a7553261ad84d664f8754f'
       },
       {
-        'startDate': '2016-09-20 03:29:56',
-        'endDate': '2015-03-29 05:15:37',
-        'scheduleType': 'General',
-        'service': '57fb0c644c3b849c76ce6cb0',
-        'workshift': '57fb0c6424d4b389359b9e6e',
-        'createdBy': '57fb0c64ac02dfb6227f8538'
-      },
-      {
-        'startDate': '2015-03-23 07:12:05',
-        'endDate': '2015-10-13 09:58:43',
+        'startDate': '2014-11-25 09:16:14',
+        'endDate': '2016-08-25 07:49:25',
+        'userId': '59a75532ddc4c16c71b5f66d',
         'scheduleType': 'Exception',
-        'service': '57fb0c6413a7278fe0bc9336',
-        'workshift': '57fb0c64da70d80d489b9acd',
-        'createdBy': '57fb0c64c0107903202e5445'
+        'serviceId': '59a75532e358c3a5b0d6b4d0',
+        'workshiftId': '59a755328a8d3b85ec3e010d',
+        'locationId': '59a75532e99a3daa300a83c8',
+        'createdBy': '59a75532ad37fc4e1622a2cd'
       },
       {
-        'startDate': '2015-05-20 04:14:38',
-        'endDate': '2014-03-10 09:02:20',
+        'startDate': '2014-04-09 05:27:31',
+        'endDate': '2014-03-21 10:25:49',
+        'userId': '59a75532c0774555a623560f',
+        'scheduleType': 'General',
+        'serviceId': '59a7553263ccc5306520f3f8',
+        'workshiftId': '59a755328faa4dae747cd605',
+        'locationId': '59a755321596c2f28775ee9d',
+        'createdBy': '59a75532b189c0344e1ec68b'
+      },
+      {
+        'startDate': '2015-12-09 02:58:01',
+        'endDate': '2016-09-07 12:38:12',
+        'userId': '59a75532d4b9764e2401c7a6',
+        'scheduleType': 'General',
+        'serviceId': '59a75532529cf936dcff59f8',
+        'workshiftId': '59a75532c4e30a5220e95266',
+        'locationId': '59a755324e41fec559e4456d',
+        'createdBy': '59a75532c9c66918d9830ded'
+      },
+      {
+        'startDate': '2015-05-19 02:28:30',
+        'endDate': '2014-06-24 01:34:28',
+        'userId': '59a755323b3464c5fcda55a3',
+        'scheduleType': 'General',
+        'serviceId': '59a75532c800c2e4f4c1cd23',
+        'workshiftId': '59a755323bbca6facc79cd15',
+        'locationId': '59a75532f2e5433caba3a81a',
+        'createdBy': '59a75532b7d958a46be0b64b'
+      },
+      {
+        'startDate': '2017-03-04 02:41:09',
+        'endDate': '2016-11-14 07:16:26',
+        'userId': '59a75532f2a085a0ed83aa0d',
         'scheduleType': 'Exception',
-        'service': '57fb0c648d151f5d4afd54be',
-        'workshift': '57fb0c6470cebfe3d374baa5',
-        'createdBy': '57fb0c64a895b5b8006ade5a'
+        'serviceId': '59a75532a59b9af28e6d94b5',
+        'workshiftId': '59a75532f52532380a3de823',
+        'locationId': '59a7553241710e2ea311c78f',
+        'createdBy': '59a75532a84bc094387e8436'
       },
       {
-        'startDate': '2015-08-04 01:14:27',
-        'endDate': '2014-01-17 06:22:37',
-        'scheduleType': 'General',
-        'service': '57fb0c64f305c80d8498f312',
-        'workshift': '57fb0c64225e922d40253f90',
-        'createdBy': '57fb0c6410ed927f4d7e460f'
-      },
-      {
-        'startDate': '2015-03-29 08:45:39',
-        'endDate': '2015-05-24 02:36:56',
-        'scheduleType': 'General',
-        'service': '57fb0c64273bf704c5d158dc',
-        'workshift': '57fb0c647ce3d495785e13f7',
-        'createdBy': '57fb0c64c476ced2e7dbda77'
-      },
-      {
-        'startDate': '2015-07-20 11:26:57',
-        'endDate': '2015-10-30 09:35:30',
-        'scheduleType': 'General',
-        'service': '57fb0c647687b7e31e51a910',
-        'workshift': '57fb0c649a07453e2618cd75',
-        'createdBy': '57fb0c6470fc5c7a67acb13b'
-      },
-      {
-        'startDate': '2016-01-09 06:24:10',
-        'endDate': '2014-08-06 03:41:53',
-        'scheduleType': 'General',
-        'service': '57fb0c6458a1a4678afa8e75',
-        'workshift': '57fb0c64b3c4cbb5038d102b',
-        'createdBy': '57fb0c649677678983a0e4e6'
-      },
-      {
-        'startDate': '2014-08-24 01:31:17',
-        'endDate': '2015-05-03 05:59:45',
+        'startDate': '2014-07-07 01:12:40',
+        'endDate': '2017-01-10 03:33:36',
+        'userId': '59a755325c0f80ea16934748',
         'scheduleType': 'Exception',
-        'service': '57fb0c646018a59e0ad60509',
-        'workshift': '57fb0c64ff19536c502eb296',
-        'createdBy': '57fb0c6407eb4735985278c9'
+        'serviceId': '59a75532668158908e02cd1f',
+        'workshiftId': '59a755327fa8c625999c9fed',
+        'locationId': '59a75532cca185ecb6e2f689',
+        'createdBy': '59a755326b000598cbd0ac68'
       },
       {
-        'startDate': '2016-03-18 01:12:28',
-        'endDate': '2015-12-25 10:01:08',
-        'scheduleType': 'General',
-        'service': '57fb0c64a391987f5fb98a6e',
-        'workshift': '57fb0c642dff0401fccb8a0a',
-        'createdBy': '57fb0c64e3b1e64e0951263c'
-      },
-      {
-        'startDate': '2015-09-26 06:30:09',
-        'endDate': '2016-03-24 04:24:56',
-        'scheduleType': 'General',
-        'service': '57fb0c647a3532d193cb9db4',
-        'workshift': '57fb0c645325aa33aa42502f',
-        'createdBy': '57fb0c64c080d627658ad0b2'
-      },
-      {
-        'startDate': '2015-08-29 05:16:51',
-        'endDate': '2014-01-09 01:23:55',
-        'scheduleType': 'General',
-        'service': '57fb0c64996850dd4e9ac994',
-        'workshift': '57fb0c64aa8579077f2c21c0',
-        'createdBy': '57fb0c6477bd3adc3e01cf3a'
-      },
-      {
-        'startDate': '2015-07-07 11:52:39',
-        'endDate': '2016-09-28 11:50:48',
-        'scheduleType': 'General',
-        'service': '57fb0c642f989e9adbc6af09',
-        'workshift': '57fb0c648b5537bb72151dc2',
-        'createdBy': '57fb0c6401314a41d306d1de'
-      },
-      {
-        'startDate': '2014-01-05 04:19:27',
-        'endDate': '2016-06-19 04:44:34',
-        'scheduleType': 'General',
-        'service': '57fb0c6482d160a1880538e6',
-        'workshift': '57fb0c64e26469044a9fc3de',
-        'createdBy': '57fb0c6409bc59b43bcc4448'
-      },
-      {
-        'startDate': '2015-12-15 01:45:07',
-        'endDate': '2015-11-09 03:20:20',
-        'scheduleType': 'General',
-        'service': '57fb0c64ab5095d86c8f6c53',
-        'workshift': '57fb0c64dbdf4316384bd5cf',
-        'createdBy': '57fb0c64995cce370df5d4ac'
-      },
-      {
-        'startDate': '2015-04-16 08:04:32',
-        'endDate': '2015-11-07 06:44:03',
+        'startDate': '2017-05-17 05:04:12',
+        'endDate': '2017-05-18 03:46:07',
+        'userId': '59a7553244401e1c2ae49a55',
         'scheduleType': 'Exception',
-        'service': '57fb0c64e53a90e23490eafa',
-        'workshift': '57fb0c642bb99ad8d4b6d686',
-        'createdBy': '57fb0c643a243737ec824469'
+        'serviceId': '59a75532a9bdd6326440b9cb',
+        'workshiftId': '59a75532a41bb8360f185939',
+        'locationId': '59a755325acff22c5f9e0624',
+        'createdBy': '59a75532c6af8ee3d015cb65'
       },
       {
-        'startDate': '2015-04-13 12:21:26',
-        'endDate': '2015-03-18 09:00:42',
+        'startDate': '2017-06-12 05:07:30',
+        'endDate': '2017-08-14 12:03:54',
+        'userId': '59a75532c4461cad70dc1897',
+        'scheduleType': 'Exception',
+        'serviceId': '59a75532a73be28490280b37',
+        'workshiftId': '59a755329ec62402ed3fb233',
+        'locationId': '59a755329d22be3e0abdb555',
+        'createdBy': '59a7553296421374a8e41622'
+      },
+      {
+        'startDate': '2014-03-10 11:30:56',
+        'endDate': '2014-01-24 12:23:30',
+        'userId': '59a755320815b60f1e9893c3',
         'scheduleType': 'General',
-        'service': '57fb0c64f6cdc33d547e6c6a',
-        'workshift': '57fb0c6421fd33539ba166e1',
-        'createdBy': '57fb0c647775e7e35b26ad3a'
+        'serviceId': '59a755325c42c0480650e11f',
+        'workshiftId': '59a75532071a362bdca0e3db',
+        'locationId': '59a75532deb1e228dd191b9f',
+        'createdBy': '59a755329529a2a89ee8522e'
       },
       {
-        'startDate': '2015-11-17 01:05:32',
-        'endDate': '2014-10-26 06:27:48',
-        'scheduleType': 'Exception',
-        'service': '57fb0c6436a5add26c6dd1b2',
-        'workshift': '57fb0c640bebe19151e5640f',
-        'createdBy': '57fb0c647cc49ef447acebf8'
-      },
-      {
-        'startDate': '2014-08-17 06:06:37',
-        'endDate': '2016-07-06 10:18:30',
-        'scheduleType': 'Exception',
-        'service': '57fb0c64ba3e0f0fd79b8802',
-        'workshift': '57fb0c6456a53a3ea9852497',
-        'createdBy': '57fb0c6472e6f2ca28c59428'
-      },
-      {
-        'startDate': '2014-09-22 12:25:37',
-        'endDate': '2015-01-22 05:56:36',
-        'scheduleType': 'Exception',
-        'service': '57fb0c641c90c17f6d7c83a1',
-        'workshift': '57fb0c64bedc8c9439651c72',
-        'createdBy': '57fb0c6426fcaeb07725b33a'
-      },
-      {
-        'startDate': '2014-03-14 10:59:06',
-        'endDate': '2014-08-11 01:38:10',
+        'startDate': '2017-03-09 02:05:33',
+        'endDate': '2017-04-16 10:17:30',
+        'userId': '59a75532af81680747bc876a',
         'scheduleType': 'General',
-        'service': '57fb0c64cddb8cee5deb33d7',
-        'workshift': '57fb0c640db90163e68bef35',
-        'createdBy': '57fb0c6457547ea0952ca0ae'
+        'serviceId': '59a75532a93e85fb2e19bc0a',
+        'workshiftId': '59a755320e90b29d46f0d6a1',
+        'locationId': '59a755322a4f67bc24c015f0',
+        'createdBy': '59a7553238322257ae714946'
       },
       {
-        'startDate': '2015-12-12 05:49:49',
-        'endDate': '2014-10-21 12:41:01',
+        'startDate': '2017-06-12 07:24:53',
+        'endDate': '2017-04-28 09:45:28',
+        'userId': '59a7553293dd91dca4540a77',
         'scheduleType': 'Exception',
-        'service': '57fb0c64f5d3f5d06025691f',
-        'workshift': '57fb0c6408ca65fc9d28c2f9',
-        'createdBy': '57fb0c64899928a22df88903'
+        'serviceId': '59a755326a311541243b9809',
+        'workshiftId': '59a75532ec7b886a7843aaa0',
+        'locationId': '59a755326a2b21171b202bae',
+        'createdBy': '59a75532c11e6375b08b7ddb'
       },
       {
-        'startDate': '2014-12-26 04:05:46',
-        'endDate': '2016-09-17 02:40:07',
+        'startDate': '2016-04-12 09:16:41',
+        'endDate': '2016-10-20 01:29:18',
+        'userId': '59a75532f0c88c2c16ceaa52',
         'scheduleType': 'Exception',
-        'service': '57fb0c64b3d1675872e5fe5b',
-        'workshift': '57fb0c645bdcdeeb95be2bda',
-        'createdBy': '57fb0c640851d068ccab11a6'
+        'serviceId': '59a755329f95d71db66c9a3d',
+        'workshiftId': '59a755326a4dac578f7e744d',
+        'locationId': '59a7553251ba5bc0c424390f',
+        'createdBy': '59a75532b6b3a7ba958f028a'
       },
       {
-        'startDate': '2015-04-25 07:41:20',
-        'endDate': '2015-05-23 03:44:04',
-        'scheduleType': 'Exception',
-        'service': '57fb0c64800eb55ee3b54bd9',
-        'workshift': '57fb0c6404fcc6a0f2819abb',
-        'createdBy': '57fb0c64440dda11893df96f'
-      },
-      {
-        'startDate': '2014-01-31 11:19:18',
-        'endDate': '2015-09-19 06:12:32',
-        'scheduleType': 'Exception',
-        'service': '57fb0c646b614c9688a6b9b4',
-        'workshift': '57fb0c648957f7819885e39b',
-        'createdBy': '57fb0c64a6ebc65709a4579f'
-      },
-      {
-        'startDate': '2014-03-20 04:26:19',
-        'endDate': '2015-06-30 04:46:50',
-        'scheduleType': 'Exception',
-        'service': '57fb0c642f3232d011f671f5',
-        'workshift': '57fb0c6438e7795763cd1eb7',
-        'createdBy': '57fb0c64e14139fa0d51b629'
-      },
-      {
-        'startDate': '2014-03-25 07:55:25',
-        'endDate': '2015-04-22 01:59:33',
-        'scheduleType': 'Exception',
-        'service': '57fb0c64bc15b99261efbeff',
-        'workshift': '57fb0c64f035f69d0d2b88f1',
-        'createdBy': '57fb0c64467d48caa5d1c6cd'
-      },
-      {
-        'startDate': '2015-12-04 09:27:21',
-        'endDate': '2015-06-25 10:53:35',
-        'scheduleType': 'Exception',
-        'service': '57fb0c646091b8fcfc6f19d4',
-        'workshift': '57fb0c643f705dfe2cf962ca',
-        'createdBy': '57fb0c64aed287180244adf0'
-      },
-      {
-        'startDate': '2015-07-20 02:04:29',
-        'endDate': '2015-04-02 01:15:12',
+        'startDate': '2015-07-25 07:56:19',
+        'endDate': '2017-07-15 03:09:58',
+        'userId': '59a75532e5bc831fdafc0b11',
         'scheduleType': 'General',
-        'service': '57fb0c64c545e56f675283b0',
-        'workshift': '57fb0c64de0f60bd0a9653b1',
-        'createdBy': '57fb0c64da7365d662ad4d7f'
+        'serviceId': '59a75532e251fbf633ddc071',
+        'workshiftId': '59a755324bb22d1b0793aa0a',
+        'locationId': '59a75532a27c0331bc4aed12',
+        'createdBy': '59a75532b7f713842d2dcbcc'
       },
       {
-        'startDate': '2015-03-17 06:45:52',
-        'endDate': '2014-08-14 06:39:43',
-        'scheduleType': 'General',
-        'service': '57fb0c649d9a930f17aea539',
-        'workshift': '57fb0c64a370ce92e22e0331',
-        'createdBy': '57fb0c64c8a4ac6b267a1e25'
-      },
-      {
-        'startDate': '2015-06-15 12:49:12',
-        'endDate': '2015-12-20 07:06:11',
-        'scheduleType': 'General',
-        'service': '57fb0c6485d703359dbb1218',
-        'workshift': '57fb0c64abc9fb3d168b8b8c',
-        'createdBy': '57fb0c64cab56e919d0882b8'
-      },
-      {
-        'startDate': '2015-06-28 06:24:26',
-        'endDate': '2014-05-31 10:20:39',
+        'startDate': '2015-05-12 08:40:22',
+        'endDate': '2016-06-06 03:53:03',
+        'userId': '59a7553229b39ccc4097be31',
         'scheduleType': 'Exception',
-        'service': '57fb0c64b09596bb13d79c6e',
-        'workshift': '57fb0c64efba075929c1359e',
-        'createdBy': '57fb0c64319df87966a86790'
+        'serviceId': '59a7553291bfcaddae900309',
+        'workshiftId': '59a75532d352d5c821bf2498',
+        'locationId': '59a75532d402ce8a9276f06f',
+        'createdBy': '59a755322e95155559c371ca'
       },
       {
-        'startDate': '2015-03-22 06:59:31',
-        'endDate': '2014-02-04 10:38:47',
-        'scheduleType': 'General',
-        'service': '57fb0c64b50e1b9688524cf0',
-        'workshift': '57fb0c648de8ea8839509f31',
-        'createdBy': '57fb0c6414925508aff8e7d5'
-      },
-      {
-        'startDate': '2014-11-21 01:55:43',
-        'endDate': '2016-02-29 11:43:43',
+        'startDate': '2015-11-26 10:36:19',
+        'endDate': '2015-03-24 12:15:11',
+        'userId': '59a7553208dfedacbe6f5c7b',
         'scheduleType': 'Exception',
-        'service': '57fb0c64b01d2aed5ec7f09b',
-        'workshift': '57fb0c642bf8b02d2dd002ff',
-        'createdBy': '57fb0c644125f35d2a9e66e6'
+        'serviceId': '59a75532f8009a524207d196',
+        'workshiftId': '59a755324df792ed7df7636c',
+        'locationId': '59a75532228a799aaae03dc3',
+        'createdBy': '59a75532dcba70ec491bcac0'
       },
       {
-        'startDate': '2016-09-30 02:40:15',
-        'endDate': '2016-05-31 09:05:07',
+        'startDate': '2014-04-17 05:22:30',
+        'endDate': '2014-10-21 09:20:52',
+        'userId': '59a75532fe8178476e0dd757',
+        'scheduleType': 'General',
+        'serviceId': '59a7553278c60711ec148842',
+        'workshiftId': '59a755326fe9eb8c48c187f0',
+        'locationId': '59a755323c10dd71c2d7e2d4',
+        'createdBy': '59a755327364b2ed5e1b47ed'
+      },
+      {
+        'startDate': '2017-02-22 07:16:13',
+        'endDate': '2014-06-10 03:10:48',
+        'userId': '59a755326691b317d4237344',
         'scheduleType': 'Exception',
-        'service': '57fb0c64c7739f1bf9dc06ad',
-        'workshift': '57fb0c642541bb95c8a79310',
-        'createdBy': '57fb0c64cae37ae15f05f7c6'
+        'serviceId': '59a755324065e64cb0eeaba7',
+        'workshiftId': '59a755328669f00990c7572e',
+        'locationId': '59a75532bff1dd586e82d5e6',
+        'createdBy': '59a75532c48d6084c47c505a'
       },
       {
-        'startDate': '2014-08-10 10:58:42',
-        'endDate': '2015-12-28 04:34:11',
-        'scheduleType': 'General',
-        'service': '57fb0c64026ad5e580a8f0e9',
-        'workshift': '57fb0c64d568fae0dd503ee9',
-        'createdBy': '57fb0c640f97f9a98219d894'
-      },
-      {
-        'startDate': '2015-12-30 02:33:42',
-        'endDate': '2014-12-20 05:04:25',
+        'startDate': '2015-11-16 05:12:05',
+        'endDate': '2015-03-06 03:28:39',
+        'userId': '59a755321d7cc37129f5c42d',
         'scheduleType': 'Exception',
-        'service': '57fb0c64834c41eff737a3b7',
-        'workshift': '57fb0c648005065b052e48d1',
-        'createdBy': '57fb0c64658d4a823d545cef'
+        'serviceId': '59a7553228bb19e070b2f621',
+        'workshiftId': '59a755320b0fa531dcd8c0f0',
+        'locationId': '59a755322c3bd91b3a5d186b',
+        'createdBy': '59a75532ad3f72d3fa5fbd14'
       },
       {
-        'startDate': '2014-11-16 08:44:07',
-        'endDate': '2014-08-29 03:26:51',
+        'startDate': '2017-07-17 12:43:13',
+        'endDate': '2016-06-01 01:16:01',
+        'userId': '59a75532454857e1cd51428f',
         'scheduleType': 'Exception',
-        'service': '57fb0c647ba8e6c1644b52e1',
-        'workshift': '57fb0c64cae4a9418a6b49f0',
-        'createdBy': '57fb0c640e26d1bc2b67a8c0'
+        'serviceId': '59a7553258951e8bfe690ba6',
+        'workshiftId': '59a75532a85e19dad4ad9bb8',
+        'locationId': '59a75532a999fa4fc449fa26',
+        'createdBy': '59a75532c932ef5845451b63'
       },
       {
-        'startDate': '2016-03-18 06:01:04',
-        'endDate': '2016-03-04 11:18:39',
+        'startDate': '2016-02-16 01:34:26',
+        'endDate': '2017-01-18 08:11:08',
+        'userId': '59a75532ad7037006d64083c',
         'scheduleType': 'General',
-        'service': '57fb0c646d1d7e717dd06512',
-        'workshift': '57fb0c6437c5ed57f9c31059',
-        'createdBy': '57fb0c64983334dbaa8cfc10'
+        'serviceId': '59a755329c8d905ec68f4dd9',
+        'workshiftId': '59a755322e6df17048b66cdf',
+        'locationId': '59a7553217120d29c765a33d',
+        'createdBy': '59a7553226eb508e969682e9'
       },
       {
-        'startDate': '2015-05-03 09:40:58',
-        'endDate': '2016-03-05 05:28:53',
+        'startDate': '2015-06-10 10:02:06',
+        'endDate': '2016-01-07 02:40:58',
+        'userId': '59a755329a0fcf6799fbb8df',
         'scheduleType': 'General',
-        'service': '57fb0c64f90e38a9a7644ddf',
-        'workshift': '57fb0c648599b5ded26c2f00',
-        'createdBy': '57fb0c64cc7606feb10b438a'
+        'serviceId': '59a755324e6b79dd30f40d92',
+        'workshiftId': '59a7553237cfa3247faece16',
+        'locationId': '59a75532a71685dbb366d28b',
+        'createdBy': '59a75532bfdd74ccbf5207fb'
       },
       {
-        'startDate': '2016-06-02 06:12:14',
-        'endDate': '2014-11-30 05:23:17',
-        'scheduleType': 'General',
-        'service': '57fb0c646ebdf5994ed1aa58',
-        'workshift': '57fb0c641221648647b292bc',
-        'createdBy': '57fb0c64e8c499bf21031dba'
-      },
-      {
-        'startDate': '2014-07-20 11:06:41',
-        'endDate': '2016-07-15 08:30:36',
-        'scheduleType': 'General',
-        'service': '57fb0c643660e22de8701210',
-        'workshift': '57fb0c6442b921f1909e2cf8',
-        'createdBy': '57fb0c643f615a491dbdea51'
-      },
-      {
-        'startDate': '2014-07-10 08:32:45',
-        'endDate': '2015-04-17 11:43:01',
-        'scheduleType': 'General',
-        'service': '57fb0c64e2c6528c3af2eeca',
-        'workshift': '57fb0c64bbcad3d64b4c747a',
-        'createdBy': '57fb0c6424e244e7d0024859'
-      },
-      {
-        'startDate': '2015-08-28 02:35:22',
-        'endDate': '2016-03-27 12:21:40',
+        'startDate': '2016-04-29 04:06:22',
+        'endDate': '2016-09-02 07:13:55',
+        'userId': '59a7553271e930b45959cbf3',
         'scheduleType': 'Exception',
-        'service': '57fb0c648df6360de72e2ba5',
-        'workshift': '57fb0c6456bc03a9b7bd1409',
-        'createdBy': '57fb0c64c8567cbab39e895e'
+        'serviceId': '59a755322728cd3ac4757f76',
+        'workshiftId': '59a755320fe02c1979d7c892',
+        'locationId': '59a75532d8f984642a49409f',
+        'createdBy': '59a75532f3c771d9a8fc133f'
       },
       {
-        'startDate': '2015-03-07 09:59:18',
-        'endDate': '2014-07-23 05:52:51',
+        'startDate': '2017-03-20 11:27:53',
+        'endDate': '2017-01-28 06:14:16',
+        'userId': '59a75532c416074438e44f78',
         'scheduleType': 'General',
-        'service': '57fb0c6426dcb7ba0e421bf2',
-        'workshift': '57fb0c6441aaf544c9af78d0',
-        'createdBy': '57fb0c642ab4648dc3b3e181'
+        'serviceId': '59a75532828287693177bc68',
+        'workshiftId': '59a75532cbb1d9b73f2846f4',
+        'locationId': '59a755326b453600a137341e',
+        'createdBy': '59a755324e98a6e9bbec73a3'
       },
       {
-        'startDate': '2015-08-19 12:08:57',
-        'endDate': '2015-12-02 03:26:03',
+        'startDate': '2017-08-27 09:42:54',
+        'endDate': '2017-01-19 12:34:24',
+        'userId': '59a75532e9455e13cbfe723c',
         'scheduleType': 'Exception',
-        'service': '57fb0c6485a3648d266e339b',
-        'workshift': '57fb0c64bbb2b0a193e893b9',
-        'createdBy': '57fb0c647337ca3edffab39b'
+        'serviceId': '59a75532ed5f6d903bb40c19',
+        'workshiftId': '59a75532d0ad55d33d66243b',
+        'locationId': '59a75532f75659168eaac040',
+        'createdBy': '59a75532d4475b4059720793'
       },
       {
-        'startDate': '2014-07-28 07:41:43',
-        'endDate': '2016-04-19 01:02:20',
-        'scheduleType': 'General',
-        'service': '57fb0c64ee455b2fa1c46edd',
-        'workshift': '57fb0c640c4f07f35bb9b320',
-        'createdBy': '57fb0c64c7c4d2501dd97f13'
-      },
-      {
-        'startDate': '2016-08-12 11:41:45',
-        'endDate': '2016-07-28 11:44:49',
-        'scheduleType': 'General',
-        'service': '57fb0c649e82aa4fd0691f8b',
-        'workshift': '57fb0c643f7bfd86496b0097',
-        'createdBy': '57fb0c64fde2e865844a8411'
-      },
-      {
-        'startDate': '2014-07-14 06:15:39',
-        'endDate': '2016-07-23 11:54:43',
+        'startDate': '2016-04-17 10:29:56',
+        'endDate': '2016-09-17 09:08:29',
+        'userId': '59a75532086c760329291528',
         'scheduleType': 'Exception',
-        'service': '57fb0c64f7008572651d303f',
-        'workshift': '57fb0c646a7b14025fdfb7d6',
-        'createdBy': '57fb0c64dcf71e000d22ba30'
+        'serviceId': '59a7553227d26b5435f1e5f1',
+        'workshiftId': '59a7553213a98572a6a16671',
+        'locationId': '59a75532fd9a7e9428a9809b',
+        'createdBy': '59a7553291c11fad6a956182'
       },
       {
-        'startDate': '2016-02-13 02:24:16',
-        'endDate': '2014-02-09 04:14:33',
+        'startDate': '2016-03-06 09:37:14',
+        'endDate': '2016-09-13 05:20:51',
+        'userId': '59a75532e830c959da358b97',
         'scheduleType': 'General',
-        'service': '57fb0c64b466efd7c958235c',
-        'workshift': '57fb0c64251af67e53712781',
-        'createdBy': '57fb0c64c5fdd6189cde035f'
+        'serviceId': '59a755326edb02e6474c2a66',
+        'workshiftId': '59a75532ec496fd4a44fa13a',
+        'locationId': '59a75532bdc101ca12aa23fb',
+        'createdBy': '59a755325c93161ecfbfb4a7'
       },
       {
-        'startDate': '2015-11-05 12:30:44',
-        'endDate': '2016-09-15 07:09:46',
+        'startDate': '2015-07-26 06:51:32',
+        'endDate': '2014-12-18 12:44:20',
+        'userId': '59a755329e2004fdf8ccf9c0',
         'scheduleType': 'General',
-        'service': '57fb0c643022ffebc2777538',
-        'workshift': '57fb0c64285c1fb0ea826848',
-        'createdBy': '57fb0c64a7e066c60dd4d56f'
+        'serviceId': '59a75532abd75c3b14e0ada1',
+        'workshiftId': '59a7553247be5c1a6440b87a',
+        'locationId': '59a75532e335bc75d2cea690',
+        'createdBy': '59a75532b7377cb81e5ddef1'
       },
       {
-        'startDate': '2014-01-30 06:40:31',
-        'endDate': '2014-03-28 06:22:03',
+        'startDate': '2017-08-23 02:46:21',
+        'endDate': '2014-09-14 07:24:43',
+        'userId': '59a75532dad6805fee88a775',
+        'scheduleType': 'Exception',
+        'serviceId': '59a755322463abffdd7924a2',
+        'workshiftId': '59a755328efe09984e0ffad0',
+        'locationId': '59a7553289c2964b314f620c',
+        'createdBy': '59a75532d1a3e1a68bd41dc8'
+      },
+      {
+        'startDate': '2014-10-18 02:52:01',
+        'endDate': '2014-03-18 02:32:01',
+        'userId': '59a7553234e89c20c9513a65',
         'scheduleType': 'General',
-        'service': '57fb0c64367da548d46cb30b',
-        'workshift': '57fb0c64bf9b9a50852d15a3',
-        'createdBy': '57fb0c6402a83d3480c4ab2f'
+        'serviceId': '59a7553243814f28d72f4d3e',
+        'workshiftId': '59a75532ef884ff550a9c004',
+        'locationId': '59a755321435deb2ff699cf1',
+        'createdBy': '59a75532b73ad3bf50fc01d3'
       },
       {
-        'startDate': '2014-06-20 03:31:43',
-        'endDate': '2015-11-06 06:28:20',
-        'scheduleType': 'Exception',
-        'service': '57fb0c6430a33bdc17abe2f6',
-        'workshift': '57fb0c64ac8d46067bb28649',
-        'createdBy': '57fb0c64b0e24df4b6ccae7a'
-      },
-      {
-        'startDate': '2015-12-01 08:17:59',
-        'endDate': '2016-10-01 04:55:33',
+        'startDate': '2014-07-31 02:14:12',
+        'endDate': '2014-08-04 11:41:30',
+        'userId': '59a755323c198ee64e1f1d49',
         'scheduleType': 'General',
-        'service': '57fb0c647321831683d8c21d',
-        'workshift': '57fb0c640f1b02e5b4a994d4',
-        'createdBy': '57fb0c64ad1d0c31bbd4d5c6'
+        'serviceId': '59a755320dc4ab93213a0873',
+        'workshiftId': '59a755325058e51aa7e6a3d5',
+        'locationId': '59a75532f74b0273db296cac',
+        'createdBy': '59a755325d2e1a1e56b0371f'
       },
       {
-        'startDate': '2015-10-11 01:59:16',
-        'endDate': '2014-03-18 05:37:46',
+        'startDate': '2017-04-15 06:55:53',
+        'endDate': '2016-12-24 10:15:00',
+        'userId': '59a755324f32ab4ea976cea3',
         'scheduleType': 'General',
-        'service': '57fb0c64642565dd00047482',
-        'workshift': '57fb0c64d5d8e9d7255dbc3a',
-        'createdBy': '57fb0c64564c38dd2091dc59'
+        'serviceId': '59a75532dbf7a0a675b96259',
+        'workshiftId': '59a755321a46218d38614f0d',
+        'locationId': '59a7553237a523991ee3e8a8',
+        'createdBy': '59a755320802ff9a7bdfba8a'
       },
       {
-        'startDate': '2016-02-28 03:29:03',
-        'endDate': '2014-07-02 01:22:48',
+        'startDate': '2015-07-19 07:45:23',
+        'endDate': '2016-04-29 02:57:03',
+        'userId': '59a7553245177bee403c5945',
+        'scheduleType': 'Exception',
+        'serviceId': '59a75532e1d6189fc38246bd',
+        'workshiftId': '59a75532ec36c448df66b7d7',
+        'locationId': '59a755326a5bf665c2b75ef7',
+        'createdBy': '59a755328310428d89cb4059'
+      },
+      {
+        'startDate': '2014-09-13 06:32:42',
+        'endDate': '2017-01-01 11:48:50',
+        'userId': '59a75532bad75be4e33dcdf3',
         'scheduleType': 'General',
-        'service': '57fb0c64dfb9c1da7a797c18',
-        'workshift': '57fb0c64e2a8c5e659ecaa79',
-        'createdBy': '57fb0c6459ccc051bceb83b9'
+        'serviceId': '59a755327a95fadd52f5171d',
+        'workshiftId': '59a755326ce1abbe2670c556',
+        'locationId': '59a75532aad54f34a776f184',
+        'createdBy': '59a75532396e67ad12f87ba4'
       },
       {
-        'startDate': '2016-09-14 02:27:56',
-        'endDate': '2015-11-07 09:42:04',
+        'startDate': '2016-08-23 11:23:19',
+        'endDate': '2017-05-11 11:58:26',
+        'userId': '59a75532770e97ced280c6af',
         'scheduleType': 'General',
-        'service': '57fb0c648c1378d4d7cf38a7',
-        'workshift': '57fb0c64cd6e13ebfc486961',
-        'createdBy': '57fb0c64e5bfe61eb343c1e5'
+        'serviceId': '59a7553293358755495f1254',
+        'workshiftId': '59a7553232a3d26afa25c1ed',
+        'locationId': '59a755328c2bfc240583cbec',
+        'createdBy': '59a755323b43ca73840de4f4'
       },
       {
-        'startDate': '2016-09-12 03:14:09',
-        'endDate': '2014-03-25 07:09:55',
-        'scheduleType': 'Exception',
-        'service': '57fb0c64c040e3b7fc5732e8',
-        'workshift': '57fb0c6464081fd2fabf5e31',
-        'createdBy': '57fb0c644f28ccec89799dd6'
-      },
-      {
-        'startDate': '2015-08-06 06:05:59',
-        'endDate': '2016-03-07 02:45:54',
-        'scheduleType': 'Exception',
-        'service': '57fb0c64748143593bed7b50',
-        'workshift': '57fb0c6497ca4d1f95d60773',
-        'createdBy': '57fb0c648071ff1061586a99'
-      },
-      {
-        'startDate': '2015-02-02 12:46:16',
-        'endDate': '2016-05-01 10:44:18',
-        'scheduleType': 'Exception',
-        'service': '57fb0c6474175661b80e9672',
-        'workshift': '57fb0c64483255499212b4a1',
-        'createdBy': '57fb0c649810e08ecd65fd77'
-      },
-      {
-        'startDate': '2015-03-06 11:39:41',
-        'endDate': '2015-08-03 07:28:02',
-        'scheduleType': 'Exception',
-        'service': '57fb0c64d7f59f9cccc9ec0f',
-        'workshift': '57fb0c64fef635a77ccb8802',
-        'createdBy': '57fb0c64206f6ce1374f7956'
-      },
-      {
-        'startDate': '2016-01-21 11:01:10',
-        'endDate': '2016-07-11 09:21:08',
+        'startDate': '2014-12-21 01:17:58',
+        'endDate': '2017-07-12 04:22:52',
+        'userId': '59a75532ce9f77994f81078a',
         'scheduleType': 'General',
-        'service': '57fb0c64b5242837e98acde6',
-        'workshift': '57fb0c6487b3ab0cec7db107',
-        'createdBy': '57fb0c641394b189701e1ccf'
+        'serviceId': '59a7553261bc3e0aa06840e7',
+        'workshiftId': '59a75532becc5b4236e5a490',
+        'locationId': '59a75532566c00d522d6cfc7',
+        'createdBy': '59a75532715f0eec6dfbf7da'
       },
       {
-        'startDate': '2016-07-10 01:35:59',
-        'endDate': '2015-12-25 05:39:23',
+        'startDate': '2017-01-31 11:43:11',
+        'endDate': '2017-08-13 08:19:32',
+        'userId': '59a7553215f6d58ca4991fb2',
+        'scheduleType': 'Exception',
+        'serviceId': '59a75532bcfbad5ddfc3c396',
+        'workshiftId': '59a75532a0b7fcf195b81cab',
+        'locationId': '59a7553240b5d11622353bd9',
+        'createdBy': '59a7553210e958c6278bcbe7'
+      },
+      {
+        'startDate': '2017-08-09 07:34:07',
+        'endDate': '2014-02-01 07:55:50',
+        'userId': '59a75532ad6f84307b06b29d',
+        'scheduleType': 'Exception',
+        'serviceId': '59a75532ee2f70aa1aafd3b0',
+        'workshiftId': '59a75532df4f77f373bbf4a0',
+        'locationId': '59a75532e5687ac61a14b3d8',
+        'createdBy': '59a75532ba788647da078235'
+      },
+      {
+        'startDate': '2015-11-30 08:46:30',
+        'endDate': '2014-01-24 03:57:48',
+        'userId': '59a75532dd421d8f4fd848f3',
         'scheduleType': 'General',
-        'service': '57fb0c64136d5b1c268778be',
-        'workshift': '57fb0c643a47f9ae64aee5fb',
-        'createdBy': '57fb0c64b72cc295987e0e40'
+        'serviceId': '59a75532348a9111d613cdb4',
+        'workshiftId': '59a75532e011a11ef722798a',
+        'locationId': '59a75532e84ded861892da9d',
+        'createdBy': '59a755328529dc8212c021ea'
       },
       {
-        'startDate': '2014-09-26 08:38:05',
-        'endDate': '2014-10-14 09:50:11',
+        'startDate': '2015-10-03 05:51:16',
+        'endDate': '2015-11-20 11:29:45',
+        'userId': '59a755321d427819850122b3',
+        'scheduleType': 'Exception',
+        'serviceId': '59a75532469faebc151f4bb2',
+        'workshiftId': '59a755328d8dc12a88ff45e3',
+        'locationId': '59a755329d7fb4ed9f29a255',
+        'createdBy': '59a755326e5a9b4b4f1ea88c'
+      },
+      {
+        'startDate': '2015-10-25 02:17:21',
+        'endDate': '2014-06-13 08:10:06',
+        'userId': '59a7553245a25aef4a7a02bb',
         'scheduleType': 'General',
-        'service': '57fb0c641a15f76105e39db7',
-        'workshift': '57fb0c646f56c41140e3e0d7',
-        'createdBy': '57fb0c649ef668d90db0f318'
+        'serviceId': '59a75532406a805489f3d082',
+        'workshiftId': '59a75532028c15b3b105becc',
+        'locationId': '59a75532427ef825fa47b7ae',
+        'createdBy': '59a755329f87d9a4f1834b18'
       },
       {
-        'startDate': '2014-06-24 11:29:05',
-        'endDate': '2015-07-04 03:23:36',
+        'startDate': '2017-03-30 05:23:13',
+        'endDate': '2016-05-27 03:02:32',
+        'userId': '59a755329b260946ebde3fcd',
+        'scheduleType': 'Exception',
+        'serviceId': '59a755325852447db37e4de5',
+        'workshiftId': '59a75532d060c820c6d9cdb7',
+        'locationId': '59a7553241b3a4116f29b838',
+        'createdBy': '59a75532201c9428cb66120b'
+      },
+      {
+        'startDate': '2015-01-25 02:36:06',
+        'endDate': '2017-05-22 12:45:05',
+        'userId': '59a75532f5bbfe4025ca6114',
+        'scheduleType': 'Exception',
+        'serviceId': '59a75532ac3067d4ab21725e',
+        'workshiftId': '59a755324f27822310e75741',
+        'locationId': '59a755328db075573d2e99a0',
+        'createdBy': '59a75532533eeaf886edab08'
+      },
+      {
+        'startDate': '2014-01-29 12:28:23',
+        'endDate': '2014-10-30 11:04:50',
+        'userId': '59a75532aa6ffa876b9d4aa1',
         'scheduleType': 'General',
-        'service': '57fb0c640d8e1e4efc597f21',
-        'workshift': '57fb0c64d51cb523282dd051',
-        'createdBy': '57fb0c645debca54d08f2d92'
+        'serviceId': '59a75532107eee550040ac10',
+        'workshiftId': '59a75532bb03bb6e89204756',
+        'locationId': '59a75532889348474659bb36',
+        'createdBy': '59a755326c29516ae1d949a0'
       },
       {
-        'startDate': '2016-08-05 11:25:27',
-        'endDate': '2016-08-25 03:22:44',
+        'startDate': '2016-01-29 03:05:38',
+        'endDate': '2014-12-17 11:21:48',
+        'userId': '59a755323f40a77fc44d8721',
+        'scheduleType': 'Exception',
+        'serviceId': '59a75532594f87bfa63e478c',
+        'workshiftId': '59a755320fdf5893efe4dcf2',
+        'locationId': '59a755324ea6df39fea1796f',
+        'createdBy': '59a75532f78512fac7937f4f'
+      },
+      {
+        'startDate': '2014-08-12 07:20:05',
+        'endDate': '2016-12-03 05:23:31',
+        'userId': '59a75532577ae220a782861d',
+        'scheduleType': 'Exception',
+        'serviceId': '59a75532382246e24df02e86',
+        'workshiftId': '59a75532acec1e7cf171b585',
+        'locationId': '59a755320d0dd3881d14ea96',
+        'createdBy': '59a7553268fe395b2836e390'
+      },
+      {
+        'startDate': '2016-09-20 04:22:41',
+        'endDate': '2015-03-25 03:38:48',
+        'userId': '59a75532b74e3e154422d840',
         'scheduleType': 'General',
-        'service': '57fb0c64c6bbda3ff39ba08d',
-        'workshift': '57fb0c64c15d80478c382251',
-        'createdBy': '57fb0c64f1dc2e3a47d983ba'
+        'serviceId': '59a7553298cb452f6b318cd7',
+        'workshiftId': '59a75532a9c263d00405c1e1',
+        'locationId': '59a7553260f0582cfe68a4c9',
+        'createdBy': '59a7553212db53a91a6ea49b'
       },
       {
-        'startDate': '2016-05-13 05:20:57',
-        'endDate': '2015-11-01 12:34:02',
+        'startDate': '2014-09-10 10:02:33',
+        'endDate': '2014-02-27 11:02:12',
+        'userId': '59a75532c30df3456984198a',
+        'scheduleType': 'Exception',
+        'serviceId': '59a75532cfeaaf2a216c9696',
+        'workshiftId': '59a755326cf23e5d61e6c042',
+        'locationId': '59a755324be4b9585a43e818',
+        'createdBy': '59a7553210c857b16c9c007e'
+      },
+      {
+        'startDate': '2016-12-11 08:25:12',
+        'endDate': '2016-02-09 08:38:31',
+        'userId': '59a7553253fc006c376884b3',
+        'scheduleType': 'Exception',
+        'serviceId': '59a75532269e8d179423a687',
+        'workshiftId': '59a7553218f70baf06d1e5ce',
+        'locationId': '59a75532d2c43c9ab65f8c19',
+        'createdBy': '59a755322de12330a4308501'
+      },
+      {
+        'startDate': '2014-05-25 07:09:01',
+        'endDate': '2017-06-10 12:16:14',
+        'userId': '59a755322a58de03365f0720',
+        'scheduleType': 'Exception',
+        'serviceId': '59a75532cfc5279a998acc77',
+        'workshiftId': '59a755327bd35a9b2fbb0da1',
+        'locationId': '59a7553294df5e520f6506a7',
+        'createdBy': '59a755324ca0ae8ce537b145'
+      },
+      {
+        'startDate': '2017-05-09 07:00:46',
+        'endDate': '2014-10-07 04:49:56',
+        'userId': '59a755323566d89afce3fea4',
+        'scheduleType': 'Exception',
+        'serviceId': '59a75532751cc61155cf51ab',
+        'workshiftId': '59a755328b8463f902bf2084',
+        'locationId': '59a75532e8fc157d62adfff3',
+        'createdBy': '59a755328dec2ee01a609f31'
+      },
+      {
+        'startDate': '2016-08-05 10:51:41',
+        'endDate': '2015-03-25 01:08:34',
+        'userId': '59a7553299d7984f682b2a58',
         'scheduleType': 'General',
-        'service': '57fb0c64764f20fd7159b2de',
-        'workshift': '57fb0c647df9acc86e47393e',
-        'createdBy': '57fb0c64479804299bc79a6d'
+        'serviceId': '59a7553295a869db49ab031c',
+        'workshiftId': '59a755322271cf19601c1dac',
+        'locationId': '59a755321b1b8140a605affd',
+        'createdBy': '59a755323b29ec2c35ce799d'
       },
       {
-        'startDate': '2014-01-13 12:18:29',
-        'endDate': '2015-01-08 03:18:29',
+        'startDate': '2016-08-24 11:38:11',
+        'endDate': '2017-07-20 12:54:05',
+        'userId': '59a75532dc88ddf0090811f8',
         'scheduleType': 'Exception',
-        'service': '57fb0c64ffccb531477a3c28',
-        'workshift': '57fb0c646369cf273672fc8e',
-        'createdBy': '57fb0c640ff9387873a84a6a'
+        'serviceId': '59a755328dba19d14ab3194d',
+        'workshiftId': '59a75532129e2c44aaa3513e',
+        'locationId': '59a7553292c0cdd6e642402a',
+        'createdBy': '59a75532fecec106af34de05'
       },
       {
-        'startDate': '2014-11-19 12:03:43',
-        'endDate': '2015-05-27 04:30:56',
+        'startDate': '2017-01-19 10:18:20',
+        'endDate': '2016-06-27 10:00:13',
+        'userId': '59a75532932af234b1f34102',
         'scheduleType': 'Exception',
-        'service': '57fb0c646eaa3551c3ed28ce',
-        'workshift': '57fb0c64ee41edf0061f5fae',
-        'createdBy': '57fb0c64175c3ed33e537456'
+        'serviceId': '59a75532c64c91b27eaab6e8',
+        'workshiftId': '59a755323b20f5bc72b14185',
+        'locationId': '59a755320b27dadcf68f638f',
+        'createdBy': '59a75532f3fcd42fb10ab780'
       },
       {
-        'startDate': '2016-05-09 07:10:32',
-        'endDate': '2014-09-23 07:54:27',
-        'scheduleType': 'Exception',
-        'service': '57fb0c64c95d492667be2745',
-        'workshift': '57fb0c641843847b31bcf864',
-        'createdBy': '57fb0c64d78dc9a978c675c5'
-      },
-      {
-        'startDate': '2014-07-16 01:00:03',
-        'endDate': '2015-01-01 10:34:45',
-        'scheduleType': 'Exception',
-        'service': '57fb0c643cb938a0505f3616',
-        'workshift': '57fb0c64ffa0f69290773bbd',
-        'createdBy': '57fb0c643ffa8eeeef7d38ef'
-      },
-      {
-        'startDate': '2014-09-28 01:45:27',
-        'endDate': '2016-03-18 02:36:33',
-        'scheduleType': 'Exception',
-        'service': '57fb0c6410b3e01385ba1e55',
-        'workshift': '57fb0c64f68016e7c323ad47',
-        'createdBy': '57fb0c648946bdc2519afe8a'
-      },
-      {
-        'startDate': '2014-10-05 03:58:58',
-        'endDate': '2016-04-02 09:18:10',
-        'scheduleType': 'Exception',
-        'service': '57fb0c64db19da02b7306d0a',
-        'workshift': '57fb0c64bc2ff2fea58f802b',
-        'createdBy': '57fb0c64f914cc5eec26095b'
-      },
-      {
-        'startDate': '2014-03-23 12:54:07',
-        'endDate': '2016-05-24 03:56:06',
+        'startDate': '2017-02-10 07:30:52',
+        'endDate': '2016-12-03 07:16:37',
+        'userId': '59a75532d45fd2d2ae1708b5',
         'scheduleType': 'General',
-        'service': '57fb0c64350a63f0b070e5fd',
-        'workshift': '57fb0c64629650b2deb99707',
-        'createdBy': '57fb0c64ba1a67483147542f'
+        'serviceId': '59a75532b0225e4c85dc44c1',
+        'workshiftId': '59a75532b5090c1723397cd3',
+        'locationId': '59a75532e8ae9d2aea0bcfd4',
+        'createdBy': '59a7553239fab4e52684f9b5'
       },
       {
-        'startDate': '2014-12-06 07:06:42',
-        'endDate': '2014-12-20 04:39:22',
+        'startDate': '2014-04-15 03:38:53',
+        'endDate': '2015-03-15 01:19:46',
+        'userId': '59a75532408c448e7b237d26',
         'scheduleType': 'Exception',
-        'service': '57fb0c64141b4c678f67a80f',
-        'workshift': '57fb0c6409354b89f376ab09',
-        'createdBy': '57fb0c64d1efc1351304c5b3'
+        'serviceId': '59a7553277c98d9751e2996c',
+        'workshiftId': '59a75532c59cf500a2095d8b',
+        'locationId': '59a75532d03912ea67b6d2d0',
+        'createdBy': '59a75532ada22606a469264e'
       },
       {
-        'startDate': '2016-03-14 12:52:31',
-        'endDate': '2015-10-03 01:32:15',
+        'startDate': '2016-03-06 01:49:36',
+        'endDate': '2016-04-12 08:34:42',
+        'userId': '59a755325151d91f246d3fe9',
         'scheduleType': 'Exception',
-        'service': '57fb0c6428851e068b200a4b',
-        'workshift': '57fb0c645b93bf27a37718c4',
-        'createdBy': '57fb0c6423bd92aa3fa2c8ee'
+        'serviceId': '59a755325757750d11d46ec6',
+        'workshiftId': '59a7553260dd1e6e56056b8c',
+        'locationId': '59a755320d23eea28bcff7ce',
+        'createdBy': '59a755325fa9e7c93176c10e'
       },
       {
-        'startDate': '2014-11-24 01:09:07',
-        'endDate': '2016-08-14 04:56:16',
+        'startDate': '2015-12-20 05:34:14',
+        'endDate': '2014-03-15 12:34:24',
+        'userId': '59a75532e1b4505deb836ffe',
         'scheduleType': 'Exception',
-        'service': '57fb0c64cb939e5c06d4ea58',
-        'workshift': '57fb0c6465be09016c5f181c',
-        'createdBy': '57fb0c644e36397bf62bd214'
+        'serviceId': '59a75532c9d71175ec61e0ec',
+        'workshiftId': '59a75532e051a2442c131411',
+        'locationId': '59a75532b67f2276c76acbc7',
+        'createdBy': '59a755327eca4c43d1ccbf3e'
+      },
+      {
+        'startDate': '2015-08-12 08:40:04',
+        'endDate': '2014-11-26 04:59:08',
+        'userId': '59a75532c6810577e732a3c2',
+        'scheduleType': 'Exception',
+        'serviceId': '59a755322d59a464af2b3982',
+        'workshiftId': '59a75532661b2997452e45de',
+        'locationId': '59a75532ed62d9969cb7667d',
+        'createdBy': '59a755323fcbe1d185e9300f'
+      },
+      {
+        'startDate': '2014-04-04 11:10:52',
+        'endDate': '2015-09-05 11:14:42',
+        'userId': '59a75532b35b5510170ea5bf',
+        'scheduleType': 'Exception',
+        'serviceId': '59a755326722d583ed2ea5fb',
+        'workshiftId': '59a75532e9a05f0e46346f21',
+        'locationId': '59a7553256aca94d8dcd0f95',
+        'createdBy': '59a7553287b7ffddaae9a382'
+      },
+      {
+        'startDate': '2016-06-29 09:50:31',
+        'endDate': '2015-01-30 12:23:09',
+        'userId': '59a75532b00a8c6b9d41fdae',
+        'scheduleType': 'General',
+        'serviceId': '59a75532ac3777d70486a6b2',
+        'workshiftId': '59a75532137d394df10bafd7',
+        'locationId': '59a755321347525a9123960a',
+        'createdBy': '59a75532631120c541d00e01'
+      },
+      {
+        'startDate': '2014-05-04 09:26:48',
+        'endDate': '2014-08-29 04:41:56',
+        'userId': '59a755325db2ad0e95f15e46',
+        'scheduleType': 'General',
+        'serviceId': '59a75532aecfa74d100d9efb',
+        'workshiftId': '59a7553263c4bec9b28a9c29',
+        'locationId': '59a75532364f29d23297efdb',
+        'createdBy': '59a75532ec04dd25a389488c'
+      },
+      {
+        'startDate': '2015-07-10 06:36:27',
+        'endDate': '2015-11-02 03:46:05',
+        'userId': '59a755321e3bab7da71c72e0',
+        'scheduleType': 'General',
+        'serviceId': '59a75532a6e97e30111983a9',
+        'workshiftId': '59a755323801c24917deaff4',
+        'locationId': '59a75532a133456ff69ebc2a',
+        'createdBy': '59a755323c485bcb053d5bf4'
+      },
+      {
+        'startDate': '2015-08-25 08:26:25',
+        'endDate': '2014-09-29 02:19:56',
+        'userId': '59a755323efffc1b27fdb8f8',
+        'scheduleType': 'General',
+        'serviceId': '59a75532cd6987fd4874b4da',
+        'workshiftId': '59a7553276de913cddc8d597',
+        'locationId': '59a75532551b6f1104b135a7',
+        'createdBy': '59a75532af1b64d40201b51c'
+      },
+      {
+        'startDate': '2016-09-18 12:45:22',
+        'endDate': '2015-11-19 09:52:29',
+        'userId': '59a7553295bb2873f556b587',
+        'scheduleType': 'Exception',
+        'serviceId': '59a75532ff6420aa4500ea71',
+        'workshiftId': '59a75532af8e77833069bf0a',
+        'locationId': '59a7553247db944f7fbaa922',
+        'createdBy': '59a755321c4c0a25f475ed9e'
+      },
+      {
+        'startDate': '2015-12-26 10:49:43',
+        'endDate': '2016-03-20 09:45:20',
+        'userId': '59a7553210d634ea66ca5d8c',
+        'scheduleType': 'Exception',
+        'serviceId': '59a75532fff31e5b0d13f6a4',
+        'workshiftId': '59a75532a3a2cc2a06ac923c',
+        'locationId': '59a755321bfba27335fe6fff',
+        'createdBy': '59a7553256478c228b570b89'
       }
     ]
   }

@@ -6,7 +6,7 @@ module.exports = userService => {
    * @desc Returns all users.
    */
   function getAllUsers (req, res, next) {
-    const setResponse = users => 
+    const setResponse = users =>
       res.status(HttpStatus.OK).pagedJson(users)
 
     const {page, pageSize} = req.query

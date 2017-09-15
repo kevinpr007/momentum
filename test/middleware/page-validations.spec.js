@@ -1,3 +1,5 @@
+const HttpStatus = require('http-status-codes')
+
 describe('page validations tests', () => {
   const pageValidations = require('../../src/middleware/page-validations')
 
@@ -24,7 +26,7 @@ describe('page validations tests', () => {
 
     context('when requesting without params', () => {
       it('will call next() with default values', sinon.test(function (done) {
-        let req = { query: { } }
+        let req = { query: {} }
 
         let spy = this.spy(next)
         pageValidations(req, null, spy)
@@ -39,40 +41,43 @@ describe('page validations tests', () => {
     })
 
     context('when passing invalid page param', () => {
-      it('will call next with a Bad Request (400) error', sinon.test(function (done) {
+      it('will throw an error with a Bad Request (400) error', sinon.test(function (done) {
         let req = {
           query: {
             page: 'one'
           }
         }
 
+        let next = () => { }
         let spy = this.spy(next)
-        pageValidations(req, null, spy)
 
-        function next () {
-          assert.isTrue(spy.calledOnce)
-          expect(spy.args[0].length).to.equal(1)
-          assert.isTrue(spy.args[0][0] instanceof Error)
+        try {
+          pageValidations(req, null, spy)
+        } catch (err) {
+          expect(err.status).to.equal(HttpStatus.BAD_REQUEST)
+          assert.isTrue(err instanceof Error)
           done()
         }
       }))
     })
 
     context('when passing invalid pageSize param', () => {
-      it('will call next with a Bad Request (400) error', sinon.test(function (done) {
+      it('will throw an error with a Bad Request (400) error', sinon.test(function (done) {
         let req = {
           query: {
             pageSize: 'ten'
           }
         }
 
-        let spy = this.spy(next)
-        pageValidations(req, null, spy)
+        let next = () => { }
 
-        function next () {
-          assert.isTrue(spy.calledOnce)
-          expect(spy.args[0].length).to.equal(1)
-          assert.isTrue(spy.args[0][0] instanceof Error)
+        let spy = this.spy(next)
+
+        try {
+          pageValidations(req, null, spy)
+        } catch (err) {
+          expect(err.status).to.equal(HttpStatus.BAD_REQUEST)
+          assert.isTrue(err instanceof Error)
           done()
         }
       }))

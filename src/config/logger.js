@@ -17,6 +17,7 @@ const serializer = data => {
 module.exports = bunyan.createLogger({
   name: 'StylePoint',
   src: false,
+  // TODO: Remove hardcode
   streams: [
     {
       level: 'info',

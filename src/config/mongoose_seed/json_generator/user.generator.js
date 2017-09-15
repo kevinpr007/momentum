@@ -12,9 +12,14 @@
     phone: '{{integer(1000000000, 1999999999)}}',
     roles: [
       '{{repeat(1, 2)}}',
-      '{{random("sysAdmin", "Admin", "Manager", "Employee", "User")}}'],
+      {
+        name: '{{random("sysAdmin", "Admin", "Manager", "Employee", "User")}}',
+        appId: '{{objectId()}}'
+      }
+    ],
     address: {
       address1: '{{street()}}',
+      address2: '{{street()}}',
       city: '{{city()}}',
       state: '{{state()}}',
       zipCode: '{{integer(10000, 90000)}}'

@@ -6,4 +6,5 @@
                 day schedule in the store.
  User:          They will be the clients in the system. User role will be the role with the least privileges in the system.
  */
+// TODO: Apply the correct use in the router area
 module.exports = ['sysAdmin', 'Admin', 'Manager', 'Employee', 'User']
